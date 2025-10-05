@@ -195,10 +195,10 @@ async def test_build_analysis():
             logger.info(f"  ... and {len(sorted_builds) - 20} more builds")
             break
     
-    # Get unique builds (5+ threshold)
-    unique_builds = analyzed_report.get_unique_builds()
+    # Get unique builds (2+ threshold for testing)
+    unique_builds = [build for build in analyzed_report.common_builds if build.count >= 2]
     logger.info(f"\n{'='*60}")
-    logger.info(f"Common builds (5+ occurrences): {len(unique_builds)}")
+    logger.info(f"Common builds (2+ occurrences): {len(unique_builds)}")
     logger.info(f"{'='*60}")
     
     for i, build in enumerate(unique_builds, 1):

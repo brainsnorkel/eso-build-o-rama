@@ -27,8 +27,8 @@ jobs:
             # Each trial runs every 24 hours (repeats the same sequence daily)
             # Starting reference: 1:00 AM UTC for AA
             
-            CURRENT_HOUR=$(date -u +%H)
-            CURRENT_MINUTE=$(date -u +%M)
+            CURRENT_HOUR=$(date -u +%H | sed 's/^0*//' || echo "0")
+            CURRENT_MINUTE=$(date -u +%M | sed 's/^0*//' || echo "0")
             
             # Minutes since 1:00 AM UTC today
             TOTAL_MINUTES_SINCE_1AM=$(( (CURRENT_HOUR - 1) * 60 + CURRENT_MINUTE ))

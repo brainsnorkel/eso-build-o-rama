@@ -39,36 +39,61 @@ async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_
     data_parser = DataParser()
     
     try:
-        # Get top ranked reports using the rankings API (with leaderboard: LogsOnly)
-        # We need to query per encounter to get truly top-ranked reports
-        logger.info(f"   Fetching top {max_reports} RANKED reports per encounter...")
+        # First, get the zone data to find the correct encounters for this trial
+        logger.info(f"   Fetching encounter list for {trial_name}...")
+        zones = await api_client.get_zones()
         
-        # For most trials, the last encounter ID (overall trial) has rankings
-        # We'll fetch reports from the overall encounter and then process individual boss fights within them
-        logger.info(f"\n   📊 Fetching top {max_reports} ranked reports for {trial_name}...")
+        # Find this trial's zone and get its encounters
+        trial_zone = None
+        for zone in zones:
+            if zone['id'] == trial_id:
+                trial_zone = zone
+                break
+        
+        if not trial_zone or not trial_zone.get('encounters'):
+            logger.warning(f"      ⚠️  No encounters found for {trial_name}")
+            return {}
+        
+        encounters = trial_zone['encounters']
+        logger.info(f"      ✅ Found {len(encounters)} encounters for {trial_name}")
+        for enc in encounters:
+            logger.info(f"         - {enc['name']} (ID: {enc['id']})")
         
         # Organize players by boss name
         players_by_boss = defaultdict(list)
         processed_reports = set()  # Track which reports we've already processed
         
-        # Use get_top_logs which uses leaderboard: LogsOnly
-        # Note: Encounter 4 is the standard "overall trial" encounter for rankings across most trials
-        rankings = await api_client.get_top_logs(
-            zone_id=trial_id,
-            encounter_id=4,  # Overall trial encounter (standard across trials)
-            limit=max_reports
-        )
+        # Query rankings for each encounter to get trial-specific reports
+        logger.info(f"\n   📊 Fetching top {max_reports} ranked reports per encounter...")
         
-        if not rankings:
-            logger.warning(f"      ⚠️  No rankings found for {trial_name}")
+        all_rankings = []
+        for encounter in encounters:
+            enc_id = encounter['id']
+            enc_name = encounter['name']
+            
+            logger.info(f"      Querying encounter: {enc_name} (ID: {enc_id})")
+            rankings = await api_client.get_top_logs(
+                zone_id=trial_id,
+                encounter_id=enc_id,
+                limit=max_reports
+            )
+            
+            if rankings:
+                logger.info(f"         ✅ Found {len(rankings)} reports")
+                all_rankings.extend(rankings)
+            else:
+                logger.info(f"         ⚠️  No rankings for this encounter")
+        
+        if not all_rankings:
+            logger.warning(f"      ⚠️  No rankings found for any encounter in {trial_name}")
             return {}
         
-        logger.info(f"      ✅ Found {len(rankings)} top-ranked reports")
+        logger.info(f"      ✅ Total: {len(all_rankings)} ranked reports across all encounters")
         
         # Process each ranked report
         # Note: We'll process all boss fights (those with difficulty values)
         # No hardcoded boss names - this makes it work for all trials
-        for rank_data in rankings:
+        for rank_data in all_rankings:
             report_info = rank_data.get('report', {})
             report_code = report_info.get('code')
             

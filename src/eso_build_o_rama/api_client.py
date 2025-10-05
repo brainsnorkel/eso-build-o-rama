@@ -4,6 +4,7 @@ Handles authentication and API requests to ESO Logs.
 """
 
 import os
+import asyncio
 import logging
 from typing import Dict, List, Optional, Any
 from dotenv import load_dotenv
@@ -250,13 +251,32 @@ class ESOLogsAPIClient:
         }
         
         logger.info(f"Fetching table data for report {report_code}")
-        result = await self.client.query(query, variables)
-        table = result.get("reportData", {}).get("report", {}).get("table", {})
-        
-        return table
+        try:
+            result = await self.client.get_report_table(
+                code=report_code,
+                start_time=start_time,
+                end_time=end_time,
+                data_type=data_type,
+                hostility_type="Friendlies",
+                fight_ids=fight_ids,
+                include_combatant_info=include_combatant_info
+            )
+            
+            if result:
+                return result
+            
+            logger.warning("No table data found")
+            return {}
+            
+        except Exception as e:
+            logger.error(f"Error fetching table data: {e}")
+            return {}
     
-    def close(self):
+    async def close(self):
         """Close the client connection."""
         if hasattr(self.client, 'close'):
-            self.client.close()
+            if asyncio.iscoroutinefunction(self.client.close):
+                await self.client.close()
+            else:
+                self.client.close()
         logger.info("ESO Logs API client closed")

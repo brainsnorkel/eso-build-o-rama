@@ -152,13 +152,13 @@ class PageGenerator:
     
     def generate_home_page(
         self,
-        builds_by_trial: Dict[str, Dict[str, List[CommonBuild]]]
+        builds_by_trial: Dict[str, Dict[str, Dict[str, Any]]]
     ) -> str:
         """
         Generate the home page listing all trials.
         
         Args:
-            builds_by_trial: Dictionary of {trial_name: {boss_name: [builds]}}
+            builds_by_trial: Dictionary of {trial_name: {boss_name: {'builds': [builds], 'total_reports': int}}}
             
         Returns:
             Path to generated HTML file
@@ -170,10 +170,16 @@ class PageGenerator:
         for trial_name, bosses in builds_by_trial.items():
             # Find the highest DPS build across all bosses in this trial
             all_builds = []
-            for builds in bosses.values():
-                all_builds.extend(builds)
+            for boss_data in bosses.values():
+                if isinstance(boss_data, dict) and 'builds' in boss_data:
+                    all_builds.extend(boss_data['builds'])
+                elif isinstance(boss_data, list):
+                    all_builds.extend(boss_data)
             
-            top_build = max(all_builds, key=lambda b: b.best_player.dps if b.best_player else 0)
+            if all_builds:
+                top_build = max(all_builds, key=lambda b: b.best_player.dps if b.best_player else 0)
+            else:
+                top_build = None
             
             trial_slug = trial_name.lower().replace(' ', '-')
             trials.append({
@@ -268,9 +274,19 @@ class PageGenerator:
         
         generated_files = {}
         
-        # Generate index page
-        index_path = self.generate_index_page(all_builds, update_version, trials_metadata)
-        generated_files['index'] = index_path
+        # Group builds by trial for proper site structure
+        builds_by_trial = self._group_builds_by_trial(all_builds)
+        
+        # Generate home page (index.html) with trial links
+        home_path = self.generate_home_page(builds_by_trial)
+        generated_files['home'] = home_path
+        
+        # Generate individual trial pages
+        for trial_name, trial_data in builds_by_trial.items():
+            # Extract just the bosses data for trial page generation
+            bosses_data = {boss: data['builds'] for boss, data in trial_data.items()}
+            trial_path = self.generate_trial_page(trial_name, bosses_data)
+            generated_files[f'trial_{trial_name.lower().replace(" ", "_")}'] = trial_path
         
         # Generate individual build pages
         for build in all_builds:

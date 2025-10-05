@@ -263,6 +263,7 @@ class DataParser:
         # Type 8 appears to be ultimate abilities
         # flags=1 seems to indicate active abilities
         
+        
         for i, talent in enumerate(talents):
             try:
                 ability = Ability(

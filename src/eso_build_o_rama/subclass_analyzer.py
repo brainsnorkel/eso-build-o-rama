@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 ESO Subclass Analysis Module
 Analyzes equipped abilities to infer player subclass/build information.
@@ -147,120 +148,120 @@ class ESOSubclassAnalyzer:
             'Solar Flare', 'Dark Flare', 'Solar Barrage',
             'Backlash', 'Purifying Light', 'Power of the Light',
             'Eclipse', 'Total Dark', 'Unstable Core',
-            'Solar Prison', 'Radiant Oppression', 'Solar Disturbance'
+            'Radiant Destruction', 'Radiant Glory', 'Radiant Oppression'
         ],
         
         'Restoring Light': [
             # Ultimate
             'Rite of Passage', 'Practiced Incantation', 'Remembrance',
             # Active Skills
-            'Healing Hands', 'Breath of Life', 'Combat Prayer',
-            'Rushed Ceremony', 'Honor the Dead', 'Ritual of Retribution',
-            'Cleansing Ritual', 'Purify', 'Cleanse',
-            'Restoring Aura', 'Repentance', 'Restoring Spirit',
-            'Radiant Ward', 'Blazing Shield', 'Sun Shield'
+            'Rushed Ceremony', 'Breath of Life', 'Honor the Dead',
+            'Healing Ritual', 'Ritual of Rebirth', 'Hasty Prayer',
+            'Restoring Aura', 'Radiant Aura', 'Repentance',
+            'Cleansing Ritual', 'Purifying Ritual', 'Extended Ritual',
+            'Rune Focus', 'Channeled Focus', 'Restoring Focus'
         ],
         
         # Warden Skill Lines
         'Animal Companions': [
             # Ultimate
-            'Feral Guardian', 'Eternal Guardian', 'Soul Shriven Guardian',
+            'Feral Guardian', 'Eternal Guardian', 'Wild Guardian',
             # Active Skills
-            'Cutting Dive', 'Screaming Cliff Racer', 'Dive',
-            'Falcon\'s Swiftness', 'Bird of Prey', 'Falcon\'s Blessing',
-            'Fletcher Infection', 'Deep Fissure', 'Subterranean Assault',
-            'Betty Netch', 'Blue Betty', 'Green Lotus',
-            'Swarm', 'Fetcher Infection', 'Leeching Vines'
+            'Dive', 'Cutting Dive', 'Screaming Cliff Racer',
+            'Scorch', 'Subterranean Assault', 'Deep Fissure',
+            'Swarm', 'Fetcher Infection', 'Growing Swarm',
+            'Betty Netch', 'Blue Betty', 'Bull Netch',
+            'Falcon\'s Swiftness', 'Deceptive Predator', 'Bird of Prey'
         ],
         
         'Green Balance': [
             # Ultimate
-            'Secluded Grove', 'Healing Thicket', 'Enchanted Grove',
+            'Secluded Grove', 'Enchanted Forest', 'Healing Thicket',
             # Active Skills
-            'Living Vines', 'Living Trellis', 'Living Vines',
-            'Leeching Vines', 'Fetcher Infection', 'Swarm',
-            'Healing Seed', 'Budding Seeds', 'Living Seeds',
-            'Lotus Blossom', 'Living Trellis', 'Living Vines',
-            'Enchanted Growth', 'Living Vines', 'Living Trellis'
+            'Fungal Growth', 'Enchanted Growth', 'Soothing Spores',
+            'Healing Seed', 'Budding Seeds', 'Corrupting Pollen',
+            'Living Vines', 'Leeching Vines', 'Nature\'s Grasp',
+            'Lotus Flower', 'Green Lotus', 'Lotus Blossom',
+            'Nature\'s Gift', 'Nature\'s Embrace', 'Emerald Moss'
         ],
         
         'Winter\'s Embrace': [
             # Ultimate
             'Sleet Storm', 'Northern Storm', 'Permafrost',
             # Active Skills
-            'Impaling Shards', 'Winter\'s Revenge', 'Impaling Shards',
-            'Frozen Device', 'Frozen Gate', 'Frozen Device',
-            'Frozen Gate', 'Frozen Device', 'Frozen Gate',
-            'Expansive Frost Cloak', 'Expansive Frost Cloak', 'Expansive Frost Cloak',
-            'Expansive Frost Cloak', 'Expansive Frost Cloak', 'Expansive Frost Cloak'
+            'Frost Cloak', 'Expansive Frost Cloak', 'Ice Cloak',
+            'Impaling Shards', 'Gripping Shards', 'Winter\'s Revenge',
+            'Arctic Wind', 'Arctic Blast', 'Polar Wind',
+            'Crystallized Shield', 'Crystallized Slab', 'Shimmering Shield',
+            'Frozen Gate', 'Frozen Device', 'Frozen Retreat'
         ],
         
         # Necromancer Skill Lines
+        'Grave Lord': [
+            # Ultimate
+            'Frozen Colossus', 'Pestilent Colossus', 'Glacial Colossus',
+            # Active Skills
+            'Flame Skull', 'Ricochet Skull', 'Venom Skull',
+            'Blastbones', 'Blighted Blastbones', 'Stalking Blastbones',
+            'Boneyard', 'Unnerving Boneyard', 'Avid Boneyard',
+            'Skeletal Mage', 'Skeletal Archer', 'Skeletal Arcanist',
+            'Shocking Siphon', 'Detonating Siphon', 'Mystic Siphon'
+        ],
+        
         'Bone Tyrant': [
             # Ultimate
             'Bone Goliath Transformation', 'Pummeling Goliath', 'Ravenous Goliath',
             # Active Skills
-            'Bone Armor', 'Beckoning Armor', 'Bone Prison',
-            'Bitter Harvest', 'Bitter Harvest', 'Bitter Harvest',
-            'Bone Prison', 'Beckoning Armor', 'Bone Armor',
-            'Bone Prison', 'Beckoning Armor', 'Bone Armor',
-            'Bone Prison', 'Beckoning Armor', 'Bone Armor'
-        ],
-        
-        'Grave Lord': [
-            # Ultimate
-            'Pummeling Goliath', 'Ravenous Goliath', 'Bone Goliath Transformation',
-            # Active Skills
-            'Blastbones', 'Blastbones', 'Blastbones',
-            'Bitter Harvest', 'Bitter Harvest', 'Bitter Harvest',
-            'Blastbones', 'Blastbones', 'Blastbones',
-            'Bitter Harvest', 'Bitter Harvest', 'Bitter Harvest',
-            'Blastbones', 'Blastbones', 'Blastbones'
+            'Death Scythe', 'Ruinous Scythe', 'Hungry Scythe',
+            'Bone Armor', 'Beckoning Armor', 'Summoner\'s Armor',
+            'Bitter Harvest', 'Deaden Pain', 'Necrotic Potency',
+            'Bone Totem', 'Remote Totem', 'Agony Totem',
+            'Grave Grasp', 'Ghostly Embrace', 'Empowering Grasp'
         ],
         
         'Living Death': [
             # Ultimate
-            'Ravenous Goliath', 'Bone Goliath Transformation', 'Pummeling Goliath',
+            'Reanimate', 'Renewing Animation', 'Animate Blastbones',
             # Active Skills
-            'Bitter Harvest', 'Bitter Harvest', 'Bitter Harvest',
-            'Blastbones', 'Blastbones', 'Blastbones',
-            'Bitter Harvest', 'Bitter Harvest', 'Bitter Harvest',
-            'Blastbones', 'Blastbones', 'Blastbones',
-            'Bitter Harvest', 'Bitter Harvest', 'Bitter Harvest'
+            'Render Flesh', 'Resistant Flesh', 'Blood Sacrifice',
+            'Life amid Death', 'Enduring Undeath', 'Renewing Undeath',
+            'Spirit Mender', 'Spirit Guardian', 'Intensive Mender',
+            'Restoring Tether', 'Braided Tether', 'Mortal Coil',
+            'Expunge', 'Expunge and Modify', 'Hexproof'
         ],
         
         # Arcanist Skill Lines
         'Herald of the Tome': [
             # Ultimate
-            'The Unfathomable Darkness', 'The Unfathomable Darkness', 'The Unfathomable Darkness',
+            'The Tide King\'s Gaze', 'The Languid Eye', 'The Unblinking Eye',
             # Active Skills
-            'Fatecarver', 'Fatecarver', 'Fatecarver',
-            'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail',
-            'Fatecarver', 'Fatecarver', 'Fatecarver',
-            'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail',
-            'Fatecarver', 'Fatecarver', 'Fatecarver'
-        ],
-        
-        'Soldier of Apocrypha': [
-            # Ultimate
-            'The Unfathomable Darkness', 'The Unfathomable Darkness', 'The Unfathomable Darkness',
-            # Active Skills
-            'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail',
-            'Fatecarver', 'Fatecarver', 'Fatecarver',
-            'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail',
-            'Fatecarver', 'Fatecarver', 'Fatecarver',
-            'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail'
+            'Runeblades', 'Writhing Runeblades', 'Escalating Runeblades',
+            'Fatecarver', 'Pragmatic Fatecarver', 'Exhausting Fatecarver',
+            'Abyssal Impact', 'Tentacular Dread', 'Cephaliarch\'s Flail',
+            'Tome-Bearer\'s Inspiration', 'Inspired Scholarship', 'Recuperative Treatise',
+            'The Imperfect Ring', 'Rune of Displacement', 'Fulminating Rune'
         ],
         
         'Curative Runeforms': [
             # Ultimate
-            'The Unfathomable Darkness', 'The Unfathomable Darkness', 'The Unfathomable Darkness',
+            'Vitalizing Glyphic', 'Glyphic of the Tides', 'Resonating Glyphic',
             # Active Skills
-            'Fatecarver', 'Fatecarver', 'Fatecarver',
-            'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail',
-            'Fatecarver', 'Fatecarver', 'Fatecarver',
-            'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail', 'Cephaliarch\'s Flail',
-            'Fatecarver', 'Fatecarver', 'Fatecarver'
+            'Runemend', 'Evolving Runemend', 'Audacious Runemend',
+            'Remedy Cascade', 'Cascading Fortune', 'Curative Surge',
+            'Chakram of Destiny', 'Chakram\'s Havoc', 'Kinetic Aegis',
+            'Arcanist\'s Domain', 'Reconstructive Domain', 'Zenas\' Empowering Disc',
+            'Apocryphal Gate', 'Fleet-footed Gate', 'Passage Between Worlds'
+        ],
+        
+        'Soldier of Apocrypha': [
+            # Ultimate
+            'Gibbering Shield', 'Sanctum of the Abyssal Sea', 'Gibbering Shelter',
+            # Active Skills
+            'Runic Jolt', 'Runic Sunder', 'Runic Embrace',
+            'Runespite Ward', 'Spiteward of the Lucid Mind', 'Impervious Runeward',
+            'Fatewoven Armor', 'Cruxweaver Armor', 'Unbreakable Fate',
+            'Runic Defense', 'Runeguard of Still Waters', 'Runeguard of Freedom',
+            'Rune of Eldritch Horror', 'Rune of Uncanny Adoration', 'Rune of the Colorless Pool'
         ]
     }
 
@@ -282,30 +283,16 @@ class ESOSubclassAnalyzer:
         Returns:
             List of 3 subclass abbreviations (e.g., ['Ass', 'Herald', 'Ardent'])
         """
-        skill_line_counts = defaultdict(int)
+        # Convert to set for the analyze_subclass method
+        abilities_set = set(abilities)
         
-        # Count abilities from each skill line
-        for ability in abilities:
-            ability_lower = ability.lower().strip()
-            
-            # Direct match
-            if ability_lower in self.ability_to_skill_line:
-                skill_line = self.ability_to_skill_line[ability_lower]
-                skill_line_counts[skill_line] += 1
-                continue
-            
-            # Partial match (for morphed abilities)
-            for known_ability, skill_line in self.ability_to_skill_line.items():
-                if ability_lower in known_ability or known_ability in ability_lower:
-                    skill_line_counts[skill_line] += 1
-                    break
-        
-        # Get top 3 skill lines
-        sorted_skill_lines = sorted(skill_line_counts.items(), key=lambda x: x[1], reverse=True)
+        # Use the proper analyze_subclass method
+        result = self.analyze_subclass(abilities_set)
+        skill_lines = result.get('skill_lines', [])
         
         # Convert to abbreviations
         subclasses = []
-        for skill_line, count in sorted_skill_lines[:3]:
+        for skill_line in skill_lines[:3]:  # Take top 3
             abbreviation = self._get_skill_line_abbreviation(skill_line)
             subclasses.append(abbreviation)
         
@@ -315,6 +302,131 @@ class ESOSubclassAnalyzer:
         
         logger.debug(f"Analyzed {len(abilities)} abilities -> subclasses: {subclasses}")
         return subclasses
+
+    def analyze_subclass(self, abilities: Set[str]) -> Dict[str, any]:
+        """Analyze abilities to infer skill lines."""
+        if not abilities:
+            return {'skill_lines': [], 'confidence': 0.0, 'role': 'unknown'}
+
+        # Clean ability names for better matching
+        clean_abilities = {self._clean_ability_name(ability) for ability in abilities}
+        logger.debug(f"Analyzing abilities: {clean_abilities}")
+
+        # Find skill lines that have at least one matching ability
+        detected_skill_lines = []
+        for skill_line, skill_abilities in self.SKILL_LINE_ABILITIES.items():
+            if any(self._ability_matches(ability, clean_ability) 
+                   for ability in skill_abilities 
+                   for clean_ability in clean_abilities):
+                detected_skill_lines.append(skill_line)
+
+        # Create a list of unique skill lines (preserving order)
+        seen = set()
+        unique_skill_lines = []
+        for skill_line in detected_skill_lines:
+            if skill_line not in seen:
+                unique_skill_lines.append(skill_line)
+                seen.add(skill_line)
+        top_skill_lines = unique_skill_lines
+
+        # Simple confidence: 1.0 if we found skill lines, 0.0 if not
+        confidence = 1.0 if top_skill_lines else 0.0
+
+        logger.debug(f"Detected skill lines: {top_skill_lines} (confidence: {confidence})")
+
+        return {
+            'skill_lines': top_skill_lines,
+            'confidence': confidence,
+            'role': self._infer_role_from_skill_lines(top_skill_lines, abilities)
+        }
+    
+    def _infer_role_from_skill_lines(self, skill_lines: List[str], abilities: Set[str]) -> str:
+        """Infer role from detected skill lines and abilities."""
+        # Role detection based on skill lines and abilities
+        if not skill_lines:
+            return 'unknown'
+        
+        # Check for healing abilities
+        healing_abilities = {
+            'Breath of Life', 'Honor the Dead', 'Healing Ritual', 'Combat Prayer', 
+            'Rapid Regeneration', 'Healing Springs', 'Radiating Regeneration',
+            'Restoring Aura', 'Radiant Aura', 'Repentance', 'Rushed Ceremony',
+            'Ritual of Rebirth', 'Hasty Prayer', 'Cleansing Ritual', 'Purifying Ritual',
+            'Extended Ritual', 'Rune Focus', 'Channeled Focus', 'Restoring Focus',
+            'Runemend', 'Evolving Runemend', 'Audacious Runemend', 'Remedy Cascade',
+            'Cascading Fortune', 'Curative Surge', 'Healing Seed', 'Budding Seeds',
+            'Corrupting Pollen', 'Living Vines', 'Leeching Vines', 'Nature\'s Grasp',
+            'Lotus Flower', 'Green Lotus', 'Lotus Blossom', 'Nature\'s Gift',
+            'Nature\'s Embrace', 'Emerald Moss', 'Fungal Growth', 'Enchanted Growth',
+            'Soothing Spores'
+        }
+        if any(ability in abilities for ability in healing_abilities):
+            return 'healer'
+        
+        # Check for tank abilities
+        tank_abilities = {
+            'Pierce Armor', 'Inner Rage', 'Heroic Slash', 'Defensive Posture', 
+            'Absorb Magic', 'Puncture', 'Ransack', 'Stone Giant', 'Obsidian Shard',
+            'Molten Weapons', 'Igneous Weapons', 'Molten Armaments', 'Obsidian Shield',
+            'Igneous Shield', 'Fragmented Shield', 'Spiked Armor', 'Hardened Armor',
+            'Volatile Armor', 'Dark Talons', 'Burning Talons', 'Choking Talons',
+            'Dragon Blood', 'Green Dragon Blood', 'Coagulating Blood', 'Reflective Scale',
+            'Dragon Fire Scale', 'Reflective Plate', 'Bone Armor', 'Beckoning Armor',
+            'Summoner\'s Armor', 'Runespite Ward', 'Spiteward of the Lucid Mind',
+            'Impervious Runeward', 'Fatewoven Armor', 'Cruxweaver Armor', 'Unbreakable Fate',
+            'Runic Defense', 'Runeguard of Still Waters', 'Runeguard of Freedom'
+        }
+        if any(ability in abilities for ability in tank_abilities):
+            return 'tank'
+        
+        # Check for DPS abilities
+        dps_abilities = {
+            'Crystal Fragments', 'Force Pulse', 'Wrecking Blow', 'Biting Jabs', 
+            'Scorched Earth', 'Lava Whip', 'Molten Whip', 'Flame Lash',
+            'Searing Strike', 'Venomous Claw', 'Burning Embers', 'Fiery Breath',
+            'Noxious Breath', 'Engulfing Flames', 'Inferno', 'Flames of Oblivion',
+            'Cauterize', 'Mages\' Fury', 'Mages\' Wrath', 'Endless Fury',
+            'Lightning Splash', 'Liquid Lightning', 'Lightning Flood', 'Surge',
+            'Power Surge', 'Critical Surge', 'Assassin\'s Blade', 'Killer\'s Blade',
+            'Impale', 'Teleport Strike', 'Ambush', 'Lotus Fan', 'Veiled Strike',
+            'Surprise Attack', 'Concealed Weapon', 'Puncturing Strikes', 'Puncturing Sweep',
+            'Piercing Javelin', 'Aurora Javelin', 'Binding Javelin', 'Focused Charge',
+            'Explosive Charge', 'Toppling Charge', 'Spear Shards', 'Luminous Shards',
+            'Blazing Spear', 'Sun Fire', 'Vampire\'s Bane', 'Reflective Light',
+            'Solar Flare', 'Dark Flare', 'Solar Barrage', 'Backlash', 'Purifying Light',
+            'Power of the Light', 'Radiant Destruction', 'Radiant Glory', 'Radiant Oppression',
+            'Dive', 'Cutting Dive', 'Screaming Cliff Racer', 'Scorch', 'Subterranean Assault',
+            'Deep Fissure', 'Swarm', 'Fetcher Infection', 'Growing Swarm',
+            'Flame Skull', 'Ricochet Skull', 'Venom Skull', 'Blastbones',
+            'Blighted Blastbones', 'Stalking Blastbones', 'Boneyard', 'Unnerving Boneyard',
+            'Avid Boneyard', 'Skeletal Mage', 'Skeletal Archer', 'Skeletal Arcanist',
+            'Death Scythe', 'Ruinous Scythe', 'Hungry Scythe', 'Runeblades',
+            'Writhing Runeblades', 'Escalating Runeblades', 'Fatecarver', 'Pragmatic Fatecarver',
+            'Exhausting Fatecarver', 'Abyssal Impact', 'Tentacular Dread', 'Cephaliarch\'s Flail'
+        }
+        if any(ability in abilities for ability in dps_abilities):
+            return 'dps'
+        
+        # Default role based on skill lines
+        if 'Restoring Light' in skill_lines or 'Curative Runeforms' in skill_lines or 'Green Balance' in skill_lines:
+            return 'healer'
+        elif 'Aedric Spear' in skill_lines or 'Dawn\'s Wrath' in skill_lines or 'Ardent Flame' in skill_lines or 'Storm Calling' in skill_lines or 'Dark Magic' in skill_lines or 'Assassination' in skill_lines or 'Shadow' in skill_lines or 'Siphoning' in skill_lines or 'Animal Companions' in skill_lines or 'Grave Lord' in skill_lines or 'Living Death' in skill_lines or 'Herald of the Tome' in skill_lines or 'Soldier of Apocrypha' in skill_lines:
+            return 'dps'
+        else:
+            return 'dps'  # Default to DPS
+
+    def _clean_ability_name(self, ability: str) -> str:
+        """Clean ability name for better matching."""
+        # Remove common prefixes/suffixes
+        cleaned = ability.replace('Heavy Attack', '').replace('Light Attack', '')
+        cleaned = re.sub(r'\s*\([^)]*\)', '', cleaned)  # Remove parenthetical content
+        return cleaned.strip()
+
+    def _ability_matches(self, pattern: str, ability: str) -> bool:
+        """Check if an ability matches a pattern."""
+        pattern_lower = pattern.lower()
+        ability_lower = ability.lower()
+        return pattern_lower in ability_lower or ability_lower in pattern_lower
 
     def _get_skill_line_abbreviation(self, skill_line: str) -> str:
         """Get abbreviation for a skill line."""

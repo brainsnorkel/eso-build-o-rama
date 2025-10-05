@@ -39,15 +39,17 @@ class BuildAnalyzer:
         # Group players by build slug
         build_groups = self._group_players_by_build(trial_report.all_players)
         
-        # Identify common builds (5+ occurrences)
-        common_builds = []
+        # Create build objects for ALL builds (not just 5+)
+        all_builds = []
         for build_slug, players in build_groups.items():
-            if len(players) >= 5:  # Common build threshold
-                common_build = self._create_common_build(build_slug, players, trial_report)
-                common_builds.append(common_build)
+            common_build = self._create_common_build(build_slug, players, trial_report)
+            all_builds.append(common_build)
         
         # Sort by count (most common first)
-        common_builds.sort(key=lambda x: x.count, reverse=True)
+        all_builds.sort(key=lambda x: x.count, reverse=True)
+        
+        # Store ALL builds for debugging
+        common_builds = all_builds
         
         trial_report.common_builds = common_builds
         logger.info(f"Found {len(common_builds)} common builds")

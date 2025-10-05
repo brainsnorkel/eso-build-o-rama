@@ -29,21 +29,23 @@ jobs:
           else
             # Sequential trial scheduling: AA, HRC, SO, MoL, HoF, AS, CR, SS, KA, RG, DSR, SE, LC, OC
             # Each trial runs every 24 hours (repeats the same sequence daily)
-            # Starting reference: 1:00 AM UTC for AA
+            # Starting reference: 20:32 UTC today for AA (cycle restarted)
             
             CURRENT_HOUR=$(date -u +%H | sed 's/^0*//' || echo "0")
             CURRENT_MINUTE=$(date -u +%M | sed 's/^0*//' || echo "0")
             
-            # Minutes since 1:00 AM UTC today
-            TOTAL_MINUTES_SINCE_1AM=$(( (CURRENT_HOUR - 1) * 60 + CURRENT_MINUTE ))
+            # Minutes since 20:32 UTC today (restart reference)
+            REFERENCE_HOUR=20
+            REFERENCE_MINUTE=32
+            TOTAL_MINUTES_SINCE_REFERENCE=$(( (CURRENT_HOUR - REFERENCE_HOUR) * 60 + CURRENT_MINUTE - REFERENCE_MINUTE ))
             
-            # Handle negative values (if current time is before 1:00 AM)
-            if [ $TOTAL_MINUTES_SINCE_1AM -lt 0 ]; then
-              TOTAL_MINUTES_SINCE_1AM=$((TOTAL_MINUTES_SINCE_1AM + 24 * 60))
+            # Handle negative values (if current time is before reference)
+            if [ $TOTAL_MINUTES_SINCE_REFERENCE -lt 0 ]; then
+              TOTAL_MINUTES_SINCE_REFERENCE=$((TOTAL_MINUTES_SINCE_REFERENCE + 24 * 60))
             fi
             
-            # Trial index = (minutes since 1:00 AM / 30) % 14
-            TRIAL_INDEX=$(( (TOTAL_MINUTES_SINCE_1AM / 30) % 14 ))
+            # Trial index = (minutes since reference / 30) % 14
+            TRIAL_INDEX=$(( (TOTAL_MINUTES_SINCE_REFERENCE / 30) % 14 ))
             
             # Map trial index to actual trial IDs
             case $TRIAL_INDEX in
@@ -65,7 +67,7 @@ jobs:
             esac
             
             echo "Current time: $(date -u '+%Y-%m-%d %H:%M') UTC"
-            echo "Minutes since 1:00 AM today: $TOTAL_MINUTES_SINCE_1AM"
+            echo "Minutes since 20:32 UTC (restart reference): $TOTAL_MINUTES_SINCE_REFERENCE"
             echo "Trial index: $TRIAL_INDEX"
           fi
       

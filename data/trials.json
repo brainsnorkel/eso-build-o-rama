@@ -1,0 +1,77 @@
+{
+  "trials": [
+    {
+      "id": 1,
+      "name": "Aetherian Archive",
+      "abbreviation": "AA",
+      "encounters": 4
+    },
+    {
+      "id": 2,
+      "name": "Hel Ra Citadel",
+      "abbreviation": "HRC",
+      "encounters": 3
+    },
+    {
+      "id": 3,
+      "name": "Sanctum Ophidia",
+      "abbreviation": "SO",
+      "encounters": 4
+    },
+    {
+      "id": 6,
+      "name": "The Halls of Fabrication",
+      "abbreviation": "HoF",
+      "encounters": 5
+    },
+    {
+      "id": 7,
+      "name": "Asylum Sanctorium",
+      "abbreviation": "AS",
+      "encounters": 3
+    },
+    {
+      "id": 8,
+      "name": "Cloudrest",
+      "abbreviation": "CR",
+      "encounters": 4
+    },
+    {
+      "id": 12,
+      "name": "Sunspire",
+      "abbreviation": "SS",
+      "encounters": 3
+    },
+    {
+      "id": 14,
+      "name": "Kyne's Aegis",
+      "abbreviation": "KA",
+      "encounters": 3
+    },
+    {
+      "id": 15,
+      "name": "Rockgrove",
+      "abbreviation": "RG",
+      "encounters": 3
+    },
+    {
+      "id": 16,
+      "name": "Dreadsail Reef",
+      "abbreviation": "DSR",
+      "encounters": 3
+    },
+    {
+      "id": 17,
+      "name": "Sanity's Edge",
+      "abbreviation": "SE",
+      "encounters": 3
+    },
+    {
+      "id": 18,
+      "name": "Lucent Citadel",
+      "abbreviation": "LC",
+      "encounters": 3
+    }
+  ],
+  "note": "Maw of Lorkhaj not found in current ESO Logs data (may be removed or renamed)"
+}

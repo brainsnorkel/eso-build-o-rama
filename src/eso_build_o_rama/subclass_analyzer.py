@@ -202,7 +202,7 @@ class ESOSubclassAnalyzer:
             'Frozen Colossus', 'Pestilent Colossus', 'Glacial Colossus',
             # Active Skills
             'Flame Skull', 'Ricochet Skull', 'Venom Skull',
-            'Blastbones', 'Blighted Blastbones', 'Stalking Blastbones',
+            'Sacrificial Bones', 'Blighted Blastbones', 'Grave Lord\'s Sacrifice',
             'Boneyard', 'Unnerving Boneyard', 'Avid Boneyard',
             'Skeletal Mage', 'Skeletal Archer', 'Skeletal Arcanist',
             'Shocking Siphon', 'Detonating Siphon', 'Mystic Siphon'

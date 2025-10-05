@@ -1,0 +1,54 @@
+name: Generate ESO Builds
+
+on:
+  schedule:
+    # Run every Sunday at 00:00 UTC (weekly)
+    - cron: '0 0 * * 0'
+  workflow_dispatch:  # Allow manual triggers
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run build analysis
+        env:
+          ESOLOGS_ID: ${{ secrets.ESOLOGS_ID }}
+          ESOLOGS_SECRET: ${{ secrets.ESOLOGS_SECRET }}
+        run: |
+          python3 test_per_boss.py
+      
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages-branch
+      
+      - name: Copy generated files to gh-pages
+        run: |
+          cp -r output/* gh-pages-branch/
+          cp -r static gh-pages-branch/
+      
+      - name: Commit and push to gh-pages
+        run: |
+          cd gh-pages-branch
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Update builds - $(date +'%Y-%m-%d')" || echo "No changes to commit"
+          git push origin gh-pages

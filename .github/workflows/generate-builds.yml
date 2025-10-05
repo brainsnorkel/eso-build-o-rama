@@ -2,10 +2,10 @@ name: Generate ESO Builds (Staggered)
 
 on:
   schedule:
-    # Every 30 minutes, cycling through all 14 trials
-    # This means each trial gets updated every 7 hours
-    - cron: '0 */2 * * *'   # Every 2 hours starting at minute 0
-    - cron: '30 */2 * * *'  # Every 2 hours starting at minute 30
+    # Every 30 minutes, cycling through all 14 trials sequentially
+    # AA at 1:00 AM, HRC at 1:30 AM, SO at 2:00 AM, etc.
+    # Each trial gets updated every 7 hours (14 trials × 30 minutes)
+    - cron: '0,30 * * * *'  # Every 30 minutes
   workflow_dispatch:
     inputs:
       trial_id:
@@ -23,20 +23,23 @@ jobs:
           if [ -n "${{ inputs.trial_id }}" ]; then
             echo "trial_id=${{ inputs.trial_id }}" >> $GITHUB_OUTPUT
           else
-            # Auto-detect based on current time (UTC) - cycles through all 14 trials every 28 hours
-            # Each trial gets updated every 2 hours, staggered by 30 minutes
-            MINUTE=$(date -u +%M)
-            HOUR=$(date -u +%H)
+            # Sequential trial scheduling: AA, HRC, SO, MoL, HoF, AS, CR, SS, KA, RG, DSR, SE, LC, OC
+            # Each trial runs every 24 hours (repeats the same sequence daily)
+            # Starting reference: 1:00 AM UTC for AA
             
-            # Calculate which trial based on time
-            # Every 2 hours, we cycle through 14 trials
-            # Trial index = (hour / 2) % 14
-            TRIAL_INDEX=$(( (HOUR / 2) % 14 ))
+            CURRENT_HOUR=$(date -u +%H)
+            CURRENT_MINUTE=$(date -u +%M)
             
-            # Adjust for 30-minute offset runs
-            if [ "$MINUTE" -ge 30 ]; then
-              TRIAL_INDEX=$(( (TRIAL_INDEX + 7) % 14 ))
+            # Minutes since 1:00 AM UTC today
+            TOTAL_MINUTES_SINCE_1AM=$(( (CURRENT_HOUR - 1) * 60 + CURRENT_MINUTE ))
+            
+            # Handle negative values (if current time is before 1:00 AM)
+            if [ $TOTAL_MINUTES_SINCE_1AM -lt 0 ]; then
+              TOTAL_MINUTES_SINCE_1AM=$((TOTAL_MINUTES_SINCE_1AM + 24 * 60))
             fi
+            
+            # Trial index = (minutes since 1:00 AM / 30) % 14
+            TRIAL_INDEX=$(( (TOTAL_MINUTES_SINCE_1AM / 30) % 14 ))
             
             # Map trial index to actual trial IDs
             case $TRIAL_INDEX in
@@ -57,7 +60,8 @@ jobs:
               *) echo "trial_id=1" >> $GITHUB_OUTPUT ;;    # Default to AA
             esac
             
-            echo "Current time: $(date -u '+%H:%M') UTC"
+            echo "Current time: $(date -u '+%Y-%m-%d %H:%M') UTC"
+            echo "Minutes since 1:00 AM today: $TOTAL_MINUTES_SINCE_1AM"
             echo "Trial index: $TRIAL_INDEX"
           fi
       

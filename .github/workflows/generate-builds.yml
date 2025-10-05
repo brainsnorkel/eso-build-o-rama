@@ -33,22 +33,17 @@ jobs:
         run: |
           python3 test_per_boss.py
       
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v4
+      - name: Copy static assets to output
+        run: |
+          cp -r static output/
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          ref: gh-pages
-          path: gh-pages-branch
-      
-      - name: Copy generated files to gh-pages
-        run: |
-          cp -r output/* gh-pages-branch/
-          cp -r static gh-pages-branch/
-      
-      - name: Commit and push to gh-pages
-        run: |
-          cd gh-pages-branch
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Update builds - $(date +'%Y-%m-%d')" || echo "No changes to commit"
-          git push origin gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          publish_branch: gh-pages
+          force_orphan: false
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Update builds - ${{ github.run_number }}'

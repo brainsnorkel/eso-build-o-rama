@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Top Performing Builds - {{ update_version }}</h2>
+    <p style="margin-top: 10px; color: #7f8c8d;">
+        Analyzed from the top 5 logs of each trial. Found <strong>{{ total_builds }}</strong> common builds appearing 5+ times.
+    </p>
+</div>
+
+{% for trial_name, bosses in builds_by_trial.items() %}
+<div class="card">
+    <h2>{{ trial_name }}</h2>
+    
+    {% for boss_name, builds in bosses.items() %}
+    <h3>{{ boss_name }}</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Build</th>
+                <th>Sets</th>
+                <th>Popularity</th>
+                <th>Top DPS</th>
+                <th>Top Player</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for build in builds %}
+            <tr>
+                <td><strong>{{ build.get_display_name() }}</strong></td>
+                <td>
+                    {% if build.sets %}
+                        {{ build.sets|join(', ') }}
+                    {% else %}
+                        Unknown Sets
+                    {% endif %}
+                </td>
+                <td>{{ build.count }} players</td>
+                <td class="dps-highlight">{{ build.best_player.dps|format_dps }}</td>
+                <td>{{ build.best_player.character_name }}</td>
+                <td>
+                    <a href="{{ update_version.lower() }}-{{ build.build_slug }}.html" style="color: #3498db;">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<div class="card">
+    <h3>About This Data</h3>
+    <p>
+        This page shows the most popular builds from the top 5 ranked logs for each trial boss. 
+        A build is considered "common" and featured here if it appears 5 or more times among top players.
+    </p>
+    <p style="margin-top: 10px;">
+        <strong>Build Definition:</strong> A unique combination of subclasses (skill lines) and two 5-piece gear sets.
+    </p>
+    <p style="margin-top: 10px;">
+        <strong>Data Source:</strong> ESO Logs public rankings, automatically scanned weekly.
+    </p>
+</div>
+{% endblock %}

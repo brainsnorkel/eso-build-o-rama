@@ -1,21 +1,53 @@
 # Open Questions & Research Items
 
 ## ESO Logs API
-- [ ] What is the exact API endpoint structure for fetching top logs?
-- [ ] How to filter for public logs only?
-- [ ] Rate limiting constraints and best practices?
-- [ ] Authentication requirements (API key, OAuth, etc.)?
-- [ ] What trials are currently active in the game?
-- [ ] How to get the current game update version from the API?
-- [ ] Data format for abilities, gear, and buffs in API responses?
-- [ ] How to identify "blue CP" (Champion Points) from the API?
+- [x] **What is the exact API endpoint structure for fetching top logs?**
+  - **Answer**: GraphQL API at `https://www.esologs.com/api/v2/client`
+  - Use `characterRankings` query with `zoneID`, `encounterID`, `limit`, and `metric: dps`
+  - See `docs/api_research.md` for query examples
+- [x] **How to filter for public logs only?**
+  - **Answer**: ESO Logs API returns public logs by default in rankings
+- [ ] **Rate limiting constraints and best practices?**
+  - TODO: Test and document from actual API usage
+  - Implement exponential backoff and caching
+- [x] **Authentication requirements (API key, OAuth, etc.)?**
+  - **Answer**: OAuth 2.0 Client Credentials flow
+  - Exchange ESOLOGS_ID and ESOLOGS_SECRET for bearer token
+  - Use `esologs-python` library which handles this automatically
+- [x] **What trials are currently active in the game?**
+  - **Answer**: 13 trials total (see `docs/api_research.md`)
+  - Can query `worldData.zones` to get current zone IDs
+- [ ] **How to get the current game update version from the API?**
+  - TODO: Check report metadata or zone data
+  - May need to infer from report date
+- [x] **Data format for abilities, gear, and buffs in API responses?**
+  - **Answer**: Table data returns DPS/damage breakdown
+  - Gear from player equipment in report data
+  - Abilities require web scraping (not fully in API)
+  - Reference: `top-builds/src/eso_builds/` modules
+- [ ] **How to identify "blue CP" (Champion Points) from the API?**
+  - TODO: Examine buff table in API responses
+  - Likely in player buffs/debuffs data 
 
 ## Build Detection
-- [ ] Review ESO-Log-Build-and-Buff-Summary subclass detection algorithm
-- [ ] How are two-handed weapons counted (1 or 2 slots)?
-- [ ] How to handle "weaponless" or special setups?
-- [ ] What constitutes a "5-piece set" for mythic items or special sets?
-- [ ] How to handle arena weapons (which can be front or back bar)?
+- [x] **Review ESO-Log-Build-and-Buff-Summary subclass detection algorithm**
+  - **Answer**: Found in `top-builds/src/eso_builds/subclass_analyzer.py`
+  - Maps each slotted ability to its skill line
+  - Counts frequency of abilities from each skill line
+  - Returns top 3 skill lines as subclasses
+  - Uses abbreviations (Ass, Dawn, Herald, etc.)
+- [x] **How are two-handed weapons counted (1 or 2 slots)?**
+  - **Answer**: 2-handed weapons and staves count as 2 pieces
+  - Confirmed in top-builds project README
+- [ ] **How to handle "weaponless" or special setups?**
+  - TODO: Review edge cases in reference implementation
+- [ ] **What constitutes a "5-piece set" for mythic items or special sets?**
+  - **Answer**: Uses LibSets database for dynamic set requirements
+  - Some sets have different piece counts (monster sets = 2pc)
+  - TODO: Integrate LibSets data
+- [x] **How to handle arena weapons (which can be front or back bar)?**
+  - **Answer**: Reference project handles arena weapons
+  - Track which bar each piece is equipped on
 
 ## Data Sources & External Resources
 - [ ] Best format to use from LibSets (XLSM vs Lua)?

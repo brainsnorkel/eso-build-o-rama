@@ -38,6 +38,14 @@ async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_
     api_client = ESOLogsAPIClient()
     data_parser = DataParser()
     
+    # Load trial boss mapping to filter out bosses from other trials
+    bosses_file = Path(__file__).parent / "data" / "trial_bosses.json"
+    with open(bosses_file, 'r') as f:
+        bosses_data = json.load(f)
+    
+    valid_bosses = set(bosses_data['trial_bosses'].get(trial_name, []))
+    logger.info(f"   Valid bosses for {trial_name}: {len(valid_bosses)}")
+    
     try:
         # First, get the zone data to find the correct encounters for this trial
         logger.info(f"   Fetching encounter list for {trial_name}...")
@@ -125,6 +133,11 @@ async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_
                     
                     # Skip if not a boss fight (bosses have difficulty values, trash doesn't)
                     if fight.get('difficulty') is None:
+                        continue
+                    
+                    # Skip if this boss doesn't belong to the current trial
+                    if valid_bosses and fight_name not in valid_bosses:
+                        logger.debug(f"        Skipping {fight_name} (not in {trial_name})")
                         continue
                     
                     logger.info(f"        Processing: {fight_name} (ID: {fight_id})")

@@ -1,0 +1,72 @@
+{
+  "trial_bosses": {
+    "Aetherian Archive": [
+      "Lightning Storm Atronach",
+      "Foundation Stone Atronach", 
+      "Varlariel",
+      "The Mage"
+    ],
+    "Hel Ra Citadel": [
+      "Ra Kotu",
+      "Rakhat the Battlemaster",
+      "The Yokedas",
+      "The Warrior",
+      "Ash Titan",
+      "Xalvakka"
+    ],
+    "Sanctum Ophidia": [
+      "Possessed Mantikora",
+      "Stonebreaker",
+      "Ozara",
+      "The Serpent"
+    ],
+    "The Halls of Fabrication": [
+      "The Pinnacle Factotum",
+      "Archcustodian",
+      "Refabrication Committee",
+      "Assembly General"
+    ],
+    "Asylum Sanctorium": [
+      "Saint Olms the Just",
+      "Saint Llothis the Pious",
+      "Saint Felms the Bold"
+    ],
+    "Cloudrest": [
+      "Z'Maja",
+      "Shade of Galenwe",
+      "Shade of Relequen",
+      "Shade of Siroria"
+    ],
+    "Sunspire": [
+      "Lokkestiiz",
+      "Yolnahkriin",
+      "Nahviintaas"
+    ],
+    "Kyne's Aegis": [
+      "Yandir the Butcher",
+      "Captain Vrol",
+      "Lord Falgravn"
+    ],
+    "Rockgrove": [
+      "Oaxiltso",
+      "Flame-Herald Bahsei",
+      "Xalvakka"
+    ],
+    "Dreadsail Reef": [
+      "Lylanar and Turlassil",
+      "Reef Guardian",
+      "Tideborn Taleria"
+    ],
+    "Sanity's Edge": [
+      "Exarchanic Yaseyla",
+      "Archwizard Twelvane",
+      "Ansuul the Tormentor"
+    ],
+    "Lucent Citadel": [
+      "Orphic Shattered Shard",
+      "Arcane Knot",
+      "Xoryn"
+    ]
+  },
+  "note": "Boss names from ESO Logs API and UESP wiki. Some trials have mini-bosses that may appear in reports but aren't main encounters."
+}

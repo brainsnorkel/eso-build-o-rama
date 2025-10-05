@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Top performing Earthen Heart / Unknown / Unknown build with Fortified Brass / Pearlescent Ward from Aetherian Archive - Multiple Bosses. Featuring 5 top players.">
+    <title>Earthen Heart / Unknown / Unknown - Fortified Brass / Pearlescent Ward | ESO Build-O-Rama</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e8e8e8;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #fff, #a8edea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        header .subtitle {
+            color: #e8f8f5;
+            font-size: 1.1em;
+            margin-top: 8px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #11998e, #38ef7d, #11998e);
+            background-size: 200% 100%;
+            animation: gradient-flow 3s ease infinite;
+        }
+        
+        @keyframes gradient-flow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .card h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #38ef7d;
+            padding-bottom: 12px;
+            font-size: 1.8em;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .card h2::after {
+            content: '⚔️';
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+        
+        .card h3 {
+            color: #e8f8f5;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e8e8e8;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+            color: white;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        
+        th::before {
+            content: '🛡️';
+            margin-right: 8px;
+            opacity: 0.8;
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+        
+        .build-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            padding: 18px;
+            border-radius: 8px;
+            border-left: 4px solid #38ef7d;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .info-box:hover::before {
+            left: 100%;
+        }
+        
+        .info-box:hover {
+            transform: translateY(-2px);
+            border-left-color: #11998e;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .info-box .label {
+            font-weight: 600;
+            color: #a8edea;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-box .value {
+            font-size: 1.2em;
+            color: #ffffff;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .abilities-bar {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .abilities-bar::before {
+            content: '⚡';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .ability {
+            flex: 1;
+            text-align: center;
+            padding: 15px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9em;
+            color: #e8e8e8;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ability::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .ability:hover::before {
+            opacity: 1;
+        }
+        
+        .ability:hover {
+            border-color: #38ef7d;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(56, 239, 125, 0.3);
+            color: #ffffff;
+        }
+        
+        .dps-highlight {
+            color: #ff6b6b;
+            font-weight: 700;
+            font-size: 1.3em;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            from { filter: drop-shadow(0 0 5px rgba(255, 107, 107, 0.5)); }
+            to { filter: drop-shadow(0 0 15px rgba(255, 107, 107, 0.8)); }
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e8f8f5;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 3px solid #38ef7d;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(56, 239, 125, 0.5), transparent);
+        }
+        
+        footer a {
+            color: #38ef7d;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        footer a:hover {
+            color: #11998e;
+            text-shadow: 0 0 8px rgba(56, 239, 125, 0.5);
+        }
+        
+        footer a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #38ef7d, #11998e);
+            transition: width 0.3s ease;
+        }
+        
+        footer a:hover::after {
+            width: 100%;
+        }
+        
+        .credits {
+            font-size: 0.9em;
+            line-height: 1.8;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #38ef7d;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            background: rgba(56, 239, 125, 0.1);
+            border: 1px solid rgba(56, 239, 125, 0.3);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .back-link::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        
+        .back-link:hover {
+            background: rgba(56, 239, 125, 0.2);
+            border-color: rgba(56, 239, 125, 0.5);
+            transform: translateX(-5px);
+            box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3);
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(56, 239, 125, 0.3);
+            border-radius: 50%;
+            border-top-color: #38ef7d;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-online { background: #38ef7d; box-shadow: 0 0 10px rgba(56, 239, 125, 0.5); }
+        .status-offline { background: #666; }
+        .status-busy { background: #ff6b6b; }
+        
+        /* Progress Bars */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progress-shimmer 2s infinite;
+        }
+        
+        @keyframes progress-shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+        
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #38ef7d, #11998e);
+        }
+        
+        @media (max-width: 768px) {
+            .build-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .abilities-bar {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .abilities-bar::before {
+                left: 15px;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .card {
+                background: white !important;
+                border: 1px solid #ccc !important;
+                box-shadow: none !important;
+            }
+            
+            header {
+                background: #333 !important;
+                color: white !important;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>ESO Build-O-Rama</h1>
+            <p class="subtitle">Top-Performing ESO Trial Builds</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        
+<a href="index.html" class="back-link">← Back to All Builds</a>
+
+<div class="card">
+    <h2>Earthen Heart / Unknown / Unknown</h2>
+    
+    <div class="build-info">
+        <div class="info-box">
+            <div class="label">Trial &amp; Boss</div>
+            <div class="value">Aetherian Archive - Multiple Bosses</div>
+        </div>
+        
+        <div class="info-box">
+            <div class="label">Popularity</div>
+            <div class="value">5 top players using this build</div>
+            <div class="status-indicator status-online"></div>
+            <span style="font-size: 0.9em; color: #a8edea;">Active Build</span>
+        </div>
+        
+        <div class="info-box">
+            <div class="label">Update Version</div>
+            <div class="value">U48</div>
+            <div style="font-size: 0.8em; color: #a8edea; margin-top: 5px;">Current Meta</div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Example Player</h3>
+    <div class="build-info">
+        <div class="info-box">
+            <div class="label">Player</div>
+            <div class="value">
+                nil - Anonymous 7
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <div class="label">DPS</div>
+            <div class="value">0</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0.0%"></div>
+            </div>
+        </div>
+        
+        <div class="info-box">
+            <div class="label">Class</div>
+            <div class="value">Arcanist</div>
+        </div>
+        
+        
+    </div>
+    
+    <p style="margin-top: 15px;">
+        <a href="https://www.esologs.com/character/id/7" target="_blank" style="color: #3498db;">View on ESO Logs →</a>
+    </p>
+</div>
+
+
+<div class="card">
+    <h3>Ability Bars</h3>
+    
+    
+    <h4 style="margin-top: 15px; color: #a8edea;">
+        <span class="status-indicator status-online"></span>Bar 1 (Main) - 5 Abilities + Ultimate
+    </h4>
+    <div class="abilities-bar">
+        
+        <div class="ability tooltip" data-tooltip="">
+            Runic Embrace
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Stone Giant
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Impervious Runeward
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Rune of the Colorless Pool
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Polar Wind
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Reviving Barrier
+        </div>
+        
+    </div>
+    
+    
+    
+    <h4 style="margin-top: 15px; color: #a8edea;">
+        <span class="status-indicator status-online"></span>Bar 2 (Backup) - 5 Abilities + Ultimate
+    </h4>
+    <div class="abilities-bar">
+        
+        <div class="ability tooltip" data-tooltip="">
+            Ice Fortress
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Echoing Vigor
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Razor Caltrops
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Elemental Blockade
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Elemental Drain
+        </div>
+        
+        <div class="ability tooltip" data-tooltip="">
+            Sanctum of the Abyssal Sea
+        </div>
+        
+    </div>
+    
+</div>
+
+
+
+<div class="card">
+    <h3>Gear Setup</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Slot</th>
+                <th>Set</th>
+                <th>Item</th>
+                <th>Trait</th>
+                <th>Enchantment</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong>Head</strong></td>
+                <td>Lord Warden</td>
+                <td>Lord Warden Dusk&#39;s Guise</td>
+                <td>Infused</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Shoulders</strong></td>
+                <td>Fortified Brass</td>
+                <td>Fortified Brass Cuirass</td>
+                <td>Divines</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Chest</strong></td>
+                <td>Lord Warden</td>
+                <td>Lord Warden Dusk&#39;s Arm Cops</td>
+                <td>Divines</td>
+                <td>Max Health</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Belt</strong></td>
+                <td>Fortified Brass</td>
+                <td>Fortified Brass Girdle</td>
+                <td>Divines</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Legs</strong></td>
+                <td>Pearlescent Ward</td>
+                <td>Pearlescent Gauntlets</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Boots</strong></td>
+                <td>Pearlescent Ward</td>
+                <td>Pearlescent Greaves</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Hands</strong></td>
+                <td>Fortified Brass</td>
+                <td>Fortified Brass Sabatons</td>
+                <td>Divines</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Slot_7</strong></td>
+                <td>Pearlescent Ward</td>
+                <td>Pearlescent Amulet</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Slot_8</strong></td>
+                <td>Pearlescent Ward</td>
+                <td>Pearlescent Ring</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Slot_9</strong></td>
+                <td>Pearlescent Ward</td>
+                <td>Pearlescent Ring</td>
+                <td>Decisive</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Slot_10</strong></td>
+                <td>Fortified Brass</td>
+                <td>Fortified Brass mace</td>
+                <td>Powered</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Slot_11</strong></td>
+                <td>Fortified Brass</td>
+                <td>Fortified Brass Shield</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Slot_12</strong></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Necklace</strong></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Ring1</strong></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Ring2</strong></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+    <h4 style="margin-top: 20px;">Set Summary</h4>
+    <div class="build-info">
+        
+        <div class="info-box">
+            <div class="label">Lord Warden</div>
+            <div class="value">2 pieces</div>
+        </div>
+        
+        <div class="info-box">
+            <div class="label">Fortified Brass</div>
+            <div class="value">5 pieces</div>
+        </div>
+        
+        <div class="info-box">
+            <div class="label">Pearlescent Ward</div>
+            <div class="value">5 pieces</div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card">
+    <h3>Other Example Players (5 total)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Character</th>
+                <th>DPS</th>
+                <th>Contribution</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>nil</td>
+                <td>Anonymous 7</td>
+                <td>0</td>
+                <td>0.0%</td>
+            </tr>
+            
+            <tr>
+                <td>nil</td>
+                <td>Anonymous 7</td>
+                <td>0</td>
+                <td>0.0%</td>
+            </tr>
+            
+            <tr>
+                <td>nil</td>
+                <td>Anonymous 7</td>
+                <td>0</td>
+                <td>0.0%</td>
+            </tr>
+            
+            <tr>
+                <td>nil</td>
+                <td>Anonymous 7</td>
+                <td>0</td>
+                <td>0.0%</td>
+            </tr>
+            
+            <tr>
+                <td>nil</td>
+                <td>Anonymous 7</td>
+                <td>0</td>
+                <td>0.0%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+</div>
+
+
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="credits">
+                <p><strong>Credits & Resources:</strong></p>
+                <p>
+                    Data from <a href="https://www.esologs.com" target="_blank">ESO Logs</a> | 
+                    Reference data from <a href="https://en.uesp.net/wiki/Online:Online" target="_blank">UESP.net</a> | 
+                    Set information from <a href="https://www.esoui.com/downloads/info2241-LibSets.html" target="_blank">LibSets by Baertram</a> | 
+                    Icons from <a href="https://github.com/sheumais/esoskillbarbuilder" target="_blank">esoskillbarbuilder</a>
+                </p>
+                <p>
+                    <a href="https://www.elderscrollsonline.com" target="_blank">The Elder Scrolls Online</a> © 2025 ZeniMax Media Inc.
+                </p>
+                <p style="margin-top: 15px; font-size: 0.85em;">
+                    © 2025 <a href="https://github.com/brainsnorkel" target="_blank">@brainsnorkel</a> | 
+                    Generated: 2025-10-05
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

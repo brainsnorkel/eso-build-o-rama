@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Integration test script for ESO Build-O-Rama
-Tests the complete pipeline with mock data.
+Tests the complete pipeline with REAL ESO Logs API data ONLY.
+NO MOCKS - Pure API integration.
 """
 
 import asyncio
@@ -14,11 +15,11 @@ from pathlib import Path
 project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
-from src.eso_build_o_rama.models import (
-    PlayerBuild, GearPiece, Ability, TrialReport, CommonBuild
-)
+from src.eso_build_o_rama.api_client import ESOLogsAPIClient
+from src.eso_build_o_rama.data_parser import DataParser
 from src.eso_build_o_rama.build_analyzer import BuildAnalyzer
 from src.eso_build_o_rama.page_generator import PageGenerator
+from src.eso_build_o_rama.models import TrialReport
 
 # Configure logging
 logging.basicConfig(
@@ -29,165 +30,130 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def create_mock_player_builds():
-    """Create mock player builds for testing."""
+async def fetch_real_trial_data(trial_name: str = "Aetherian Archive", trial_id: int = 1):
+    """Fetch REAL data from ESO Logs API - NO MOCKS."""
     
-    # Create abilities
-    abilities_bar1 = [
-        Ability(ability_name="Assassin's Blade", skill_line="Assassination"),
-        Ability(ability_name="Shadow Cloak", skill_line="Shadow"),
-        Ability(ability_name="Siphoning Strikes", skill_line="Siphoning"),
-        Ability(ability_name="Blade Cloak", skill_line="Assassination"),
-        Ability(ability_name="Death Stroke", skill_line="Assassination"),
-    ]
+    logger.info(f"Fetching REAL data for {trial_name} (ID: {trial_id})")
     
-    abilities_bar2 = [
-        Ability(ability_name="Dark Shade", skill_line="Shadow"),
-        Ability(ability_name="Shadow Image", skill_line="Shadow"),
-        Ability(ability_name="Soul Shred", skill_line="Siphoning"),
-        Ability(ability_name="Soul Trap", skill_line="Siphoning"),
-        Ability(ability_name="Incapacitating Strike", skill_line="Assassination"),
-    ]
+    api_client = ESOLogsAPIClient()
+    data_parser = DataParser()
     
-    # Create gear pieces
-    gear = [
-        GearPiece(
-            slot="head", set_name="Deadly Strike", item_name="Deadly Strike Helmet",
-            trait="Divines", enchantment="Max Magicka", bar=1
-        ),
-        GearPiece(
-            slot="shoulders", set_name="Deadly Strike", item_name="Deadly Strike Pauldrons",
-            trait="Divines", enchantment="Max Magicka", bar=1
-        ),
-        GearPiece(
-            slot="chest", set_name="Deadly Strike", item_name="Deadly Strike Cuirass",
-            trait="Divines", enchantment="Max Magicka", bar=1
-        ),
-        GearPiece(
-            slot="hands", set_name="Deadly Strike", item_name="Deadly Strike Gauntlets",
-            trait="Divines", enchantment="Max Magicka", bar=1
-        ),
-        GearPiece(
-            slot="legs", set_name="Deadly Strike", item_name="Deadly Strike Greaves",
-            trait="Divines", enchantment="Max Magicka", bar=1
-        ),
-        GearPiece(
-            slot="belt", set_name="Ansuul's Torment", item_name="Ansuul's Torment Belt",
-            trait="Divines", enchantment="Max Magicka", bar=1
-        ),
-        GearPiece(
-            slot="boots", set_name="Ansuul's Torment", item_name="Ansuul's Torment Boots",
-            trait="Divines", enchantment="Max Magicka", bar=1
-        ),
-        GearPiece(
-            slot="necklace", set_name="Ansuul's Torment", item_name="Ansuul's Torment Necklace",
-            trait="Infused", enchantment="Spell Damage", bar=1
-        ),
-        GearPiece(
-            slot="ring1", set_name="Ansuul's Torment", item_name="Ansuul's Torment Ring",
-            trait="Infused", enchantment="Spell Damage", bar=1
-        ),
-        GearPiece(
-            slot="ring2", set_name="Ansuul's Torment", item_name="Ansuul's Torment Ring",
-            trait="Infused", enchantment="Spell Damage", bar=1
-        ),
-        GearPiece(
-            slot="main_hand", set_name="Ansuul's Torment", item_name="Ansuul's Torment Staff",
-            trait="Infused", enchantment="Fire Damage", bar=1
-        ),
-        GearPiece(
-            slot="off_hand", set_name="", item_name="Empty", trait="", enchantment="", bar=1
-        ),
-    ]
-    
-    # Create player builds
-    players = []
-    
-    # Create 6 players with the same build (Deadly Strike + Ansuul's Torment)
-    base_names = ["TestNightblade", "TestStamblade", "TestBlade", "TestRogue", "TestAssassin", "TestShadow"]
-    base_players = ["@testplayer1", "@testplayer2", "@testplayer3", "@testplayer4", "@testplayer5", "@testplayer6"]
-    
-    for i, (char_name, player_name) in enumerate(zip(base_names, base_players)):
-        player = PlayerBuild(
-            character_name=char_name,
-            player_name=player_name,
-            class_name="Nightblade",
-            dps=125000 - (i * 1000),  # Slightly different DPS
-            dps_percentage=25.5 - (i * 0.5),
-            gear=gear,
-            abilities_bar1=abilities_bar1,
-            abilities_bar2=abilities_bar2,
-            mundus="The Shadow",
-            champion_points=["Deadly Aim", "Backstabber", "Assassination"],
-            player_url=f"https://www.esologs.com/character/id/1234{i+5}",
-            subclasses=['Ass', 'Shadow', 'Siphon']
+    try:
+        # Step 1: Search for top 5 recent reports
+        logger.info(f"   Searching for top 5 reports...")
+        result = await api_client.client.search_reports(
+            zone_id=trial_id,
+            limit=5
         )
-        player.sets_equipped = {"Deadly Strike": 5, "Ansuul's Torment": 5}
-        players.append(player)
+        
+        if not result or not hasattr(result, 'report_data') or not hasattr(result.report_data, 'reports'):
+            logger.error("   ❌ No reports found")
+            return []
+        
+        reports_data = result.report_data.reports.data
+        if not reports_data:
+            logger.error("   ❌ No report data available")
+            return []
+        
+        logger.info(f"   ✅ Found {len(reports_data)} reports")
+        
+        # Step 2: Process ALL fights in ALL reports
+        all_players = []
+        
+        for report_info in reports_data[:5]:  # Top 5 reports
+            report_code = report_info.code
+            logger.info(f"   Processing report: {report_code}")
+            
+            try:
+                # Get report details
+                report_data = await api_client.get_report(report_code)
+                
+                if not report_data or not report_data.get('fights'):
+                    logger.warning(f"     ⚠️  No fights in report {report_code}")
+                    continue
+                
+                fights = report_data.get('fights', [])
+                logger.info(f"     Found {len(fights)} fights")
+                
+                # Process ALL fights in this report
+                for fight in fights:
+                    fight_id = fight['id']
+                    fight_name = fight['name']
+                    
+                    logger.info(f"     Processing fight: {fight_name} (ID: {fight_id})")
+                    
+                    # Get table data with combatant info
+                    table_data = await api_client.get_report_table(
+                        report_code=report_code,
+                        start_time=fight['startTime'],
+                        end_time=fight['endTime'],
+                        data_type="Summary",
+                        include_combatant_info=True
+                    )
+                    
+                    if not table_data:
+                        logger.warning(f"       ⚠️  No table data for fight {fight_id}")
+                        continue
+                    
+                    # Parse ALL players from this fight
+                    players = data_parser.parse_report_data(
+                        report_data,
+                        table_data,
+                        fight_id
+                    )
+                    
+                    if players:
+                        # Filter for valid players with gear and abilities
+                        valid_players = [
+                            p for p in players 
+                            if (p.gear and (p.abilities_bar1 or p.abilities_bar2))
+                        ]
+                        
+                        logger.info(f"       ✅ Parsed {len(valid_players)} valid players from {len(players)} total")
+                        all_players.extend(valid_players)
+                    else:
+                        logger.warning(f"       ⚠️  No players parsed from fight {fight_id}")
+                
+            except Exception as e:
+                logger.error(f"     ❌ Error processing report {report_code}: {e}")
+                continue
+        
+        logger.info(f"   ✅ Total players collected: {len(all_players)}")
+        return all_players
+        
+    except Exception as e:
+        logger.error(f"   ❌ Error fetching trial data: {e}")
+        return []
     
-    # Add 2 players with a different build (Relequen + Advancing Yokeda)
-    gear2 = gear.copy()
-    for piece in gear2:
-        if piece.set_name == "Deadly Strike":
-            piece.set_name = "Relequen"
-            piece.item_name = piece.item_name.replace("Deadly Strike", "Relequen")
-        elif piece.set_name == "Ansuul's Torment":
-            piece.set_name = "Advancing Yokeda"
-            piece.item_name = piece.item_name.replace("Ansuul's Torment", "Advancing Yokeda")
-    
-    player7 = PlayerBuild(
-        character_name="TestStamDK1",
-        player_name="@testplayer7",
-        class_name="Dragonknight",
-        dps=122000,
-        dps_percentage=24.2,
-        gear=gear2,
-        abilities_bar1=abilities_bar1,
-        abilities_bar2=abilities_bar2,
-        mundus="The Warrior",
-        champion_points=["Deadly Aim", "Backstabber", "Assassination"],
-        player_url="https://www.esologs.com/character/id/12351",
-        subclasses=['Ass', 'Shadow', 'Siphon']
-    )
-    player7.sets_equipped = {"Relequen": 5, "Advancing Yokeda": 5}
-    players.append(player7)
-    
-    player8 = PlayerBuild(
-        character_name="TestStamDK2",
-        player_name="@testplayer8",
-        class_name="Dragonknight",
-        dps=121000,
-        dps_percentage=23.8,
-        gear=gear2,
-        abilities_bar1=abilities_bar1,
-        abilities_bar2=abilities_bar2,
-        mundus="The Warrior",
-        champion_points=["Deadly Aim", "Backstabber", "Assassination"],
-        player_url="https://www.esologs.com/character/id/12352",
-        subclasses=['Ass', 'Shadow', 'Siphon']
-    )
-    player8.sets_equipped = {"Relequen": 5, "Advancing Yokeda": 5}
-    players.append(player8)
-    
-    return players
+    finally:
+        await api_client.close()
 
 
 async def test_build_analysis():
-    """Test the build analysis pipeline."""
+    """Test the build analysis pipeline with REAL API data."""
     logger.info("="*60)
-    logger.info("Testing Build Analysis Pipeline")
+    logger.info("Testing Build Analysis Pipeline - REAL API DATA ONLY")
     logger.info("="*60)
     
-    # Create mock data
-    players = create_mock_player_builds()
-    logger.info(f"Created {len(players)} mock player builds")
+    # Fetch REAL data from ESO Logs API
+    players = await fetch_real_trial_data()
     
-    # Create trial report
+    if not players:
+        logger.error("❌ Failed to fetch real player data from API")
+        logger.info("This could be due to:")
+        logger.info("- API rate limiting")
+        logger.info("- No recent reports available")
+        logger.info("- Network connectivity issues")
+        return []
+    
+    logger.info(f"✅ Fetched {len(players)} REAL players from ESO Logs API")
+    
+    # Create trial report from REAL data
     trial_report = TrialReport(
         trial_name="Aetherian Archive",
-        boss_name="Mage",
+        boss_name="Multiple Bosses",
         all_players=players,
-        report_code="TEST123",
+        report_code="REAL_API_DATA",
         update_version="U48-20251005"
     )
     
@@ -246,15 +212,19 @@ async def test_page_generation(builds):
 
 
 async def main():
-    """Run the complete integration test."""
+    """Run the complete integration test with REAL API data."""
     logger.info("🚀 Starting ESO Build-O-Rama Integration Test")
+    logger.info("="*60)
+    logger.info("⚠️  NO MOCKS - Using REAL ESO Logs API data ONLY")
+    logger.info("="*60)
     
     try:
-        # Test build analysis
+        # Test build analysis with REAL data
         builds = await test_build_analysis()
         
         if not builds:
-            logger.warning("No builds found - cannot test page generation")
+            logger.error("❌ No builds found - test failed")
+            logger.info("Unable to generate pages without build data")
             return
         
         # Test page generation

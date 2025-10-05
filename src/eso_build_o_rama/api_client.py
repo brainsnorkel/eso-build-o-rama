@@ -192,11 +192,39 @@ class ESOLogsAPIClient:
         variables = {"code": report_code}
         
         logger.info(f"Fetching report {report_code}")
-        result = await self.client.query(query, variables)
-        report = result.get("reportData", {}).get("report", {})
-        
-        logger.info(f"Fetched report: {report.get('title', 'Unknown')}")
-        return report
+        try:
+            result = await self.client.get_report_by_code(report_code)
+            
+            if result and hasattr(result, 'report_data') and hasattr(result.report_data, 'report'):
+                report_obj = result.report_data.report
+                
+                report = {
+                    "code": getattr(report_obj, 'code', report_code),
+                    "title": getattr(report_obj, 'title', 'Unknown Title'),
+                    "startTime": getattr(report_obj, 'start_time', 0),
+                    "endTime": getattr(report_obj, 'end_time', 0),
+                    "fights": [
+                        {
+                            "id": getattr(fight, 'id', 0),
+                            "name": getattr(fight, 'name', 'Unknown Fight'),
+                            "startTime": getattr(fight, 'start_time', 0),
+                            "endTime": getattr(fight, 'end_time', 0),
+                            "difficulty": getattr(fight, 'difficulty', 0),
+                            "kill": getattr(fight, 'kill', False)
+                        }
+                        for fight in getattr(report_obj, 'fights', [])
+                    ]
+                }
+                
+                logger.info(f"Fetched report: {report.get('title', 'Unknown')} with {len(report['fights'])} fights")
+                return report
+            
+            logger.warning(f"Report {report_code} not found")
+            return None
+            
+        except Exception as e:
+            logger.error(f"Error fetching report {report_code}: {e}")
+            return None
     
     async def get_report_table(
         self,

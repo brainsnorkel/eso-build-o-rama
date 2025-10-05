@@ -5,8 +5,13 @@ Main orchestration script for ESO Build-O-Rama.
 import asyncio
 import json
 import logging
+import sys
 from pathlib import Path
 from typing import List, Dict, Any
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
 
 from .trial_scanner import TrialScanner
 from .page_generator import PageGenerator
@@ -28,7 +33,7 @@ class ESOBuildORM:
         """Initialize the application."""
         self.scanner = TrialScanner()
         self.page_generator = PageGenerator()
-        self.trials_file = Path("data/trials.json")
+        self.trials_file = Path(__file__).parent.parent.parent / "data" / "trials.json"
     
     async def run(self, test_mode: bool = False):
         """

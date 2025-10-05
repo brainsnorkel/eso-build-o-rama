@@ -115,9 +115,10 @@ def test_common_build_identification():
     # Analyze the trial
     result = analyzer.analyze_trial_report(trial_report)
     
-    # Should find one common build
-    assert len(result.common_builds) == 1
-    common_build = result.common_builds[0]
+    # Should find one common build (5+ occurrences)
+    unique_builds = result.get_unique_builds()
+    assert len(unique_builds) == 1
+    common_build = unique_builds[0]
     
     assert common_build.count == 6
     assert common_build.best_player.character_name == "Player 5"  # Highest DPS

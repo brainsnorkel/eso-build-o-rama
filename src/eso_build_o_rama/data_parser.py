@@ -234,8 +234,11 @@ class DataParser:
                     player_build = self._parse_player(player_data, report_data, fight_id, role, player_details_lookup)
                     if player_build:
                         players.append(player_build)
-                except Exception as e:
+                except (KeyError, ValueError, TypeError) as e:
                     logger.error(f"Error parsing player {player_data.get('name', 'Unknown')}: {e}")
+                    continue
+                except Exception as e:
+                    logger.error(f"Unexpected error parsing player {player_data.get('name', 'Unknown')}: {e}")
                     continue
             
             logger.info(f"Parsed {len(players)} players from fight {fight_id}")
@@ -246,8 +249,11 @@ class DataParser:
             
             return players
             
-        except Exception as e:
+        except (KeyError, ValueError, TypeError) as e:
             logger.error(f"Error parsing report data: {e}")
+            return []
+        except Exception as e:
+            logger.error(f"Unexpected error parsing report data: {e}")
             return []
     
     def _parse_player(
@@ -334,8 +340,11 @@ class DataParser:
             
             return player_build
             
+        except (KeyError, ValueError, TypeError) as e:
+            logger.error(f"Error parsing player data: {e}")
+            return None
         except Exception as e:
-            logger.error(f"Error parsing player: {e}")
+            logger.error(f"Unexpected error parsing player: {e}")
             return None
     
     def _parse_gear(self, gear_data: List[Dict[str, Any]]) -> List[GearPiece]:
@@ -364,8 +373,11 @@ class DataParser:
                 
                 gear_pieces.append(gear_piece)
                 
+            except (KeyError, ValueError, TypeError) as e:
+                logger.debug(f"Error parsing gear piece data: {e}")
+                continue
             except Exception as e:
-                logger.debug(f"Error parsing gear piece: {e}")
+                logger.debug(f"Unexpected error parsing gear piece: {e}")
                 continue
         
         return gear_pieces
@@ -410,8 +422,11 @@ class DataParser:
                 elif i < 12:
                     abilities_bar2.append(ability)
                     
+            except (KeyError, ValueError, TypeError) as e:
+                logger.debug(f"Error parsing ability data: {e}")
+                continue
             except Exception as e:
-                logger.debug(f"Error parsing ability: {e}")
+                logger.debug(f"Unexpected error parsing ability: {e}")
                 continue
         
         return abilities_bar1, abilities_bar2

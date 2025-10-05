@@ -75,15 +75,21 @@ class TrialScanner:
                     )
                     if report:
                         trial_reports.append(report)
-                except Exception as e:
+                except (KeyError, ValueError, TypeError) as e:
                     logger.error(f"Error processing report {report_code}: {e}")
+                    continue
+                except Exception as e:
+                    logger.error(f"Unexpected error processing report {report_code}: {e}")
                     continue
             
             logger.info(f"Processed {len(trial_reports)} reports for {trial_name}")
             return trial_reports
             
-        except Exception as e:
+        except (KeyError, ValueError, TypeError) as e:
             logger.error(f"Error scanning trial {trial_name}: {e}")
+            return []
+        except Exception as e:
+            logger.error(f"Unexpected error scanning trial {trial_name}: {e}")
             return []
     
     async def _process_report(
@@ -238,8 +244,11 @@ class TrialScanner:
                 if reports:
                     all_reports[trial_name] = reports
                     
-            except Exception as e:
+            except (KeyError, ValueError, TypeError) as e:
                 logger.error(f"Error scanning {trial_name}: {e}")
+                continue
+            except Exception as e:
+                logger.error(f"Unexpected error scanning {trial_name}: {e}")
                 continue
         
         logger.info(f"Completed scanning {len(all_reports)} trials")

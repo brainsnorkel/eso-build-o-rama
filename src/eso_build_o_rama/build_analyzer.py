@@ -4,7 +4,7 @@ Analyzes player builds to identify common builds and create build slugs.
 """
 
 import logging
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Any
 from collections import defaultdict, Counter
 
 from .models import PlayerBuild, CommonBuild, TrialReport
@@ -15,6 +15,11 @@ logger = logging.getLogger(__name__)
 
 class BuildAnalyzer:
     """Analyzes player builds to identify common patterns."""
+    
+    # Constants for build analysis
+    MINIMUM_SET_PIECES = 4  # Minimum pieces for a meaningful set bonus
+    MINIMUM_COMMON_BUILD_OCCURRENCES = 5  # Minimum occurrences to be considered a "common build"
+    MAX_SUBCLASSES = 3  # Maximum number of subclasses per character
     
     def __init__(self):
         """Initialize the build analyzer."""
@@ -30,6 +35,11 @@ class BuildAnalyzer:
         Returns:
             Updated TrialReport with common builds identified
         """
+        # Input validation
+        if not isinstance(trial_report, TrialReport):
+            raise TypeError("trial_report must be a TrialReport object")
+        if not trial_report.all_players:
+            raise ValueError("trial_report must contain players")
         logger.info(f"Analyzing {len(trial_report.all_players)} players for trial {trial_report.trial_name}")
         
         # Analyze each player's build
@@ -209,7 +219,7 @@ class BuildAnalyzer:
         # Get the two most common sets
         sorted_sets = sorted(best_player.sets_equipped.items(), key=lambda x: x[1], reverse=True)
         for set_name, count in sorted_sets[:2]:
-            if count >= 4:  # Only include if it's a meaningful set
+            if count >= self.MINIMUM_SET_PIECES:  # Only include if it's a meaningful set
                 sets.append(set_name)
         
         # Count unique reports
@@ -232,7 +242,7 @@ class BuildAnalyzer:
         
         return common_build
     
-    def get_build_statistics(self, trial_report: TrialReport) -> Dict[str, any]:
+    def get_build_statistics(self, trial_report: TrialReport) -> Dict[str, Any]:
         """Get statistics about builds in the trial report."""
         stats = {
             'total_players': len(trial_report.all_players),
@@ -261,7 +271,7 @@ class BuildAnalyzer:
         
         for player in players:
             for set_name, count in player.sets_equipped.items():
-                if count >= 4:  # Only count meaningful sets
+                if count >= self.MINIMUM_SET_PIECES:  # Only count meaningful sets
                     set_counts[set_name] += count
         
         return dict(set_counts)

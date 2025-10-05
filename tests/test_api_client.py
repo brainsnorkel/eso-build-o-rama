@@ -21,7 +21,7 @@ async def test_api_authentication():
     assert client.client_id is not None
     assert client.client_secret is not None
     assert client.access_token is not None
-    client.close()
+    await client.close()
 
 
 @pytest.mark.asyncio
@@ -42,7 +42,7 @@ async def test_get_zones():
     print(f"\nFound {len(zones)} zones")
     print(f"First zone: {first_zone['name']} (ID: {first_zone['id']})")
     
-    client.close()
+    await client.close()
 
 
 if __name__ == "__main__":
@@ -67,7 +67,7 @@ if __name__ == "__main__":
                 encounters = zone.get("encounters", [])
                 print(f"   - {zone['name']} (ID: {zone['id']}, {len(encounters)} encounters)")
         
-        client.close()
+        await client.close()
         print("\n✅ API client test complete!")
     
     asyncio.run(main())

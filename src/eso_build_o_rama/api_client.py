@@ -21,13 +21,19 @@ load_dotenv()
 class ESOLogsAPIClient:
     """Client for interacting with ESO Logs API."""
     
+    # Constants for rate limiting
+    DEFAULT_MIN_REQUEST_DELAY = 2.0  # Default minimum delay between requests in seconds
+    DEFAULT_MAX_RETRIES = 3  # Default maximum number of retries
+    DEFAULT_RETRY_DELAY = 120.0  # Default retry delay in seconds
+    RATE_LIMIT_HTTP_STATUS = 429  # HTTP status code for rate limiting
+    
     def __init__(
         self, 
         client_id: Optional[str] = None, 
         client_secret: Optional[str] = None,
-        min_request_delay: float = 2.0,
-        max_retries: int = 3,
-        retry_delay: float = 120.0
+        min_request_delay: float = DEFAULT_MIN_REQUEST_DELAY,
+        max_retries: int = DEFAULT_MAX_RETRIES,
+        retry_delay: float = DEFAULT_RETRY_DELAY
     ):
         """
         Initialize the ESO Logs API client.
@@ -42,11 +48,7 @@ class ESOLogsAPIClient:
         self.client_id = client_id or os.getenv("ESOLOGS_ID")
         self.client_secret = client_secret or os.getenv("ESOLOGS_SECRET")
         
-        if not self.client_id or not self.client_secret:
-            raise ValueError(
-                "ESO Logs credentials not found. "
-                "Set ESOLOGS_ID and ESOLOGS_SECRET environment variables."
-            )
+        self._validate_credentials(self.client_id, self.client_secret)
         
         # Rate limiting settings
         self.min_request_delay = min_request_delay
@@ -61,6 +63,23 @@ class ESOLogsAPIClient:
             headers={"Authorization": f"Bearer {self.access_token}"}
         )
         logger.info(f"ESO Logs API client initialized (rate limit: {min_request_delay}s between requests)")
+    
+    def _validate_credentials(self, client_id: str, client_secret: str) -> None:
+        """Validate ESO Logs API credentials."""
+        if not client_id:
+            raise ValueError(
+                "ESO Logs client ID not found. "
+                "Set ESOLOGS_ID environment variable."
+            )
+        if not client_secret:
+            raise ValueError(
+                "ESO Logs client secret not found. "
+                "Set ESOLOGS_SECRET environment variable."
+            )
+        if len(client_id) < 10:
+            raise ValueError("Invalid client ID format")
+        if len(client_secret) < 20:
+            raise ValueError("Invalid client secret format")
     
     async def _wait_for_rate_limit(self):
         """Ensure minimum delay between API requests."""
@@ -91,7 +110,7 @@ class ESOLogsAPIClient:
                 return await func(*args, **kwargs)
                 
             except GraphQLClientHttpError as e:
-                if "429" in str(e):  # Rate limit error
+                if str(self.RATE_LIMIT_HTTP_STATUS) in str(e):  # Rate limit error
                     if attempt < self.max_retries - 1:
                         delay = self.retry_delay * (attempt + 1)
                         logger.warning(f"Rate limit hit, retrying in {delay}s (attempt {attempt + 1}/{self.max_retries})")
@@ -155,6 +174,13 @@ class ESOLogsAPIClient:
         Returns:
             List of ranking data
         """
+        # Input validation
+        if not isinstance(zone_id, int) or zone_id <= 0:
+            raise ValueError("zone_id must be a positive integer")
+        if limit <= 0 or limit > 100:
+            raise ValueError("limit must be between 1 and 100")
+        if difficulty is not None and (difficulty < 1 or difficulty > 3):
+            raise ValueError("difficulty must be between 1 and 3")
         query = """
         query GetRankings(
           $zoneID: Int!
@@ -275,6 +301,11 @@ class ESOLogsAPIClient:
         Returns:
             Report data dictionary
         """
+        # Input validation
+        if not isinstance(report_code, str) or not report_code.strip():
+            raise ValueError("report_code must be a non-empty string")
+        if len(report_code) < 8 or len(report_code) > 16:
+            raise ValueError("report_code must be between 8 and 16 characters")
         query = """
         query GetReportByCode($code: String!) {
           reportData {

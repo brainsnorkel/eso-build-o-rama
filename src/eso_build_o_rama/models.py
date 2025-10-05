@@ -198,6 +198,6 @@ class TrialReport:
     healer_players: int = 0
     tank_players: int = 0
     
-    def get_unique_builds(self) -> List[CommonBuild]:
-        """Get builds that appear 5+ times (common builds)."""
-        return [build for build in self.common_builds if build.count >= 5]
+    def get_unique_builds(self, min_occurrences: int = 5) -> List[CommonBuild]:
+        """Get builds that appear min_occurrences+ times (common builds)."""
+        return [build for build in self.common_builds if build.count >= min_occurrences]

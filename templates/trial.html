@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trial_name }} - Common ESO Builds{% endblock %}
+
+{% block content %}
+<nav style="margin-bottom: 20px; font-size: 0.9em;">
+    <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>
+    <span style="color: #666; margin: 0 10px;">/</span>
+    <span style="color: #a8edea;">{{ trial_name }}</span>
+</nav>
+
+<div class="card">
+    <h2>{{ trial_name }}</h2>
+    <p style="color: #a8edea; margin-top: 10px;">
+        Common builds from top-performing players across all boss encounters
+    </p>
+</div>
+
+{% for boss_name, builds in bosses.items() %}
+<div class="card">
+    <h3 style="color: #38ef7d; margin-bottom: 20px;">{{ boss_name }}</h3>
+    
+    {% if builds %}
+    <table>
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Build</th>
+                <th>Sets</th>
+                <th>Popularity</th>
+                <th>DPS</th>
+                <th>Player</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for build in builds %}
+            <tr>
+                <td style="text-align: center; font-size: 1.5em;">
+                    {% if build.best_player.role == 'dps' %}
+                        ⚔️
+                    {% elif build.best_player.role == 'healer' %}
+                        ✚
+                    {% elif build.best_player.role == 'tank' %}
+                        🛡️
+                    {% else %}
+                        ❓
+                    {% endif %}
+                </td>
+                <td><strong>{{ build.get_display_name() }}</strong></td>
+                <td>{{ build.sets|join(', ') if build.sets else 'Various' }}</td>
+                <td>{{ build.count }} players in {{ build.report_count }} reports</td>
+                <td>{{ build.best_player.dps|format_dps }}</td>
+                <td>{{ build.best_player.character_name }}</td>
+                <td><a href="u48-{{ build.build_slug }}.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color: #a8edea;">No common builds found for this boss.</p>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% endblock %}

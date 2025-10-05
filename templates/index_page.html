@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="card">
-    <h2>Top Performing Builds - {{ update_version }}</h2>
+    <h2>Common builds from ranked reports - {{ update_version }}</h2>
     <p style="margin-top: 10px; color: #7f8c8d;">
         Analyzed from the top 5 logs of each trial. Found <strong>{{ total_builds }}</strong> common builds appearing 5+ times.
     </p>
@@ -41,7 +41,7 @@
                         Unknown Sets
                     {% endif %}
                 </td>
-                <td>{{ build.count }} players</td>
+                <td>{{ build.count }} players in {{ build.report_count }} reports</td>
                 <td>{{ build.best_player.dps|format_dps }}</td>
                 <td>{{ build.best_player.character_name }}</td>
                 <td>

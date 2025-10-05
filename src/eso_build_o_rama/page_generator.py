@@ -64,14 +64,20 @@ class PageGenerator:
         template = self.env.get_template('build_page.html')
         
         # Prepare data for template
+        trial_slug = build.trial_name.lower().replace(' ', '-')
         context = {
             'build': build,
             'update_version': update_version,
             'best_player': build.best_player,
+            'trial_slug': trial_slug,
             'generated_date': datetime.now().strftime('%Y-%m-%d'),
             'page_title': self._get_page_title(build),
             'meta_description': self._get_meta_description(build)
         }
+        
+        # Debug: Check DPS value being passed to template
+        if build.best_player:
+            logger.debug(f"Passing to template - Best player: {build.best_player.character_name}, DPS: {build.best_player.dps:,}")
         
         # Render template
         html = template.render(**context)
@@ -127,6 +133,103 @@ class PageGenerator:
         filepath.write_text(html, encoding='utf-8')
         
         logger.info(f"Generated index: {filepath}")
+        return str(filepath)
+    
+    def generate_home_page(
+        self,
+        builds_by_trial: Dict[str, Dict[str, List[CommonBuild]]]
+    ) -> str:
+        """
+        Generate the home page listing all trials.
+        
+        Args:
+            builds_by_trial: Dictionary of {trial_name: {boss_name: [builds]}}
+            
+        Returns:
+            Path to generated HTML file
+        """
+        logger.info("Generating home page")
+        
+        # Prepare trial data with top build for each trial
+        trials = []
+        for trial_name, bosses in builds_by_trial.items():
+            # Find the highest DPS build across all bosses in this trial
+            all_builds = []
+            for builds in bosses.values():
+                all_builds.extend(builds)
+            
+            top_build = max(all_builds, key=lambda b: b.best_player.dps if b.best_player else 0)
+            
+            trial_slug = trial_name.lower().replace(' ', '-')
+            trials.append({
+                'name': trial_name,
+                'slug': trial_slug,
+                'top_build': top_build
+            })
+        
+        # Sort trials alphabetically
+        trials.sort(key=lambda t: t['name'])
+        
+        # Load template
+        template = self.env.get_template('home.html')
+        
+        # Render template
+        context = {
+            'trials': trials,
+            'generated_date': datetime.now().strftime('%Y-%m-%d')
+        }
+        html = template.render(**context)
+        
+        # Write file
+        filepath = self.output_dir / 'index.html'
+        filepath.write_text(html, encoding='utf-8')
+        
+        logger.info(f"Generated home page: {filepath}")
+        return str(filepath)
+    
+    def generate_trial_page(
+        self,
+        trial_name: str,
+        bosses: Dict[str, List[CommonBuild]]
+    ) -> str:
+        """
+        Generate a trial page with all bosses and their builds.
+        
+        Args:
+            trial_name: Name of the trial
+            bosses: Dictionary of {boss_name: [builds]}
+            
+        Returns:
+            Path to generated HTML file
+        """
+        logger.info(f"Generating trial page for {trial_name}")
+        
+        # Sort builds for each boss by popularity (count) then DPS
+        sorted_bosses = {}
+        for boss_name, builds in bosses.items():
+            sorted_builds = sorted(
+                builds,
+                key=lambda b: (-b.count, -(b.best_player.dps if b.best_player else 0))
+            )
+            sorted_bosses[boss_name] = sorted_builds
+        
+        # Load template
+        template = self.env.get_template('trial.html')
+        
+        # Render template
+        context = {
+            'trial_name': trial_name,
+            'bosses': sorted_bosses,
+            'generated_date': datetime.now().strftime('%Y-%m-%d')
+        }
+        html = template.render(**context)
+        
+        # Write file
+        trial_slug = trial_name.lower().replace(' ', '-')
+        filepath = self.output_dir / f'{trial_slug}.html'
+        filepath.write_text(html, encoding='utf-8')
+        
+        logger.info(f"Generated trial page: {filepath}")
         return str(filepath)
     
     def generate_all_pages(

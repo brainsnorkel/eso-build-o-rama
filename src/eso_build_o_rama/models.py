@@ -57,6 +57,7 @@ class PlayerBuild:
     player_id: Optional[int] = None
     character_id: Optional[int] = None
     class_name: str = ""
+    role: str = ""  # dps, healer, tank
     
     # Performance
     dps: float = 0.0
@@ -119,6 +120,7 @@ class CommonBuild:
     subclasses: List[str] = field(default_factory=list)
     sets: List[str] = field(default_factory=list)
     count: int = 0
+    report_count: int = 0
     best_player: Optional[PlayerBuild] = None
     all_players: List[PlayerBuild] = field(default_factory=list)
     
@@ -154,7 +156,23 @@ class CommonBuild:
         for subclass in self.subclasses:
             full_subclasses.append(subclass_names.get(subclass.lower(), subclass.title()))
         
-        return " / ".join(full_subclasses)
+        # Add role information if available
+        role_info = ""
+        if self.best_player and self.best_player.role:
+            role_display = self.best_player.role.title()  # dps -> DPS, healer -> Healer
+            role_info = f" ({role_display})"
+        
+        return " / ".join(full_subclasses) + role_info
+    
+    def get_all_sets_used(self) -> List[str]:
+        """Get a list of all unique sets used by players with this build."""
+        all_sets = set()
+        for player in self.all_players:
+            if player.sets_equipped:
+                all_sets.update(player.sets_equipped.keys())
+        
+        # Sort alphabetically and return as list
+        return sorted(list(all_sets))
 
 
 @dataclass
@@ -166,6 +184,7 @@ class TrialReport:
     report_code: str = ""
     date: str = ""
     update_version: str = ""
+    total_reports_analyzed: int = 0  # Total number of reports analyzed for this trial/boss
     
     # All players in the fight
     all_players: List[PlayerBuild] = field(default_factory=list)

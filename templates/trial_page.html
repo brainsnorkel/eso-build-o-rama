@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}{{ trial_name }} Builds - {{ update_version }}{% endblock %}
+
+{% block meta_description %}Top performing builds for {{ trial_name }} organized by boss encounter{% endblock %}
+
+{% block content %}
+<a href="index.html" class="back-link">← Back to All Trials</a>
+
+<div class="card">
+    <h2>{{ trial_name }} - Top Builds</h2>
+    <p style="color: #a8edea; margin-top: 10px;">
+        Builds organized by boss encounter from top-ranked logs
+    </p>
+</div>
+
+{% for boss_name, builds in builds_by_boss.items() %}
+<div class="card">
+    <h3>{{ boss_name }}</h3>
+    
+    {% if builds %}
+    <table>
+        <thead>
+            <tr>
+                <th>Build</th>
+                <th>Sets</th>
+                <th>Players</th>
+                <th>Top DPS</th>
+                <th>Example Player</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for build in builds %}
+            <tr>
+                <td><strong>{{ build.get_display_name() }}</strong></td>
+                <td>{{ ', '.join(build.sets[:2]) }}</td>
+                <td>{{ build.count }}</td>
+                <td>{{ build.best_player.dps|format_dps }}</td>
+                <td>{{ build.best_player.character_name }}</td>
+                <td>
+                    <a href="{{ build.build_slug }}.html" class="button" style="padding: 5px 15px; font-size: 0.9em;">
+                        View Details →
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color: #7f8c8d; font-style: italic;">No common builds found for this encounter.</p>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% endblock %}

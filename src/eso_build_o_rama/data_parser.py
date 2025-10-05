@@ -20,58 +20,88 @@ SLOT_NAMES = {
     4: "legs",
     5: "boots",
     6: "hands",
-    13: "necklace",
-    14: "ring1",
-    15: "ring2",
-    16: "main_hand",
-    17: "off_hand",
-    18: "backup_main_hand",
-    19: "backup_off_hand"
+    7: "necklace",
+    8: "ring1",
+    9: "ring2",
+    10: "main_hand",
+    11: "off_hand",
+    12: "backup_main_hand",
+    13: "backup_off_hand",
+    14: "backup_necklace",
+    15: "backup_ring1",
+    16: "backup_ring2"
 }
 
-# Trait ID mapping (common ESO traits)
+# Trait ID mapping (from ESO Logs API)
+# Based on authoritative sources: UESP, ESO Wiki, and ESO Logs API documentation
 TRAIT_NAMES = {
-    1: "Divines",
-    2: "Infused",
-    3: "Impenetrable",
-    4: "Reinforced",
-    5: "Sturdy",
-    6: "Training",
-    7: "Well-Fitted",
-    11: "Arcane",
-    12: "Healthy",
-    13: "Robust",
-    16: "Bloodthirsty",
-    17: "Harmony",
-    18: "Protective",
-    19: "Swift",
-    20: "Triune",
-    21: "Charged",
-    22: "Decisive",
-    23: "Defending",
-    24: "Nirnhoned",
-    25: "Powered",
-    26: "Precise",
-    27: "Sharpened",
-    28: "Training"
+    # Armor traits
+    1: "Divines",           # Increases Mundus Stone effects
+    2: "Infused",           # Increases armor enchantment effect  
+    3: "Impenetrable",      # Increases Critical Resistance
+    4: "Reinforced",        # Increases Armor value
+    5: "Sturdy",           # Reduces block cost
+    6: "Training",         # Increases experience gained (armor/weapon)
+    7: "Well-Fitted",      # Reduces sprinting/roll dodge cost
+    8: "Divines",          # Alternate ID for Divines
+    
+    # Jewelry traits  
+    11: "Arcane",          # Increases Maximum Magicka
+    12: "Healthy",         # Increases Maximum Health
+    13: "Robust",          # Increases Maximum Stamina
+    16: "Bloodthirsty",    # Increases damage vs low-health enemies
+    17: "Harmony",         # Increases Synergy effectiveness
+    18: "Protective",      # Increases Physical and Spell Resistance
+    19: "Swift",           # Increases movement speed
+    20: "Triune",          # Increases Health, Magicka, and Stamina
+    
+    # Weapon traits
+    21: "Charged",         # Increases chance to apply status effects
+    22: "Decisive",        # Chance to gain additional Ultimate
+    23: "Defending",       # Increases Physical and Spell Resistance
+    24: "Nirnhoned",       # Increases weapon damage
+    25: "Powered",         # Increases healing done
+    26: "Precise",         # Increases Weapon and Spell Critical
+    27: "Sharpened",       # Increases Physical and Spell Penetration
+    28: "Training"         # Increases experience gained (weapon/armor)
 }
 
-# Enchantment type mapping
+# Enchantment type mapping (from ESO Logs API)
+# Based on authoritative sources: UESP, ESO Wiki, and ESO Logs API documentation
 ENCHANT_NAMES = {
-    35: "Max Health",
-    36: "Max Magicka",
-    37: "Max Stamina",
-    38: "Magicka Recovery",
-    39: "Stamina Recovery",
-    40: "Health Recovery",
-    41: "Spell Damage",
-    42: "Weapon Damage",
-    43: "Spell Critical",
-    44: "Weapon Critical",
-    45: "Spell Resist",
-    46: "Physical Resist",
-    47: "Reduce Spell Cost",
-    48: "Reduce Feat Cost"
+    # Weapon enchants
+    3: "Shock Damage",         # Glyph of Shock
+    28: "Flame Damage",        # Glyph of Flame
+    29: "Weapon Damage",       # Glyph of Weapon Damage (jewelry)
+    
+    # Armor enchants  
+    26: "Max Health",          # Glyph of Health (armor)
+    
+    # Primary stat enchants
+    35: "Max Health",          # Glyph of Health (Oko essence rune)
+    36: "Max Magicka",         # Glyph of Magicka (Makko essence rune)  
+    37: "Max Stamina",         # Glyph of Stamina (Deni essence rune)
+    
+    # Recovery enchants
+    38: "Magicka Recovery",    # Glyph of Magicka Recovery (Makkoma essence rune)
+    39: "Stamina Recovery",    # Glyph of Stamina Recovery (Denima essence rune)
+    40: "Health Recovery",     # Glyph of Health Recovery (Okoma essence rune)
+    
+    # Damage enchants
+    41: "Spell Damage",        # Glyph of Increase Magical Harm (Makderi essence rune)
+    42: "Weapon Damage",       # Glyph of Increase Physical Harm (Taderi essence rune)
+    
+    # Critical enchants
+    43: "Spell Critical",      # Glyph of Spell Critical
+    44: "Weapon Critical",     # Glyph of Weapon Critical
+    
+    # Resistance enchants
+    45: "Spell Resist",        # Glyph of Spell Resist
+    46: "Physical Resist",     # Glyph of Physical Resist
+    
+    # Cost reduction enchants
+    47: "Reduce Spell Cost",   # Glyph of Reduce Spell Cost
+    48: "Reduce Feat Cost"     # Glyph of Reduce Feat Cost
 }
 
 
@@ -86,7 +116,8 @@ class DataParser:
         self,
         report_data: Dict[str, Any],
         table_data: Any,
-        fight_id: int
+        fight_id: int,
+        player_details_data: Any = None
     ) -> List[PlayerBuild]:
         """
         Parse report and table data to extract player builds.
@@ -110,20 +141,44 @@ class DataParser:
                 logger.error("Invalid table data structure")
                 return []
             
-            # Get player data - try playerDetails first (newer format), then entries (older format)
+            # Get both playerDetails (for account names) and entries (for performance data)
+            player_details_lookup = {}
             all_players_data = []
             
-            if 'playerDetails' in data:
-                # Newer format with playerDetails (for kills)
+            # First, extract account names from playerDetails format (either from same data or separate call)
+            player_details_source = data if 'playerDetails' in data else None
+            if player_details_data and hasattr(player_details_data, 'report_data'):
+                player_details_source = player_details_data.report_data.report.table['data']
+            
+            if player_details_source and 'playerDetails' in player_details_source and player_details_source.get('playerDetails'):
+                player_details = player_details_source.get('playerDetails', {})
+                dps_players = player_details.get('dps', [])
+                healer_players = player_details.get('healers', [])
+                tank_players = player_details.get('tanks', [])
+                
+                # Create lookup table: character_name -> account_name
+                for player in dps_players + healer_players + tank_players:
+                    char_name = player.get('name', '')
+                    account_name = player.get('displayName', '')
+                    if char_name and account_name:
+                        player_details_lookup[char_name] = account_name
+                
+                logger.info(f"Created account name lookup for {len(player_details_lookup)} players")
+            
+            # Get performance data from entries format if available
+            if 'entries' in data:
+                # Entries format has actual performance data (total damage, active time) for all players
+                all_players_data = data.get('entries', [])
+                logger.info(f"Found {len(all_players_data)} players (entries format with performance data)")
+            elif 'playerDetails' in data and data.get('playerDetails'):
+                # Fall back to playerDetails format if entries not available
                 player_details = data.get('playerDetails', {})
                 dps_players = player_details.get('dps', [])
                 healer_players = player_details.get('healers', [])
-                all_players_data = dps_players + healer_players
-                logger.info(f"Found {len(dps_players)} DPS and {len(healer_players)} healers (playerDetails format)")
-            elif 'entries' in data:
-                # Older format with entries (for non-kills or older reports)
-                all_players_data = data.get('entries', [])
-                logger.info(f"Found {len(all_players_data)} players (entries format)")
+                tank_players = player_details.get('tanks', [])
+                if dps_players or healer_players or tank_players:
+                    all_players_data = dps_players + healer_players + tank_players
+                    logger.info(f"Found {len(dps_players)} DPS, {len(healer_players)} healers, {len(tank_players)} tanks (playerDetails format)")
             
             if not all_players_data:
                 logger.warning("No player data found in table")
@@ -133,7 +188,46 @@ class DataParser:
             players = []
             for player_data in all_players_data:
                 try:
-                    player_build = self._parse_player(player_data, report_data, fight_id)
+                    # Determine role - use playerDetails lookup if available, otherwise infer
+                    role = "unknown"
+                    character_name = player_data.get('name', '')
+                    
+                    # First try to get role from playerDetails lookup
+                    if character_name in player_details_lookup:
+                        # We have playerDetails data, determine role from original classification
+                        player_details = player_details_source.get('playerDetails', {})
+                        dps_players = player_details.get('dps', [])
+                        healer_players = player_details.get('healers', [])
+                        tank_players = player_details.get('tanks', [])
+                        
+                        # Find this player in the original lists
+                        for player in dps_players:
+                            if player.get('name') == character_name:
+                                role = "dps"
+                                break
+                        if role == "unknown":
+                            for player in healer_players:
+                                if player.get('name') == character_name:
+                                    role = "healer"
+                                    break
+                        if role == "unknown":
+                            for player in tank_players:
+                                if player.get('name') == character_name:
+                                    role = "tank"
+                                    break
+                    else:
+                        # Fallback: infer role from performance data
+                        total_damage = player_data.get('total', 0)
+                        total_healing = player_data.get('overheal', 0)
+                        
+                        # Simple heuristic: if they have significant healing, they're a healer
+                        # Otherwise, they're DPS (including tanks who also do damage)
+                        if total_healing > total_damage * 0.5:  # More healing than damage
+                            role = "healer"
+                        else:
+                            role = "dps"  # Includes tanks and DPS
+                    
+                    player_build = self._parse_player(player_data, report_data, fight_id, role, player_details_lookup)
                     if player_build:
                         players.append(player_build)
                 except Exception as e:
@@ -156,14 +250,22 @@ class DataParser:
         self,
         player_data: Dict[str, Any],
         report_data: Dict[str, Any],
-        fight_id: int
+        fight_id: int,
+        role: str = "unknown",
+        player_details_lookup: Dict[str, str] = None
     ) -> Optional[PlayerBuild]:
         """Parse a single player's data."""
         
         try:
             # Basic info
             character_name = player_data.get('name', 'Unknown')
-            player_name = player_data.get('displayName', '@Unknown')
+            
+            # Get account name from lookup table or fallback to character name
+            if player_details_lookup and character_name in player_details_lookup:
+                player_name = player_details_lookup[character_name]
+            else:
+                # Fallback: use character name with @ prefix
+                player_name = f"@{character_name}"
             class_name = player_data.get('type', 'Unknown')
             player_id = player_data.get('id', 0)
             
@@ -212,6 +314,7 @@ class DataParser:
                 character_name=character_name,
                 player_name=player_name,
                 class_name=class_name,
+                role=role,
                 dps=dps,
                 dps_percentage=dps_percentage,
                 gear=gear,
@@ -243,7 +346,7 @@ class DataParser:
                 
                 # Determine which bar this gear is on
                 bar = 1
-                if slot_id in [18, 19]:  # Backup weapons
+                if slot_id in [12, 13, 14, 15, 16]:  # Backup slots (main_hand, off_hand, necklace, ring1, ring2)
                     bar = 2
                 
                 gear_piece = GearPiece(

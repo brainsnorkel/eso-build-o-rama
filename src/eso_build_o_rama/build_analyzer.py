@@ -58,6 +58,9 @@ class BuildAnalyzer:
     
     def _analyze_player_build(self, player: PlayerBuild) -> None:
         """Analyze a single player's build."""
+        # Debug: Check DPS before analysis
+        dps_before = player.dps
+        
         # Extract ability names for subclass analysis
         all_abilities = []
         for ability in player.abilities_bar1 + player.abilities_bar2:
@@ -76,7 +79,12 @@ class BuildAnalyzer:
         
         # Generate build slug
         build_slug = player.get_build_slug()
-        logger.debug(f"Player {player.character_name}: {build_slug}")
+        
+        # Debug: Check if DPS changed
+        if player.dps != dps_before:
+            logger.warning(f"DPS CHANGED for {player.character_name}: {dps_before:,} -> {player.dps:,}")
+        
+        logger.debug(f"Player {player.character_name}: {build_slug} (DPS: {player.dps:,})")
     
     def _analyze_gear_sets(self, player: PlayerBuild) -> None:
         """Analyze gear to determine set counts per bar."""
@@ -89,8 +97,12 @@ class BuildAnalyzer:
             if gear.set_name and gear.set_name.strip():
                 set_name = gear.set_name.strip()
                 
-                # Add to total count
+                # Always add to total count (for "Sets Used" display)
                 total_sets[set_name] += 1
+                
+                # Skip mythics and arena weapons from bar-specific set counts (they don't contribute to 5-piece bonuses)
+                if self._is_mythic_item(gear.item_name) or self._is_arena_weapon(gear.item_name):
+                    continue
                 
                 # Add to appropriate bar count
                 if gear.bar == 1:
@@ -108,11 +120,19 @@ class BuildAnalyzer:
                 if self._is_two_handed_weapon(gear.item_name):
                     if gear.set_name and gear.set_name.strip():
                         set_name = gear.set_name.strip()
+                        
+                        # Always add to total count (for "Sets Used" display)
+                        total_sets[set_name] += 1
+                        
+                        # Skip arena weapons from bar-specific counts (they don't contribute to 5-piece bonuses)
+                        if self._is_arena_weapon(gear.item_name):
+                            continue
+                        
+                        # Add extra count for 2H weapons (they count as 2 pieces for set bonuses)
                         if gear.bar == 1 or gear.bar == 0:
                             bar1_sets[set_name] += 1  # Already counted 1, add 1 more
                         elif gear.bar == 2:
                             bar2_sets[set_name] += 1
-                        total_sets[set_name] += 1
         
         player.sets_equipped = dict(total_sets)
         player.sets_bar1 = dict(bar1_sets)
@@ -133,6 +153,34 @@ class BuildAnalyzer:
         item_lower = item_name.lower()
         return any(keyword in item_lower for keyword in two_handed_keywords)
     
+    def _is_mythic_item(self, item_name: str) -> bool:
+        """Check if an item is a mythic item."""
+        if not item_name:
+            return False
+        
+        mythic_keywords = [
+            'oakensoul', 'death dealer\'s fete', 'pale order', 'wild hunt',
+            'gaze of sithis', 'malacath\'s band', 'mythic', 'ring of',
+            'band of', 'amulet of', 'necklace of'
+        ]
+        
+        item_lower = item_name.lower()
+        return any(keyword in item_lower for keyword in mythic_keywords)
+    
+    def _is_arena_weapon(self, item_name: str) -> bool:
+        """Check if an item is an arena weapon."""
+        if not item_name:
+            return False
+        
+        arena_keywords = [
+            'maelstrom\'s', 'vateshran\'s', 'dragonstar arena',
+            'brp', 'blackrose prison', 'imperial city prison',
+            'vateshran hollows', 'maelstrom arena'
+        ]
+        
+        item_lower = item_name.lower()
+        return any(keyword in item_lower for keyword in arena_keywords)
+    
     def _group_players_by_build(self, players: List[PlayerBuild]) -> Dict[str, List[PlayerBuild]]:
         """Group players by their build slug."""
         build_groups = defaultdict(list)
@@ -145,8 +193,14 @@ class BuildAnalyzer:
     
     def _create_common_build(self, build_slug: str, players: List[PlayerBuild], trial_report: TrialReport) -> CommonBuild:
         """Create a CommonBuild object from a group of players."""
+        # Debug: Check DPS values before selecting best
+        logger.debug(f"Creating common build for {build_slug} with {len(players)} players")
+        for p in players[:3]:
+            logger.debug(f"  {p.character_name}: DPS={p.dps:,}")
+        
         # Find the highest DPS player
         best_player = max(players, key=lambda p: p.dps)
+        logger.debug(f"Selected best player: {best_player.character_name} with DPS={best_player.dps:,}")
         
         # Extract build components from the best player
         subclasses = best_player.subclasses.copy()
@@ -158,12 +212,16 @@ class BuildAnalyzer:
             if count >= 4:  # Only include if it's a meaningful set
                 sets.append(set_name)
         
+        # Count unique reports
+        unique_reports = set(player.report_code for player in players if player.report_code)
+        
         # Create common build
         common_build = CommonBuild(
             build_slug=build_slug,
             subclasses=subclasses,
             sets=sets,
             count=len(players),
+            report_count=len(unique_reports),
             best_player=best_player,
             all_players=players.copy(),
             trial_name=trial_report.trial_name,

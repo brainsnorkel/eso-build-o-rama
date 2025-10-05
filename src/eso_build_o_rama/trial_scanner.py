@@ -112,8 +112,8 @@ class TrialScanner:
             logger.error(f"Fight {fight_id} not found in report")
             return None
         
-        # Fetch table data with combatant info
-        table_data = await self.api_client.get_report_table(
+        # Fetch table data with combatant info - get both Summary (for account names/roles) and DamageDone (for performance)
+        summary_data = await self.api_client.get_report_table(
             report_code=report_code,
             start_time=fight_info.get('startTime'),
             end_time=fight_info.get('endTime'),
@@ -121,15 +121,24 @@ class TrialScanner:
             include_combatant_info=True
         )
         
-        if not table_data:
-            logger.error(f"Failed to fetch table data for report {report_code}")
+        damage_data = await self.api_client.get_report_table(
+            report_code=report_code,
+            start_time=fight_info.get('startTime'),
+            end_time=fight_info.get('endTime'),
+            data_type="DamageDone",
+            include_combatant_info=True
+        )
+        
+        if not damage_data:
+            logger.error(f"Failed to fetch damage data for report {report_code}")
             return None
         
-        # Parse player builds
+        # Parse player builds (use damage_data for performance, summary_data for account names/roles)
         players = self.data_parser.parse_report_data(
             report_data,
-            table_data,
-            fight_id
+            damage_data,
+            fight_id,
+            player_details_data=summary_data
         )
         
         if not players:

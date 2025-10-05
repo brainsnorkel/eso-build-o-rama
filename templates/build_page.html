@@ -14,16 +14,22 @@
         <div class="info-box">
             <div class="label">Trial &amp; Boss</div>
             <div class="value">{{ build.trial_name }} - {{ build.boss_name }}</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ (build.count / 12 * 100) | round }}%"></div>
+            </div>
         </div>
         
         <div class="info-box">
             <div class="label">Popularity</div>
             <div class="value">{{ build.count }} top players using this build</div>
+            <div class="status-indicator status-online"></div>
+            <span style="font-size: 0.9em; color: #a8edea;">Active Build</span>
         </div>
         
         <div class="info-box">
             <div class="label">Update Version</div>
             <div class="value">{{ update_version }}</div>
+            <div style="font-size: 0.8em; color: #a8edea; margin-top: 5px;">Current Meta</div>
         </div>
     </div>
 </div>
@@ -41,6 +47,10 @@
         <div class="info-box">
             <div class="label">DPS</div>
             <div class="value dps-highlight">{{ best_player.dps|format_dps }}</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ (best_player.dps / 150000 * 100) | round }}%"></div>
+            </div>
+            <div style="font-size: 0.8em; color: #a8edea; margin-top: 5px;">Peak Performance</div>
         </div>
         
         <div class="info-box">
@@ -66,10 +76,12 @@
     <h3>Ability Bars</h3>
     
     {% if best_player.abilities_bar1 %}
-    <h4 style="margin-top: 15px; color: #7f8c8d;">Bar 1 (Main)</h4>
+    <h4 style="margin-top: 15px; color: #a8edea;">
+        <span class="status-indicator status-online"></span>Bar 1 (Main)
+    </h4>
     <div class="abilities-bar">
         {% for ability in best_player.abilities_bar1 %}
-        <div class="ability" title="{{ ability.skill_line }}">
+        <div class="ability tooltip" data-tooltip="{{ ability.skill_line }}">
             {{ ability.ability_name or 'Empty' }}
         </div>
         {% endfor %}
@@ -77,10 +89,12 @@
     {% endif %}
     
     {% if best_player.abilities_bar2 %}
-    <h4 style="margin-top: 15px; color: #7f8c8d;">Bar 2 (Backup)</h4>
+    <h4 style="margin-top: 15px; color: #a8edea;">
+        <span class="status-indicator status-online"></span>Bar 2 (Backup)
+    </h4>
     <div class="abilities-bar">
         {% for ability in best_player.abilities_bar2 %}
-        <div class="ability" title="{{ ability.skill_line }}">
+        <div class="ability tooltip" data-tooltip="{{ ability.skill_line }}">
             {{ ability.ability_name or 'Empty' }}
         </div>
         {% endfor %}

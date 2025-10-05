@@ -30,7 +30,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_id: int = 1, encounter_count: int = 4, max_reports: int = 10):
+async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_id: int = 1, max_reports: int = 10):
     """Fetch data organized by boss encounter."""
     
     logger.info(f"Fetching data for {trial_name} (ID: {trial_id}) organized by boss")
@@ -52,10 +52,10 @@ async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_
         processed_reports = set()  # Track which reports we've already processed
         
         # Use get_top_logs which uses leaderboard: LogsOnly
-        # Use the encounter_count as the encounter_id (usually the overall trial encounter)
+        # Note: Encounter 4 is the standard "overall trial" encounter for rankings across most trials
         rankings = await api_client.get_top_logs(
             zone_id=trial_id,
-            encounter_id=encounter_count,  # Overall trial encounter (last encounter)
+            encounter_id=4,  # Overall trial encounter (standard across trials)
             limit=max_reports
         )
         
@@ -338,7 +338,6 @@ async def process_single_trial(trial: dict) -> tuple:
         players_by_boss = await fetch_trial_data_by_boss(
             trial_name=trial_name,
             trial_id=trial_id,
-            encounter_count=trial['encounters'],
             max_reports=10
         )
         
@@ -373,7 +372,9 @@ async def main():
     
     try:
         # Load trials data
-        trials_file = Path(__file__).parent / "data" / "trials.json"
+        # Use trials_test.json if it exists (for testing), otherwise use trials.json
+        test_file = Path(__file__).parent / "data" / "trials_test.json"
+        trials_file = test_file if test_file.exists() else Path(__file__).parent / "data" / "trials.json"
         with open(trials_file, 'r') as f:
             trials_data = json.load(f)
         

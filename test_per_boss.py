@@ -30,7 +30,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_id: int = 1, max_reports: int = 10):
+async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_id: int = 1, encounter_count: int = 4, max_reports: int = 10):
     """Fetch data organized by boss encounter."""
     
     logger.info(f"Fetching data for {trial_name} (ID: {trial_id}) organized by boss")
@@ -41,10 +41,10 @@ async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_
     try:
         # Get top ranked reports using the rankings API (with leaderboard: LogsOnly)
         # We need to query per encounter to get truly top-ranked reports
-        logger.info(f"   Fetching top {max_reports} RANKED reports per encounter (increased from 5 to 10)...")
+        logger.info(f"   Fetching top {max_reports} RANKED reports per encounter...")
         
-        # For Aetherian Archive, only encounter 4 has rankings (overall trial)
-        # We'll fetch reports from encounter 4 and then process individual boss fights within them
+        # For most trials, the last encounter ID (overall trial) has rankings
+        # We'll fetch reports from the overall encounter and then process individual boss fights within them
         logger.info(f"\n   📊 Fetching top {max_reports} ranked reports for {trial_name}...")
         
         # Organize players by boss name
@@ -52,10 +52,10 @@ async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_
         processed_reports = set()  # Track which reports we've already processed
         
         # Use get_top_logs which uses leaderboard: LogsOnly
-        # For AA, encounter 4 is the only one with rankings
+        # Use the encounter_count as the encounter_id (usually the overall trial encounter)
         rankings = await api_client.get_top_logs(
             zone_id=trial_id,
-            encounter_id=4,  # Overall trial encounter
+            encounter_id=encounter_count,  # Overall trial encounter (last encounter)
             limit=max_reports
         )
         
@@ -65,15 +65,9 @@ async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_
         
         logger.info(f"      ✅ Found {len(rankings)} top-ranked reports")
         
-        # Boss names we want to analyze (will filter by difficulty in reports)
-        target_bosses = {
-            "Lightning Storm Atronach",
-            "Foundation Stone Atronach",
-            "Varlariel",
-            "The Mage"
-        }
-        
         # Process each ranked report
+        # Note: We'll process all boss fights (those with difficulty values)
+        # No hardcoded boss names - this makes it work for all trials
         for rank_data in rankings:
             report_info = rank_data.get('report', {})
             report_code = report_info.get('code')
@@ -106,10 +100,6 @@ async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_
                     
                     # Skip if not a boss fight (bosses have difficulty values, trash doesn't)
                     if fight.get('difficulty') is None:
-                        continue
-                    
-                    # Skip if not one of our target bosses
-                    if fight_name not in target_bosses:
                         continue
                     
                     logger.info(f"        Processing: {fight_name} (ID: {fight_id})")
@@ -348,6 +338,7 @@ async def process_single_trial(trial: dict) -> tuple:
         players_by_boss = await fetch_trial_data_by_boss(
             trial_name=trial_name,
             trial_id=trial_id,
+            encounter_count=trial['encounters'],
             max_reports=10
         )
         
@@ -418,6 +409,12 @@ async def main():
                 if builds_by_boss:
                     all_trials_data[trial_name] = builds_by_boss
                     total_generated_files.update(generated_files)
+            
+            # Add delay between batches to avoid rate limits (except after last batch)
+            if batch_num < total_batches:
+                delay_seconds = 60  # 1 minute delay between batches
+                logger.info(f"\n⏳ Waiting {delay_seconds} seconds before next batch to avoid rate limits...")
+                await asyncio.sleep(delay_seconds)
         
         # Step 4: Generate home page with all trials
         if all_trials_data:

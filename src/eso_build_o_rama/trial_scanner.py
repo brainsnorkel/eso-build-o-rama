@@ -255,4 +255,4 @@ class TrialScanner:
     async def close(self):
         """Close the API client connection."""
         if self.api_client:
-            self.api_client.close()
+            await self.api_client.close()

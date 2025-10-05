@@ -7,7 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+### Added (2025-10-05 - Rate Limiting Update)
+- **API Rate Limiting**: Added automatic rate limiting to API client
+  - Configurable minimum delay between requests (default: 0.5s)
+  - Automatic retry with exponential backoff on HTTP 429 errors (60s, 120s, 180s)
+  - Transparent integration - no code changes needed in existing code
+  - All API methods wrapped with retry logic
+- Updated `trials.json`: Removed redundant `encounters` field
+  - Encounter counts now derived from `trial_bosses.json` when needed
+  - Added Maw of Lorkhaj (zone ID 5) and Ossein Cage (zone ID 19)
+- Created `test_sunspire.py` for single-trial testing
+
+### Changed (2025-10-05)
+- `ESOLogsAPIClient` now accepts rate limiting parameters in constructor
+- `TrialScanner.close()` now properly awaits the async close method
+
+### Fixed (2025-10-05)
+- Fixed async/await handling in trial scanner cleanup
+- Improved error handling for rate limit scenarios
+
+### Added (Earlier)
 - Initial project setup with README and .gitignore
 - Requirements and design documentation (`docs/requirements_and_design.md`)
 - Project plan with architecture and implementation phases (`docs/project_plan.md`)

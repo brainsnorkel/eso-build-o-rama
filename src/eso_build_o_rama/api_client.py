@@ -6,9 +6,11 @@ Handles authentication and API requests to ESO Logs.
 import os
 import asyncio
 import logging
+import time
 from typing import Dict, List, Optional, Any
 from dotenv import load_dotenv
 from esologs import Client, get_access_token
+from esologs._generated.exceptions import GraphQLClientHttpError
 
 logger = logging.getLogger(__name__)
 
@@ -19,13 +21,23 @@ load_dotenv()
 class ESOLogsAPIClient:
     """Client for interacting with ESO Logs API."""
     
-    def __init__(self, client_id: Optional[str] = None, client_secret: Optional[str] = None):
+    def __init__(
+        self, 
+        client_id: Optional[str] = None, 
+        client_secret: Optional[str] = None,
+        min_request_delay: float = 0.5,
+        max_retries: int = 3,
+        retry_delay: float = 60.0
+    ):
         """
         Initialize the ESO Logs API client.
         
         Args:
             client_id: ESO Logs client ID (defaults to env var ESOLOGS_ID)
             client_secret: ESO Logs client secret (defaults to env var ESOLOGS_SECRET)
+            min_request_delay: Minimum delay between API requests in seconds (default: 0.5)
+            max_retries: Maximum number of retries for rate-limited requests (default: 3)
+            retry_delay: Delay in seconds after hitting rate limit (default: 60)
         """
         self.client_id = client_id or os.getenv("ESOLOGS_ID")
         self.client_secret = client_secret or os.getenv("ESOLOGS_SECRET")
@@ -36,13 +48,61 @@ class ESOLogsAPIClient:
                 "Set ESOLOGS_ID and ESOLOGS_SECRET environment variables."
             )
         
+        # Rate limiting settings
+        self.min_request_delay = min_request_delay
+        self.max_retries = max_retries
+        self.retry_delay = retry_delay
+        self.last_request_time = 0
+        
         # Get access token and initialize the client
         self.access_token = get_access_token(self.client_id, self.client_secret)
         self.client = Client(
             url="https://www.esologs.com/api/v2/client",
             headers={"Authorization": f"Bearer {self.access_token}"}
         )
-        logger.info("ESO Logs API client initialized")
+        logger.info(f"ESO Logs API client initialized (rate limit: {min_request_delay}s between requests)")
+    
+    async def _wait_for_rate_limit(self):
+        """Ensure minimum delay between API requests."""
+        current_time = time.time()
+        time_since_last_request = current_time - self.last_request_time
+        
+        if time_since_last_request < self.min_request_delay:
+            delay = self.min_request_delay - time_since_last_request
+            logger.debug(f"Rate limiting: waiting {delay:.2f}s")
+            await asyncio.sleep(delay)
+        
+        self.last_request_time = time.time()
+    
+    async def _retry_on_rate_limit(self, func, *args, **kwargs):
+        """
+        Retry a function call with exponential backoff on rate limit errors.
+        
+        Args:
+            func: Async function to call
+            *args, **kwargs: Arguments to pass to the function
+            
+        Returns:
+            Result of the function call
+        """
+        for attempt in range(self.max_retries):
+            try:
+                await self._wait_for_rate_limit()
+                return await func(*args, **kwargs)
+                
+            except GraphQLClientHttpError as e:
+                if "429" in str(e):  # Rate limit error
+                    if attempt < self.max_retries - 1:
+                        delay = self.retry_delay * (attempt + 1)
+                        logger.warning(f"Rate limit hit, retrying in {delay}s (attempt {attempt + 1}/{self.max_retries})")
+                        await asyncio.sleep(delay)
+                    else:
+                        logger.error(f"Rate limit exceeded after {self.max_retries} retries")
+                        raise
+                else:
+                    raise
+        
+        raise Exception(f"Failed after {self.max_retries} retries")
     
     async def get_zones(self) -> List[Dict[str, Any]]:
         """
@@ -52,7 +112,7 @@ class ESOLogsAPIClient:
             List of zone dictionaries with id, name, and encounters
         """
         logger.info("Fetching available zones")
-        result = await self.client.get_zones()
+        result = await self._retry_on_rate_limit(self.client.get_zones)
         
         if result and result.world_data and result.world_data.zones:
             zones = []
@@ -155,7 +215,8 @@ class ESOLogsAPIClient:
             }
             '''
             
-            result = await self.client.execute(
+            result = await self._retry_on_rate_limit(
+                self.client.execute,
                 query=query_logs_only,
                 variables={"encounterID": encounter_id}
             )
@@ -254,7 +315,10 @@ class ESOLogsAPIClient:
         
         logger.info(f"Fetching report {report_code}")
         try:
-            result = await self.client.get_report_by_code(report_code)
+            result = await self._retry_on_rate_limit(
+                self.client.get_report_by_code,
+                report_code
+            )
             
             if result and hasattr(result, 'report_data') and hasattr(result.report_data, 'report'):
                 report_obj = result.report_data.report
@@ -341,7 +405,8 @@ class ESOLogsAPIClient:
         
         logger.info(f"Fetching table data for report {report_code}")
         try:
-            result = await self.client.get_report_table(
+            result = await self._retry_on_rate_limit(
+                self.client.get_report_table,
                 code=report_code,
                 start_time=start_time,
                 end_time=end_time,

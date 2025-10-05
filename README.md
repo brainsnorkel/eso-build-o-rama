@@ -20,6 +20,7 @@ This project automates the process of:
 - ✅ Repository setup and project structure
 - ✅ API research and authentication
 - ✅ Working API client with OAuth 2.0
+- ✅ **API rate limiting with automatic retry** (0.5s delay, exponential backoff)
 - ✅ Data models and parsers
 - ✅ Subclass detection algorithm
 - ✅ Build analysis engine
@@ -34,6 +35,24 @@ This project automates the process of:
 - Refine data parsing and error handling
 - Implement GitHub Actions for weekly execution
 - Deploy to GitHub Pages
+
+## Features
+
+### Rate Limiting
+The API client includes automatic rate limiting to prevent hitting ESO Logs API limits:
+- **Minimum delay**: 0.5 seconds between requests (configurable)
+- **Automatic retry**: Up to 3 retries on rate limit errors
+- **Exponential backoff**: 60s, 120s, 180s retry delays
+- **Transparent**: Works automatically without code changes
+
+Configure rate limiting when creating the client:
+```python
+client = ESOLogsAPIClient(
+    min_request_delay=1.0,  # 1 second between requests
+    max_retries=3,          # retry up to 3 times
+    retry_delay=60.0        # start with 60s delay
+)
+```
 
 ## Documentation
 

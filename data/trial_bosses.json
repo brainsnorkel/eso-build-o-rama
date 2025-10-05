@@ -8,22 +8,25 @@
     ],
     "Hel Ra Citadel": [
       "Ra Kotu",
-      "Rakhat the Battlemaster",
       "The Yokedas",
-      "The Warrior",
-      "Ash Titan",
-      "Xalvakka"
+      "The Warrior"
     ],
     "Sanctum Ophidia": [
-      "Possessed Mantikora",
-      "Stonebreaker",
-      "Ozara",
-      "The Serpent"
+        "Possessed Mantikora",
+        "Stonebreaker",
+        "Ozara",
+        "The Serpent"
+      ],
+      "Maw of Lorkhaj": [
+        "Zhaj'hassa the Forgotten",
+        "The Twins",
+        "Rakkhat"
     ],
     "The Halls of Fabrication": [
-      "The Pinnacle Factotum",
+      "The Hunter Killers",
+      "Pinnacle Factotum",
       "Archcustodian",
-      "Refabrication Committee",
+      "The Refabrication Committee",
       "Assembly General"
     ],
     "Asylum Sanctorium": [
@@ -48,25 +51,38 @@
       "Lord Falgravn"
     ],
     "Rockgrove": [
+      "Basks-In-Snakes",
       "Oaxiltso",
       "Flame-Herald Bahsei",
       "Xalvakka"
     ],
     "Dreadsail Reef": [
       "Lylanar and Turlassil",
+      "Bow Breaker",
+      "Sail Ripper",
       "Reef Guardian",
       "Tideborn Taleria"
     ],
     "Sanity's Edge": [
       "Exarchanic Yaseyla",
+      "Spiral Descender",
       "Archwizard Twelvane",
       "Ansuul the Tormentor"
     ],
     "Lucent Citadel": [
+      "Cavot Agnan",
       "Orphic Shattered Shard",
       "Arcane Knot",
       "Xoryn"
-    ]
+    ],
+    "Ossein Cage": [
+        "Red Witch Gedna Relvel",
+        "Hall of Fleshcraft",
+        "Tortured Ranyu",
+        "Jynorah and Skorkhif",
+        "Blood Drinker Thisa",
+        "Overfiend Kazpian"
+      ]  
   },
   "note": "Boss names from ESO Logs API and UESP wiki. Some trials have mini-bosses that may appear in reports but aren't main encounters."
 }

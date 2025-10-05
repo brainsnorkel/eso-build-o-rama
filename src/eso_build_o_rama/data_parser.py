@@ -74,22 +74,26 @@ ENCHANT_NAMES = {
     28: "Flame Damage",        # Glyph of Flame
     29: "Weapon Damage",       # Glyph of Weapon Damage (jewelry)
     
+    # Additional weapon enchants (from ESO Logs data)
+    30: "Fiery Weapon",        # Fire damage weapon enchant
+    31: "Berserker",           # Berserker weapon enchant
+    
     # Armor enchants  
     26: "Max Health",          # Glyph of Health (armor)
     
-    # Primary stat enchants
-    35: "Max Health",          # Glyph of Health (Oko essence rune)
-    36: "Max Magicka",         # Glyph of Magicka (Makko essence rune)  
-    37: "Max Stamina",         # Glyph of Stamina (Deni essence rune)
+    # Primary stat enchants (ESO Logs uses shorter names)
+    35: "Health",              # Max Health / Glyph of Health (Oko essence rune)
+    36: "Magicka",             # Max Magicka / Glyph of Magicka (Makko essence rune)  
+    37: "Stamina",             # Max Stamina / Glyph of Stamina (Deni essence rune)
     
     # Recovery enchants
     38: "Magicka Recovery",    # Glyph of Magicka Recovery (Makkoma essence rune)
     39: "Stamina Recovery",    # Glyph of Stamina Recovery (Denima essence rune)
     40: "Health Recovery",     # Glyph of Health Recovery (Okoma essence rune)
     
-    # Damage enchants
-    41: "Spell Damage",        # Glyph of Increase Magical Harm (Makderi essence rune)
-    42: "Weapon Damage",       # Glyph of Increase Physical Harm (Taderi essence rune)
+    # Damage enchants (actual names from ESO Logs)
+    41: "Increase Magical Harm", # Spell Damage / Glyph of Increase Magical Harm (Makderi essence rune)
+    42: "Increase Physical Damage", # Weapon Damage / Glyph of Increase Physical Harm (Taderi essence rune)
     
     # Critical enchants
     43: "Spell Critical",      # Glyph of Spell Critical

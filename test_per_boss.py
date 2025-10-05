@@ -102,13 +102,13 @@ async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_
                     fights = report_data.get('fights', [])
                     logger.info(f"        Found {len(fights)} fights")
                     
-                    # Process each fight
+                    # Only process fights for the CURRENT boss we're analyzing
                     for fight in fights:
                         fight_id = fight['id']
                         fight_name = fight['name']
                         
-                        # Skip "Unknown" fights
-                        if fight_name == "Unknown":
+                        # Skip if not the boss we're looking for
+                        if fight_name != boss_name:
                             continue
                         
                         logger.info(f"        Processing: {fight_name} (ID: {fight_id})")

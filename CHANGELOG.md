@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (2025-10-05 - Staggered Trial Scanning)
+- **Staggered Trial Scanning**: Each trial now runs on its own schedule (14 trials, 1 hour apart starting Sunday 1am UTC)
+- **Incremental Data Storage**: Trial build data persists in `output/builds.json` between runs
+- **CLI Arguments**: Support for `--trial-id`, `--trial`, and `--test` arguments
+- **Timestamp Display**: Each trial section shows when it was last updated
+- **GitHub Actions Auto-Detection**: Workflow automatically determines which trial to scan based on current hour
+- **Data Persistence Module**: New `data_store.py` module for JSON serialization/deserialization
+
+### Changed (2025-10-05 - Staggered Trial Scanning)
+- **Scanning Schedule**: From weekly full-scan to daily staggered per-trial scanning
+- **Page Generation**: Index page now shows last-updated timestamps for each trial
+- **Workflow Architecture**: Single workflow with 14 cron schedules instead of separate files
+- **Data Flow**: Added incremental storage layer between scanning and page generation
+
 ### Added (2025-10-05 - Code Quality Improvements)
 - **Code Quality Enhancements**: Comprehensive improvements to code maintainability and reliability
   - Extracted magic numbers to named constants (MINIMUM_SET_PIECES, DEFAULT_MIN_REQUEST_DELAY, etc.)

@@ -4,7 +4,8 @@ Generates HTML pages for build displays.
 """
 
 import logging
-from typing import List, Dict, Optional
+import json
+from typing import List, Dict, Optional, Any
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from datetime import datetime
@@ -28,6 +29,9 @@ class PageGenerator:
         self.template_dir = Path(template_dir)
         self.output_dir = Path(output_dir)
         
+        # Load boss order from trial_bosses.json
+        self.boss_order = self._load_boss_order()
+        
         # Create output directory if it doesn't exist
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
@@ -40,6 +44,7 @@ class PageGenerator:
         # Add custom filters
         self.env.filters['format_dps'] = self._format_dps
         self.env.filters['format_percentage'] = self._format_percentage
+        self.env.filters['format_timestamp'] = self._format_timestamp
         
         logger.info(f"Page generator initialized (templates: {template_dir}, output: {output_dir})")
     
@@ -95,7 +100,8 @@ class PageGenerator:
     def generate_index_page(
         self,
         all_builds: List[CommonBuild],
-        update_version: str
+        update_version: str,
+        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None
     ) -> str:
         """
         Generate the index page listing all builds.
@@ -103,6 +109,7 @@ class PageGenerator:
         Args:
             all_builds: List of all common builds
             update_version: Game update version
+            trials_metadata: Optional metadata about trials including last updated times
             
         Returns:
             Path to generated HTML file
@@ -115,9 +122,17 @@ class PageGenerator:
         # Load template
         template = self.env.get_template('index_page.html')
         
+        # Add timestamp information to each trial
+        builds_by_trial_with_timestamps = {}
+        for trial_name, bosses_data in builds_by_trial.items():
+            builds_by_trial_with_timestamps[trial_name] = {
+                'bosses': bosses_data,
+                'metadata': trials_metadata.get(trial_name, {}) if trials_metadata else {}
+            }
+        
         # Prepare data
         context = {
-            'builds_by_trial': builds_by_trial,
+            'builds_by_trial': builds_by_trial_with_timestamps,
             'update_version': update_version,
             'total_builds': len(all_builds),
             'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
@@ -235,7 +250,8 @@ class PageGenerator:
     def generate_all_pages(
         self,
         all_builds: List[CommonBuild],
-        update_version: str
+        update_version: str,
+        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None
     ) -> Dict[str, str]:
         """
         Generate all build pages and index.
@@ -243,6 +259,7 @@ class PageGenerator:
         Args:
             all_builds: List of all common builds
             update_version: Game update version
+            trials_metadata: Optional metadata about trials including last updated times
             
         Returns:
             Dictionary mapping build slugs to file paths
@@ -252,7 +269,7 @@ class PageGenerator:
         generated_files = {}
         
         # Generate index page
-        index_path = self.generate_index_page(all_builds, update_version)
+        index_path = self.generate_index_page(all_builds, update_version, trials_metadata)
         generated_files['index'] = index_path
         
         # Generate individual build pages
@@ -267,13 +284,28 @@ class PageGenerator:
         logger.info(f"Generated {len(generated_files)} pages")
         return generated_files
     
+    def _load_boss_order(self) -> Dict[str, List[str]]:
+        """Load boss order from trial_bosses.json."""
+        bosses_file = Path(__file__).parent.parent.parent / "data" / "trial_bosses.json"
+        try:
+            with open(bosses_file, 'r') as f:
+                data = json.load(f)
+                return data.get('trial_bosses', {})
+        except FileNotFoundError:
+            logger.warning(f"trial_bosses.json not found at {bosses_file}")
+            return {}
+        except json.JSONDecodeError:
+            logger.warning(f"Could not parse trial_bosses.json")
+            return {}
+    
     def _group_builds_by_trial(
         self,
         builds: List[CommonBuild]
-    ) -> Dict[str, Dict[str, List[CommonBuild]]]:
-        """Group builds by trial and boss."""
+    ) -> Dict[str, Dict[str, Dict[str, Any]]]:
+        """Group builds by trial and boss with additional metadata, preserving boss order from trial_bosses.json."""
         grouped = {}
         
+        # First, collect all builds
         for build in builds:
             trial = build.trial_name
             boss = build.boss_name
@@ -282,11 +314,36 @@ class PageGenerator:
                 grouped[trial] = {}
             
             if boss not in grouped[trial]:
-                grouped[trial][boss] = []
+                grouped[trial][boss] = {
+                    'builds': [],
+                    'total_reports': 0
+                }
             
-            grouped[trial][boss].append(build)
+            grouped[trial][boss]['builds'].append(build)
+            
+            # Track the highest report count for this boss (should be the same for all builds of same boss)
+            if build.report_count > grouped[trial][boss]['total_reports']:
+                grouped[trial][boss]['total_reports'] = build.report_count
         
-        return grouped
+        # Now reorder bosses according to trial_bosses.json
+        ordered_grouped = {}
+        for trial, bosses_data in grouped.items():
+            if trial in self.boss_order:
+                # Create ordered dict based on trial_bosses.json order
+                ordered_grouped[trial] = {}
+                for boss_name in self.boss_order[trial]:
+                    if boss_name in bosses_data:
+                        ordered_grouped[trial][boss_name] = bosses_data[boss_name]
+                
+                # Add any bosses not in the order file (shouldn't happen, but just in case)
+                for boss_name, data in bosses_data.items():
+                    if boss_name not in ordered_grouped[trial]:
+                        ordered_grouped[trial][boss_name] = data
+            else:
+                # Trial not in boss_order, keep original order
+                ordered_grouped[trial] = bosses_data
+        
+        return ordered_grouped
     
     def _get_page_title(self, build: CommonBuild) -> str:
         """Generate page title for a build."""
@@ -320,3 +377,17 @@ class PageGenerator:
     def _format_percentage(value: float) -> str:
         """Format percentage value for display."""
         return f"{value:.1f}%"
+    
+    @staticmethod
+    def _format_timestamp(timestamp_str: str) -> str:
+        """Format timestamp for display."""
+        if not timestamp_str:
+            return "Never"
+        
+        try:
+            from datetime import datetime
+            # Parse ISO format timestamp
+            dt = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
+            return dt.strftime('%Y-%m-%d %H:%M UTC')
+        except (ValueError, TypeError):
+            return timestamp_str

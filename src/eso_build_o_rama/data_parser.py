@@ -33,79 +33,73 @@ SLOT_NAMES = {
 }
 
 # Trait ID mapping (from ESO Logs API)
-# Based on authoritative sources: UESP, ESO Wiki, and ESO Logs API documentation
 TRAIT_NAMES = {
-    # Armor traits
-    1: "Divines",           # Increases Mundus Stone effects
-    2: "Infused",           # Increases armor enchantment effect  
-    3: "Impenetrable",      # Increases Critical Resistance
-    4: "Reinforced",        # Increases Armor value
-    5: "Sturdy",           # Reduces block cost
-    6: "Training",         # Increases experience gained (armor/weapon)
-    7: "Well-Fitted",      # Reduces sprinting/roll dodge cost
-    8: "Divines",          # Alternate ID for Divines
-    
-    # Jewelry traits  
-    11: "Arcane",          # Increases Maximum Magicka
-    12: "Healthy",         # Increases Maximum Health
-    13: "Robust",          # Increases Maximum Stamina
-    16: "Bloodthirsty",    # Increases damage vs low-health enemies
-    17: "Harmony",         # Increases Synergy effectiveness
-    18: "Protective",      # Increases Physical and Spell Resistance
-    19: "Swift",           # Increases movement speed
-    20: "Triune",          # Increases Health, Magicka, and Stamina
-    
-    # Weapon traits
-    21: "Charged",         # Increases chance to apply status effects
-    22: "Decisive",        # Chance to gain additional Ultimate
-    23: "Defending",       # Increases Physical and Spell Resistance
-    24: "Nirnhoned",       # Increases weapon damage
-    25: "Powered",         # Increases healing done
-    26: "Precise",         # Increases Weapon and Spell Critical
-    27: "Sharpened",       # Increases Physical and Spell Penetration
-    28: "Training"         # Increases experience gained (weapon/armor)
+    0: "None",
+    1: "Powered",
+    2: "Charged",
+    3: "Precise",
+    4: "Infused",
+    5: "Defending",
+    6: "Training",
+    7: "Sharpened",
+    8: "Decisive",
+    9: "Sturdy",
+    10: "Impenetrable",
+    11: "Reinforced",
+    12: "Well-fitted",
+    13: "Training",
+    14: "Infused",
+    15: "Prosperous",
+    16: "Divines",
+    17: "Nirnhoned",
+    18: "Nirnhoned",
+    19: "Arcane",
+    20: "Healthy",
+    21: "Robust",
+    22: "Ornate",
+    23: "Intricate",
+    24: "Harmony",
+    25: "Protective",
+    26: "Swift",
+    27: "Triune",
+    28: "Bloodthirsty",
+    29: "Infused",
+    30: "Prolific",
+    31: "Quickened",
 }
 
 # Enchantment type mapping (from ESO Logs API)
-# Based on authoritative sources: UESP, ESO Wiki, and ESO Logs API documentation
 ENCHANT_NAMES = {
-    # Weapon enchants
-    3: "Shock Damage",         # Glyph of Shock
-    28: "Flame Damage",        # Glyph of Flame
-    29: "Weapon Damage",       # Glyph of Weapon Damage (jewelry)
-    
-    # Additional weapon enchants (from ESO Logs data)
-    30: "Fiery Weapon",        # Fire damage weapon enchant
-    31: "Berserker",           # Berserker weapon enchant
-    
-    # Armor enchants  
-    26: "Max Health",          # Glyph of Health (armor)
-    
-    # Primary stat enchants (ESO Logs uses shorter names)
-    35: "Health",              # Max Health / Glyph of Health (Oko essence rune)
-    36: "Magicka",             # Max Magicka / Glyph of Magicka (Makko essence rune)  
-    37: "Stamina",             # Max Stamina / Glyph of Stamina (Deni essence rune)
-    
-    # Recovery enchants
-    38: "Magicka Recovery",    # Glyph of Magicka Recovery (Makkoma essence rune)
-    39: "Stamina Recovery",    # Glyph of Stamina Recovery (Denima essence rune)
-    40: "Health Recovery",     # Glyph of Health Recovery (Okoma essence rune)
-    
-    # Damage enchants (actual names from ESO Logs)
-    41: "Increase Magical Harm", # Spell Damage / Glyph of Increase Magical Harm (Makderi essence rune)
-    42: "Increase Physical Damage", # Weapon Damage / Glyph of Increase Physical Harm (Taderi essence rune)
-    
-    # Critical enchants
-    43: "Spell Critical",      # Glyph of Spell Critical
-    44: "Weapon Critical",     # Glyph of Weapon Critical
-    
-    # Resistance enchants
-    45: "Spell Resist",        # Glyph of Spell Resist
-    46: "Physical Resist",     # Glyph of Physical Resist
-    
-    # Cost reduction enchants
-    47: "Reduce Spell Cost",   # Glyph of Reduce Spell Cost
-    48: "Reduce Feat Cost"     # Glyph of Reduce Feat Cost
+    0: "None",
+    1: "Magicka",
+    2: "Health",
+    3: "Stamina",
+    4: "Magicka Recovery",
+    5: "Health Recovery",
+    6: "Stamina Recovery",
+    7: "Weapon Damage",
+    8: "Spell Damage",
+    9: "Hardening",
+    10: "Crushing",
+    11: "Weakening",
+    12: "Decrease Health",
+    13: "Decrease Spell Power",
+    14: "Decrease Weapon Power",
+    15: "Absorb Magicka",
+    16: "Absorb Health",
+    17: "Absorb Stamina",
+    18: "Fire Damage",
+    19: "Shock Damage",
+    20: "Frost Damage",
+    21: "Poison Damage",
+    22: "Disease Damage",
+    23: "Reduce Armor",
+    24: "Reduce Power",
+    25: "Reduce Speed",
+    26: "Prismatic Defense",
+    27: "Prismatic Recovery",
+    28: "Decrease Physical Harm",
+    29: "Decrease Spell Harm",
 }
 
 
@@ -362,12 +356,22 @@ class DataParser:
                 if slot_id in [12, 13, 14, 15, 16]:  # Backup slots (main_hand, off_hand, necklace, ring1, ring2)
                     bar = 2
                 
+                # Extract trait and enchantment IDs
+                trait_id = item.get('trait', 0)
+                enchant_id = item.get('enchantType', 0)
+                
+                # Debug: Log unknown IDs to help build complete lookup tables
+                if trait_id and trait_id not in TRAIT_NAMES:
+                    logger.debug(f"Unknown trait ID {trait_id} on {item.get('name', 'Unknown item')}")
+                if enchant_id and enchant_id not in ENCHANT_NAMES:
+                    logger.debug(f"Unknown enchant ID {enchant_id} on {item.get('name', 'Unknown item')}")
+                
                 gear_piece = GearPiece(
                     slot=slot_name,
                     set_name=item.get('setName', ''),
                     item_name=item.get('name', ''),
-                    trait=TRAIT_NAMES.get(item.get('trait', 0), 'Unknown'),
-                    enchantment=ENCHANT_NAMES.get(item.get('enchantType', 0), 'Unknown'),
+                    trait=TRAIT_NAMES.get(trait_id, 'Unknown' if trait_id else ''),
+                    enchantment=ENCHANT_NAMES.get(enchant_id, 'Unknown' if enchant_id else ''),
                     bar=bar
                 )
                 

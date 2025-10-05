@@ -95,6 +95,7 @@
         </thead>
         <tbody>
             {% for gear in best_player.gear %}
+            {% if gear.slot not in ['backup_necklace', 'backup_ring1', 'backup_ring2'] %}
             <tr>
                 <td><strong>{{ gear.slot|title }}</strong></td>
                 <td>{{ gear.set_name or 'N/A' }}</td>
@@ -102,6 +103,7 @@
                 <td>{{ gear.trait or 'N/A' }}</td>
                 <td>{{ gear.enchantment or 'N/A' }}</td>
             </tr>
+            {% endif %}
             {% endfor %}
         </tbody>
     </table>

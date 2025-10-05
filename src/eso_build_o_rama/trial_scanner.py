@@ -225,6 +225,10 @@ class TrialScanner:
         """
         logger.info(f"Scanning {len(trial_list)} trials")
         
+        # Get zones with encounters first
+        logger.info("Fetching zone and encounter data...")
+        zones = await self.api_client.get_zones()
+        
         all_reports = {}
         
         for trial in trial_list:
@@ -235,14 +239,39 @@ class TrialScanner:
                 continue
             
             try:
-                reports = await self.scan_trial(
-                    trial_zone_id=trial_id,
-                    trial_name=trial_name,
-                    top_n=top_n
-                )
+                # Find this trial's zone and get its encounters
+                trial_zone = None
+                for zone in zones:
+                    if zone['id'] == trial_id:
+                        trial_zone = zone
+                        break
                 
-                if reports:
-                    all_reports[trial_name] = reports
+                if not trial_zone or not trial_zone.get('encounters'):
+                    logger.warning(f"No encounters found for {trial_name}")
+                    continue
+                
+                encounters = trial_zone['encounters']
+                logger.info(f"Found {len(encounters)} encounters for {trial_name}")
+                
+                # Scan each encounter
+                trial_reports = []
+                for encounter in encounters:
+                    enc_id = encounter['id']
+                    enc_name = encounter['name']
+                    
+                    logger.info(f"Scanning encounter: {enc_name} (ID: {enc_id})")
+                    reports = await self.scan_trial(
+                        trial_zone_id=trial_id,
+                        trial_name=trial_name,
+                        encounter_id=enc_id,
+                        top_n=top_n
+                    )
+                    
+                    if reports:
+                        trial_reports.extend(reports)
+                
+                if trial_reports:
+                    all_reports[trial_name] = trial_reports
                     
             except (KeyError, ValueError, TypeError) as e:
                 logger.error(f"Error scanning {trial_name}: {e}")
@@ -259,7 +288,8 @@ class TrialScanner:
         all_reports: Dict[str, List[TrialReport]]
     ) -> List[CommonBuild]:
         """
-        Get all publishable builds (common builds that appear 5+ times).
+        Get all publishable builds (common builds that meet role-based thresholds).
+        Consolidates builds with the same build_slug across multiple reports.
         
         Args:
             all_reports: Dictionary of trial reports
@@ -267,18 +297,56 @@ class TrialScanner:
         Returns:
             List of common builds ready to publish
         """
-        publishable_builds = []
+        from collections import defaultdict
+        
+        # Group builds by (trial_name, boss_name, build_slug) to consolidate duplicates
+        build_groups = defaultdict(list)
         
         for trial_name, reports in all_reports.items():
             for report in reports:
-                common_builds = report.get_unique_builds()
-                publishable_builds.extend(common_builds)
+                # Get all common builds from this report (not filtered by threshold yet)
+                for build in report.common_builds:
+                    key = (build.trial_name, build.boss_name, build.build_slug)
+                    build_groups[key].append(build)
+        
+        # Consolidate builds with the same key
+        consolidated_builds = []
+        for (trial_name, boss_name, build_slug), builds in build_groups.items():
+            # Merge all players from all builds with this slug
+            all_players = []
+            for build in builds:
+                all_players.extend(build.all_players)
+            
+            # Find the best player across all instances
+            best_player = max(all_players, key=lambda p: p.dps)
+            
+            # Count unique reports
+            unique_reports = set(player.report_code for player in all_players if player.report_code)
+            
+            # Create consolidated build
+            consolidated = CommonBuild(
+                build_slug=build_slug,
+                subclasses=builds[0].subclasses.copy(),
+                sets=builds[0].sets.copy(),
+                count=len(all_players),
+                report_count=len(unique_reports),
+                best_player=best_player,
+                all_players=all_players,
+                trial_name=trial_name,
+                boss_name=boss_name,
+                fight_id=builds[0].fight_id,
+                update_version=builds[0].update_version
+            )
+            
+            # Only include if meets role-based threshold
+            if consolidated.meets_threshold():
+                consolidated_builds.append(consolidated)
         
         # Sort by count (most popular first)
-        publishable_builds.sort(key=lambda x: x.count, reverse=True)
+        consolidated_builds.sort(key=lambda x: x.count, reverse=True)
         
-        logger.info(f"Found {len(publishable_builds)} publishable builds")
-        return publishable_builds
+        logger.info(f"Found {len(consolidated_builds)} publishable builds after consolidation")
+        return consolidated_builds
     
     async def close(self):
         """Close the API client connection."""

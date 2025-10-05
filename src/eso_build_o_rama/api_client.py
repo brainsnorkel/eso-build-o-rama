@@ -220,14 +220,16 @@ class ESOLogsAPIClient:
             "limit": limit
         }
         
-        logger.info(f"Fetching top {limit} ranked logs for zone {zone_id}, encounter {encounter_id}")
-        
         if not encounter_id:
             logger.error("encounter_id is required for rankings")
             return []
         
+        logger.info(f"Fetching top {limit} unique ranked logs for zone {zone_id}, encounter {encounter_id}")
+        
         try:
-            # Use GraphQL with leaderboard: LogsOnly to get rankings with report codes
+            # Use LogsOnly leaderboard to get rankings with report codes
+            # Note: This returns all available logs (typically 8-12 unique reports)
+            # We'll take the top N after deduplication
             query_logs_only = '''
             query GetTopRankedReports($encounterID: Int!) {
               worldData {
@@ -257,8 +259,15 @@ class ESOLogsAPIClient:
                 logger.error(f"GraphQL errors: {data['errors']}")
                 return []
             
-            rankings_data = data['data']['worldData']['encounter']['characterRankings']
-            rankings = rankings_data.get('rankings', [])
+            character_rankings = data['data']['worldData']['encounter']['characterRankings']
+            # LogsOnly returns data as JSON directly, not in a rankings sub-field
+            if isinstance(character_rankings, dict):
+                rankings = character_rankings.get('rankings', [])
+            elif isinstance(character_rankings, list):
+                rankings = character_rankings
+            else:
+                logger.error(f"Unexpected characterRankings format: {type(character_rankings)}")
+                return []
             
             # Extract unique report codes (keep top DPS per report)
             report_map = {}

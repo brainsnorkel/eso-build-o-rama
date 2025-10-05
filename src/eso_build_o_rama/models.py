@@ -156,13 +156,8 @@ class CommonBuild:
         for subclass in self.subclasses:
             full_subclasses.append(subclass_names.get(subclass.lower(), subclass.title()))
         
-        # Add role information if available
-        role_info = ""
-        if self.best_player and self.best_player.role:
-            role_display = self.best_player.role.title()  # dps -> DPS, healer -> Healer
-            role_info = f" ({role_display})"
-        
-        return " / ".join(full_subclasses) + role_info
+        # Role information is now shown via icon, not in parentheses
+        return " / ".join(full_subclasses)
     
     def get_all_sets_used(self) -> List[str]:
         """Get a list of all unique sets used by players with this build."""
@@ -173,6 +168,23 @@ class CommonBuild:
         
         # Sort alphabetically and return as list
         return sorted(list(all_sets))
+    
+    def get_sorted_sets(self) -> List[str]:
+        """Get the main sets for this build, sorted alphabetically."""
+        return sorted(self.sets) if self.sets else []
+    
+    def meets_threshold(self) -> bool:
+        """Check if this build meets the minimum occurrence threshold for its role."""
+        if not self.best_player:
+            return False
+        
+        role = self.best_player.role.lower()
+        
+        # Different thresholds based on role
+        if role in ['tank', 'healer']:
+            return self.count >= 3
+        else:  # DPS or unknown
+            return self.count >= 5
 
 
 @dataclass
@@ -198,6 +210,6 @@ class TrialReport:
     healer_players: int = 0
     tank_players: int = 0
     
-    def get_unique_builds(self, min_occurrences: int = 5) -> List[CommonBuild]:
-        """Get builds that appear min_occurrences+ times (common builds)."""
-        return [build for build in self.common_builds if build.count >= min_occurrences]
+    def get_unique_builds(self) -> List[CommonBuild]:
+        """Get builds that meet the role-based occurrence threshold (3+ for tank/healer, 5+ for DPS)."""
+        return [build for build in self.common_builds if build.meets_threshold()]

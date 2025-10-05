@@ -1,15 +1,15 @@
 # ESO Build-O-Rama
 
-A weekly scan of ESOLogs to publish new top-performing trial builds.
+A staggered daily scan of ESOLogs to publish new top-performing trial builds, with each trial updated independently.
 
 ## Project Overview
 
 This project automates the process of:
-- Scanning ESOLogs for top 5 logs per trial
+- Scanning ESOLogs for top 10 logs per trial
 - Extracting build information (gear, abilities, mundus, CP)
 - Identifying common builds across top performers
 - Publishing static web pages showcasing these builds
-- Updating weekly with new builds from the current game update
+- Updating each trial independently on a staggered schedule (14 trials, 1 hour apart starting Sunday 1am UTC)
 
 ## Status
 
@@ -30,10 +30,15 @@ This project automates the process of:
 - ✅ Comprehensive test suite (7 passing tests)
 - ✅ Main application script
 
+### Recent Changes
+- ✅ **Staggered Trial Scanning** - Each trial now runs on its own schedule
+- ✅ **Incremental Updates** - Trial data persists between runs, allowing partial updates
+- ✅ **Timestamp Display** - Each trial shows when it was last updated
+- ✅ **CLI Support** - Can scan individual trials with `--trial-id` or `--trial` arguments
+
 ### Next Steps
 - Integration testing with live API data
-- Refine data parsing and error handling
-- Implement GitHub Actions for weekly execution
+- Monitor staggered execution performance
 - Deploy to GitHub Pages
 
 ## Features
@@ -55,7 +60,7 @@ client = ESOLogsAPIClient(
 )
 ```
 
-**Safe Operation**: With 2s delays and ~5-10 points per request, a full scan of 14 trials uses ~2,800 points (well within the 18,000/hour limit).
+**Safe Operation**: With 2s delays and ~5-10 points per request, a single trial scan uses ~200 points (well within the 18,000/hour limit). Each trial runs 1 hour apart to ensure adequate rate limit recovery.
 
 ## Documentation
 
@@ -81,7 +86,7 @@ cd eso-build-o-rama
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install dependencies (when requirements.txt is created)
+# Install dependencies
 pip install -r requirements.txt
 
 # Copy environment template and add your API keys
@@ -89,16 +94,67 @@ cp .env.example .env
 # Edit .env with your credentials
 ```
 
+### Usage
+
+The main script now supports different scanning modes:
+
+```bash
+# Scan all trials (full scan)
+python -m src.eso_build_o_rama.main
+
+# Scan a specific trial by ID
+python -m src.eso_build_o_rama.main --trial-id 12  # Sunspire
+
+# Scan a specific trial by name
+python -m src.eso_build_o_rama.main --trial "Sunspire"
+
+# Test mode (scan only first trial)
+python -m src.eso_build_o_rama.main --test
+```
+
+**Trial IDs**:
+- 1: Aetherian Archive (AA)
+- 2: Hel Ra Citadel (HRC) 
+- 3: Sanctum Ophidia (SO)
+- 5: Maw of Lorkhaj (MoL)
+- 6: Halls of Fabrication (HoF)
+- 7: Asylum Sanctorium (AS)
+- 8: Cloudrest (CR)
+- 12: Sunspire (SS)
+- 14: Kyne's Aegis (KA)
+- 15: Rockgrove (RG)
+- 16: Dreadsail Reef (DSR)
+- 17: Sanity's Edge (SE)
+- 18: Lucent Citadel (LC)
+- 19: Ossein Cage (OC)
+
 ## Architecture
 
-**Data Flow**: ESO Logs API → Data Collection → Build Analysis → Page Generation → Static Hosting
+**Data Flow**: ESO Logs API → Data Collection → Build Analysis → Incremental Data Storage → Page Generation → Static Hosting
 
 **Components**:
 1. Data Collection Module - API client for ESO Logs
 2. Build Analysis Module - Subclass detection and common build identification
-3. Page Generation Module - Static HTML generator
-4. Deployment Module - Publisher to S3/Cloudflare
-5. Scheduler - Weekly Lambda/Worker execution
+3. Data Storage Module - JSON persistence for incremental trial updates
+4. Page Generation Module - Static HTML generator with timestamp support
+5. Deployment Module - GitHub Actions with staggered scheduling
+6. Scheduler - 14 separate cron jobs (1 hour apart, Sunday 1am UTC start)
+
+**Staggered Schedule**:
+- Sunday 1:00 AM UTC: Aetherian Archive (AA)
+- Sunday 2:00 AM UTC: Hel Ra Citadel (HRC)
+- Sunday 3:00 AM UTC: Sanctum Ophidia (SO)
+- Sunday 4:00 AM UTC: Maw of Lorkhaj (MoL)
+- Sunday 5:00 AM UTC: Halls of Fabrication (HoF)
+- Sunday 6:00 AM UTC: Asylum Sanctorium (AS)
+- Sunday 7:00 AM UTC: Cloudrest (CR)
+- Sunday 8:00 AM UTC: Sunspire (SS)
+- Sunday 9:00 AM UTC: Kyne's Aegis (KA)
+- Sunday 10:00 AM UTC: Rockgrove (RG)
+- Sunday 11:00 AM UTC: Dreadsail Reef (DSR)
+- Sunday 12:00 PM UTC: Sanity's Edge (SE)
+- Sunday 1:00 PM UTC: Lucent Citadel (LC)
+- Sunday 2:00 PM UTC: Ossein Cage (OC)
 
 See [Project Plan](docs/project_plan.md) for detailed architecture.
 

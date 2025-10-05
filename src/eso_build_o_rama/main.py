@@ -2,12 +2,13 @@
 Main orchestration script for ESO Build-O-Rama.
 """
 
+import argparse
 import asyncio
 import json
 import logging
 import sys
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 # Add project root to Python path
 project_root = Path(__file__).parent.parent.parent
@@ -16,6 +17,7 @@ sys.path.insert(0, str(project_root))
 from .trial_scanner import TrialScanner
 from .page_generator import PageGenerator
 from .models import CommonBuild
+from .data_store import DataStore
 
 # Configure logging
 logging.basicConfig(
@@ -33,14 +35,17 @@ class ESOBuildORM:
         """Initialize the application."""
         self.scanner = TrialScanner()
         self.page_generator = PageGenerator()
+        self.data_store = DataStore()
         self.trials_file = Path(__file__).parent.parent.parent / "data" / "trials.json"
     
-    async def run(self, test_mode: bool = False):
+    async def run(self, test_mode: bool = False, trial_name: Optional[str] = None, trial_id: Optional[int] = None):
         """
         Run the complete build scanning and generation process.
         
         Args:
             test_mode: If True, only scan one trial for testing
+            trial_name: Specific trial name to scan (overrides test_mode)
+            trial_id: Specific trial ID to scan (overrides test_mode)
         """
         logger.info("="*60)
         logger.info("ESO Build-O-Rama - Starting scan")
@@ -48,16 +53,14 @@ class ESOBuildORM:
         
         try:
             # Load trials data
-            trials = self._load_trials()
+            all_trials = self._load_trials()
             
-            if test_mode:
-                # In test mode, only process first trial
-                trials = [trials[0]]
-                logger.info("TEST MODE: Processing only first trial")
+            # Determine which trials to scan
+            trials_to_scan = self._get_trials_to_scan(all_trials, test_mode, trial_name, trial_id)
             
-            # Scan all trials
-            logger.info(f"\nScanning {len(trials)} trials...")
-            all_reports = await self.scanner.scan_all_trials(trials, top_n=5)
+            # Scan selected trials
+            logger.info(f"\nScanning {len(trials_to_scan)} trials...")
+            all_reports = await self.scanner.scan_all_trials(trials_to_scan, top_n=10)
             
             if not all_reports:
                 logger.error("No reports found!")
@@ -74,15 +77,33 @@ class ESOBuildORM:
             
             logger.info(f"\nFound {len(publishable_builds)} publishable builds")
             
-            # Generate pages
+            # Save trial data incrementally
+            if trial_name or trial_id:
+                # Single trial mode - save this trial's data
+                update_version = self._get_most_common_version(all_reports)
+                for trial_name_scanned, trial_builds in self._group_builds_by_trial(publishable_builds).items():
+                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version)
+                    logger.info(f"Saved {len(trial_builds)} builds for trial '{trial_name_scanned}'")
+            else:
+                # Full scan mode - save all trials
+                update_version = self._get_most_common_version(all_reports)
+                for trial_name_scanned, trial_builds in self._group_builds_by_trial(publishable_builds).items():
+                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version)
+                    logger.info(f"Saved {len(trial_builds)} builds for trial '{trial_name_scanned}'")
+            
+            # Generate pages using all saved builds
             logger.info("\nGenerating HTML pages...")
-            # Get update version from the most recent report
+            all_saved_builds = self.data_store.get_all_builds()
+            trials_metadata = self.data_store.get_trials_metadata()
             update_version = self._get_most_common_version(all_reports)
+            
             logger.info(f"Using game version: {update_version}")
+            logger.info(f"Total builds across all trials: {len(all_saved_builds)}")
             
             generated_files = self.page_generator.generate_all_pages(
-                publishable_builds,
-                update_version
+                all_saved_builds,
+                update_version,
+                trials_metadata
             )
             
             logger.info(f"Generated {len(generated_files)} HTML files")
@@ -113,6 +134,64 @@ class ESOBuildORM:
         logger.info(f"Loaded {len(trials)} trials from {self.trials_file}")
         
         return trials
+    
+    def _get_trials_to_scan(self, all_trials: List[Dict[str, Any]], test_mode: bool, trial_name: Optional[str], trial_id: Optional[int]) -> List[Dict[str, Any]]:
+        """
+        Determine which trials to scan based on parameters.
+        
+        Args:
+            all_trials: List of all available trials
+            test_mode: If True, scan only first trial
+            trial_name: Specific trial name to scan
+            trial_id: Specific trial ID to scan
+            
+        Returns:
+            List of trials to scan
+        """
+        if trial_id:
+            # Find trial by ID
+            matching_trials = [t for t in all_trials if t.get('id') == trial_id]
+            if not matching_trials:
+                logger.error(f"Trial with ID {trial_id} not found!")
+                raise ValueError(f"Trial with ID {trial_id} not found")
+            logger.info(f"Scanning trial by ID: {trial_id} ({matching_trials[0]['name']})")
+            return matching_trials
+        
+        if trial_name:
+            # Find trial by name (case-insensitive)
+            matching_trials = [t for t in all_trials if t.get('name', '').lower() == trial_name.lower()]
+            if not matching_trials:
+                logger.error(f"Trial with name '{trial_name}' not found!")
+                raise ValueError(f"Trial with name '{trial_name}' not found")
+            logger.info(f"Scanning trial by name: {trial_name}")
+            return matching_trials
+        
+        if test_mode:
+            # In test mode, only process first trial
+            logger.info("TEST MODE: Processing only first trial")
+            return [all_trials[0]]
+        
+        # Default: scan all trials
+        logger.info("Scanning all trials")
+        return all_trials
+    
+    def _group_builds_by_trial(self, builds: List[CommonBuild]) -> Dict[str, List[CommonBuild]]:
+        """
+        Group builds by trial name.
+        
+        Args:
+            builds: List of CommonBuild objects
+            
+        Returns:
+            Dictionary mapping trial names to lists of builds
+        """
+        grouped = {}
+        for build in builds:
+            trial = build.trial_name
+            if trial not in grouped:
+                grouped[trial] = []
+            grouped[trial].append(build)
+        return grouped
     
     def _get_most_common_version(self, all_reports: Dict[str, List]) -> str:
         """Get the most common update version from all reports."""
@@ -163,10 +242,25 @@ class ESOBuildORM:
 
 async def main():
     """Main entry point."""
+    parser = argparse.ArgumentParser(description='ESO Build-O-Rama - Scan trials and generate build pages')
+    parser.add_argument('--trial', type=str, help='Specific trial name to scan')
+    parser.add_argument('--trial-id', type=int, help='Specific trial ID to scan')
+    parser.add_argument('--test', action='store_true', help='Test mode - scan only first trial')
+    
+    args = parser.parse_args()
+    
     app = ESOBuildORM()
     
-    # For testing, use test_mode=True
-    await app.run(test_mode=True)
+    # Determine scan mode
+    if args.trial_id:
+        await app.run(trial_id=args.trial_id)
+    elif args.trial:
+        await app.run(trial_name=args.trial)
+    elif args.test:
+        await app.run(test_mode=True)
+    else:
+        # Default: full scan of all trials
+        await app.run()
 
 
 if __name__ == "__main__":

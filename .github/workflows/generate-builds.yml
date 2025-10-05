@@ -1,20 +1,67 @@
-name: Generate ESO Builds
+name: Generate ESO Builds (Staggered)
 
 on:
-  # schedule:
-    # Run every Sunday at 00:00 UTC (weekly)
-    # - cron: '0 0 * * 0'
-  workflow_dispatch:  # Allow manual triggers
+  schedule:
+    - cron: '0 1 * * 0'   # AA - Sunday 1:00 AM UTC
+    - cron: '0 2 * * 0'   # HRC - Sunday 2:00 AM UTC
+    - cron: '0 3 * * 0'   # SO - Sunday 3:00 AM UTC
+    - cron: '0 4 * * 0'   # MoL - Sunday 4:00 AM UTC
+    - cron: '0 5 * * 0'   # HoF - Sunday 5:00 AM UTC
+    - cron: '0 6 * * 0'   # AS - Sunday 6:00 AM UTC
+    - cron: '0 7 * * 0'   # CR - Sunday 7:00 AM UTC
+    - cron: '0 8 * * 0'   # SS - Sunday 8:00 AM UTC
+    - cron: '0 9 * * 0'   # KA - Sunday 9:00 AM UTC
+    - cron: '0 10 * * 0'  # RG - Sunday 10:00 AM UTC
+    - cron: '0 11 * * 0'  # DSR - Sunday 11:00 AM UTC
+    - cron: '0 12 * * 0'  # SE - Sunday 12:00 PM UTC
+    - cron: '0 13 * * 0'  # LC - Sunday 1:00 PM UTC
+    - cron: '0 14 * * 0'  # OC - Sunday 2:00 PM UTC
+  workflow_dispatch:
+    inputs:
+      trial_id:
+        description: 'Trial ID to scan (leave empty for auto-detect based on time)'
+        required: false
+        type: number
 
 jobs:
-  generate-and-deploy:
+  generate-trial:
     runs-on: ubuntu-latest
-    
     steps:
+      - name: Determine which trial to run
+        id: trial
+        run: |
+          if [ -n "${{ inputs.trial_id }}" ]; then
+            echo "trial_id=${{ inputs.trial_id }}" >> $GITHUB_OUTPUT
+          else
+            # Auto-detect based on current hour (UTC)
+            HOUR=$(date -u +%H)
+            case $HOUR in
+              01) echo "trial_id=1" >> $GITHUB_OUTPUT ;;   # AA
+              02) echo "trial_id=2" >> $GITHUB_OUTPUT ;;   # HRC
+              03) echo "trial_id=3" >> $GITHUB_OUTPUT ;;   # SO
+              04) echo "trial_id=5" >> $GITHUB_OUTPUT ;;   # MoL
+              05) echo "trial_id=6" >> $GITHUB_OUTPUT ;;   # HoF
+              06) echo "trial_id=7" >> $GITHUB_OUTPUT ;;   # AS
+              07) echo "trial_id=8" >> $GITHUB_OUTPUT ;;   # CR
+              08) echo "trial_id=12" >> $GITHUB_OUTPUT ;;  # SS
+              09) echo "trial_id=14" >> $GITHUB_OUTPUT ;;  # KA
+              10) echo "trial_id=15" >> $GITHUB_OUTPUT ;;  # RG
+              11) echo "trial_id=16" >> $GITHUB_OUTPUT ;;  # DSR
+              12) echo "trial_id=17" >> $GITHUB_OUTPUT ;;  # SE
+              13) echo "trial_id=18" >> $GITHUB_OUTPUT ;;  # LC
+              14) echo "trial_id=19" >> $GITHUB_OUTPUT ;;  # OC
+              *) echo "trial_id=1" >> $GITHUB_OUTPUT ;;    # Default to AA
+            esac
+          fi
+      
       - name: Checkout main branch
         uses: actions/checkout@v4
+      
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
         with:
-          ref: main
+          ref: gh-pages
+          path: output
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -26,24 +73,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Run build analysis
+      - name: Run build analysis for trial
         env:
           ESOLOGS_ID: ${{ secrets.ESOLOGS_ID }}
           ESOLOGS_SECRET: ${{ secrets.ESOLOGS_SECRET }}
         run: |
-          python3 test_per_boss.py
+          python -m src.eso_build_o_rama.main --trial-id ${{ steps.trial.outputs.trial_id }}
       
-      - name: Copy static assets to output
+      - name: Copy static assets
         run: |
-          cp -r static output/
+          if [ ! -d "output/static" ]; then
+            cp -r static output/
+          fi
       
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./output
-          publish_branch: gh-pages
-          force_orphan: false
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: 'Update builds - ${{ github.run_number }}'
+      - name: Commit and push changes
+        working-directory: output
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Update trial ${{ steps.trial.outputs.trial_id }} builds - $(date -u +%Y-%m-%d)"
+            git push
+          )

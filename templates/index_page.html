@@ -6,44 +6,56 @@
 
 {% block content %}
 <div class="card">
-    <h2>Common builds from ranked reports - {{ update_version }}</h2>
+    <h2>Common builds from ranked reports{% if not update_version.startswith('unknown') %} - {{ update_version }}{% endif %}</h2>
     <p style="margin-top: 10px; color: #7f8c8d;">
-        Analyzed from the top 5 logs of each trial. Found <strong>{{ total_builds }}</strong> common builds appearing 5+ times.
+        Analyzed from the top logs of each trial boss. Found <strong>{{ total_builds }}</strong> common builds (DPS: 5+ occurrences, Tank/Healer: 3+ occurrences).
     </p>
 </div>
 
-{% for trial_name, bosses in builds_by_trial.items() %}
+{% for trial_name, trial_data in builds_by_trial.items() %}
 <div class="card">
-    <h2>{{ trial_name }}</h2>
+    <h2>{{ trial_name }}
+        {% if trial_data.metadata.last_updated %}
+        <small style="font-size: 0.6em; color: #a8edea; font-weight: normal; margin-left: 15px;">
+            Last updated: {{ trial_data.metadata.last_updated|format_timestamp }}
+        </small>
+        {% endif %}
+    </h2>
     
-    {% for boss_name, builds in bosses.items() %}
+    {% for boss_name, boss_data in trial_data.bosses.items() %}
     <h3>{{ boss_name }}</h3>
     
     <table>
         <thead>
             <tr>
+                <th>Role</th>
                 <th>Build</th>
-                <th>Sets</th>
+                <th>Signature Sets</th>
                 <th>Popularity</th>
-                <th>Example DPS</th>
-                <th>Example Player</th>
+                <th>Top DPS</th>
+                <th>Player</th>
                 <th>Details</th>
             </tr>
         </thead>
         <tbody>
-            {% for build in builds %}
+            {% for build in boss_data.builds %}
             <tr>
+                <td>
+                    {% set role_icon = '⚔️' if build.best_player.role == 'dps' else ('🛡️' if build.best_player.role == 'tank' else '💚') %}
+                    <span title="{{ build.best_player.role.title() }}" aria-label="{{ build.best_player.role.title() }} role">{{ role_icon }}</span>
+                </td>
                 <td><strong>{{ build.get_display_name() }}</strong></td>
                 <td>
-                    {% if build.sets %}
-                        {{ build.sets|join(', ') }}
+                    {% set sorted_sets = build.get_sorted_sets() %}
+                    {% if sorted_sets %}
+                        {{ sorted_sets|join(', ') }}
                     {% else %}
                         Unknown Sets
                     {% endif %}
                 </td>
-                <td>{{ build.count }} players in {{ build.report_count }} reports</td>
+                <td>{{ build.count }} in {{ boss_data.total_reports }} fight reports</td>
                 <td>{{ build.best_player.dps|format_dps }}</td>
-                <td>{{ build.best_player.character_name }}</td>
+                <td>{{ build.best_player.player_name }}</td>
                 <td>
                     <a href="{{ update_version.lower() }}-{{ build.build_slug }}.html" style="color: #3498db;">
                         View Build →
@@ -60,8 +72,8 @@
 <div class="card">
     <h3>About This Data</h3>
     <p>
-        This page shows the most popular builds from the top 5 ranked logs for each trial boss. 
-        A build is considered "common" and featured here if it appears 5 or more times among top players.
+        This page shows the most popular builds from the top 10 ranked logs for each trial boss. 
+        A build is considered "common" and featured here if it appears 5+ times (DPS) or 3+ times (Tank/Healer) among top players.
     </p>
     <p style="margin-top: 10px;">
         <strong>Build Definition:</strong> A unique combination of subclasses (skill lines) and two 5-piece gear sets.

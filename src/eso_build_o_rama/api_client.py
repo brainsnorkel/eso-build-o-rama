@@ -155,7 +155,10 @@ class ESOLogsAPIClient:
             }
             '''
             
-            result = await self.client.execute(query_logs_only, {"encounterID": encounter_id})
+            result = await self.client.execute(
+                query=query_logs_only,
+                variables={"encounterID": encounter_id}
+            )
             
             if result.status_code != 200:
                 logger.error(f"API request failed with status {result.status_code}")

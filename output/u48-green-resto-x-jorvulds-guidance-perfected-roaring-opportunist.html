@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Top performing Green / Restoring Light / Unknown build with Perfected Roaring Opportunist / Jorvuld&#39;s Guidance from Aetherian Archive - Multiple Bosses. Featuring 25 top players.">
-    <title>Green / Restoring Light / Unknown - Perfected Roaring Opportunist / Jorvuld&#39;s Guidance | ESO Build-O-Rama</title>
+    <meta name="description" content="Top performing Restoring Light / Green / Unknown (Healer) build with Jorvuld&#39;s Guidance / Perfected Roaring Opportunist from Aetherian Archive - Ra Kotu. Featuring 2 top players.">
+    <title>Restoring Light / Green / Unknown (Healer) - Jorvuld&#39;s Guidance / Perfected Roaring Opportunist | ESO Build-O-Rama</title>
     <style>
         * {
             margin: 0;
@@ -172,11 +172,6 @@
             position: relative;
         }
         
-        th::before {
-            content: '🛡️';
-            margin-right: 8px;
-            opacity: 0.8;
-        }
         
         tr:hover {
             background: rgba(255, 255, 255, 0.05);
@@ -252,36 +247,45 @@
             position: relative;
         }
         
-        .abilities-bar::before {
-            content: '⚡';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
         
         .ability {
             flex: 1;
             text-align: center;
-            padding: 15px 10px;
+            padding: 10px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
             border-radius: 8px;
             border: 2px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.9em;
+            font-size: 0.85em;
             color: #e8e8e8;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            min-height: 60px;
+            min-height: 80px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+        }
+        
+        .ability-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ability-name {
+            font-size: 0.8em;
+            line-height: 1.2;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
         
         .ability::before {
@@ -390,11 +394,6 @@
             overflow: hidden;
         }
         
-        .back-link::before {
-            content: '←';
-            margin-right: 8px;
-            font-size: 1.2em;
-        }
         
         .back-link:hover {
             background: rgba(56, 239, 125, 0.2);
@@ -562,29 +561,41 @@
 <body>
     <header>
         <div class="container">
-            <h1>ESO Build-O-Rama</h1>
-            <p class="subtitle">Top-Performing ESO Trial Builds</p>
+            <h1>Common ESO Builds</h1>
+            <p class="subtitle">Common builds found in top esologs</p>
         </div>
     </header>
     
     <main class="container">
         
-<a href="index.html" class="back-link">← Back to All Builds</a>
+<nav style="margin-bottom: 20px; font-size: 0.9em;">
+    <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>
+    <span style="color: #666; margin: 0 10px;">/</span>
+    <a href="aetherian-archive.html" style="color: #38ef7d; text-decoration: none;">Aetherian Archive</a>
+    <span style="color: #666; margin: 0 10px;">/</span>
+    <span style="color: #a8edea;">Ra Kotu</span>
+    <span style="color: #666; margin: 0 10px;">/</span>
+    <span style="color: #fff;">Restoring Light / Green / Unknown (Healer)</span>
+</nav>
 
 <div class="card">
-    <h2>Green / Restoring Light / Unknown</h2>
+    <h2>Restoring Light / Green / Unknown (Healer)</h2>
     
     <div class="build-info">
         <div class="info-box">
             <div class="label">Trial &amp; Boss</div>
-            <div class="value">Aetherian Archive - Multiple Bosses</div>
+            <div class="value">Aetherian Archive - Ra Kotu</div>
         </div>
         
         <div class="info-box">
-            <div class="label">Popularity</div>
-            <div class="value">25 top players using this build</div>
-            <div class="status-indicator status-online"></div>
-            <span style="font-size: 0.9em; color: #a8edea;">Active Build</span>
+            <div class="label">Player DPS</div>
+            <div class="value">5.2K</div>
+            <div style="font-size: 0.8em; margin-top: 5px;">
+                <div>@Marak_is - kasiriyas</div>
+                <a href="https://www.esologs.com/reports/Y3mM4DvxbFjhfnN6?fight=13&amp;type=summary&amp;source=104" target="_blank" style="color: #38ef7d; text-decoration: none; font-size: 0.9em;">
+                    View on ESO Logs →
+                </a>
+            </div>
         </div>
         
         <div class="info-box">
@@ -595,69 +606,56 @@
     </div>
 </div>
 
-<div class="card">
-    <h3>Example Player</h3>
-    <div class="build-info">
-        <div class="info-box">
-            <div class="label">Player</div>
-            <div class="value">
-                @Runzalot - Alotzalot
-            </div>
-        </div>
-        
-        <div class="info-box">
-            <div class="label">DPS</div>
-            <div class="value">0</div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 0.0%"></div>
-            </div>
-        </div>
-        
-        <div class="info-box">
-            <div class="label">Class</div>
-            <div class="value">Templar</div>
-        </div>
-        
-        
-    </div>
-    
-    <p style="margin-top: 15px;">
-        <a href="https://www.esologs.com/character/id/2" target="_blank" style="color: #3498db;">View on ESO Logs →</a>
-    </p>
-</div>
-
 
 <div class="card">
     <h3>Ability Bars</h3>
     
     
     <h4 style="margin-top: 15px; color: #a8edea;">
-        <span class="status-indicator status-online"></span>Bar 1 (Main) - 5 Abilities + Ultimate
+        <span class="status-indicator status-online"></span>Bar 1 (Main)
     </h4>
     <div class="abilities-bar">
         
-        <div class="ability tooltip" data-tooltip="">
-            Energy Orb
+        <div class="ability tooltip" data-tooltip="Healing Springs">
+            
+            <img src="../static/icons/ability_restorationstaff_004a.png" alt="Healing Springs" class="ability-icon">
+            
+            <div class="ability-name">Healing Springs</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Enchanted Growth
+        <div class="ability tooltip" data-tooltip="Radiating Regeneration">
+            
+            <img src="../static/icons/ability_restorationstaff_002a.png" alt="Radiating Regeneration" class="ability-icon">
+            
+            <div class="ability-name">Radiating Regeneration</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Budding Seeds
+        <div class="ability tooltip" data-tooltip="Combat Prayer">
+            
+            <img src="../static/icons/ability_restorationstaff_003_b.png" alt="Combat Prayer" class="ability-icon">
+            
+            <div class="ability-name">Combat Prayer</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Extended Ritual
+        <div class="ability tooltip" data-tooltip="Budding Seeds">
+            
+            <img src="../static/icons/ability_warden_007_b.png" alt="Budding Seeds" class="ability-icon">
+            
+            <div class="ability-name">Budding Seeds</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Reconstructive Domain
+        <div class="ability tooltip" data-tooltip="Healthy Offering">
+            
+            <img src="../static/icons/ability_nightblade_011_a.png" alt="Healthy Offering" class="ability-icon">
+            
+            <div class="ability-name">Healthy Offering</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Aggressive Horn
+        <div class="ability tooltip" data-tooltip="Reviving Barrier">
+            
+            <img src="../static/icons/ability_ava_006_b.png" alt="Reviving Barrier" class="ability-icon">
+            
+            <div class="ability-name">Reviving Barrier</div>
         </div>
         
     </div>
@@ -665,32 +663,50 @@
     
     
     <h4 style="margin-top: 15px; color: #a8edea;">
-        <span class="status-indicator status-online"></span>Bar 2 (Backup) - 5 Abilities + Ultimate
+        <span class="status-indicator status-online"></span>Bar 2 (Backup)
     </h4>
     <div class="abilities-bar">
         
-        <div class="ability tooltip" data-tooltip="">
-            Chakram of Destiny
+        <div class="ability tooltip" data-tooltip="Extended Ritual">
+            
+            <img src="../static/icons/ability_templar_extended_ritual.png" alt="Extended Ritual" class="ability-icon">
+            
+            <div class="ability-name">Extended Ritual</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Combat Prayer
+        <div class="ability tooltip" data-tooltip="Elemental Blockade">
+            
+            <img src="../static/icons/ability_destructionstaff_002a.png" alt="Elemental Blockade" class="ability-icon">
+            
+            <div class="ability-name">Elemental Blockade</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Illustrious Healing
+        <div class="ability tooltip" data-tooltip="Energy Orb">
+            
+            <img src="../static/icons/ability_undaunted_004b.png" alt="Energy Orb" class="ability-icon">
+            
+            <div class="ability-name">Energy Orb</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Echoing Vigor
+        <div class="ability tooltip" data-tooltip="Echoing Vigor">
+            
+            <img src="../static/icons/ability_ava_echoing_vigor.png" alt="Echoing Vigor" class="ability-icon">
+            
+            <div class="ability-name">Echoing Vigor</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Radiant Aura
+        <div class="ability tooltip" data-tooltip="Overflowing Altar">
+            
+            <img src="../static/icons/ability_undaunted_001_a.png" alt="Overflowing Altar" class="ability-icon">
+            
+            <div class="ability-name">Overflowing Altar</div>
         </div>
         
-        <div class="ability tooltip" data-tooltip="">
-            Glyphic of the Tides
+        <div class="ability tooltip" data-tooltip="Aggressive Horn">
+            
+            <img src="../static/icons/ability_ava_003_a.png" alt="Aggressive Horn" class="ability-icon">
+            
+            <div class="ability-name">Aggressive Horn</div>
         </div>
         
     </div>
@@ -700,8 +716,6 @@
 
 
 <div class="card">
-    <h3>Gear Setup</h3>
-    
     <table>
         <thead>
             <tr>
@@ -717,15 +731,15 @@
             <tr>
                 <td><strong>Head</strong></td>
                 <td>The Blind</td>
-                <td>The Blind Guise</td>
+                <td>The Blind Visage</td>
                 <td>Divines</td>
                 <td>Unknown</td>
             </tr>
             
             <tr>
                 <td><strong>Shoulders</strong></td>
-                <td>Perfected Roaring Opportunist</td>
-                <td>Roaring Opportunist&#39;s Perfected Robe</td>
+                <td>Jorvuld&#39;s Guidance</td>
+                <td>Jorvuld&#39;s Guidance Robe</td>
                 <td>Divines</td>
                 <td>Unknown</td>
             </tr>
@@ -733,101 +747,77 @@
             <tr>
                 <td><strong>Chest</strong></td>
                 <td>The Blind</td>
-                <td>The Blind Epaulets</td>
+                <td>The Blind Arm Cops</td>
                 <td>Divines</td>
                 <td>Unknown</td>
             </tr>
             
             <tr>
                 <td><strong>Belt</strong></td>
-                <td>Perfected Roaring Opportunist</td>
-                <td>Roaring Opportunist&#39;s Perfected Sash</td>
+                <td>Jorvuld&#39;s Guidance</td>
+                <td>Jorvuld&#39;s Guidance Sash</td>
                 <td>Divines</td>
                 <td>Unknown</td>
             </tr>
             
             <tr>
                 <td><strong>Legs</strong></td>
-                <td>Perfected Roaring Opportunist</td>
-                <td>Roaring Opportunist&#39;s Perfected Gloves</td>
+                <td>Jorvuld&#39;s Guidance</td>
+                <td>Jorvuld&#39;s Guidance Gloves</td>
                 <td>Divines</td>
                 <td>Unknown</td>
             </tr>
             
             <tr>
                 <td><strong>Boots</strong></td>
-                <td>Perfected Roaring Opportunist</td>
-                <td>Roaring Opportunist&#39;s Perfected Breeches</td>
+                <td>Jorvuld&#39;s Guidance</td>
+                <td>Jorvuld&#39;s Guidance Breeches</td>
                 <td>Divines</td>
                 <td>Unknown</td>
             </tr>
             
             <tr>
                 <td><strong>Hands</strong></td>
-                <td>Perfected Roaring Opportunist</td>
-                <td>Roaring Opportunist&#39;s Perfected Shoes</td>
+                <td>Jorvuld&#39;s Guidance</td>
+                <td>Jorvuld&#39;s Guidance Shoes</td>
                 <td>Divines</td>
                 <td>Unknown</td>
             </tr>
             
             <tr>
-                <td><strong>Slot_7</strong></td>
-                <td>Jorvuld&#39;s Guidance</td>
-                <td>Jorvuld&#39;s Guidance Necklace</td>
-                <td>Healthy</td>
-                <td>Unknown</td>
-            </tr>
-            
-            <tr>
-                <td><strong>Slot_8</strong></td>
-                <td>Jorvuld&#39;s Guidance</td>
-                <td>Jorvuld&#39;s Guidance Ring</td>
-                <td>Healthy</td>
-                <td>Unknown</td>
-            </tr>
-            
-            <tr>
-                <td><strong>Slot_9</strong></td>
-                <td>Jorvuld&#39;s Guidance</td>
-                <td>Jorvuld&#39;s Guidance Ring</td>
-                <td>Healthy</td>
-                <td>Unknown</td>
-            </tr>
-            
-            <tr>
-                <td><strong>Slot_10</strong></td>
-                <td>Jorvuld&#39;s Guidance</td>
-                <td>Jorvuld&#39;s Guidance Restoration Staff</td>
-                <td>Unknown</td>
-                <td>Unknown</td>
-            </tr>
-            
-            <tr>
-                <td><strong>Slot_11</strong></td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>Unknown</td>
-                <td>Unknown</td>
-            </tr>
-            
-            <tr>
-                <td><strong>Slot_12</strong></td>
-                <td>Jorvuld&#39;s Guidance</td>
-                <td>Jorvuld&#39;s Guidance Restoration Staff</td>
-                <td>Unknown</td>
-                <td>Unknown</td>
-            </tr>
-            
-            <tr>
                 <td><strong>Necklace</strong></td>
-                <td>N/A</td>
-                <td>N/A</td>
-                <td>Unknown</td>
+                <td>Perfected Roaring Opportunist</td>
+                <td>Roaring Opportunist&#39;s Perfected Amulet</td>
+                <td>Healthy</td>
                 <td>Unknown</td>
             </tr>
             
             <tr>
                 <td><strong>Ring1</strong></td>
+                <td>Perfected Roaring Opportunist</td>
+                <td>Roaring Opportunist&#39;s Perfected Ring</td>
+                <td>Healthy</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Ring2</strong></td>
+                <td>Perfected Roaring Opportunist</td>
+                <td>Roaring Opportunist&#39;s Perfected Ring</td>
+                <td>Healthy</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Main_hand</strong></td>
+                <td>Perfected Grand Rejuvenation</td>
+                <td>The Master&#39;s Perfected Restoration Staff</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Off_hand</strong></td>
                 <td>N/A</td>
                 <td>N/A</td>
                 <td>Unknown</td>
@@ -835,7 +825,31 @@
             </tr>
             
             <tr>
-                <td><strong>Ring2</strong></td>
+                <td><strong>Backup_main_hand</strong></td>
+                <td>Perfected Roaring Opportunist</td>
+                <td>Roaring Opportunist&#39;s Perfected Ice Staff</td>
+                <td>Precise</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Backup_off_hand</strong></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Backup_necklace</strong></td>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td>Unknown</td>
+                <td>Unknown</td>
+            </tr>
+            
+            <tr>
+                <td><strong>Backup_ring1</strong></td>
                 <td>N/A</td>
                 <td>N/A</td>
                 <td>Unknown</td>
@@ -845,22 +859,23 @@
         </tbody>
     </table>
     
-    <h4 style="margin-top: 20px;">Set Summary</h4>
-    <div class="build-info">
+    <h4 style="margin-top: 20px;">Sets Used</h4>
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
         
-        <div class="info-box">
-            <div class="label">The Blind</div>
-            <div class="value">2 pieces</div>
+        <div style="background: rgba(168, 237, 234, 0.1); padding: 8px 15px; border-radius: 5px; border: 1px solid rgba(168, 237, 234, 0.3);">
+            The Blind (2 pieces)
         </div>
         
-        <div class="info-box">
-            <div class="label">Perfected Roaring Opportunist</div>
-            <div class="value">5 pieces</div>
+        <div style="background: rgba(168, 237, 234, 0.1); padding: 8px 15px; border-radius: 5px; border: 1px solid rgba(168, 237, 234, 0.3);">
+            Jorvuld&#39;s Guidance (5 pieces)
         </div>
         
-        <div class="info-box">
-            <div class="label">Jorvuld&#39;s Guidance</div>
-            <div class="value">5 pieces</div>
+        <div style="background: rgba(168, 237, 234, 0.1); padding: 8px 15px; border-radius: 5px; border: 1px solid rgba(168, 237, 234, 0.3);">
+            Perfected Roaring Opportunist (5 pieces)
+        </div>
+        
+        <div style="background: rgba(168, 237, 234, 0.1); padding: 8px 15px; border-radius: 5px; border: 1px solid rgba(168, 237, 234, 0.3);">
+            Perfected Grand Rejuvenation (2 pieces)
         </div>
         
     </div>
@@ -871,94 +886,41 @@
 
 
 <div class="card">
-    <h3>Other Example Players (25 total)</h3>
+    <h3>Other Example Players (2 total)</h3>
     <table>
         <thead>
             <tr>
                 <th>Player</th>
                 <th>Character</th>
                 <th>DPS</th>
-                <th>Contribution</th>
             </tr>
         </thead>
         <tbody>
             
             <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
+                <td>
+                    <div>@Marak_is</div>
+                    <a href="https://www.esologs.com/reports/Y3mM4DvxbFjhfnN6?fight=13&amp;type=summary&amp;source=104" target="_blank" style="color: #38ef7d; text-decoration: none; font-size: 0.8em;">
+                        View on ESO Logs →
+                    </a>
+                </td>
+                <td>kasiriyas</td>
+                <td>5.2K</td>
             </tr>
             
             <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
-            </tr>
-            
-            <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
-            </tr>
-            
-            <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
-            </tr>
-            
-            <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
-            </tr>
-            
-            <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
-            </tr>
-            
-            <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
-            </tr>
-            
-            <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
-            </tr>
-            
-            <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
-            </tr>
-            
-            <tr>
-                <td>@Runzalot</td>
-                <td>Alotzalot</td>
-                <td>0</td>
-                <td>0.0%</td>
+                <td>
+                    <div>@Momopeacho</div>
+                    <a href="https://www.esologs.com/reports/r9BCmyjQ3gHh6kfP?fight=1&amp;type=summary&amp;source=4" target="_blank" style="color: #38ef7d; text-decoration: none; font-size: 0.8em;">
+                        View on ESO Logs →
+                    </a>
+                </td>
+                <td>Anwen Graire</td>
+                <td>4.2K</td>
             </tr>
             
         </tbody>
     </table>
-    
-    <p style="margin-top: 10px; color: #7f8c8d; font-style: italic;">
-        Showing top 10 of 25 players
-    </p>
     
 </div>
 

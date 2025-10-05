@@ -94,7 +94,11 @@ async def test_sunspire():
         
         # Generate pages
         logger.info("\nGenerating HTML pages...")
-        update_version = "U48"
+        # Get version from reports
+        from collections import Counter
+        versions = [r.update_version for r in reports if r.update_version and r.update_version != "unknown"]
+        update_version = Counter(versions).most_common(1)[0][0] if versions else "unknown"
+        logger.info(f"Using game version: {update_version}")
         
         generated_files = page_generator.generate_all_pages(
             publishable_builds,

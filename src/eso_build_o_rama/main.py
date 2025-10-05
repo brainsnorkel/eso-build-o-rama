@@ -76,7 +76,9 @@ class ESOBuildORM:
             
             # Generate pages
             logger.info("\nGenerating HTML pages...")
-            update_version = "U48"  # TODO: Get from game data
+            # Get update version from the most recent report
+            update_version = self._get_most_common_version(all_reports)
+            logger.info(f"Using game version: {update_version}")
             
             generated_files = self.page_generator.generate_all_pages(
                 publishable_builds,
@@ -111,6 +113,23 @@ class ESOBuildORM:
         logger.info(f"Loaded {len(trials)} trials from {self.trials_file}")
         
         return trials
+    
+    def _get_most_common_version(self, all_reports: Dict[str, List]) -> str:
+        """Get the most common update version from all reports."""
+        from collections import Counter
+        
+        versions = []
+        for trial_reports in all_reports.values():
+            for report in trial_reports:
+                if report.update_version and report.update_version != "unknown":
+                    versions.append(report.update_version)
+        
+        if versions:
+            # Get the most common version
+            most_common = Counter(versions).most_common(1)[0][0]
+            return most_common
+        
+        return "unknown"
     
     def _print_summary(
         self,

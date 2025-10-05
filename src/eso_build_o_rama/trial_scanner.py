@@ -173,15 +173,34 @@ class TrialScanner:
     
     def _get_update_version(self, report_data: Dict[str, Any]) -> str:
         """Extract game update version from report data."""
-        # Try to get from report metadata
-        # This is a placeholder - actual implementation depends on API structure
+        # Get game version from ESO Logs (e.g., "10.2.5", "10.3.0")
+        game_version = report_data.get('gameVersion')
+        
+        if game_version:
+            # ESO game versions are like "10.2.5" (major.minor.patch)
+            # Extract major.minor for update number
+            try:
+                parts = game_version.split('.')
+                if len(parts) >= 2:
+                    major = int(parts[0])
+                    minor = int(parts[1])
+                    # ESO updates roughly: major version 10 = Update 40+
+                    # Each minor version increment = 1 update
+                    # Approximate mapping: 10.x.x -> U(40+x)
+                    if major == 10:
+                        update_num = 40 + minor
+                        return f"u{update_num}"
+            except (ValueError, IndexError) as e:
+                logger.warning(f"Could not parse game version {game_version}: {e}")
+        
+        # Fallback: use date-based estimation
         start_time = report_data.get('startTime', 0)
         if start_time:
-            date = datetime.fromtimestamp(start_time / 1000)  # Convert ms to seconds
-            # Format as U## (update number is estimated from date)
-            # This is simplified - in production, we'd maintain a mapping
-            return f"U48-{date.strftime('%Y%m%d')}"
-        return "Unknown"
+            date = datetime.fromtimestamp(start_time / 1000)
+            # Return a date-based version if we can't determine the update number
+            return f"unknown-{date.strftime('%Y%m%d')}"
+        
+        return "unknown"
     
     async def scan_all_trials(
         self,

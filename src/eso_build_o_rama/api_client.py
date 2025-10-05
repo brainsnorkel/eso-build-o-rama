@@ -283,6 +283,7 @@ class ESOLogsAPIClient:
               title
               startTime
               endTime
+              gameVersion
               zone {
                 id
                 name
@@ -328,6 +329,7 @@ class ESOLogsAPIClient:
                     "title": getattr(report_obj, 'title', 'Unknown Title'),
                     "startTime": getattr(report_obj, 'start_time', 0),
                     "endTime": getattr(report_obj, 'end_time', 0),
+                    "gameVersion": getattr(report_obj, 'game_version', None),
                     "fights": [
                         {
                             "id": getattr(fight, 'id', 0),

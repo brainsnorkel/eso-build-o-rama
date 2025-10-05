@@ -53,6 +53,7 @@
 - [ ] Best format to use from LibSets (XLSM vs Lua)?
 - [ ] Can we programmatically access UESP ability URLs?
 - [ ] Where to get official ESO ability icons?
+  - https://github.com/sheumais/esoskillbarbuilder
 - [ ] License restrictions on using esoskillbarbuilder icons?
 - [ ] How to map ESO Logs ability IDs to UESP URLs?
 

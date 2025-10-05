@@ -53,6 +53,11 @@ Develop and test locally, then push to a `https://test.{whatever domain name}` b
 ## Development approach
 
 Prioritise getting a rough prototype working on this local machine.
+Build sensible automated tests as we go.
+
+
+## Technical constraints
+* Do not use web scraping to access ESOlogs, only the API
 
 
 ## Reference material

@@ -23,8 +23,8 @@
 - [x] **Data format for abilities, gear, and buffs in API responses?**
   - **Answer**: Table data returns DPS/damage breakdown
   - Gear from player equipment in report data
-  - Abilities require web scraping (not fully in API)
-  - Reference: `top-builds/src/eso_builds/` modules
+  - ⚠️ **CONSTRAINT**: Cannot use web scraping for abilities (API only)
+  - **NEW QUESTION**: How to get ability bars from API only?
 - [ ] **How to identify "blue CP" (Champion Points) from the API?**
   - TODO: Examine buff table in API responses
   - Likely in player buffs/debuffs data 
@@ -58,10 +58,12 @@
 - [ ] How to map ESO Logs ability IDs to UESP URLs?
 
 ## Hosting & Infrastructure
-- [ ] AWS Lambda vs Cloudflare Workers - which is more cost-effective?
-- [ ] Estimated data transfer costs for S3/Cloudflare?
+- [x] **AWS Lambda vs Cloudflare Workers vs GitHub Pages?**
+  - **Answer**: GitHub Pages now preferred option (from requirements)
+  - Much simpler deployment, free hosting, built-in SSL
+- [ ] Estimated data transfer costs for GitHub Pages?
 - [ ] Domain name options and registration service?
-- [ ] SSL certificate setup (free via Let's Encrypt/Cloudflare)?
+- [ ] SSL certificate setup (GitHub Pages provides this free)
 - [ ] Best way to implement test.domain vs production domain?
 
 ## Build Publishing

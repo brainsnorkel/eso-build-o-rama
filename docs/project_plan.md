@@ -44,11 +44,11 @@ ESO Logs API → Data Collection → Build Analysis → Page Generation → Stat
 - Add proper credits and attributions
 
 ### Phase 4: Deployment Infrastructure
-- Set up AWS Lambda or Cloudflare Workers
-- Configure S3 bucket or Cloudflare Pages
-- Implement weekly scheduling
-- Set up test and production environments
-- Configure custom domain
+- Set up GitHub Actions for weekly execution
+- Configure GitHub Pages for static site hosting
+- Implement weekly scheduling via GitHub Actions
+- Set up test branch (gh-pages-test) and production (gh-pages)
+- Configure custom domain (optional)
 
 ### Phase 5: Testing & Polish
 - Create comprehensive test suite
@@ -71,10 +71,10 @@ ESO Logs API → Data Collection → Build Analysis → Page Generation → Stat
 - **Styling**: Modern, responsive CSS (consider Tailwind CSS)
 
 ### Infrastructure
-- **Hosting**: AWS S3 + CloudFront OR Cloudflare Pages
-- **Domain**: TBD
+- **Hosting**: GitHub Pages (preferred per requirements)
+- **Domain**: TBD (custom domain can be added to GitHub Pages)
 - **CI/CD**: GitHub Actions
-- **Secrets**: AWS Secrets Manager or environment variables
+- **Secrets**: GitHub Secrets for API credentials
 
 ## Key Design Decisions
 

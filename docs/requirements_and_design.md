@@ -45,7 +45,7 @@ The tool will create an index page for showing all builds with headings per tria
 
 ## Platformm, Performance and Cost
 
-I would like this tool to be very cheap to run. Maybe a weekly lambda batch job that publishes static files (with minimal JS) to S3, use of Cloudflare's publishing capabilities. Serve via https from a yet to be acquired domain name. 
+I would like this tool to be very cheap to run. Maybe a weekly lambda batch job that publishes static files (with minimal JS) to S3, use of Cloudflare's publishing capabilities. Serve via https from a yet to be acquired domain name.  Actually github pages might be the play if that is commercially prudent.
 
 Develop and test locally, then push to a `https://test.{whatever domain name}` before migrating to `http://{whatever domain name}`
 

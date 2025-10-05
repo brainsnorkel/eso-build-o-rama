@@ -24,7 +24,16 @@
   - **Answer**: Table data returns DPS/damage breakdown
   - Gear from player equipment in report data
   - ⚠️ **CONSTRAINT**: Cannot use web scraping for abilities (API only)
-  - **NEW QUESTION**: How to get ability bars from API only?
+  - **NEW QUESTION**: How to get ability bars from API only? includeCombatantInfo=True returns ability bars in order. See top-builds code. 
+  - `            table_data = await client._make_request(
+                "get_report_table",
+                code=report_code,
+                start_time=int(fight.start_time),
+                end_time=int(fight.end_time),
+                data_type="Summary",
+                hostility_type="Friendlies",
+                includeCombatantInfo=True
+            )`
 - [ ] **How to identify "blue CP" (Champion Points) from the API?**
   - TODO: Examine buff table in API responses
   - Likely in player buffs/debuffs data 

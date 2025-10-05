@@ -203,7 +203,8 @@ class ESOLogsAPIClient:
         start_time: Optional[float] = None,
         end_time: Optional[float] = None,
         fight_ids: Optional[List[int]] = None,
-        data_type: str = "DamageDone"
+        data_type: str = "DamageDone",
+        include_combatant_info: bool = False
     ) -> Dict[str, Any]:
         """
         Get table data for a report (DPS, damage breakdown, etc.).
@@ -213,10 +214,11 @@ class ESOLogsAPIClient:
             start_time: Optional fight start time
             end_time: Optional fight end time
             fight_ids: Optional list of fight IDs
-            data_type: Type of data (DamageDone, Healing, etc.)
+            data_type: Type of data (DamageDone, Healing, Summary, etc.)
+            include_combatant_info: If True, includes ability bars and gear (CRITICAL for build analysis!)
             
         Returns:
-            Table data dictionary
+            Table data dictionary (with combatant info if requested)
         """
         query = """
         query GetReportTable(

@@ -53,19 +53,39 @@ However, our research showed:
 - Doesn't meet original requirements
 - Less useful to users
 
-## Recommended Investigation
+## ✅ SOLUTION FOUND
 
-1. **Deep dive into ESO Logs API** to see what ability data is available
-2. **Test with real report data** to understand data structure
-3. **Check if ability names appear in damage events**
-4. **Consider if gear/sets alone are sufficient** for build identification
+**Date Updated:** October 5, 2025
+
+### Ability Bars ARE Available in API!
+
+The `includeCombatantInfo=True` parameter in the table query returns ability bar data!
+
+**Code from top-builds reference:**
+```python
+table_data = await client._make_request(
+    "get_report_table",
+    code=report_code,
+    start_time=int(fight.start_time),
+    end_time=int(fight.end_time),
+    data_type="Summary",
+    hostility_type="Friendlies",
+    includeCombatantInfo=True  # <-- THIS IS THE KEY!
+)
+```
+
+This resolves the conflict between:
+- Requirements: Need ability bars
+- Constraint: API-only (no web scraping)
+
+**Conclusion:** We CAN meet all requirements with API-only approach! ✅
 
 ## Next Steps
 
-1. Implement full API data fetching first
-2. Analyze what ability data we can get from API
-3. If insufficient, discuss with user about relaxing constraint
-4. Focus on gear/set analysis which is definitely in API
+1. ✅ **RESOLVED** - Ability data is available via API
+2. Implement `get_report_table()` with `includeCombatantInfo=True`
+3. Parse combatant info to extract ability bars
+4. Focus on gear/set analysis which is also in API
 
 ## Files to Update
 

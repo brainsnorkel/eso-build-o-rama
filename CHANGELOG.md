@@ -25,7 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✅ Mapped out GraphQL query structure for rankings and reports
 - ✅ Confirmed 2H weapons count as 2 pieces
 - ✅ Found working examples of gear/ability extraction
-- Answered 11 of 30+ open questions
+- ✅ **CRITICAL**: Ability bars available via API with `includeCombatantInfo=True`
+- ✅ Resolved API-only constraint conflict
+- Answered 12+ of 30+ open questions
 
 ### Implementation Started
 - ✅ Created Python project structure (src/eso_build_o_rama/)

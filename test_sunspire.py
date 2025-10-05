@@ -42,32 +42,43 @@ async def test_sunspire():
             "abbreviation": "SS"
         }
         
-        logger.info(f"\nNote: Due to API rate limiting, this will take a few minutes...")
-        logger.info(f"API will be queried with delays to respect rate limits.\n")
+        logger.info(f"\nScanning {sunspire['name']} (Zone ID: {sunspire['id']})...")
+        logger.info("This will query the API with rate limiting (0.5s between requests)")
         
-        # Load boss names from trial_bosses.json to know what to expect
-        bosses_file = Path(__file__).parent / "data" / "trial_bosses.json"
-        with open(bosses_file, 'r') as f:
-            bosses_data = json.load(f)
+        # Get encounter information from the API
+        zones = await scanner.api_client.get_zones()
+        sunspire_zone = None
+        for zone in zones:
+            if zone['id'] == sunspire['id']:
+                sunspire_zone = zone
+                break
         
-        expected_bosses = bosses_data['trial_bosses'].get(sunspire['name'], [])
-        logger.info(f"Expected bosses for {sunspire['name']}: {expected_bosses}")
+        if not sunspire_zone or not sunspire_zone.get('encounters'):
+            logger.error(f"Could not find encounters for {sunspire['name']}")
+            return
         
-        # For now, we'll try to scan the trial without specific encounter IDs
-        # The API will return available encounters in the rankings
-        logger.info(f"\nAttempting to scan {sunspire['name']} with top 3 logs per encounter...")
-        logger.info("(Using fewer logs to respect rate limits)")
+        encounters = sunspire_zone['encounters']
+        logger.info(f"Found {len(encounters)} encounters: {[e['name'] for e in encounters]}")
         
-        # Note: We'd need encounter IDs from the API, but we're rate-limited
-        # For now, show what we would do and suggest waiting
-        logger.warning("\n⚠️  API Rate Limit Reached!")
-        logger.info("\nTo complete this test, we need to:")
-        logger.info("1. Wait for rate limit to reset (typically 1-5 minutes)")
-        logger.info("2. Query the API for specific encounter IDs for each boss")
-        logger.info("3. Fetch top rankings for each encounter")
-        logger.info("4. Process the report data and generate pages")
-        logger.info("\nPlease wait a few minutes and try again.")
-        return
+        # Scan each encounter
+        all_reports = []
+        for encounter in encounters:
+            logger.info(f"\nScanning encounter: {encounter['name']} (ID: {encounter['id']})...")
+            
+            reports = await scanner.scan_trial(
+                trial_zone_id=sunspire['id'],
+                trial_name=sunspire['name'],
+                encounter_id=encounter['id'],
+                top_n=5
+            )
+            
+            if reports:
+                all_reports.extend(reports)
+                logger.info(f"  ✅ Processed {len(reports)} reports for {encounter['name']}")
+            else:
+                logger.warning(f"  ⚠️  No reports found for {encounter['name']}")
+        
+        reports = all_reports
         
         if not reports:
             logger.error("No reports found for Sunspire!")

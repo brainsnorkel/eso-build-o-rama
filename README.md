@@ -40,19 +40,22 @@ This project automates the process of:
 
 ### Rate Limiting
 The API client includes automatic rate limiting to prevent hitting ESO Logs API limits:
-- **Minimum delay**: 0.5 seconds between requests (configurable)
+- **API Limit**: 18,000 points per hour (report queries = 5-10 points each)
+- **Minimum delay**: 2.0 seconds between requests (configurable)
 - **Automatic retry**: Up to 3 retries on rate limit errors
-- **Exponential backoff**: 60s, 120s, 180s retry delays
+- **Exponential backoff**: 120s, 240s, 360s retry delays
 - **Transparent**: Works automatically without code changes
 
 Configure rate limiting when creating the client:
 ```python
 client = ESOLogsAPIClient(
-    min_request_delay=1.0,  # 1 second between requests
+    min_request_delay=2.0,  # 2 seconds between requests (default)
     max_retries=3,          # retry up to 3 times
-    retry_delay=60.0        # start with 60s delay
+    retry_delay=120.0       # start with 120s delay on rate limit
 )
 ```
+
+**Safe Operation**: With 2s delays and ~5-10 points per request, a full scan of 14 trials uses ~2,800 points (well within the 18,000/hour limit).
 
 ## Documentation
 

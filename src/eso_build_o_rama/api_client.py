@@ -25,9 +25,9 @@ class ESOLogsAPIClient:
         self, 
         client_id: Optional[str] = None, 
         client_secret: Optional[str] = None,
-        min_request_delay: float = 0.5,
+        min_request_delay: float = 2.0,
         max_retries: int = 3,
-        retry_delay: float = 60.0
+        retry_delay: float = 120.0
     ):
         """
         Initialize the ESO Logs API client.
@@ -35,9 +35,9 @@ class ESOLogsAPIClient:
         Args:
             client_id: ESO Logs client ID (defaults to env var ESOLOGS_ID)
             client_secret: ESO Logs client secret (defaults to env var ESOLOGS_SECRET)
-            min_request_delay: Minimum delay between API requests in seconds (default: 0.5)
+            min_request_delay: Minimum delay between API requests in seconds (default: 2.0)
             max_retries: Maximum number of retries for rate-limited requests (default: 3)
-            retry_delay: Delay in seconds after hitting rate limit (default: 60)
+            retry_delay: Delay in seconds after hitting rate limit (default: 120)
         """
         self.client_id = client_id or os.getenv("ESOLOGS_ID")
         self.client_secret = client_secret or os.getenv("ESOLOGS_SECRET")

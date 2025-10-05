@@ -135,6 +135,11 @@ class DataParser:
                     continue
             
             logger.info(f"Parsed {len(players)} players from fight {fight_id}")
+            
+            # Deduplicate players - keep only highest DPS for each player/character combo
+            players = self._deduplicate_players(players)
+            logger.info(f"After deduplication: {len(players)} unique players")
+            
             return players
             
         except Exception as e:
@@ -173,6 +178,11 @@ class DataParser:
             dps = 0  # TODO: Extract from damageDone array
             dps_percentage = 0  # TODO: Calculate from total damage
             
+            # Create player URL in the correct format
+            # Format: https://www.esologs.com/reports/{report_code}?fight={fight_id}&type=summary&source={player_id}
+            report_code = report_data.get('code', '')
+            player_url = f"https://www.esologs.com/reports/{report_code}?fight={fight_id}&type=summary&source={player_id}"
+            
             # Create player build
             player_build = PlayerBuild(
                 character_name=character_name,
@@ -185,9 +195,9 @@ class DataParser:
                 abilities_bar2=abilities_bar2,
                 mundus="",  # TODO: Extract from buffs
                 champion_points=[],  # TODO: Extract from buffs
-                player_url=f"https://www.esologs.com/character/id/{player_id}",
+                player_url=player_url,
                 subclasses=[],  # Will be determined by analyzer
-                report_code=report_data.get('code', ''),
+                report_code=report_code,
                 fight_id=fight_id
             )
             
@@ -304,6 +314,37 @@ class DataParser:
         )
         
         return trial_report
+    
+    def _deduplicate_players(self, players: List[PlayerBuild]) -> List[PlayerBuild]:
+        """
+        Deduplicate players by player_name + character_name combination.
+        Keep only the highest DPS instance for each unique player/character.
+        
+        Args:
+            players: List of PlayerBuild objects (may contain duplicates)
+            
+        Returns:
+            List of deduplicated PlayerBuild objects
+        """
+        # Group by player_name + character_name
+        player_map = {}
+        
+        for player in players:
+            key = f"{player.player_name}|{player.character_name}"
+            
+            if key not in player_map:
+                player_map[key] = player
+            else:
+                # Keep the one with higher DPS
+                if player.dps > player_map[key].dps:
+                    player_map[key] = player
+        
+        deduplicated = list(player_map.values())
+        
+        if len(deduplicated) < len(players):
+            logger.info(f"Removed {len(players) - len(deduplicated)} duplicate player entries")
+        
+        return deduplicated
     
     def _get_fight_info(
         self,

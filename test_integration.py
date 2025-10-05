@@ -30,7 +30,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-async def fetch_real_trial_data(trial_name: str = "Aetherian Archive", trial_id: int = 1):
+async def fetch_real_trial_data(trial_name: str = "Aetherian Archive", trial_id: int = 1, max_reports: int = 5):
     """Fetch REAL data from ESO Logs API - NO MOCKS."""
     
     logger.info(f"Fetching REAL data for {trial_name} (ID: {trial_id})")
@@ -39,11 +39,11 @@ async def fetch_real_trial_data(trial_name: str = "Aetherian Archive", trial_id:
     data_parser = DataParser()
     
     try:
-        # Step 1: Search for top 5 recent reports
-        logger.info(f"   Searching for top 5 reports...")
+        # Step 1: Search for recent reports
+        logger.info(f"   Searching for top {max_reports} reports...")
         result = await api_client.client.search_reports(
             zone_id=trial_id,
-            limit=5
+            limit=max_reports
         )
         
         if not result or not hasattr(result, 'report_data') or not hasattr(result.report_data, 'reports'):
@@ -60,7 +60,7 @@ async def fetch_real_trial_data(trial_name: str = "Aetherian Archive", trial_id:
         # Step 2: Process ALL fights in ALL reports
         all_players = []
         
-        for report_info in reports_data[:5]:  # Top 5 reports
+        for report_info in reports_data[:max_reports]:  # Top N reports
             report_code = report_info.code
             logger.info(f"   Processing report: {report_code}")
             
@@ -135,8 +135,8 @@ async def test_build_analysis():
     logger.info("Testing Build Analysis Pipeline - REAL API DATA ONLY")
     logger.info("="*60)
     
-    # Fetch REAL data from ESO Logs API
-    players = await fetch_real_trial_data()
+    # Fetch REAL data from ESO Logs API (5 reports for reasonable test time)
+    players = await fetch_real_trial_data(max_reports=5)
     
     if not players:
         logger.error("❌ Failed to fetch real player data from API")
@@ -148,11 +148,25 @@ async def test_build_analysis():
     
     logger.info(f"✅ Fetched {len(players)} REAL players from ESO Logs API")
     
+    # Deduplicate players across all fights (keep highest DPS per player/character)
+    player_map = {}
+    for player in players:
+        key = f"{player.player_name}|{player.character_name}"
+        if key not in player_map:
+            player_map[key] = player
+        else:
+            # Keep the one with higher DPS
+            if player.dps > player_map[key].dps:
+                player_map[key] = player
+    
+    unique_players = list(player_map.values())
+    logger.info(f"After cross-fight deduplication: {len(unique_players)} unique players")
+    
     # Create trial report from REAL data
     trial_report = TrialReport(
         trial_name="Aetherian Archive",
         boss_name="Multiple Bosses",
-        all_players=players,
+        all_players=unique_players,
         report_code="REAL_API_DATA",
         update_version="U48-20251005"
     )
@@ -163,9 +177,29 @@ async def test_build_analysis():
     analyzer = BuildAnalyzer()
     analyzed_report = analyzer.analyze_trial_report(trial_report)
     
-    # Get unique builds
+    # DEBUG: Show ALL builds found, ranked by count
+    all_builds = analyzed_report.common_builds
+    logger.info(f"\n{'='*60}")
+    logger.info(f"DEBUG: All builds found (ranked by popularity):")
+    logger.info(f"{'='*60}")
+    
+    # Sort by count
+    sorted_builds = sorted(all_builds, key=lambda b: b.count, reverse=True)
+    
+    for i, build in enumerate(sorted_builds, 1):
+        logger.info(f"  {i}. {build.build_slug}")
+        logger.info(f"     Display: {build.get_display_name()}")
+        logger.info(f"     Count: {build.count} players")
+        logger.info(f"     Sets: {', '.join(build.sets)}")
+        if i >= 20:  # Limit to top 20 for readability
+            logger.info(f"  ... and {len(sorted_builds) - 20} more builds")
+            break
+    
+    # Get unique builds (5+ threshold)
     unique_builds = analyzed_report.get_unique_builds()
-    logger.info(f"Found {len(unique_builds)} unique builds")
+    logger.info(f"\n{'='*60}")
+    logger.info(f"Common builds (5+ occurrences): {len(unique_builds)}")
+    logger.info(f"{'='*60}")
     
     for i, build in enumerate(unique_builds, 1):
         logger.info(f"  {i}. {build.get_display_name()} - {build.count} players")

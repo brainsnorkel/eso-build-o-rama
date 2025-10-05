@@ -110,14 +110,20 @@ class DataParser:
                 logger.error("Invalid table data structure")
                 return []
             
-            # Get player details
-            player_details = data.get('playerDetails', {})
-            dps_players = player_details.get('dps', [])
-            healer_players = player_details.get('healers', [])
+            # Get player data - try playerDetails first (newer format), then entries (older format)
+            all_players_data = []
             
-            all_players_data = dps_players + healer_players
-            
-            logger.info(f"Found {len(dps_players)} DPS and {len(healer_players)} healers")
+            if 'playerDetails' in data:
+                # Newer format with playerDetails (for kills)
+                player_details = data.get('playerDetails', {})
+                dps_players = player_details.get('dps', [])
+                healer_players = player_details.get('healers', [])
+                all_players_data = dps_players + healer_players
+                logger.info(f"Found {len(dps_players)} DPS and {len(healer_players)} healers (playerDetails format)")
+            elif 'entries' in data:
+                # Older format with entries (for non-kills or older reports)
+                all_players_data = data.get('entries', [])
+                logger.info(f"Found {len(all_players_data)} players (entries format)")
             
             if not all_players_data:
                 logger.warning("No player data found in table")
@@ -161,21 +167,39 @@ class DataParser:
             class_name = player_data.get('type', 'Unknown')
             player_id = player_data.get('id', 0)
             
-            # Get combatant info
+            # Handle both data formats:
+            # 1. playerDetails format (newer, for kills): has combatantInfo nested
+            # 2. entries format (older, for non-kills): has gear/talents at top level
             combatant_info = player_data.get('combatantInfo', {})
-            if not combatant_info:
-                logger.debug(f"No combatant info for {character_name}")
-                return None
+            
+            if combatant_info:
+                # PlayerDetails format
+                gear_data = combatant_info.get('gear', [])
+                talents = combatant_info.get('talents', [])
+            else:
+                # Entries format - gear and talents are at top level
+                gear_data = player_data.get('gear', [])
+                talents = player_data.get('talents', [])
+                
+                if not gear_data and not talents:
+                    logger.debug(f"No gear or talents for {character_name}")
+                    return None
             
             # Parse gear
-            gear = self._parse_gear(combatant_info.get('gear', []))
+            gear = self._parse_gear(gear_data)
             
             # Parse abilities
-            talents = combatant_info.get('talents', [])
             abilities_bar1, abilities_bar2 = self._parse_abilities(talents)
             
-            # Get DPS and stats (placeholder - would need to extract from damage done)
-            dps = 0  # TODO: Extract from damageDone array
+            # Get DPS and stats
+            # In entries format, 'total' is total damage, we can calculate DPS
+            if 'total' in player_data and 'activeTime' in player_data:
+                total_damage = player_data.get('total', 0)
+                active_time_ms = player_data.get('activeTime', 1)
+                dps = (total_damage / active_time_ms) * 1000 if active_time_ms > 0 else 0
+            else:
+                dps = player_data.get('dps', 0)
+            
             dps_percentage = 0  # TODO: Calculate from total damage
             
             # Create player URL in the correct format

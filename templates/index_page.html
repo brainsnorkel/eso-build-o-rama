@@ -25,8 +25,8 @@
                 <th>Build</th>
                 <th>Sets</th>
                 <th>Popularity</th>
-                <th>Top DPS</th>
-                <th>Top Player</th>
+                <th>Example DPS</th>
+                <th>Example Player</th>
                 <th>Details</th>
             </tr>
         </thead>
@@ -42,7 +42,7 @@
                     {% endif %}
                 </td>
                 <td>{{ build.count }} players</td>
-                <td class="dps-highlight">{{ build.best_player.dps|format_dps }}</td>
+                <td>{{ build.best_player.dps|format_dps }}</td>
                 <td>{{ build.best_player.character_name }}</td>
                 <td>
                     <a href="{{ update_version.lower() }}-{{ build.build_slug }}.html" style="color: #3498db;">

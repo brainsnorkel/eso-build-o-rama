@@ -30,7 +30,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_id: int = 1, max_reports: int = 10):
+async def fetch_trial_data_by_boss(trial_name: str = "Aetherian Archive", trial_id: int = 1, max_reports: int = 5):
     """Fetch data organized by boss encounter."""
     
     logger.info(f"Fetching data for {trial_name} (ID: {trial_id}) organized by boss")
@@ -376,7 +376,7 @@ async def process_single_trial(trial: dict) -> tuple:
         players_by_boss = await fetch_trial_data_by_boss(
             trial_name=trial_name,
             trial_id=trial_id,
-            max_reports=10
+            max_reports=5
         )
         
         if not players_by_boss:

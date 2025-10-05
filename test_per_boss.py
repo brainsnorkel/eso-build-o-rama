@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Integration test script for ESO Build-O-Rama - Per-Boss Analysis
-Tests builds organized by specific boss encounters with fight-specific DPS.
+ESO Build-O-Rama - Multi-Trial Build Analysis
+Analyzes builds across all ESO trials, organized by boss encounters with fight-specific DPS.
 """
 
 import asyncio
@@ -302,12 +302,10 @@ async def analyze_builds_per_boss(players_by_boss):
     return builds_by_boss
 
 
-async def generate_pages_per_boss(builds_by_boss):
+async def generate_pages_per_boss(builds_by_boss, trial_name: str = "Aetherian Archive"):
     """Generate HTML pages organized by boss with 3-tier structure."""
     
-    logger.info("\n" + "="*60)
-    logger.info("Generating Pages (3-Tier Structure)")
-    logger.info("="*60)
+    logger.info(f"\n📄 Generating pages for {trial_name}...")
     
     page_generator = PageGenerator(
         template_dir="templates",
@@ -316,78 +314,143 @@ async def generate_pages_per_boss(builds_by_boss):
     
     all_generated_files = {}
     
-    # Organize builds by trial -> boss
-    builds_by_trial = {}
-    trial_name = "Aetherian Archive"  # Hardcoded for now
-    builds_by_trial[trial_name] = builds_by_boss
-    
-    # Generate home page
-    logger.info("\n📄 Generating home page...")
-    home_file = page_generator.generate_home_page(builds_by_trial)
-    all_generated_files['home'] = home_file
-    logger.info(f"   ✅ Generated: {home_file}")
-    
-    # Generate trial pages
-    for trial_name, bosses in builds_by_trial.items():
-        logger.info(f"\n📄 Generating trial page for {trial_name}...")
-        trial_file = page_generator.generate_trial_page(trial_name, bosses)
-        all_generated_files[f'trial_{trial_name}'] = trial_file
-        logger.info(f"   ✅ Generated: {trial_file}")
+    # Generate trial page for this trial
+    logger.info(f"   Generating trial page for {trial_name}...")
+    trial_file = page_generator.generate_trial_page(trial_name, builds_by_boss)
+    all_generated_files[f'trial_{trial_name}'] = trial_file
+    logger.info(f"   ✅ Generated: {trial_file}")
     
     # Generate build pages
-    logger.info("\n📄 Generating build pages...")
+    logger.info(f"   Generating build pages...")
     for boss_name, builds in builds_by_boss.items():
-        logger.info(f"   {boss_name}: {len(builds)} builds")
+        logger.info(f"      {boss_name}: {len(builds)} builds")
         for build in builds:
             try:
                 filepath = page_generator.generate_build_page(build, "U48")
                 all_generated_files[build.build_slug] = filepath
             except Exception as e:
-                logger.error(f"   Error generating {build.build_slug}: {e}")
+                logger.error(f"      Error generating {build.build_slug}: {e}")
     
     return all_generated_files
 
 
-async def main():
-    """Run per-boss build analysis."""
+async def process_single_trial(trial: dict) -> tuple:
+    """Process a single trial and return results."""
+    trial_name = trial['name']
+    trial_id = trial['id']
     
-    logger.info("🚀 ESO Build-O-Rama - Per-Boss Analysis")
-    logger.info("="*60)
+    logger.info(f"\n{'='*60}")
+    logger.info(f"🏛️  Processing: {trial_name} (ID: {trial_id})")
+    logger.info(f"{'='*60}")
     
     try:
         # Step 1: Fetch data organized by boss
-        players_by_boss = await fetch_trial_data_by_boss(max_reports=10)
+        players_by_boss = await fetch_trial_data_by_boss(
+            trial_name=trial_name,
+            trial_id=trial_id,
+            max_reports=10
+        )
         
         if not players_by_boss:
-            logger.error("❌ No data fetched")
-            return
+            logger.warning(f"⚠️  No data fetched for {trial_name}")
+            return (trial_name, None, {})
         
         # Step 2: Analyze builds per boss
         builds_by_boss = await analyze_builds_per_boss(players_by_boss)
         
         if not builds_by_boss:
-            logger.error("❌ No builds found")
-            return
+            logger.warning(f"⚠️  No builds found for {trial_name}")
+            return (trial_name, None, {})
         
-        # Step 3: Generate pages
-        generated_files = await generate_pages_per_boss(builds_by_boss)
+        # Step 3: Generate pages for this trial
+        generated_files = await generate_pages_per_boss(builds_by_boss, trial_name)
+        
+        logger.info(f"✅ {trial_name}: {len(builds_by_boss)} bosses, {len(generated_files)} files")
+        
+        return (trial_name, builds_by_boss, generated_files)
+        
+    except Exception as e:
+        logger.error(f"❌ Error processing {trial_name}: {e}", exc_info=True)
+        return (trial_name, None, {})
+
+
+async def main():
+    """Run per-boss build analysis for all trials with parallel processing."""
+    
+    logger.info("🚀 ESO Build-O-Rama - Multi-Trial Analysis (Parallel)")
+    logger.info("="*60)
+    
+    try:
+        # Load trials data
+        trials_file = Path(__file__).parent / "data" / "trials.json"
+        with open(trials_file, 'r') as f:
+            trials_data = json.load(f)
+        
+        trials = trials_data['trials']
+        logger.info(f"📋 Found {len(trials)} trials to process")
+        logger.info(f"⚡ Processing 3 trials in parallel for faster execution")
+        
+        all_trials_data = {}
+        total_generated_files = {}
+        
+        # Process trials in batches of 3 (parallel)
+        batch_size = 3
+        for i in range(0, len(trials), batch_size):
+            batch = trials[i:i+batch_size]
+            batch_num = (i // batch_size) + 1
+            total_batches = (len(trials) + batch_size - 1) // batch_size
+            
+            logger.info(f"\n{'='*60}")
+            logger.info(f"📦 Processing Batch {batch_num}/{total_batches}: {[t['name'] for t in batch]}")
+            logger.info(f"{'='*60}")
+            
+            # Process batch in parallel
+            tasks = [process_single_trial(trial) for trial in batch]
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # Collect results
+            for result in results:
+                if isinstance(result, Exception):
+                    logger.error(f"❌ Batch processing error: {result}")
+                    continue
+                    
+                trial_name, builds_by_boss, generated_files = result
+                if builds_by_boss:
+                    all_trials_data[trial_name] = builds_by_boss
+                    total_generated_files.update(generated_files)
+        
+        # Step 4: Generate home page with all trials
+        if all_trials_data:
+            logger.info(f"\n{'='*60}")
+            logger.info("📄 Generating home page with all trials...")
+            logger.info(f"{'='*60}")
+            
+            page_generator = PageGenerator(
+                template_dir="templates",
+                output_dir="output"
+            )
+            
+            home_file = page_generator.generate_home_page(all_trials_data)
+            total_generated_files['home'] = home_file
+            logger.info(f"✅ Generated: {home_file}")
         
         # Summary
         logger.info("\n" + "="*60)
-        logger.info("🎉 PER-BOSS ANALYSIS COMPLETE!")
+        logger.info("🎉 MULTI-TRIAL ANALYSIS COMPLETE!")
         logger.info("="*60)
-        logger.info(f"✅ Analyzed {len(builds_by_boss)} bosses")
-        logger.info(f"✅ Generated {len(generated_files)} HTML files")
+        logger.info(f"✅ Processed {len(all_trials_data)} trials")
+        logger.info(f"✅ Generated {len(total_generated_files)} HTML files")
         
-        logger.info("\n📁 Generated Files:")
-        for name, filepath in generated_files.items():
-            logger.info(f"   {filepath}")
+        logger.info("\n📊 Trials Summary:")
+        for trial_name, builds_by_boss in all_trials_data.items():
+            total_builds = sum(len(builds) for builds in builds_by_boss.values())
+            logger.info(f"   {trial_name}: {len(builds_by_boss)} bosses, {total_builds} builds")
         
         logger.info("\n🌐 To view results:")
         logger.info("   open output/index.html")
         
     except Exception as e:
-        logger.error(f"❌ Test failed: {e}", exc_info=True)
+        logger.error(f"❌ Analysis failed: {e}", exc_info=True)
         raise
 
 

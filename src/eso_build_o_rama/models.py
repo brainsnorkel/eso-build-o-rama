@@ -44,6 +44,7 @@ class Ability:
     slot: int = 0  # 0-11 for each bar
     bar: int = 1  # 1 or 2
     skill_line: str = ""
+    ability_icon: str = ""  # Icon filename from ESO Logs (e.g., "ability_nightblade_005_b")
     morph: str = ""  # e.g., "Morph1", "Morph2"
 
 

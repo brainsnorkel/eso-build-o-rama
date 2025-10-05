@@ -134,14 +134,72 @@ class ESOLogsAPIClient:
             "limit": limit
         }
         
-        logger.info(f"Fetching top {limit} logs for zone {zone_id}, encounter {encounter_id}")
-        result = await self.client.query(query, variables)
+        logger.info(f"Fetching top {limit} ranked logs for zone {zone_id}, encounter {encounter_id}")
         
-        encounter_data = result.get("worldData", {}).get("encounter", {})
-        rankings = encounter_data.get("characterRankings", {}).get("data", [])
+        if not encounter_id:
+            logger.error("encounter_id is required for rankings")
+            return []
         
-        logger.info(f"Found {len(rankings)} top logs")
-        return rankings
+        try:
+            # Use GraphQL with leaderboard: LogsOnly to get rankings with report codes
+            query_logs_only = '''
+            query GetTopRankedReports($encounterID: Int!) {
+              worldData {
+                encounter(id: $encounterID) {
+                  characterRankings(
+                    metric: dps
+                    leaderboard: LogsOnly
+                  )
+                }
+              }
+            }
+            '''
+            
+            result = await self.client.execute(query_logs_only, {"encounterID": encounter_id})
+            
+            if result.status_code != 200:
+                logger.error(f"API request failed with status {result.status_code}")
+                return []
+            
+            data = result.json()
+            
+            if 'errors' in data:
+                logger.error(f"GraphQL errors: {data['errors']}")
+                return []
+            
+            rankings_data = data['data']['worldData']['encounter']['characterRankings']
+            rankings = rankings_data.get('rankings', [])
+            
+            # Extract unique report codes (keep top DPS per report)
+            report_map = {}
+            for ranking in rankings:
+                report = ranking.get('report', {})
+                code = report.get('code')
+                
+                if code:  # Only include rankings with report codes
+                    if code not in report_map or ranking['amount'] > report_map[code]['amount']:
+                        report_map[code] = {
+                            "name": ranking['name'],
+                            "class": ranking['class'],
+                            "spec": ranking.get('spec', 'Unknown'),
+                            "amount": ranking['amount'],
+                            "report": {
+                                "code": code,
+                                "startTime": report.get('startTime', 0),
+                                "fightID": report.get('fightID', 1)
+                            }
+                        }
+            
+            # Sort by DPS and take top N
+            sorted_rankings = sorted(report_map.values(), key=lambda x: x['amount'], reverse=True)
+            top_rankings = sorted_rankings[:limit]
+            
+            logger.info(f"Found {len(top_rankings)} top-ranked reports")
+            return top_rankings
+            
+        except Exception as e:
+            logger.error(f"Error fetching top logs: {e}")
+            return []
     
     async def get_report(self, report_code: str) -> Dict[str, Any]:
         """

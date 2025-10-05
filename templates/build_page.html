@@ -77,8 +77,11 @@
     </h4>
     <div class="abilities-bar">
         {% for ability in best_player.abilities_bar1 %}
-        <div class="ability tooltip" data-tooltip="{{ ability.skill_line }}">
-            {{ ability.ability_name or 'Empty' }}
+        <div class="ability tooltip" data-tooltip="{{ ability.ability_name }}{% if ability.skill_line %} - {{ ability.skill_line }}{% endif %}">
+            {% if ability.ability_icon %}
+            <img src="../static/icons/{{ ability.ability_icon }}.png" alt="{{ ability.ability_name }}" class="ability-icon">
+            {% endif %}
+            <div class="ability-name">{{ ability.ability_name or 'Empty' }}</div>
         </div>
         {% endfor %}
     </div>
@@ -90,8 +93,11 @@
     </h4>
     <div class="abilities-bar">
         {% for ability in best_player.abilities_bar2 %}
-        <div class="ability tooltip" data-tooltip="{{ ability.skill_line }}">
-            {{ ability.ability_name or 'Empty' }}
+        <div class="ability tooltip" data-tooltip="{{ ability.ability_name }}{% if ability.skill_line %} - {{ ability.skill_line }}{% endif %}">
+            {% if ability.ability_icon %}
+            <img src="../static/icons/{{ ability.ability_icon }}.png" alt="{{ ability.ability_name }}" class="ability-icon">
+            {% endif %}
+            <div class="ability-name">{{ ability.ability_name or 'Empty' }}</div>
         </div>
         {% endfor %}
     </div>

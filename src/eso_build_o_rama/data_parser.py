@@ -268,7 +268,8 @@ class DataParser:
                 ability = Ability(
                     ability_name=talent.get('name', ''),
                     skill_line='',  # TODO: Map from ability ID to skill line
-                    ability_id=talent.get('guid', 0)
+                    ability_id=talent.get('guid', 0),
+                    ability_icon=talent.get('abilityIcon', '')  # Icon filename for display
                 )
                 
                 # First 6 abilities go to bar 1, next 6 to bar 2

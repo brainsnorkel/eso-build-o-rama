@@ -49,6 +49,7 @@ data/
 !requirements.json
 !package.json
 !data/trials.json
+!output/builds.json
 !data/trial_bosses.json
 !output/builds.json
 

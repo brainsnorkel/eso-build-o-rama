@@ -712,7 +712,9 @@ This project would not be possible without:
 
 ## License
 
-Copyright © 2025 [@brainsnorkel](https://github.com/brainsnorkel)
+MIT License - see [LICENSE](LICENSE) file for details.
+
+Copyright © 2025 Chris Gentle ([@brainsnorkel](https://github.com/brainsnorkel))
 
 This is a fan-made tool for the Elder Scrolls Online community. The Elder Scrolls Online and all related content are © ZeniMax Media Inc. This project is not affiliated with or endorsed by ZeniMax Media Inc.
 

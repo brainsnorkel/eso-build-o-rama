@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Common ESO Builds - Home{% endblock %}
+{% block title %}BS ESO Meta Build Explorer{% endblock %}
 
 {% block content %}
 <div class="card">
@@ -48,14 +48,15 @@
 <div class="card">
     <h3>About This Data</h3>
     <p style="line-height: 1.8;">
-        This page shows the most popular builds from the top 5 ranked logs for each trial boss. 
-        A build is considered "common" and featured here if it appears 2 or more times among top players.
+        This page shows the most frequently seen builds from the top 10 ranked esologs.com reports, for each boss, for each trial. 
+        A build is listed here if it appears 5 or more times among players in these top ranked reports. 
+        3 or more times for tank and healer builds. If there are no "common" builds for a boss or a trial (sorry vSO) then none will be shown.
     </p>
-    <p style="margin-top: 15px; line-height: 1.8;">
-        <strong>Build Definition:</strong> A unique combination of subclasses (skill lines) and two 5-piece gear sets.
+    <p style="margin-top: 10px; line-height: 1.8;">
+        To this tool, a "build" is a unique combination of subclasses (skill lines), and two 5-piece gear sets.
     </p>
-    <p style="margin-top: 15px; line-height: 1.8;">
-        <strong>Data Source:</strong> ESO Logs public rankings, automatically scanned weekly.
+    <p style="margin-top: 10px; line-height: 1.8;">
+        <strong>Data Source:</strong> ESO Logs public logged trial rankings. Reports are regenerated daily one trial at a time.
     </p>
 </div>
 {% endblock %}

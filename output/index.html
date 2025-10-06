@@ -561,7 +561,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>Common ESO Builds</h1>
+            <h1>BS ESO Meta Build Explorer</h1>
             <p class="subtitle">Common builds found in top esologs</p>
         </div>
     </header>
@@ -594,9 +594,14 @@
                     <div style="font-weight: 600; color: #fff;">Ardent Flame / Assassination / Herald of the Tome</div>
                     <div style="font-size: 0.85em; color: #a8edea; margin-top: 5px;">Ansuul the Tormentor</div>
                     <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.9em;">
-                        <span style="color: #a8edea;">Game Hard Me Bad</span>
+                        <span style="color: #a8edea;">@f.rags - Game Hard Me Bad</span>
                         <span style="color: #38ef7d; font-weight: 600;">225.7K</span>
                     </div>
+                    
+                    <div style="margin-top: 8px; font-size: 0.7em; color: #666; text-align: center;">
+                        Cache effectiveness: API calls obviated by cache: 12. Hitting Esologs.com: 394
+                    </div>
+                    
                 </div>
                 
             </div>
@@ -620,9 +625,10 @@
                     <div style="font-weight: 600; color: #fff;">Ardent Flame / Assassination / Herald of the Tome</div>
                     <div style="font-size: 0.85em; color: #a8edea; margin-top: 5px;">Yolnahkriin</div>
                     <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.9em;">
-                        <span style="color: #a8edea;">Kynes left Skyrim</span>
+                        <span style="color: #a8edea;">@TheHeim - Kynes left Skyrim</span>
                         <span style="color: #38ef7d; font-weight: 600;">253.8K</span>
                     </div>
+                    
                 </div>
                 
             </div>
@@ -662,10 +668,32 @@
                 </p>
                 <p style="margin-top: 15px; font-size: 0.85em;">
                     © 2025 <a href="https://github.com/brainsnorkel" target="_blank">@brainsnorkel</a> | 
-                    Generated: 2025-10-05
+                    Generated: <span id="localized-date">2025-10-06</span>
                 </p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Update the date to show localized time for the viewer
+        function updateLocalizedDate() {
+            const dateElement = document.getElementById('localized-date');
+            if (dateElement) {
+                const now = new Date();
+                const localizedDate = now.toLocaleString('sv-SE', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                });
+                dateElement.textContent = localizedDate;
+            }
+        }
+
+        // Update the date when the page loads
+        document.addEventListener('DOMContentLoaded', updateLocalizedDate);
+    </script>
 </body>
 </html>

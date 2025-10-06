@@ -97,17 +97,17 @@
             {% for gear in best_player.gear %}
             {% if gear.slot not in ['backup_necklace', 'backup_ring1'] and gear.slot not in ['slot_14', 'slot_15'] %}
             <tr>
-                <td><strong>{{ gear.slot|title }}</strong></td>
-                <td>{{ gear.set_name or 'N/A' }}</td>
-                <td>
+                <td data-label="Slot"><strong>{{ gear.slot|title }}</strong></td>
+                <td data-label="Set">{{ gear.set_name or 'N/A' }}</td>
+                <td data-label="Item">
                     {% if gear.slot in ['head', 'chest', 'shoulders', 'belt', 'hands', 'legs', 'feet'] and gear.armor_weight %}
                         {{ gear.item_name or 'N/A' }} ({{ gear.armor_weight }})
                     {% else %}
                         {{ gear.item_name or 'N/A' }}
                     {% endif %}
                 </td>
-                <td title="Trait ID: {{ gear.trait_id or 'None' }}">{{ gear.trait or 'N/A' }}</td>
-                <td title="Enchant ID: {{ gear.enchant_id or 'None' }}">{{ gear.enchantment or 'N/A' }}</td>
+                <td data-label="Trait" title="Trait ID: {{ gear.trait_id or 'None' }}">{{ gear.trait or 'N/A' }}</td>
+                <td data-label="Enchantment" title="Enchant ID: {{ gear.enchant_id or 'None' }}">{{ gear.enchantment or 'N/A' }}</td>
             </tr>
             {% endif %}
             {% endfor %}
@@ -156,14 +156,14 @@
             {% endfor %}
             {% for player in unique_players.values()|sort(attribute='dps', reverse=True) %}
             <tr>
-                <td>
+                <td data-label="Player">
                     <div>{{ player.player_name }}</div>
                     <a href="{{ player.player_url }}" target="_blank" style="color: #38ef7d; text-decoration: none; font-size: 0.8em;">
                         View on ESO Logs →
                     </a>
                 </td>
-                <td>{{ player.character_name }}</td>
-                <td>{{ player.dps|format_dps }}</td>
+                <td data-label="Character">{{ player.character_name }}</td>
+                <td data-label="DPS">{{ player.dps|format_dps }}</td>
             </tr>
             {% endfor %}
         </tbody>

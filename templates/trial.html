@@ -36,7 +36,7 @@
         <tbody>
             {% for build in builds %}
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     {% if build.best_player.role == 'dps' %}
                         ⚔️
                     {% elif build.best_player.role == 'healer' %}
@@ -47,12 +47,12 @@
                         ❓
                     {% endif %}
                 </td>
-                <td><strong>{{ build.get_display_name() }}</strong></td>
-                <td>{{ build.sets|join(', ') if build.sets else 'Various' }}</td>
-                <td>{{ build.count }} players in {{ build.report_count }} reports</td>
-                <td>{{ build.best_player.dps|format_dps }}</td>
-                <td>{{ build.best_player.player_name }}</td>
-                <td><a href="{{ build.trial_name.lower().replace(' ', '-').replace("'", "") }}-{{ build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and') }}-{{ build.build_slug }}.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>{{ build.get_display_name() }}</strong></td>
+                <td data-label="Sets">{{ build.sets|join(', ') if build.sets else 'Various' }}</td>
+                <td data-label="Frequency">{{ build.count }} players in {{ build.report_count }} reports</td>
+                <td data-label="DPS">{{ build.best_player.dps|format_dps }}</td>
+                <td data-label="Player">{{ build.best_player.player_name }}</td>
+                <td data-label="Details"><a href="{{ build.trial_name.lower().replace(' ', '-').replace("'", "") }}-{{ build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and') }}-{{ build.build_slug }}.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
             </tr>
             {% endfor %}
         </tbody>

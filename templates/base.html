@@ -521,19 +521,123 @@
             }
             
             header h1 {
-                font-size: 2em;
+                font-size: 1.8em;
+            }
+            
+            header .subtitle {
+                font-size: 0.95em;
             }
             
             .container {
-                padding: 15px;
+                padding: 10px;
             }
             
             .card {
-                padding: 20px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .card h2 {
+                font-size: 1.4em;
+            }
+            
+            .card h3 {
+                font-size: 1.1em;
             }
             
             .abilities-bar::before {
                 left: 15px;
+            }
+            
+            /* Mobile-friendly table: Convert to card layout */
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            
+            /* Hide table headers */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            tr {
+                margin-bottom: 15px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                padding: 12px;
+            }
+            
+            tr:hover {
+                transform: none;
+            }
+            
+            td {
+                border: none;
+                position: relative;
+                padding: 10px 10px 10px 45%;
+                text-align: right;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+            
+            /* Add labels before each cell */
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 40%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: #a8edea;
+                font-size: 0.85em;
+            }
+            
+            /* Special styling for role icon */
+            td:first-child {
+                padding-top: 15px;
+                font-size: 1.5em;
+            }
+            
+            /* Make links more prominent on mobile */
+            td a {
+                padding: 8px 15px;
+                background: rgba(52, 152, 219, 0.2);
+                border-radius: 5px;
+                display: inline-block;
+                font-weight: 600;
+            }
+            
+            /* Ability styling on mobile */
+            .ability {
+                min-height: 60px;
+            }
+            
+            .ability-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .ability-name {
+                font-size: 0.75em;
+            }
+            
+            /* Info boxes on mobile */
+            .info-box {
+                padding: 12px;
+            }
+            
+            .info-box .label {
+                font-size: 0.8em;
+            }
+            
+            .info-box .value {
+                font-size: 1.1em;
             }
         }
         

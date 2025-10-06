@@ -40,12 +40,12 @@
         <tbody>
             {% for build in boss_data.builds %}
             <tr>
-                <td>
+                <td data-label="Role">
                     {% set role_icon = '⚔️' if build.best_player.role == 'dps' else ('🛡️' if build.best_player.role == 'tank' else '💚') %}
                     <span title="{{ build.best_player.role.title() }}" aria-label="{{ build.best_player.role.title() }} role">{{ role_icon }}</span>
                 </td>
-                <td><strong>{{ build.get_display_name() }}</strong></td>
-                <td>
+                <td data-label="Build"><strong>{{ build.get_display_name() }}</strong></td>
+                <td data-label="Sets">
                     {% set sorted_sets = build.get_sorted_sets() %}
                     {% if sorted_sets %}
                         {{ sorted_sets|join(', ') }}
@@ -53,10 +53,10 @@
                         Unknown Sets
                     {% endif %}
                 </td>
-                <td>{{ build.count }} in {{ boss_data.total_reports }} fight reports</td>
-                <td>{{ build.best_player.dps|format_dps }}</td>
-                <td>{{ build.best_player.player_name }}</td>
-                <td>
+                <td data-label="Popularity">{{ build.count }} in {{ boss_data.total_reports }} fight reports</td>
+                <td data-label="Top DPS">{{ build.best_player.dps|format_dps }}</td>
+                <td data-label="Player">{{ build.best_player.player_name }}</td>
+                <td data-label="Details">
                     <a href="{{ update_version.lower() }}-{{ build.build_slug }}.html" style="color: #3498db;">
                         View Build →
                     </a>

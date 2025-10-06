@@ -351,6 +351,14 @@ class TrialScanner:
             # Find the best player across all instances
             best_player = max(all_players, key=lambda p: p.dps)
             
+            # Preserve mundus from any instance of the same character if available
+            if not best_player.mundus:
+                for player in all_players:
+                    if player.character_name == best_player.character_name and player.mundus:
+                        best_player.mundus = player.mundus
+                        logger.debug(f"Copied mundus '{player.mundus}' to consolidated best player {best_player.character_name}")
+                        break
+            
             # Count unique reports
             unique_reports = set(player.report_code for player in all_players if player.report_code)
             

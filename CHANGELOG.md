@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed (2025-10-06 - Per-Player Mundus Detection)
+- **Correct Per-Player Mundus Stones**: Fixed issue where build pages showed incorrect mundus stones
+  - Problem: Buffs table query returned ALL players' buffs, taking first mundus found (could be any player)
+  - Root Cause: `player_id` (source ID) was extracted but never assigned to PlayerBuild objects
+  - Solution: Added `player_id` to PlayerBuild, filter Buffs table by `source_id` for player-specific results
+  - Example: Tentaculaire now correctly shows "The Thief" instead of "The Atronach"
+  - Ensures each build page displays the actual mundus stone used by that specific player
+
 ### Added (2025-10-05 - Staggered Trial Scanning)
 - **Staggered Trial Scanning**: Each trial now runs on its own schedule (14 trials, 1 hour apart starting Sunday 1am UTC)
 - **Incremental Data Storage**: Trial build data persists in `output/builds.json` between runs

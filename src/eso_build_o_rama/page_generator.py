@@ -99,59 +99,6 @@ class PageGenerator:
         logger.info(f"Generated: {filepath}")
         return str(filepath)
     
-    def generate_index_page(
-        self,
-        all_builds: List[CommonBuild],
-        update_version: str,
-        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None
-    ) -> str:
-        """
-        Generate the index page listing all builds.
-        
-        Args:
-            all_builds: List of all common builds
-            update_version: Game update version
-            trials_metadata: Optional metadata about trials including last updated times
-            
-        Returns:
-            Path to generated HTML file
-        """
-        logger.info(f"Generating index page with {len(all_builds)} builds")
-        
-        # Group builds by trial and boss
-        builds_by_trial = self._group_builds_by_trial(all_builds)
-        
-        # Load template
-        template = self.env.get_template('index_page.html')
-        
-        # Add timestamp information to each trial
-        builds_by_trial_with_timestamps = {}
-        for trial_name, bosses_data in builds_by_trial.items():
-            builds_by_trial_with_timestamps[trial_name] = {
-                'bosses': bosses_data,
-                'metadata': trials_metadata.get(trial_name, {}) if trials_metadata else {}
-            }
-        
-        # Prepare data
-        context = {
-            'builds_by_trial': builds_by_trial_with_timestamps,
-            'update_version': update_version,
-            'total_builds': len(all_builds),
-            'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
-            'page_title': 'BS ESO Meta Build Explorer',
-            'meta_description': f'Top performing Elder Scrolls Online trial builds for {update_version}'
-        }
-        
-        # Render template
-        html = template.render(**context)
-        
-        # Write file
-        filepath = self.output_dir / 'index.html'
-        filepath.write_text(html, encoding='utf-8')
-        
-        logger.info(f"Generated index: {filepath}")
-        return str(filepath)
-    
     def generate_home_page(
         self,
         builds_by_trial: Dict[str, Dict[str, Dict[str, Any]]],

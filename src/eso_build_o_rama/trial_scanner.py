@@ -168,24 +168,6 @@ class TrialScanner:
         if not valid_players:
             return None
         
-        # Fetch mundus data for each player
-        logger.info(f"Fetching mundus data for {len(valid_players)} players")
-        for player in valid_players:
-            try:
-                mundus_stone = await self.api_client.get_player_buffs(
-                    report_code=report_code,
-                    fight_ids=[fight_id],
-                    player_name=player.player_name,
-                    start_time=fight_info.get('startTime'),
-                    end_time=fight_info.get('endTime')
-                )
-                player.mundus = mundus_stone or ""
-                if mundus_stone:
-                    logger.debug(f"Found mundus stone for {player.player_name}: {mundus_stone}")
-            except Exception as e:
-                logger.warning(f"Failed to get mundus data for {player.player_name}: {e}")
-                player.mundus = ""
-        
         # Create trial report
         boss_name = fight_info.get('name', 'Unknown Boss')
         trial_report = self.data_parser.create_trial_report(
@@ -198,6 +180,25 @@ class TrialScanner:
         
         # Analyze builds
         trial_report = self.build_analyzer.analyze_trial_report(trial_report)
+        
+        # Fetch mundus data only for best players in each build (much more efficient!)
+        logger.info(f"Fetching mundus data for {len(trial_report.common_builds)} build leaders")
+        for build in trial_report.common_builds:
+            if build.best_player:
+                try:
+                    mundus_stone = await self.api_client.get_player_buffs(
+                        report_code=report_code,
+                        fight_ids=[fight_id],
+                        player_name=build.best_player.player_name,
+                        start_time=fight_info.get('startTime'),
+                        end_time=fight_info.get('endTime')
+                    )
+                    build.best_player.mundus = mundus_stone or ""
+                    if mundus_stone:
+                        logger.debug(f"Found mundus stone for {build.best_player.player_name}: {mundus_stone}")
+                except Exception as e:
+                    logger.warning(f"Failed to get mundus data for {build.best_player.player_name}: {e}")
+                    build.best_player.mundus = ""
         
         return trial_report
     

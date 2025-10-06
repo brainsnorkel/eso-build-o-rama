@@ -13,13 +13,17 @@ on:
         required: false
         type: number
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   generate-trial:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Determine which trial to run
         id: trial
@@ -74,12 +78,6 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v4
       
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-          path: output
-      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -97,19 +95,16 @@ jobs:
         run: |
           python -m src.eso_build_o_rama.main --trial-id ${{ steps.trial.outputs.trial_id }}
       
-      - name: Copy static assets
-        run: |
-          if [ ! -d "output/static" ]; then
-            cp -r static output/
-          fi
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        with:
+          static_site_generator: custom
       
-      - name: Commit and push changes
-        working-directory: output
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          git diff --quiet && git diff --staged --quiet || (
-            git commit -m "Update trial ${{ steps.trial.outputs.trial_id }} builds - $(date -u +%Y-%m-%d)"
-            git push
-          )
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

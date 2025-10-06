@@ -547,6 +547,111 @@ class ESOLogsAPIClient:
             logger.error(f"Error fetching table data: {e}")
             return {}
     
+    # Mundus stone ability IDs (from ESO game data)
+    MUNDUS_ABILITY_IDS = {
+        13940: "The Warrior",
+        13943: "The Mage",
+        13974: "The Serpent",
+        13975: "The Thief",
+        13976: "The Lady",
+        13977: "The Steed",
+        13978: "The Lord",
+        13979: "The Apprentice",
+        13980: "The Ritual",
+        13981: "The Lover",
+        13982: "The Atronach",
+        13984: "The Shadow",
+        13985: "The Tower"
+    }
+    
+    async def get_player_buffs(
+        self, 
+        report_code: str, 
+        fight_ids: List[int],
+        player_name: str,
+        start_time: float,
+        end_time: float,
+        source_id: Optional[int] = None
+    ) -> Optional[str]:
+        """Get mundus stone from player's buff uptime by checking mundus ability IDs."""
+        
+        # Create cache key
+        cache_key = f"buffs_{report_code}_{player_name}_{start_time}_{end_time}"
+        
+        # Try to get from cache first
+        if self.cache_manager:
+            cached_data = self.cache_manager.get_cached_response(cache_key)
+            if cached_data:
+                logger.info(f"Using cached buff data for {player_name}")
+                return cached_data.get("data")
+        
+        # Use sourceID to filter Buffs table to this specific player
+        try:
+            if source_id:
+                # Query Buffs filtered by source ID
+                result = await self._retry_on_rate_limit(
+                    self.client.get_report_table,
+                    code=report_code,
+                    start_time=start_time,
+                    end_time=end_time,
+                    data_type="Buffs",
+                    hostility_type="Friendlies",
+                    source_id=source_id  # Filter by this player's source ID
+                )
+            else:
+                # Fallback: get all buffs (less accurate)
+                logger.warning(f"No source_id provided for {player_name}, getting all buffs")
+                result = await self._retry_on_rate_limit(
+                    self.client.get_report_table,
+                    code=report_code,
+                    start_time=start_time,
+                    end_time=end_time,
+                    data_type="Buffs",
+                    hostility_type="Friendlies"
+                )
+            
+            # Parse Buffs table to find mundus (100% uptime buffs matching mundus IDs)
+            if result and hasattr(result, 'report_data') and hasattr(result.report_data, 'report'):
+                table = result.report_data.report.table
+                
+                if isinstance(table, dict) and 'data' in table:
+                    table_data = table['data']
+                    auras = table_data.get('auras', [])
+                    
+                    logger.debug(f"Checking {len(auras)} auras for {player_name}")
+                    
+                    # Look through auras for THIS PLAYER's mundus buffs (filtered by source_id)
+                    for aura in auras:
+                        if isinstance(aura, dict):
+                            ability_id = aura.get('guid')  # Ability ID
+                            
+                            # Check if this is a mundus buff
+                            if ability_id in self.MUNDUS_ABILITY_IDS:
+                                mundus_name = self.MUNDUS_ABILITY_IDS[ability_id]
+                                logger.info(f"✓ Found mundus: {mundus_name} (ID: {ability_id}) for {player_name}")
+                                
+                                # Since we filtered by source_id, this is THIS PLAYER's mundus
+                                if self.cache_manager:
+                                    self.cache_manager.save_cached_response(cache_key, mundus_name)
+                                
+                                return mundus_name
+                    
+                    logger.warning(f"No mundus buffs found in {len(auras)} auras for {player_name}")
+                else:
+                    logger.warning(f"No auras data in Buffs table for {player_name}")
+            else:
+                logger.warning(f"Failed to get Buffs table for {player_name}")
+            
+            # Save empty result to cache
+            if self.cache_manager:
+                self.cache_manager.save_cached_response(cache_key, None)
+            
+            return None
+            
+        except Exception as e:
+            logger.warning(f"Failed to get buffs for {player_name}: {e}")
+            return None
+    
     async def close(self):
         """Close the client connection."""
         if hasattr(self.client, 'close'):

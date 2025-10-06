@@ -181,6 +181,33 @@ class TrialScanner:
         # Analyze builds
         trial_report = self.build_analyzer.analyze_trial_report(trial_report)
         
+        # Fetch mundus data only for best players in each build (much more efficient!)
+        logger.info(f"Fetching mundus data for {len(trial_report.common_builds)} build leaders")
+        for build in trial_report.common_builds:
+            if build.best_player:
+                try:
+                    # Use character name and player ID for buff queries
+                    character_name = build.best_player.character_name
+                    source_id = build.best_player.player_id
+                    logger.info(f"Querying mundus for character: {character_name} (source ID: {source_id})")
+                    
+                    mundus_stone = await self.api_client.get_player_buffs(
+                        report_code=report_code,
+                        fight_ids=[fight_id],
+                        player_name=character_name,
+                        start_time=fight_info.get('startTime'),
+                        end_time=fight_info.get('endTime'),
+                        source_id=source_id  # Pass source ID for player-specific filtering
+                    )
+                    build.best_player.mundus = mundus_stone or ""
+                    if mundus_stone:
+                        logger.info(f"✓ Found mundus stone for {character_name}: {mundus_stone}")
+                    else:
+                        logger.warning(f"✗ No mundus stone found for {character_name}")
+                except Exception as e:
+                    logger.warning(f"Failed to get mundus data for {build.best_player.character_name}: {e}")
+                    build.best_player.mundus = ""
+        
         return trial_report
     
     def _get_update_version(self, report_data: Dict[str, Any]) -> str:
@@ -325,6 +352,14 @@ class TrialScanner:
             
             # Find the best player across all instances
             best_player = max(all_players, key=lambda p: p.dps)
+            
+            # Preserve mundus from any instance of the same character if available
+            if not best_player.mundus:
+                for player in all_players:
+                    if player.character_name == best_player.character_name and player.mundus:
+                        best_player.mundus = player.mundus
+                        logger.debug(f"Copied mundus '{player.mundus}' to consolidated best player {best_player.character_name}")
+                        break
             
             # Count unique reports
             unique_reports = set(player.report_code for player in all_players if player.report_code)

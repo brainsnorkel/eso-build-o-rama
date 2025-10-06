@@ -159,6 +159,9 @@ class CommonBuild:
         for subclass in self.subclasses:
             full_subclasses.append(subclass_names.get(subclass.lower(), subclass.title()))
         
+        # Sort subclasses alphabetically for consistent display
+        full_subclasses.sort()
+        
         # Role information is now shown via icon, not in parentheses
         return " / ".join(full_subclasses)
     

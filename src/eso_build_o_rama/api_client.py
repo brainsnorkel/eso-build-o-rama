@@ -570,7 +570,8 @@ class ESOLogsAPIClient:
         fight_ids: List[int],
         player_name: str,
         start_time: float,
-        end_time: float
+        end_time: float,
+        source_id: Optional[int] = None
     ) -> Optional[str]:
         """Get mundus stone from player's buff uptime by checking mundus ability IDs."""
         
@@ -584,31 +585,30 @@ class ESOLogsAPIClient:
                 logger.info(f"Using cached buff data for {player_name}")
                 return cached_data.get("data")
         
-        # GraphQL query to get Buffs table which shows uptime %
-        # Mundus stones should have 100% uptime
-        query = """
-        query GetPlayerBuffs($code: String!, $startTime: Float!, $endTime: Float!) {
-            reportData {
-                report(code: $code) {
-                    table(
-                        startTime: $startTime
-                        endTime: $endTime
-                        dataType: Buffs
-                    )
-                }
-            }
-        }
-        """
-        
+        # Use sourceID to filter Buffs table to this specific player
         try:
-            result = await self._retry_on_rate_limit(
-                self.client.get_report_table,
-                code=report_code,
-                start_time=start_time,
-                end_time=end_time,
-                data_type="Buffs",
-                hostility_type="Friendlies"
-            )
+            if source_id:
+                # Query Buffs filtered by source ID
+                result = await self._retry_on_rate_limit(
+                    self.client.get_report_table,
+                    code=report_code,
+                    start_time=start_time,
+                    end_time=end_time,
+                    data_type="Buffs",
+                    hostility_type="Friendlies",
+                    source_id=source_id  # Filter by this player's source ID
+                )
+            else:
+                # Fallback: get all buffs (less accurate)
+                logger.warning(f"No source_id provided for {player_name}, getting all buffs")
+                result = await self._retry_on_rate_limit(
+                    self.client.get_report_table,
+                    code=report_code,
+                    start_time=start_time,
+                    end_time=end_time,
+                    data_type="Buffs",
+                    hostility_type="Friendlies"
+                )
             
             # Parse Buffs table to find mundus (100% uptime buffs matching mundus IDs)
             if result and hasattr(result, 'report_data') and hasattr(result.report_data, 'report'):
@@ -618,23 +618,19 @@ class ESOLogsAPIClient:
                     table_data = table['data']
                     auras = table_data.get('auras', [])
                     
-                    logger.info(f"Checking {len(auras)} auras for {player_name}")
+                    logger.debug(f"Checking {len(auras)} auras for {player_name}")
                     
-                    # Look through auras for mundus buffs with high uptime
+                    # Look through auras for THIS PLAYER's mundus buffs (filtered by source_id)
                     for aura in auras:
                         if isinstance(aura, dict):
                             ability_id = aura.get('guid')  # Ability ID
-                            name = aura.get('name', '')
-                            total_uptime = aura.get('totalUptime', 0)
                             
                             # Check if this is a mundus buff
                             if ability_id in self.MUNDUS_ABILITY_IDS:
-                                # Found a mundus buff
                                 mundus_name = self.MUNDUS_ABILITY_IDS[ability_id]
-                                uptime_pct = total_uptime / 1000 if total_uptime else 0  # Convert ms to %?
-                                logger.info(f"✓ Found mundus: {mundus_name} (ID: {ability_id}, uptime: {total_uptime}ms) for {player_name}")
+                                logger.info(f"✓ Found mundus: {mundus_name} (ID: {ability_id}) for {player_name}")
                                 
-                                # Save to cache
+                                # Since we filtered by source_id, this is THIS PLAYER's mundus
                                 if self.cache_manager:
                                     self.cache_manager.save_cached_response(cache_key, mundus_name)
                                 

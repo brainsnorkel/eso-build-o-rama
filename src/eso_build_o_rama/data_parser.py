@@ -340,6 +340,7 @@ class DataParser:
             player_build = PlayerBuild(
                 character_name=character_name,
                 player_name=player_name,
+                player_id=player_id,  # Source ID for API queries
                 class_name=class_name,
                 role=role,
                 dps=dps,
@@ -347,7 +348,7 @@ class DataParser:
                 gear=gear,
                 abilities_bar1=abilities_bar1,
                 abilities_bar2=abilities_bar2,
-                mundus="",  # TODO: Extract from buffs
+                mundus="",  # Will be fetched separately via Buffs table
                 champion_points=[],  # TODO: Extract from buffs
                 player_url=player_url,
                 subclasses=[],  # Will be determined by analyzer

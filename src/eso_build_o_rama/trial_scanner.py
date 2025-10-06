@@ -186,16 +186,18 @@ class TrialScanner:
         for build in trial_report.common_builds:
             if build.best_player:
                 try:
-                    # Use character name for buff queries (not account name)
+                    # Use character name and player ID for buff queries
                     character_name = build.best_player.character_name
-                    logger.info(f"Querying mundus for character: {character_name}")
+                    source_id = build.best_player.player_id
+                    logger.info(f"Querying mundus for character: {character_name} (source ID: {source_id})")
                     
                     mundus_stone = await self.api_client.get_player_buffs(
                         report_code=report_code,
                         fight_ids=[fight_id],
-                        player_name=character_name,  # Use character_name for buff events
+                        player_name=character_name,
                         start_time=fight_info.get('startTime'),
-                        end_time=fight_info.get('endTime')
+                        end_time=fight_info.get('endTime'),
+                        source_id=source_id  # Pass source ID for player-specific filtering
                     )
                     build.best_player.mundus = mundus_stone or ""
                     if mundus_stone:

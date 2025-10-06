@@ -4,8 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block meta_description %}Common builds found in top esologs{% endblock %}">
-    <title>{% block title %}BS ESO Meta Build Explorer{% endblock %}</title>
+    <title>{% block title %}BS ESO Meta Build Explorer{% if is_develop %} [DEV]{% endif %}{% endblock %}</title>
     <style>
+        {% if is_develop %}
+        /* Development Color Scheme - Orange/Amber */
+        :root {
+            --primary-gradient-start: #f39c12;
+            --primary-gradient-end: #e67e22;
+            --accent-color: #f39c12;
+            --accent-light: #f1c40f;
+            --header-bg-start: #d35400;
+            --header-bg-end: #e67e22;
+            --card-border: rgba(243, 156, 18, 0.3);
+            --card-hover-border: rgba(243, 156, 18, 0.5);
+        }
+        {% else %}
+        /* Production Color Scheme - Green/Teal */
+        :root {
+            --primary-gradient-start: #11998e;
+            --primary-gradient-end: #38ef7d;
+            --accent-color: #38ef7d;
+            --accent-light: #a8edea;
+            --header-bg-start: #2d1b69;
+            --header-bg-end: #11998e;
+            --card-border: rgba(56, 239, 125, 0.3);
+            --card-hover-border: rgba(56, 239, 125, 0.5);
+        }
+        {% endif %}
+        
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +69,7 @@
         }
         
         header {
-            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+            background: linear-gradient(135deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
             color: white;
             padding: 30px 0;
             margin-bottom: 30px;
@@ -106,7 +132,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #11998e, #38ef7d, #11998e);
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end), var(--primary-gradient-start));
             background-size: 200% 100%;
             animation: gradient-flow 3s ease infinite;
         }
@@ -119,13 +145,13 @@
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-            border-color: rgba(255, 255, 255, 0.3);
+            border-color: var(--card-hover-border);
         }
         
         .card h2 {
             color: #ffffff;
             margin-bottom: 20px;
-            border-bottom: 2px solid #38ef7d;
+            border-bottom: 2px solid var(--accent-color);
             padding-bottom: 12px;
             font-size: 1.8em;
             font-weight: 600;
@@ -165,7 +191,7 @@
         }
         
         th {
-            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+            background: linear-gradient(135deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
             color: white;
             font-weight: 600;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
@@ -191,7 +217,7 @@
             backdrop-filter: blur(5px);
             padding: 18px;
             border-radius: 8px;
-            border-left: 4px solid #38ef7d;
+            border-left: 4px solid var(--accent-color);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             position: relative;
@@ -215,13 +241,13 @@
         
         .info-box:hover {
             transform: translateY(-2px);
-            border-left-color: #11998e;
+            border-left-color: var(--primary-gradient-start);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
         .info-box .label {
             font-weight: 600;
-            color: #a8edea;
+            color: var(--accent-light);
             font-size: 0.9em;
             margin-bottom: 8px;
             text-transform: uppercase;
@@ -333,7 +359,7 @@
             color: #e8f8f5;
             padding: 40px 0;
             margin-top: 60px;
-            border-top: 3px solid #38ef7d;
+            border-top: 3px solid var(--accent-color);
             position: relative;
         }
         
@@ -348,15 +374,15 @@
         }
         
         footer a {
-            color: #38ef7d;
+            color: var(--accent-color);
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
         }
         
         footer a:hover {
-            color: #11998e;
-            text-shadow: 0 0 8px rgba(56, 239, 125, 0.5);
+            color: var(--primary-gradient-start);
+            text-shadow: 0 0 8px var(--card-border);
         }
         
         footer a::after {

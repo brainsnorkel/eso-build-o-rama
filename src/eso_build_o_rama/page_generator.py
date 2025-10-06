@@ -29,6 +29,9 @@ class PageGenerator:
         self.template_dir = Path(template_dir)
         self.output_dir = Path(output_dir)
         
+        # Detect if this is development mode based on output directory
+        self.is_develop = 'dev' in str(output_dir).lower()
+        
         # Load boss order from trial_bosses.json
         self.boss_order = self._load_boss_order()
         
@@ -77,7 +80,8 @@ class PageGenerator:
             'trial_slug': trial_slug,
             'generated_date': datetime.now().strftime('%Y-%m-%d'),
             'page_title': self._get_page_title(build),
-            'meta_description': self._get_meta_description(build)
+            'meta_description': self._get_meta_description(build),
+            'is_develop': self.is_develop
         }
         
         # Debug: Check DPS value being passed to template
@@ -169,7 +173,8 @@ class PageGenerator:
         context = {
             'trials': trials,
             'generated_date': datetime.now().strftime('%Y-%m-%d'),
-            'cache_stats': cache_stats
+            'cache_stats': cache_stats,
+            'is_develop': self.is_develop
         }
         html = template.render(**context)
         
@@ -220,7 +225,8 @@ class PageGenerator:
         context = {
             'trial_name': trial_name,
             'bosses': sorted_bosses,
-            'generated_date': datetime.now().strftime('%Y-%m-%d')
+            'generated_date': datetime.now().strftime('%Y-%m-%d'),
+            'is_develop': self.is_develop
         }
         html = template.render(**context)
         

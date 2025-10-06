@@ -29,9 +29,9 @@
         <thead>
             <tr>
                 <th>Role</th>
-                <th>Build</th>
+                <th>Subclassing</th>
                 <th>Signature Sets</th>
-                <th>Popularity</th>
+                <th>Frequency</th>
                 <th>Top DPS</th>
                 <th>Player</th>
                 <th>Details</th>
@@ -58,7 +58,7 @@
                 <td>{{ build.best_player.player_name }}</td>
                 <td>
                     <a href="{{ update_version.lower() }}-{{ build.build_slug }}.html" style="color: #3498db;">
-                        View Build →
+                        Build→
                     </a>
                 </td>
             </tr>
@@ -74,7 +74,7 @@
     <p style="line-height: 1.8;">
         This page shows the most frequently seen builds from the top 10 ranked esologs.com reports, for each boss, for each trial. 
         A build is listed here if it appears 5 or more times among players in these top ranked reports. 
-        3 or more times for tank and healer builds.
+        3 or more times for tank and healer builds. If there are no "common" builds for a boss or a trial (sorry vSO) then none will be shown.
     </p>
     <p style="margin-top: 10px; line-height: 1.8;">
         To this tool, a "build" is a unique combination of subclasses (skill lines), and two 5-piece gear sets.

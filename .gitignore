@@ -42,6 +42,9 @@ Thumbs.db
 *.log
 logs/
 
+# Development output (not for production)
+output-dev/
+
 # Data
 data/
 *.csv
@@ -49,7 +52,6 @@ data/
 !requirements.json
 !package.json
 !data/trials.json
-!output/builds.json
 !data/trial_bosses.json
 !output/builds.json
 

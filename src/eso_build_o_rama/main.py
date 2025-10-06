@@ -6,6 +6,8 @@ import argparse
 import asyncio
 import json
 import logging
+import os
+import subprocess
 import sys
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -32,6 +34,23 @@ logger = logging.getLogger(__name__)
 class ESOBuildORM:
     """Main application orchestrator."""
     
+    def get_output_directory(self) -> str:
+        """Determine output directory based on git branch."""
+        try:
+            result = subprocess.run(
+                ['git', 'branch', '--show-current'],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            branch = result.stdout.strip()
+            if branch == 'develop':
+                return 'output-dev'
+            return 'output'
+        except Exception:
+            # Default to 'output' if git command fails
+            return 'output'
+    
     def __init__(self, use_cache: bool = True, clear_cache: bool = False):
         """
         Initialize the application.
@@ -47,9 +66,13 @@ class ESOBuildORM:
             self.cache_manager.clear_cache()
             logger.info("Cache cleared on startup")
         
+        # Determine output directory based on git branch
+        output_dir = self.get_output_directory()
+        logger.info(f"Using output directory: {output_dir}")
+        
         self.scanner = TrialScanner(cache_manager=self.cache_manager)
-        self.page_generator = PageGenerator()
-        self.data_store = DataStore()
+        self.page_generator = PageGenerator(output_dir=output_dir)
+        self.data_store = DataStore(builds_file=f"{output_dir}/builds.json")
         self.trials_file = Path(__file__).parent.parent.parent / "data" / "trials.json"
     
     async def run(self, test_mode: bool = False, trial_name: Optional[str] = None, trial_id: Optional[int] = None):
@@ -278,6 +301,21 @@ async def main():
                        help='Show cache statistics and exit')
     
     args = parser.parse_args()
+    
+    # Check branch for safety - prevent develop branch from running in GitHub Actions
+    try:
+        result = subprocess.run(
+            ['git', 'branch', '--show-current'],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        branch = result.stdout.strip()
+        if branch == 'develop' and os.getenv('GITHUB_ACTIONS'):
+            logger.error("Develop branch should not run in GitHub Actions!")
+            sys.exit(1)
+    except Exception:
+        pass  # Ignore git errors
     
     # Handle cache stats
     if args.cache_stats:

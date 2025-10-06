@@ -12,6 +12,9 @@ on:
         description: 'Trial ID to scan (leave empty for auto-detect based on time)'
         required: false
         type: number
+  push:
+    branches:
+      - main  # Only run on main branch pushes
 
 permissions:
   contents: write

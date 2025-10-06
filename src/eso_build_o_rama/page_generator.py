@@ -5,6 +5,7 @@ Generates HTML pages for build displays.
 
 import logging
 import json
+import shutil
 from typing import List, Dict, Optional, Any
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -37,6 +38,9 @@ class PageGenerator:
         
         # Create output directory if it doesn't exist
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Copy static assets to output directory
+        self._copy_static_assets()
         
         # Initialize Jinja2 environment
         self.env = Environment(
@@ -300,6 +304,22 @@ class PageGenerator:
         except json.JSONDecodeError:
             logger.warning(f"Could not parse trial_bosses.json")
             return {}
+    
+    def _copy_static_assets(self):
+        """Copy static assets to output directory."""
+        static_source = Path(__file__).parent.parent.parent / "static"
+        static_dest = self.output_dir / "static"
+        
+        if static_source.exists():
+            # Remove existing static dir to ensure fresh copy
+            if static_dest.exists():
+                shutil.rmtree(static_dest)
+            
+            # Copy static directory
+            shutil.copytree(static_source, static_dest)
+            logger.debug(f"Copied static assets to {static_dest}")
+        else:
+            logger.warning(f"Static assets directory not found: {static_source}")
     
     def _group_builds_by_trial(
         self,

@@ -95,6 +95,10 @@ jobs:
         run: |
           python -m src.eso_build_o_rama.main --trial-id ${{ steps.trial.outputs.trial_id }}
       
+      - name: Copy static assets to output
+        run: |
+          cp -r static output/
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:

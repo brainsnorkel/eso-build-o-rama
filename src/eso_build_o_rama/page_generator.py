@@ -138,7 +138,7 @@ class PageGenerator:
             'update_version': update_version,
             'total_builds': len(all_builds),
             'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
-            'page_title': f'ESO Build-O-Rama - Top Builds for {update_version}',
+            'page_title': 'BS ESO Meta Build Explorer',
             'meta_description': f'Top performing Elder Scrolls Online trial builds for {update_version}'
         }
         

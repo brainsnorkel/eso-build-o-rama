@@ -585,32 +585,10 @@
                 </p>
                 <p style="margin-top: 15px; font-size: 0.85em;">
                     © 2025 <a href="https://github.com/brainsnorkel" target="_blank">@brainsnorkel</a> | 
-                    Generated: <span id="localized-date">{{ generated_date }}</span>
+                    Generated: {{ generated_date }} UTC
                 </p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // Update the date to show localized time for the viewer
-        function updateLocalizedDate() {
-            const dateElement = document.getElementById('localized-date');
-            if (dateElement) {
-                const now = new Date();
-                const localizedDate = now.toLocaleString('sv-SE', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false
-                });
-                dateElement.textContent = localizedDate;
-            }
-        }
-
-        // Update the date when the page loads
-        document.addEventListener('DOMContentLoaded', updateLocalizedDate);
-    </script>
 </body>
 </html>

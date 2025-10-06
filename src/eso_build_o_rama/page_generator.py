@@ -87,8 +87,10 @@ class PageGenerator:
         # Render template
         html = template.render(**context)
         
-        # Generate filename
-        filename = f"{update_version.lower()}-{build.build_slug}.html"
+        # Generate filename with trial and boss (no version prefix)
+        trial_slug = build.trial_name.lower().replace(' ', '-').replace("'", "")
+        boss_slug = build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and')
+        filename = f"{trial_slug}-{boss_slug}-{build.build_slug}.html"
         filepath = self.output_dir / filename
         
         # Write file
@@ -152,18 +154,31 @@ class PageGenerator:
     
     def generate_home_page(
         self,
-        builds_by_trial: Dict[str, Dict[str, Dict[str, Any]]]
+        builds_by_trial: Dict[str, Dict[str, Dict[str, Any]]],
+        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None,
+        cache_stats: Optional[Dict[str, Any]] = None
     ) -> str:
         """
         Generate the home page listing all trials.
         
         Args:
             builds_by_trial: Dictionary of {trial_name: {boss_name: {'builds': [builds], 'total_reports': int}}}
+            trials_metadata: Optional metadata about trials including cache stats
+            cache_stats: Optional global cache statistics (hits, misses, etc.) - deprecated, use per-trial stats
             
         Returns:
             Path to generated HTML file
         """
         logger.info("Generating home page")
+        
+        # Load trial data to get trial IDs
+        import json
+        trials_file = self.output_dir.parent / 'data' / 'trials.json'
+        with open(trials_file, 'r') as f:
+            trial_data = json.load(f)
+        
+        # Create a mapping of trial name to ID
+        trial_id_map = {trial['name']: trial['id'] for trial in trial_data['trials']}
         
         # Prepare trial data with top build for each trial
         trials = []
@@ -182,14 +197,23 @@ class PageGenerator:
                 top_build = None
             
             trial_slug = trial_name.lower().replace(' ', '-')
+            trial_id = trial_id_map.get(trial_name, 0)  # Default to 0 if not found
+            
+            # Get cache stats from trials_metadata
+            trial_cache_stats = None
+            if trials_metadata and trial_name in trials_metadata:
+                trial_cache_stats = trials_metadata[trial_name].get('cache_stats')
+            
             trials.append({
                 'name': trial_name,
                 'slug': trial_slug,
-                'top_build': top_build
+                'top_build': top_build,
+                'id': trial_id,
+                'cache_stats': trial_cache_stats
             })
         
-        # Sort trials alphabetically
-        trials.sort(key=lambda t: t['name'])
+        # Sort trials by trial ID in descending order (newest trials first)
+        trials.sort(key=lambda t: t['id'], reverse=True)
         
         # Load template
         template = self.env.get_template('home.html')
@@ -197,7 +221,8 @@ class PageGenerator:
         # Render template
         context = {
             'trials': trials,
-            'generated_date': datetime.now().strftime('%Y-%m-%d')
+            'generated_date': datetime.now().strftime('%Y-%m-%d'),
+            'cache_stats': cache_stats
         }
         html = template.render(**context)
         
@@ -225,12 +250,19 @@ class PageGenerator:
         """
         logger.info(f"Generating trial page for {trial_name}")
         
-        # Sort builds for each boss by popularity (count) then DPS
+        # Sort builds for each boss by role, then popularity (count) then DPS
         sorted_bosses = {}
         for boss_name, builds in bosses.items():
+            # Define role order: DPS first, then Healer, then Tank
+            role_order = {'dps': 0, 'healer': 1, 'tank': 2}
+            
             sorted_builds = sorted(
                 builds,
-                key=lambda b: (-b.count, -(b.best_player.dps if b.best_player else 0))
+                key=lambda b: (
+                    role_order.get(b.best_player.role.lower() if b.best_player else 'dps', 3),  # Role order (unknown roles last)
+                    -b.count,  # Popularity (descending)
+                    -(b.best_player.dps if b.best_player else 0)  # DPS (descending)
+                )
             )
             sorted_bosses[boss_name] = sorted_builds
         
@@ -257,7 +289,8 @@ class PageGenerator:
         self,
         all_builds: List[CommonBuild],
         update_version: str,
-        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None
+        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None,
+        cache_stats: Optional[Dict[str, Any]] = None
     ) -> Dict[str, str]:
         """
         Generate all build pages and index.
@@ -266,6 +299,7 @@ class PageGenerator:
             all_builds: List of all common builds
             update_version: Game update version
             trials_metadata: Optional metadata about trials including last updated times
+            cache_stats: Optional cache statistics (hits, misses, etc.)
             
         Returns:
             Dictionary mapping build slugs to file paths
@@ -278,7 +312,7 @@ class PageGenerator:
         builds_by_trial = self._group_builds_by_trial(all_builds)
         
         # Generate home page (index.html) with trial links
-        home_path = self.generate_home_page(builds_by_trial)
+        home_path = self.generate_home_page(builds_by_trial, trials_metadata, cache_stats)
         generated_files['home'] = home_path
         
         # Generate individual trial pages
@@ -365,7 +399,9 @@ class PageGenerator:
         """Generate page title for a build."""
         display_name = build.get_display_name()
         sets = ' / '.join(build.sets) if build.sets else 'Unknown Sets'
-        return f"{display_name} - {sets} | ESO Build-O-Rama"
+        trial = build.trial_name
+        boss = build.boss_name
+        return f"{display_name} - {sets} | {trial} - {boss} | ESO Build-O-Rama"
     
     def _get_meta_description(self, build: CommonBuild) -> str:
         """Generate meta description for a build."""

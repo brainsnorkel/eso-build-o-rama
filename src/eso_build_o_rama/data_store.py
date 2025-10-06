@@ -52,7 +52,13 @@ class DataStore:
                 "last_full_update": None
             }
     
-    def save_trial_builds(self, trial_name: str, builds: List[CommonBuild], update_version: str) -> None:
+    def save_trial_builds(
+        self, 
+        trial_name: str, 
+        builds: List[CommonBuild], 
+        update_version: str,
+        cache_stats: Optional[Dict[str, Any]] = None
+    ) -> None:
         """
         Save builds for a specific trial, updating the JSON file.
         
@@ -60,6 +66,7 @@ class DataStore:
             trial_name: Name of the trial
             builds: List of CommonBuild objects to save
             update_version: Game update version (e.g., 'U48')
+            cache_stats: Optional cache statistics from the scan
         """
         # Load existing data
         data = self.load_builds_data()
@@ -71,7 +78,8 @@ class DataStore:
         data["trials"][trial_name] = {
             "builds": serialized_builds,
             "last_updated": datetime.now(timezone.utc).isoformat(),
-            "update_version": update_version
+            "update_version": update_version,
+            "cache_stats": cache_stats
         }
         
         # Update last full update timestamp
@@ -120,7 +128,8 @@ class DataStore:
             metadata[trial_name] = {
                 "last_updated": trial_data.get("last_updated"),
                 "update_version": trial_data.get("update_version"),
-                "build_count": len(trial_data.get("builds", []))
+                "build_count": len(trial_data.get("builds", [])),
+                "cache_stats": trial_data.get("cache_stats")
             }
         
         return metadata
@@ -208,6 +217,9 @@ class DataStore:
             "dps_percentage": player.dps_percentage,
             "healing": player.healing,
             "healing_percentage": player.healing_percentage,
+            "gear": [self._serialize_gear_piece(gear) for gear in player.gear],
+            "abilities_bar1": [self._serialize_ability(ability) for ability in player.abilities_bar1],
+            "abilities_bar2": [self._serialize_ability(ability) for ability in player.abilities_bar2],
             "subclasses": player.subclasses,
             "sets_equipped": player.sets_equipped,
             "mundus": player.mundus,
@@ -231,6 +243,17 @@ class DataStore:
             PlayerBuild object or None if deserialization fails
         """
         try:
+            # Deserialize gear
+            gear_data = data.get("gear", [])
+            gear = [self._deserialize_gear_piece(gear_dict) for gear_dict in gear_data]
+            
+            # Deserialize abilities
+            abilities_bar1_data = data.get("abilities_bar1", [])
+            abilities_bar1 = [self._deserialize_ability(ability_dict) for ability_dict in abilities_bar1_data]
+            
+            abilities_bar2_data = data.get("abilities_bar2", [])
+            abilities_bar2 = [self._deserialize_ability(ability_dict) for ability_dict in abilities_bar2_data]
+            
             return PlayerBuild(
                 player_name=data.get("player_name", ""),
                 character_name=data.get("character_name", ""),
@@ -242,6 +265,9 @@ class DataStore:
                 dps_percentage=data.get("dps_percentage", 0.0),
                 healing=data.get("healing", 0.0),
                 healing_percentage=data.get("healing_percentage", 0.0),
+                gear=gear,
+                abilities_bar1=abilities_bar1,
+                abilities_bar2=abilities_bar2,
                 subclasses=data.get("subclasses", []),
                 sets_equipped=data.get("sets_equipped", {}),
                 mundus=data.get("mundus", ""),
@@ -256,3 +282,63 @@ class DataStore:
         except (KeyError, TypeError, ValueError) as e:
             logger.warning(f"Error deserializing player: {e}")
             return None
+    
+    def _serialize_gear_piece(self, gear: 'GearPiece') -> Dict[str, Any]:
+        """Serialize a GearPiece object to a dictionary."""
+        from .models import GearPiece
+        return {
+            "slot": gear.slot,
+            "item_id": gear.item_id,
+            "item_name": gear.item_name,
+            "set_id": gear.set_id,
+            "set_name": gear.set_name,
+            "trait": gear.trait,
+            "trait_id": gear.trait_id,
+            "enchantment": gear.enchantment,
+            "enchant_id": gear.enchant_id,
+            "quality": gear.quality,
+            "level": gear.level,
+            "bar": gear.bar,
+            "armor_weight": gear.armor_weight
+        }
+    
+    def _deserialize_gear_piece(self, data: Dict[str, Any]) -> 'GearPiece':
+        """Deserialize a dictionary back to a GearPiece object."""
+        from .models import GearPiece
+        return GearPiece(
+            slot=data.get("slot", ""),
+            item_id=data.get("item_id"),
+            item_name=data.get("item_name", ""),
+            set_id=data.get("set_id"),
+            set_name=data.get("set_name", ""),
+            trait=data.get("trait", ""),
+            trait_id=data.get("trait_id"),
+            enchantment=data.get("enchantment", ""),
+            enchant_id=data.get("enchant_id"),
+            quality=data.get("quality", ""),
+            level=data.get("level", 0),
+            bar=data.get("bar", 1),
+            armor_weight=data.get("armor_weight", "")
+        )
+    
+    def _serialize_ability(self, ability: 'Ability') -> Dict[str, Any]:
+        """Serialize an Ability object to a dictionary."""
+        from .models import Ability
+        return {
+            "ability_name": ability.ability_name,
+            "skill_line": ability.skill_line,
+            "ability_id": ability.ability_id,
+            "ability_icon": ability.ability_icon,
+            "morph": ability.morph
+        }
+    
+    def _deserialize_ability(self, data: Dict[str, Any]) -> 'Ability':
+        """Deserialize a dictionary back to an Ability object."""
+        from .models import Ability
+        return Ability(
+            ability_name=data.get("ability_name", ""),
+            skill_line=data.get("skill_line", ""),
+            ability_id=data.get("ability_id", 0),
+            ability_icon=data.get("ability_icon", ""),
+            morph=data.get("morph", "")
+        )

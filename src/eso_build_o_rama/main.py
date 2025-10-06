@@ -18,6 +18,7 @@ from .trial_scanner import TrialScanner
 from .page_generator import PageGenerator
 from .models import CommonBuild
 from .data_store import DataStore
+from .cache_manager import CacheManager
 
 # Configure logging
 logging.basicConfig(
@@ -31,9 +32,22 @@ logger = logging.getLogger(__name__)
 class ESOBuildORM:
     """Main application orchestrator."""
     
-    def __init__(self):
-        """Initialize the application."""
-        self.scanner = TrialScanner()
+    def __init__(self, use_cache: bool = True, clear_cache: bool = False):
+        """
+        Initialize the application.
+        
+        Args:
+            use_cache: Whether to use API response caching (default: True)
+            clear_cache: Whether to clear existing cache on startup (default: False)
+        """
+        self.cache_manager = CacheManager() if use_cache else None
+        
+        # Clear cache if requested
+        if clear_cache and self.cache_manager:
+            self.cache_manager.clear_cache()
+            logger.info("Cache cleared on startup")
+        
+        self.scanner = TrialScanner(cache_manager=self.cache_manager)
         self.page_generator = PageGenerator()
         self.data_store = DataStore()
         self.trials_file = Path(__file__).parent.parent.parent / "data" / "trials.json"
@@ -78,17 +92,22 @@ class ESOBuildORM:
             logger.info(f"\nFound {len(publishable_builds)} publishable builds")
             
             # Save trial data incrementally
+            # Get cache statistics if available
+            cache_stats = None
+            if hasattr(self, 'cache_manager'):
+                cache_stats = self.cache_manager.get_cache_stats()
+            
             if trial_name or trial_id:
                 # Single trial mode - save this trial's data
                 update_version = self._get_most_common_version(all_reports)
                 for trial_name_scanned, trial_builds in self._group_builds_by_trial(publishable_builds).items():
-                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version)
+                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version, cache_stats)
                     logger.info(f"Saved {len(trial_builds)} builds for trial '{trial_name_scanned}'")
             else:
                 # Full scan mode - save all trials
                 update_version = self._get_most_common_version(all_reports)
                 for trial_name_scanned, trial_builds in self._group_builds_by_trial(publishable_builds).items():
-                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version)
+                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version, cache_stats)
                     logger.info(f"Saved {len(trial_builds)} builds for trial '{trial_name_scanned}'")
             
             # Generate pages using all saved builds
@@ -103,7 +122,8 @@ class ESOBuildORM:
             generated_files = self.page_generator.generate_all_pages(
                 all_saved_builds,
                 update_version,
-                trials_metadata
+                trials_metadata,
+                cache_stats
             )
             
             logger.info(f"Generated {len(generated_files)} HTML files")
@@ -247,9 +267,35 @@ async def main():
     parser.add_argument('--trial-id', type=int, help='Specific trial ID to scan')
     parser.add_argument('--test', action='store_true', help='Test mode - scan only first trial')
     
+    # Cache control arguments
+    parser.add_argument('--use-cache', action='store_true', default=True, 
+                       help='Use cached API responses when available (default: True)')
+    parser.add_argument('--no-cache', action='store_true', 
+                       help='Disable caching (fetch all data from API)')
+    parser.add_argument('--clear-cache', action='store_true', 
+                       help='Clear existing cache before running')
+    parser.add_argument('--cache-stats', action='store_true', 
+                       help='Show cache statistics and exit')
+    
     args = parser.parse_args()
     
-    app = ESOBuildORM()
+    # Handle cache stats
+    if args.cache_stats:
+        cache_manager = CacheManager()
+        stats = cache_manager.get_cache_stats()
+        print(f"Cache Statistics:")
+        print(f"  Cache directory: {stats['cache_dir']}")
+        print(f"  Total files: {stats['total_files']}")
+        print(f"  Total size: {stats['total_size_bytes'] / 1024 / 1024:.2f} MB")
+        print(f"  Reports: {stats['by_type']['reports']['count']} files ({stats['by_type']['reports']['size_bytes'] / 1024:.1f} KB)")
+        print(f"  Rankings: {stats['by_type']['rankings']['count']} files ({stats['by_type']['rankings']['size_bytes'] / 1024:.1f} KB)")
+        print(f"  Other: {stats['by_type']['other']['count']} files ({stats['by_type']['other']['size_bytes'] / 1024:.1f} KB)")
+        return
+    
+    # Determine cache settings
+    use_cache = args.use_cache and not args.no_cache
+    
+    app = ESOBuildORM(use_cache=use_cache, clear_cache=args.clear_cache)
     
     # Determine scan mode
     if args.trial_id:

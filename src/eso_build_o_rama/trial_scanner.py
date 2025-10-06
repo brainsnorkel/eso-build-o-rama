@@ -19,9 +19,15 @@ logger = logging.getLogger(__name__)
 class TrialScanner:
     """Scans ESO Logs trials to identify top-performing builds."""
     
-    def __init__(self, api_client: Optional[ESOLogsAPIClient] = None):
-        """Initialize the trial scanner."""
-        self.api_client = api_client or ESOLogsAPIClient()
+    def __init__(self, api_client: Optional[ESOLogsAPIClient] = None, cache_manager=None):
+        """
+        Initialize the trial scanner.
+        
+        Args:
+            api_client: Optional API client instance
+            cache_manager: Optional cache manager instance
+        """
+        self.api_client = api_client or ESOLogsAPIClient(cache_manager=cache_manager)
         self.data_parser = DataParser()
         self.build_analyzer = BuildAnalyzer()
     

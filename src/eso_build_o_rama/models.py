@@ -30,10 +30,13 @@ class GearPiece:
     set_id: Optional[int] = None
     set_name: str = ""
     trait: str = ""
+    trait_id: Optional[int] = None  # Store the original trait ID from API
     enchantment: str = ""
+    enchant_id: Optional[int] = None  # Store the original enchant ID from API
     quality: str = ""
     level: int = 0
     bar: int = 1  # Which bar this piece is equipped on (1 or 2)
+    armor_weight: str = ""  # H, M, L for armor pieces (slots 0-6)
 
 
 @dataclass

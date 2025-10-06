@@ -547,15 +547,32 @@ class ESOLogsAPIClient:
             logger.error(f"Error fetching table data: {e}")
             return {}
     
+    # Mundus stone ability IDs (from ESO game data)
+    MUNDUS_ABILITY_IDS = {
+        13940: "The Warrior",
+        13943: "The Mage",
+        13974: "The Serpent",
+        13975: "The Thief",
+        13976: "The Lady",
+        13977: "The Steed",
+        13978: "The Lord",
+        13979: "The Apprentice",
+        13980: "The Ritual",
+        13981: "The Lover",
+        13982: "The Atronach",
+        13984: "The Shadow",
+        13985: "The Tower"
+    }
+    
     async def get_player_buffs(
-        self,
-        report_code: str,
+        self, 
+        report_code: str, 
         fight_ids: List[int],
         player_name: str,
         start_time: float,
         end_time: float
     ) -> Optional[str]:
-        """Get mundus stone from player's Boon: buffs."""
+        """Get mundus stone from player's buff uptime by checking mundus ability IDs."""
         
         # Create cache key
         cache_key = f"buffs_{report_code}_{player_name}_{start_time}_{end_time}"
@@ -567,65 +584,67 @@ class ESOLogsAPIClient:
                 logger.info(f"Using cached buff data for {player_name}")
                 return cached_data.get("data")
         
-        # GraphQL query to get buff events for the player
+        # GraphQL query to get Buffs table which shows uptime %
+        # Mundus stones should have 100% uptime
         query = """
-        query GetPlayerBuffs($code: String!, $fightIDs: [Int!]!, $startTime: Float!, $endTime: Float!) {
+        query GetPlayerBuffs($code: String!, $startTime: Float!, $endTime: Float!) {
             reportData {
                 report(code: $code) {
-                    events(
-                        fightIDs: $fightIDs
+                    table(
                         startTime: $startTime
                         endTime: $endTime
-                        filterExpression: "type = 'applybuff' and source.name = '%s'"
-                    ) {
-                        data {
-                            ability {
-                                name
-                            }
-                            source {
-                                name
-                            }
-                        }
-                    }
+                        dataType: Buffs
+                    )
                 }
             }
         }
-        """ % player_name
+        """
         
         try:
             result = await self._retry_on_rate_limit(
-                self.client.execute,
-                query=query,
-                variables={
-                    "code": report_code,
-                    "fightIDs": fight_ids,
-                    "startTime": start_time,
-                    "endTime": end_time
-                }
+                self.client.get_report_table,
+                code=report_code,
+                start_time=start_time,
+                end_time=end_time,
+                data_type="Buffs",
+                hostility_type="Friendlies"
             )
             
+            # Parse Buffs table to find mundus (100% uptime buffs matching mundus IDs)
             if result and hasattr(result, 'report_data') and hasattr(result.report_data, 'report'):
-                events_data = getattr(result.report_data.report, 'events', None)
-                if events_data and hasattr(events_data, 'data'):
-                    events = events_data.data
+                table = result.report_data.report.table
+                
+                if isinstance(table, dict) and 'data' in table:
+                    table_data = table['data']
+                    auras = table_data.get('auras', [])
                     
-                    # Find the first Boon: buff
-                    for event in events:
-                        ability = getattr(event, 'ability', None)
-                        if ability and hasattr(ability, 'name'):
-                            ability_name = ability.name
-                            if ability_name.startswith('Boon: '):
-                                # Extract the mundus stone name after "Boon: "
-                                mundus_name = ability_name.replace('Boon: ', '', 1)
-                                logger.info(f"Found mundus stone for {player_name}: {mundus_name}")
+                    logger.info(f"Checking {len(auras)} auras for {player_name}")
+                    
+                    # Look through auras for mundus buffs with high uptime
+                    for aura in auras:
+                        if isinstance(aura, dict):
+                            ability_id = aura.get('guid')  # Ability ID
+                            name = aura.get('name', '')
+                            total_uptime = aura.get('totalUptime', 0)
+                            
+                            # Check if this is a mundus buff
+                            if ability_id in self.MUNDUS_ABILITY_IDS:
+                                # Found a mundus buff
+                                mundus_name = self.MUNDUS_ABILITY_IDS[ability_id]
+                                uptime_pct = total_uptime / 1000 if total_uptime else 0  # Convert ms to %?
+                                logger.info(f"✓ Found mundus: {mundus_name} (ID: {ability_id}, uptime: {total_uptime}ms) for {player_name}")
                                 
                                 # Save to cache
                                 if self.cache_manager:
                                     self.cache_manager.save_cached_response(cache_key, mundus_name)
                                 
                                 return mundus_name
-            
-            logger.debug(f"No Boon buffs found for {player_name}")
+                    
+                    logger.warning(f"No mundus buffs found in {len(auras)} auras for {player_name}")
+                else:
+                    logger.warning(f"No auras data in Buffs table for {player_name}")
+            else:
+                logger.warning(f"Failed to get Buffs table for {player_name}")
             
             # Save empty result to cache
             if self.cache_manager:

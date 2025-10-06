@@ -88,6 +88,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
+      - name: Download existing builds.json
+        run: |
+          mkdir -p output
+          curl -s https://esobuild.com/builds.json -o output/builds.json || echo '{"trials": {}}' > output/builds.json
+      
       - name: Run build analysis for trial
         env:
           ESOLOGS_ID: ${{ secrets.ESOLOGS_ID }}

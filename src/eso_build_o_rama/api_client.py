@@ -547,6 +547,96 @@ class ESOLogsAPIClient:
             logger.error(f"Error fetching table data: {e}")
             return {}
     
+    async def get_player_buffs(
+        self,
+        report_code: str,
+        fight_ids: List[int],
+        player_name: str,
+        start_time: float,
+        end_time: float
+    ) -> Optional[str]:
+        """Get mundus stone from player's Boon: buffs."""
+        
+        # Create cache key
+        cache_key = f"buffs_{report_code}_{player_name}_{start_time}_{end_time}"
+        
+        # Try to get from cache first
+        if self.cache_manager:
+            cached_data = self.cache_manager.get_cached_response(cache_key)
+            if cached_data:
+                logger.info(f"Using cached buff data for {player_name}")
+                return cached_data.get("data")
+        
+        # GraphQL query to get buff events for the player
+        query = """
+        query GetPlayerBuffs($code: String!, $fightIDs: [Int!]!, $startTime: Float!, $endTime: Float!) {
+            reportData {
+                report(code: $code) {
+                    events(
+                        fightIDs: $fightIDs
+                        startTime: $startTime
+                        endTime: $endTime
+                        filterExpression: "type = 'applybuff' and source.name = '%s'"
+                    ) {
+                        data {
+                            ability {
+                                name
+                            }
+                            source {
+                                name
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        """ % player_name
+        
+        try:
+            result = await self._retry_on_rate_limit(
+                self.client.execute,
+                query=query,
+                variables={
+                    "code": report_code,
+                    "fightIDs": fight_ids,
+                    "startTime": start_time,
+                    "endTime": end_time
+                }
+            )
+            
+            if result and hasattr(result, 'report_data') and hasattr(result.report_data, 'report'):
+                events_data = getattr(result.report_data.report, 'events', None)
+                if events_data and hasattr(events_data, 'data'):
+                    events = events_data.data
+                    
+                    # Find the first Boon: buff
+                    for event in events:
+                        ability = getattr(event, 'ability', None)
+                        if ability and hasattr(ability, 'name'):
+                            ability_name = ability.name
+                            if ability_name.startswith('Boon: '):
+                                # Extract the mundus stone name after "Boon: "
+                                mundus_name = ability_name.replace('Boon: ', '', 1)
+                                logger.info(f"Found mundus stone for {player_name}: {mundus_name}")
+                                
+                                # Save to cache
+                                if self.cache_manager:
+                                    self.cache_manager.save_cached_response(cache_key, mundus_name)
+                                
+                                return mundus_name
+            
+            logger.debug(f"No Boon buffs found for {player_name}")
+            
+            # Save empty result to cache
+            if self.cache_manager:
+                self.cache_manager.save_cached_response(cache_key, None)
+            
+            return None
+            
+        except Exception as e:
+            logger.warning(f"Failed to get buffs for {player_name}: {e}")
+            return None
+    
     async def close(self):
         """Close the client connection."""
         if hasattr(self.client, 'close'):

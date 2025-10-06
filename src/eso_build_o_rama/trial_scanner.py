@@ -168,6 +168,24 @@ class TrialScanner:
         if not valid_players:
             return None
         
+        # Fetch mundus data for each player
+        logger.info(f"Fetching mundus data for {len(valid_players)} players")
+        for player in valid_players:
+            try:
+                mundus_stone = await self.api_client.get_player_buffs(
+                    report_code=report_code,
+                    fight_ids=[fight_id],
+                    player_name=player.player_name,
+                    start_time=fight_info.get('startTime'),
+                    end_time=fight_info.get('endTime')
+                )
+                player.mundus = mundus_stone or ""
+                if mundus_stone:
+                    logger.debug(f"Found mundus stone for {player.player_name}: {mundus_stone}")
+            except Exception as e:
+                logger.warning(f"Failed to get mundus data for {player.player_name}: {e}")
+                player.mundus = ""
+        
         # Create trial report
         boss_name = fight_info.get('name', 'Unknown Boss')
         trial_report = self.data_parser.create_trial_report(

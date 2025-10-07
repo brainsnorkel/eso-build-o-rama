@@ -46,12 +46,12 @@ class ESOBuildORM:
                 check=True
             )
             branch = result.stdout.strip()
-            if branch == 'develop':
-                return 'output-dev'
-            return 'output'
+            if branch == 'main':
+                return 'output'
+            return 'output-dev'
         except Exception:
-            # Default to 'output' if git command fails
-            return 'output'
+            # Default to 'output-dev' if git command fails (safer for development)
+            return 'output-dev'
     
     def __init__(self, use_cache: bool = True, clear_cache: bool = False):
         """

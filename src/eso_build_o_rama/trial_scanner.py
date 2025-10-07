@@ -53,9 +53,10 @@ class TrialScanner:
         for fight in fights:
             fight_name = fight.get('name', '')
             difficulty = fight.get('difficulty')
+            kill = fight.get('kill', False)
             
-            # Match by name and prefer fights with difficulty set (real boss attempts)
-            if fight_name == encounter_name and difficulty:
+            # Match by name, has difficulty set, and is a successful kill (not a wipe)
+            if fight_name == encounter_name and difficulty and kill:
                 duration = fight.get('endTime', 0) - fight.get('startTime', 0)
                 matching_fights.append({
                     'id': fight.get('id'),
@@ -64,12 +65,12 @@ class TrialScanner:
                 })
         
         if not matching_fights:
-            logger.debug(f"No fights with difficulty found for '{encounter_name}'")
+            logger.debug(f"No successful kills found for '{encounter_name}'")
             return None
         
-        # Return the shortest fight (fastest clear)
+        # Return the shortest fight (fastest successful kill)
         shortest = min(matching_fights, key=lambda x: x['duration'])
-        logger.info(f"Found {len(matching_fights)} attempts for {encounter_name}, using fastest (fight {shortest['id']}, {shortest['duration']/1000:.1f}s)")
+        logger.info(f"Found {len(matching_fights)} successful kills for {encounter_name}, using fastest (fight {shortest['id']}, {shortest['duration']/1000:.1f}s)")
         return shortest['fight']
     
     async def _process_single_fight(

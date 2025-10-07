@@ -339,7 +339,6 @@ class ESOLogsAPIClient:
               title
               startTime
               endTime
-              gameVersion
               zone {
                 id
                 name
@@ -372,43 +371,46 @@ class ESOLogsAPIClient:
         
         logger.info(f"Fetching report {report_code}")
         try:
+            # Use custom GraphQL query to ensure we get the kill field
             result = await self._retry_on_rate_limit(
-                self.client.get_report_by_code,
-                report_code
+                self.client.execute,
+                query=query,
+                variables=variables
             )
             
-            if result and hasattr(result, 'report_data') and hasattr(result.report_data, 'report'):
-                report_obj = result.report_data.report
-                
-                report = {
-                    "code": getattr(report_obj, 'code', report_code),
-                    "title": getattr(report_obj, 'title', 'Unknown Title'),
-                    "startTime": getattr(report_obj, 'start_time', 0),
-                    "endTime": getattr(report_obj, 'end_time', 0),
-                    "gameVersion": getattr(report_obj, 'game_version', None),
-                    "fights": [
-                        {
-                            "id": getattr(fight, 'id', 0),
-                            "name": getattr(fight, 'name', 'Unknown Fight'),
-                            "startTime": getattr(fight, 'start_time', 0),
-                            "endTime": getattr(fight, 'end_time', 0),
-                            "difficulty": getattr(fight, 'difficulty', 0),
-                            "kill": getattr(fight, 'kill', False)
-                        }
-                        for fight in getattr(report_obj, 'fights', [])
-                    ]
-                }
-                
-                logger.info(f"Fetched report: {report.get('title', 'Unknown')} with {len(report['fights'])} fights")
-                
-                # Save to cache
-                if self.cache_manager:
-                    self.cache_manager.save_cached_response(cache_key, report)
-                
-                return report
+            # Parse the JSON response from execute()
+            if result.status_code != 200:
+                logger.error(f"API request failed with status {result.status_code}")
+                return None
             
-            logger.warning(f"Report {report_code} not found")
-            return None
+            data = result.json()
+            
+            if 'errors' in data:
+                logger.error(f"GraphQL errors: {data['errors']}")
+                return None
+            
+            report_data = data['data']['reportData']['report']
+            
+            if not report_data:
+                logger.warning(f"Report {report_code} not found")
+                return None
+            
+            report = {
+                "code": report_data.get('code', report_code),
+                "title": report_data.get('title', 'Unknown Title'),
+                "startTime": report_data.get('startTime', 0),
+                "endTime": report_data.get('endTime', 0),
+                "gameVersion": None,  # Not available in ESO Logs API
+                "fights": report_data.get('fights', [])
+            }
+            
+            logger.info(f"Fetched report: {report.get('title', 'Unknown')} with {len(report['fights'])} fights")
+            
+            # Save to cache
+            if self.cache_manager:
+                self.cache_manager.save_cached_response(cache_key, report)
+            
+            return report
             
         except Exception as e:
             logger.error(f"Error fetching report {report_code}: {e}")

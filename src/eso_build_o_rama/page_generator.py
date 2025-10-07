@@ -150,7 +150,9 @@ class PageGenerator:
             if all_builds:
                 top_build = max(all_builds, key=lambda b: b.best_player.dps if b.best_player else 0)
             else:
-                top_build = None
+                # Skip trials with no common builds - don't add them to the home page
+                logger.info(f"Skipping {trial_name} from home page - no common builds found")
+                continue
             
             trial_slug = trial_name.lower().replace(' ', '-')
             trial_id = trial_id_map.get(trial_name, 0)  # Default to 0 if not found

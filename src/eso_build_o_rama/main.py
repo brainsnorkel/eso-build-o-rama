@@ -175,6 +175,10 @@ class ESOBuildORM:
             # Print summary
             self._print_summary(publishable_builds, generated_files)
             
+            # Log cache performance
+            if self.cache_manager:
+                self.cache_manager.log_cache_performance()
+            
             logger.info("\n" + "="*60)
             logger.info("ESO Build-O-Rama - Complete!")
             logger.info("="*60)
@@ -379,9 +383,17 @@ async def main():
         print(f"  Cache directory: {stats['cache_dir']}")
         print(f"  Total files: {stats['total_files']}")
         print(f"  Total size: {stats['total_size_bytes'] / 1024 / 1024:.2f} MB")
+        print(f"\nBy Type:")
         print(f"  Reports: {stats['by_type']['reports']['count']} files ({stats['by_type']['reports']['size_bytes'] / 1024:.1f} KB)")
         print(f"  Rankings: {stats['by_type']['rankings']['count']} files ({stats['by_type']['rankings']['size_bytes'] / 1024:.1f} KB)")
+        print(f"  Buffs: {stats['by_type']['buffs']['count']} files ({stats['by_type']['buffs']['size_bytes'] / 1024:.1f} KB)")
+        print(f"  Tables: {stats['by_type']['tables']['count']} files ({stats['by_type']['tables']['size_bytes'] / 1024:.1f} KB)")
         print(f"  Other: {stats['by_type']['other']['count']} files ({stats['by_type']['other']['size_bytes'] / 1024:.1f} KB)")
+        print(f"\nSession Statistics:")
+        print(f"  Cache hits: {stats['cache_hits']}")
+        print(f"  Cache misses: {stats['cache_misses']}")
+        if stats['cache_hits'] + stats['cache_misses'] > 0:
+            print(f"  Hit rate: {stats['hit_rate']*100:.1f}%")
         return
     
     # Determine cache settings

@@ -42,6 +42,8 @@ class CacheManager:
         # Create subdirectories
         (self.cache_dir / "reports").mkdir(exist_ok=True)
         (self.cache_dir / "rankings").mkdir(exist_ok=True)
+        (self.cache_dir / "buffs").mkdir(exist_ok=True)
+        (self.cache_dir / "tables").mkdir(exist_ok=True)
         
         # Cache hit/miss counters
         self.cache_hits = 0
@@ -52,7 +54,7 @@ class CacheManager:
         Get the file path for a cache key.
         
         Args:
-            cache_key: The cache key (e.g., "report_abc123", "rankings_1_2_10")
+            cache_key: The cache key (e.g., "report_abc123", "rankings_1_2_10", "buffs_...", "table_...")
             
         Returns:
             Path to the cache file
@@ -64,11 +66,17 @@ class CacheManager:
         elif cache_key.startswith("rankings_"):
             subdir = "rankings"
             filename = f"{cache_key[9:]}.json"  # Remove "rankings_" prefix
+        elif cache_key.startswith("buffs_"):
+            subdir = "buffs"
+            filename = f"{cache_key[6:]}.json"  # Remove "buffs_" prefix
+        elif cache_key.startswith("table_"):
+            subdir = "tables"
+            filename = f"{cache_key[6:]}.json"  # Remove "table_" prefix
         elif cache_key == "zones":
             subdir = ""
             filename = "zones.json"
         else:
-            # Generic cache file
+            # Generic cache file (legacy support for files in root)
             subdir = ""
             filename = f"{cache_key}.json"
         
@@ -187,6 +195,8 @@ class CacheManager:
                 self.cache_dir.mkdir(exist_ok=True)
                 (self.cache_dir / "reports").mkdir(exist_ok=True)
                 (self.cache_dir / "rankings").mkdir(exist_ok=True)
+                (self.cache_dir / "buffs").mkdir(exist_ok=True)
+                (self.cache_dir / "tables").mkdir(exist_ok=True)
                 logger.info("Cleared all cached responses")
         except OSError as e:
             logger.error(f"Failed to clear cache: {e}")
@@ -204,9 +214,12 @@ class CacheManager:
             "total_size_bytes": 0,
             "cache_hits": self.cache_hits,
             "cache_misses": self.cache_misses,
+            "hit_rate": 0.0,
             "by_type": {
                 "reports": {"count": 0, "size_bytes": 0},
                 "rankings": {"count": 0, "size_bytes": 0},
+                "buffs": {"count": 0, "size_bytes": 0},
+                "tables": {"count": 0, "size_bytes": 0},
                 "other": {"count": 0, "size_bytes": 0}
             }
         }
@@ -219,16 +232,45 @@ class CacheManager:
                     stats["total_size_bytes"] += file_size
                     
                     # Categorize by subdirectory
-                    if "reports" in str(cache_file):
+                    file_str = str(cache_file)
+                    if "reports" in file_str:
                         stats["by_type"]["reports"]["count"] += 1
                         stats["by_type"]["reports"]["size_bytes"] += file_size
-                    elif "rankings" in str(cache_file):
+                    elif "rankings" in file_str:
                         stats["by_type"]["rankings"]["count"] += 1
                         stats["by_type"]["rankings"]["size_bytes"] += file_size
+                    elif "buffs" in file_str:
+                        stats["by_type"]["buffs"]["count"] += 1
+                        stats["by_type"]["buffs"]["size_bytes"] += file_size
+                    elif "tables" in file_str:
+                        stats["by_type"]["tables"]["count"] += 1
+                        stats["by_type"]["tables"]["size_bytes"] += file_size
                     else:
                         stats["by_type"]["other"]["count"] += 1
                         stats["by_type"]["other"]["size_bytes"] += file_size
         except OSError as e:
             logger.error(f"Failed to get cache stats: {e}")
         
+        # Calculate hit rate
+        total_requests = stats["cache_hits"] + stats["cache_misses"]
+        if total_requests > 0:
+            stats["hit_rate"] = stats["cache_hits"] / total_requests
+        
         return stats
+    
+    def log_cache_performance(self) -> None:
+        """Log cache performance statistics."""
+        total_requests = self.cache_hits + self.cache_misses
+        if total_requests == 0:
+            logger.info("No cache requests during this session")
+            return
+        
+        hit_rate = (self.cache_hits / total_requests) * 100
+        logger.info("="*60)
+        logger.info("CACHE PERFORMANCE")
+        logger.info("="*60)
+        logger.info(f"Total requests: {total_requests}")
+        logger.info(f"Cache hits: {self.cache_hits} ({hit_rate:.1f}%)")
+        logger.info(f"Cache misses: {self.cache_misses} ({100-hit_rate:.1f}%)")
+        logger.info(f"API calls saved: {self.cache_hits}")
+        logger.info("="*60)

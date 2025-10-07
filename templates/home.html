@@ -26,7 +26,7 @@
                 {% if trial.top_build %}
                 <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
                     <div style="font-size: 0.9em; color: #a8edea; margin-bottom: 5px;">Highest DPS Build:</div>
-                    <div style="font-weight: 600; color: #fff;">{{ trial.top_build.get_display_name() }}</div>
+                    <div style="font-weight: 600; color: #fff;">{{ trial.top_build.get_display_name(abbreviated=True) }}</div>
                     <div style="font-size: 0.85em; color: #a8edea; margin-top: 5px;">{{ trial.top_build.boss_name }}</div>
                     <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.9em;">
                         <span style="color: #a8edea;">{{ trial.top_build.best_player.player_name }} - {{ trial.top_build.best_player.character_name }}</span>

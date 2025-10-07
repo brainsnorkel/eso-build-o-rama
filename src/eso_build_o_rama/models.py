@@ -133,32 +133,66 @@ class CommonBuild:
     fight_id: int = 0
     update_version: str = ""
     
-    def get_display_name(self) -> str:
-        """Get a human-readable name for the build."""
-        subclass_names = {
-            "animal": "Animal Companions",
-            "ardent": "Ardent Flame",
-            "ass": "Assassination",
-            "bone": "Bone Tyrant",
-            "curative": "Curative Runeforms",
-            "daedric": "Daedric Summoning",
-            "dark": "Dark Magic",
-            "dawn": "Dawn's Wrath",
-            "draconic": "Draconic Power",
-            "earthen": "Earthen Heart",
-            "grave": "Grave Lord",
-            "green": "Green Balance",
-            "herald": "Herald of the Tome",
-            "living": "Living Death",
-            "resto": "Restoring Light",
-            "shadow": "Shadow",
-            "siphon": "Siphoning",
-            "soldier": "Soldier of Apocrypha",
-            "spear": "Aedric Spear",
-            "storm": "Storm Calling",
-            "winter": "Winter's Embrace",
-            "x": "Unknown"
-        }
+    def get_display_name(self, abbreviated: bool = False) -> str:
+        """
+        Get a human-readable name for the build.
+        
+        Args:
+            abbreviated: If True, show only first word of each skill line (e.g., "Ardent" instead of "Ardent Flame")
+                        If False, show full skill line names
+        """
+        if abbreviated:
+            # For tables - show just first word
+            subclass_names = {
+                "animal": "Animal",
+                "ardent": "Ardent",
+                "ass": "Assassination",
+                "bone": "Bone",
+                "curative": "Curative",
+                "daedric": "Daedric",
+                "dark": "Dark",
+                "dawn": "Dawn's",
+                "draconic": "Draconic",
+                "earthen": "Earthen",
+                "grave": "Grave",
+                "green": "Green",
+                "herald": "Herald",
+                "living": "Living",
+                "resto": "Restoring",
+                "shadow": "Shadow",
+                "siphon": "Siphoning",
+                "soldier": "Soldier",
+                "spear": "Aedric",
+                "storm": "Storm",
+                "winter": "Winter's",
+                "x": "Unknown"
+            }
+        else:
+            # For build pages - show full names
+            subclass_names = {
+                "animal": "Animal Companions",
+                "ardent": "Ardent Flame",
+                "ass": "Assassination",
+                "bone": "Bone Tyrant",
+                "curative": "Curative Runeforms",
+                "daedric": "Daedric Summoning",
+                "dark": "Dark Magic",
+                "dawn": "Dawn's Wrath",
+                "draconic": "Draconic Power",
+                "earthen": "Earthen Heart",
+                "grave": "Grave Lord",
+                "green": "Green Balance",
+                "herald": "Herald of the Tome",
+                "living": "Living Death",
+                "resto": "Restoring Light",
+                "shadow": "Shadow",
+                "siphon": "Siphoning",
+                "soldier": "Soldier of Apocrypha",
+                "spear": "Aedric Spear",
+                "storm": "Storm Calling",
+                "winter": "Winter's Embrace",
+                "x": "Unknown"
+            }
         
         full_subclasses = []
         for subclass in self.subclasses:

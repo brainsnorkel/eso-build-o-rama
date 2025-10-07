@@ -47,7 +47,7 @@
                         ❓
                     {% endif %}
                 </td>
-                <td data-label="Build"><strong>{{ build.get_display_name() }}</strong></td>
+                <td data-label="Build"><strong>{{ build.get_display_name(abbreviated=True) }}</strong></td>
                 <td data-label="Sets">
                     {% set sorted_sets = build.get_sorted_sets() %}
                     {{ sorted_sets|join(', ') if sorted_sets else 'Various' }}

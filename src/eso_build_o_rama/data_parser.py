@@ -74,55 +74,60 @@ TRAIT_NAMES = {
 }
 
 # Enchantment type mapping (from ESO Logs API)
-# Based on authoritative sources: UESP, ESO Wiki, and ESO Logs API documentation
+# IDs 0-36: Authoritative list from @sheumais (https://github.com/sheumais/logs)
+# IDs 37+: Extended ESO Logs API IDs from empirical observation
 ENCHANT_NAMES = {
-    # Weapon enchants
-    2: "Absorb Magicka",         
-    3: "Absorb Stamina",         
+    # Base enchants (IDs 0-36 from @sheumais's authoritative list)
+    0: "None",
+    1: "Absorb Health",
+    2: "Absorb Magicka",
+    3: "Absorb Stamina",
+    4: "Befouled Weapon",
     5: "Berserker",
+    6: "Charged Weapon",
+    7: "Damage Health",
     8: "Damage Shield",
+    9: "Decrease Physical Damage",
+    10: "Decrease Spell Damage",
+    11: "Disease Resistant",
     12: "Fiery Weapon",
+    13: "Fire Resistant",
+    14: "Frost Resistant",
     15: "Frozen Weapon",
     16: "Health",
-
-    19: "Increase Physical Damage", 
+    17: "Health Regen",
+    18: "Increase Bash Damage",
+    19: "Increase Physical Damage",
+    20: "Increase Potion Effectiveness",
     21: "Increase Spell Damage",
+    22: "Magicka",
+    23: "Magicka Regen",
     24: "Poisoned Weapon",
-    25: "Prismatic Defense",
-    26: "Prismatic Defense",      
-    28: "Reduce Armor",        
-    29: "Reduce Block and Bash",     
-    
-    30: "Reduce Feat Cost",     
-    31: "Reduce Potion Cooldown",   
+    25: "Poison Resistant",
+    26: "Prismatic Defense",
+    27: "Prismatic Onslaught",
+    28: "Reduce Armor",
+    29: "Reduce Block and Bash",
+    30: "Reduce Feat Cost",
+    31: "Reduce Potion Cooldown",
     32: "Reduce Power",
     33: "Reduce Spell Cost",
+    34: "Shock Resistant",
+    35: "Stamina",
+    36: "Stamina Regen",
     
-    
-    # Primary stat enchants (ESO Logs uses shorter names)
-    35: "Stamina",              # Max Health / Glyph of Health (Oko essence rune)
-    22: "Magicka",             # Max Magicka / Glyph of Magicka (Makko essence rune)  
-    37: "Health",             # Max Stamina / Glyph of Stamina (Deni essence rune)
-    
-    # Recovery enchants
-    38: "Magicka Recovery",    # Glyph of Magicka Recovery (Makkoma essence rune)
-    39: "Stamina Recovery",    # Glyph of Stamina Recovery (Denima essence rune)
-    40: "Health Recovery",     # Glyph of Health Recovery (Okoma essence rune)
-    
-    # Damage enchants (actual names from ESO Logs)
-    41: "Increase Magical Harm", # Spell Damage / Glyph of Increase Magical Harm (Makderi essence rune)
-    
-    # Critical enchants
-    43: "Spell Critical",      # Glyph of Spell Critical
-    44: "Weapon Critical",     # Glyph of Weapon Critical
-    
-    # Resistance enchants
-    45: "Spell Resist",        # Glyph of Spell Resist
-    46: "Physical Resist",     # Glyph of Physical Resist
-    
-    # Cost reduction enchants
-    47: "Reduce Spell Cost",   # Glyph of Reduce Spell Cost
-    48: "Reduce Feat Cost"     # Glyph of Reduce Feat Cost
+    # Extended ESO Logs API IDs (observed in actual game data)
+    37: "Health",                   # Alternate Health enchant ID
+    38: "Magicka Recovery",         # Glyph of Magicka Recovery
+    39: "Stamina Recovery",         # Glyph of Stamina Recovery
+    40: "Health Recovery",          # Glyph of Health Recovery
+    41: "Increase Magical Harm",    # Spell Damage enchant
+    43: "Spell Critical",           # Glyph of Spell Critical
+    44: "Weapon Critical",          # Glyph of Weapon Critical
+    45: "Spell Resist",             # Glyph of Spell Resist
+    46: "Physical Resist",          # Glyph of Physical Resist
+    47: "Reduce Spell Cost",        # Glyph of Reduce Spell Cost (alternate ID)
+    48: "Reduce Feat Cost",         # Glyph of Reduce Feat Cost (alternate ID)
 }
 
 

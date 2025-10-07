@@ -38,46 +38,39 @@ ARMOR_WEIGHT_NAMES = {
     3: "H",  # Heavy Armor
 }
 
-# Trait name mapping (from ESO Logs API)
-# Trait names from @sheumais's authoritative list (https://github.com/sheumais/logs)
-# IDs are from ESO Logs API observation and may be context-specific (armor/jewelry/weapon)
-# Note: Some IDs map to same trait name but different slot types (e.g., Infused, Training, Nirnhoned)
+# Trait ID mapping (from ESO Logs API)
+# Based on authoritative sources: UESP, ESO Wiki, and ESO Logs API documentation
 TRAIT_NAMES = {
-    # Armor traits (IDs 1-10)
+    # Armor traits
     1: "Divines",           # Increases Mundus Stone effects
-    2: "Impenetrable",      # Increases Critical Resistance
-    3: "Infused",           # Increases enchantment effectiveness (armor)
+    2: "Impenetrable",           # Increases armor enchantment effect  
+    3: "Infused",      # Increases Critical Resistance
     4: "Reinforced",        # Increases Armor value
-    5: "Sturdy",            # Reduces block cost
-    6: "Training",          # Increases experience gained (armor)
-    7: "Well-Fitted",       # Reduces sprinting and roll dodge cost
-    8: "Nirnhoned",         # Increases Physical and Spell Resistance (armor)
-    9: "Intricate",         # Increases inspiration gained when deconstructing (armor)
-    10: "Invigorating",     # Increases Health, Magicka, and Stamina Recovery (formerly Prosperous)
+    5: "Sturdy",           # Reduces block cost
+    6: "Training",         # Increases experience gained (armor/weapon)
+    7: "Well-Fitted",      # Reduces sprinting/roll dodge cost
+    8: "Reinforced",          # Alternate ID for Divines
     
-    # Jewelry traits (IDs 11-20)
-    11: "Arcane",           # Increases Maximum Magicka
-    12: "Healthy",          # Increases Maximum Health
-    13: "Robust",           # Increases Maximum Stamina
-    14: "Bloodthirsty",     # Increases damage against low health enemies
-    15: "Harmony",          # Increases Synergy effectiveness
-    16: "Infused",          # Increases enchantment effectiveness (jewelry)
-    17: "Protective",       # Increases Physical and Spell Resistance (jewelry)
-    18: "Swift",            # Increases movement speed
-    19: "Triune",           # Increases Health, Magicka, and Stamina
-    20: "Intricate",        # Increases inspiration gained when deconstructing (jewelry)
+    # Jewelry traits  
+    11: "Arcane",          # Increases Maximum Magicka
+    12: "Healthy",         # Increases Maximum Health
+    13: "Bloodthirsty",   
+    14: "Harmony",      
+    16: "Infused",    
+    17: "Harmony",         # Increases Synergy effectiveness
+    18: "Protective",      # Increases Physical and Spell Resistance
+    19: "Swift",           # Increases movement speed
+    20: "Triune",          # Increases Health, Magicka, and Stamina
     
-    # Weapon traits (IDs 21-30)
-    21: "Powered",          # Increases healing done
-    22: "Charged",          # Increases chance to apply status effects
-    23: "Precise",          # Increases Weapon and Spell Critical
-    24: "Infused",          # Increases enchantment effectiveness (weapon)
-    25: "Defending",        # Increases Physical and Spell Resistance (weapon)
-    26: "Training",         # Increases experience gained (weapon)
-    27: "Sharpened",        # Increases Physical and Spell Penetration
-    28: "Decisive",         # Increases Ultimate generation
-    29: "Nirnhoned",        # Increases Weapon and Spell Damage (weapon)
-    30: "Intricate",        # Increases inspiration gained when deconstructing (weapon)
+    # Weapon traits
+    21: "Defending",       
+    22: "Infused",        # Chance to gain additional Ultimate
+    23: "Charged",       
+    24: "Decisive",       # Increases weapon damage
+    25: "Powered",         # Increases healing done
+    26: "Infused",         # Increases Weapon and Spell Critical
+    27: "Sharpened",       # Increases Physical and Spell Penetration
+    28: "Nirnhoned"         # Increases experience gained (weapon/armor)
 }
 
 # Enchantment type mapping (from ESO Logs API)

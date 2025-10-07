@@ -17,10 +17,16 @@
 {% block twitter_image_alt %}{{ trial_name }} - Top Builds{% endblock %}
 
 {% block content %}
-<nav style="margin-bottom: 20px; font-size: 0.9em;">
-    <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>
-    <span style="color: #666; margin: 0 10px;">/</span>
-    <span style="color: #a8edea;">{{ trial_name }}</span>
+<nav aria-label="Breadcrumb" style="margin-bottom: 20px; font-size: 0.9em;">
+    <ol style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; align-items: center;">
+        <li style="display: flex; align-items: center;">
+            <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>
+            <span style="color: #666; margin: 0 10px;" aria-hidden="true">/</span>
+        </li>
+        <li>
+            <span style="color: #a8edea;" aria-current="page">{{ trial_name }}</span>
+        </li>
+    </ol>
 </nav>
 
 <div class="card">
@@ -36,15 +42,16 @@
     
     {% if builds %}
     <table>
+        <caption class="sr-only">Builds for {{ boss_name }}</caption>
         <thead>
             <tr>
-                <th>Role</th>
-                <th>Build</th>
-                <th>Signature Sets</th>
-                <th>Frequency</th>
-                <th>DPS</th>
-                <th>Player Character</th>
-                <th>Details</th>
+                <th scope="col">Role</th>
+                <th scope="col">Build</th>
+                <th scope="col">Signature Sets</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">DPS</th>
+                <th scope="col">Player Character</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
         <tbody>
@@ -52,13 +59,17 @@
             <tr>
                 <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     {% if build.best_player.role == 'dps' %}
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     {% elif build.best_player.role == 'healer' %}
-                        ✚
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
                     {% elif build.best_player.role == 'tank' %}
-                        🛡️
+                        <span aria-hidden="true">🛡️</span>
+                        <span class="sr-only">Tank</span>
                     {% else %}
-                        ❓
+                        <span aria-hidden="true">❓</span>
+                        <span class="sr-only">Unknown</span>
                     {% endif %}
                 </td>
                 <td data-label="Build"><strong>{{ build.get_display_name(abbreviated=True) }}</strong></td>
@@ -69,7 +80,13 @@
                 <td data-label="Frequency">{{ build.count }} players in {{ build.report_count }} reports</td>
                 <td data-label="DPS">{{ build.best_player.dps|format_dps }}</td>
                 <td data-label="Player Character">{{ build.best_player.player_name }} - {{ build.best_player.character_name }}</td>
-                <td data-label="Details"><a href="{{ build.trial_name.lower().replace(' ', '-').replace("'", "") }}-{{ build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and') }}-{{ build.build_slug }}.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Details">
+                    <a href="{{ build.trial_name.lower().replace(' ', '-').replace("'", "") }}-{{ build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and') }}-{{ build.build_slug }}.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for {{ build.get_display_name(abbreviated=True) }} build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

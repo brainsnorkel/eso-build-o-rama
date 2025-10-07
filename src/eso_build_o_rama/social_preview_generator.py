@@ -73,9 +73,9 @@ class SocialPreviewGenerator:
                 description_font = ImageFont.load_default()
         
         # Main title
-        title_text = "Brainsnorkel's ESO Meta Build Explorer"
+        title_text = "ESOBuild.com"
         if is_develop:
-            title_text += " [DEV]"
+            title_text += "[DEV]"
         
         title_bbox = draw.textbbox((0, 0), title_text, font=title_font)
         title_width = title_bbox[2] - title_bbox[0]

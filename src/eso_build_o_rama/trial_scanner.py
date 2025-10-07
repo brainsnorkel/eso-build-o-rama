@@ -31,6 +31,41 @@ class TrialScanner:
         self.data_parser = DataParser()
         self.build_analyzer = BuildAnalyzer()
     
+    def _find_best_fight_for_encounter(
+        self,
+        report_data: Dict[str, Any],
+        encounter_name: str
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Find the shortest successful kill for a specific encounter in a report.
+        
+        Args:
+            report_data: Full report data
+            encounter_name: Name of the encounter/boss to find
+            
+        Returns:
+            Fight dict with the shortest kill time, or None if no kills found
+        """
+        fights = report_data.get('fights', [])
+        
+        # Find all successful kills for this encounter
+        matching_kills = []
+        for fight in fights:
+            if fight.get('name') == encounter_name and fight.get('kill', False):
+                duration = fight.get('endTime', 0) - fight.get('startTime', 0)
+                matching_kills.append({
+                    'id': fight.get('id'),
+                    'duration': duration,
+                    'fight': fight
+                })
+        
+        if not matching_kills:
+            return None
+        
+        # Return the shortest kill
+        shortest = min(matching_kills, key=lambda x: x['duration'])
+        return shortest['fight']
+    
     async def _process_single_fight(
         self,
         report_data: Dict[str, Any],
@@ -235,69 +270,75 @@ class TrialScanner:
                 encounters = trial_zone['encounters']
                 logger.info(f"Found {len(encounters)} encounters for {trial_name}")
                 
-                # Collect top reports for all encounters, then process each report once
-                # This is more efficient than fetching the same report multiple times
-                logger.info(f"Collecting top reports for {len(encounters)} encounters...")
+                if not encounters:
+                    logger.warning(f"No encounters found for {trial_name}")
+                    continue
                 
-                # Step 1: Get top reports for each encounter
-                encounter_reports = {}  # {encounter_id: [(report_code, fight_id, encounter_name), ...]}
-                unique_reports = {}  # {report_code: set of (fight_id, encounter_id, encounter_name)}
+                # Step 1: Get top reports from FINAL BOSS only (represents full trial clears)
+                final_boss = encounters[-1]  # Last encounter is the final boss
+                final_boss_id = final_boss['id']
+                final_boss_name = final_boss['name']
                 
-                for encounter in encounters:
-                    enc_id = encounter['id']
-                    enc_name = encounter['name']
+                logger.info(f"Getting top reports from final boss: {final_boss_name} (ID: {final_boss_id})")
+                top_reports_list = await self.api_client.get_top_logs(
+                    zone_id=trial_id,
+                    encounter_id=final_boss_id,
+                    limit=top_n
+                )
+                
+                if not top_reports_list:
+                    logger.warning(f"No rankings found for final boss {final_boss_name}")
+                    continue
+                
+                logger.info(f"Found {len(top_reports_list)} top-ranked reports from {final_boss_name}")
+                
+                # Step 2: For each top report, extract ALL boss fights from the trial
+                trial_reports = []
+                for report_data in top_reports_list:
+                    report_code = report_data.get('code')
                     
-                    logger.info(f"Fetching rankings for: {enc_name} (ID: {enc_id})")
-                    top_reports_list = await self.api_client.get_top_logs(
-                        zone_id=trial_id,
-                        encounter_id=enc_id,
-                        limit=top_n
-                    )
-                    
-                    if not top_reports_list:
-                        logger.warning(f"No rankings found for {enc_name}")
+                    if not report_code:
                         continue
                     
-                    # Track reports for this encounter and deduplicate
-                    for report_data in top_reports_list:
-                        report_code = report_data.get('code')
-                        fight_id = report_data.get('fightID')
-                        
-                        if not report_code or not fight_id:
-                            continue
-                        
-                        # Add to unique reports mapping
-                        if report_code not in unique_reports:
-                            unique_reports[report_code] = set()
-                        unique_reports[report_code].add((fight_id, enc_id, enc_name))
-                
-                logger.info(f"Found {len(unique_reports)} unique reports across all encounters")
-                
-                # Step 2: Process each unique report once, extracting all relevant boss fights
-                trial_reports = []
-                for report_code, fights_set in unique_reports.items():
                     try:
-                        # Fetch report once
-                        report_data = await self.api_client.get_report(report_code)
-                        if not report_data:
+                        # Fetch full report once
+                        full_report = await self.api_client.get_report(report_code)
+                        if not full_report:
                             logger.error(f"Failed to fetch report {report_code}")
                             continue
                         
-                        # Process all relevant fights from this report
-                        for fight_id, enc_id, enc_name in fights_set:
+                        logger.info(f"Processing report {report_code} for all bosses")
+                        
+                        # Process each boss encounter from this report
+                        for encounter in encounters:
+                            enc_id = encounter['id']
+                            enc_name = encounter['name']
+                            
+                            # Find the shortest/fastest kill for this boss in the report
+                            best_fight = self._find_best_fight_for_encounter(
+                                full_report,
+                                enc_name
+                            )
+                            
+                            if not best_fight:
+                                logger.debug(f"No fights found for {enc_name} in report {report_code}")
+                                continue
+                            
+                            # Process this boss fight
                             try:
-                                report = await self._process_single_fight(
-                                    report_data,
+                                trial_report = await self._process_single_fight(
+                                    full_report,
                                     report_code,
-                                    fight_id,
+                                    best_fight['id'],
                                     trial_name,
                                     enc_name
                                 )
-                                if report:
-                                    trial_reports.append(report)
+                                if trial_report:
+                                    trial_reports.append(trial_report)
                             except Exception as e:
-                                logger.error(f"Error processing fight {fight_id} in report {report_code}: {e}")
+                                logger.error(f"Error processing {enc_name} (fight {best_fight['id']}) in report {report_code}: {e}")
                                 continue
+                                
                     except Exception as e:
                         logger.error(f"Error processing report {report_code}: {e}")
                         continue

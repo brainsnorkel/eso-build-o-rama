@@ -53,22 +53,24 @@ class TrialScanner:
         logger.info(f"Scanning trial: {trial_name} (Zone ID: {trial_zone_id})")
         
         try:
-            # Get top logs for this trial
-            rankings = await self.api_client.get_top_logs(
+            # Get top reports using fightRankings
+            top_reports = await self.api_client.get_top_logs(
                 zone_id=trial_zone_id,
                 encounter_id=encounter_id,
                 limit=top_n
             )
             
-            if not rankings:
-                logger.warning(f"No rankings found for {trial_name}")
+            if not top_reports:
+                logger.warning(f"No top reports found for {trial_name}")
                 return []
             
-            # Process each log
+            logger.info(f"Found {len(top_reports)} top-ranked reports for {trial_name}")
+            
+            # Process each report - extract all players from the ranked fight
             trial_reports = []
-            for ranking in rankings:
-                report_code = ranking.get('report', {}).get('code')
-                fight_id = ranking.get('report', {}).get('fightID')
+            for report_data in top_reports:
+                report_code = report_data.get('code')
+                fight_id = report_data.get('fightID')
                 
                 if not report_code or not fight_id:
                     continue

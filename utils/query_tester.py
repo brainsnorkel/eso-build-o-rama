@@ -119,6 +119,11 @@ class QueryTester:
             print(json.dumps(rankings_data, indent=2)[:500])
             return
         
+        # Show first raw ranking for inspection
+        if rankings and len(rankings) > 0:
+            print(f"\n📋 Raw data for first ranking:")
+            print(json.dumps(rankings[0], indent=2))
+        
         if not rankings:
             print("\n⚠️  No rankings returned")
             return
@@ -209,6 +214,47 @@ class QueryTester:
         
         return results
     
+    async def inspect_report(self, report_code: str):
+        """
+        Fetch and display all fights in a report.
+        
+        Args:
+            report_code: The report code to inspect
+        """
+        print(f"\n{'='*80}")
+        print(f"INSPECTING REPORT: {report_code}")
+        print(f"{'='*80}\n")
+        
+        report = await self.client.get_report(report_code)
+        
+        if not report:
+            print(f"❌ Could not fetch report {report_code}")
+            return
+        
+        print(f"Report Title: {report.get('title', 'Unknown')}")
+        print(f"Report Code: {report.get('code', report_code)}")
+        print(f"Start Time: {report.get('startTime', 0)}")
+        print(f"End Time: {report.get('endTime', 0)}")
+        
+        fights = report.get('fights', [])
+        print(f"\n📊 Found {len(fights)} fights in this report:\n")
+        
+        for i, fight in enumerate(fights, 1):
+            fight_id = fight.get('id', 0)
+            name = fight.get('name', 'Unknown')
+            kill = fight.get('kill', False)
+            difficulty = fight.get('difficulty', 0)
+            
+            status = "✅ KILL" if kill else "❌ Wipe"
+            diff_text = f"Difficulty {difficulty}" if difficulty else "Normal"
+            
+            print(f"{i}. Fight {fight_id}: {name}")
+            print(f"   {status} | {diff_text}")
+            print(f"   Duration: {fight.get('startTime', 0)} - {fight.get('endTime', 0)}")
+            print()
+        
+        return report
+    
     async def close(self):
         """Close the API client."""
         await self.client.close()
@@ -234,17 +280,27 @@ async def main():
     tester = QueryTester()
     
     try:
-        # Test current working query
+        # Test fight rankings with speed metric
         print("\n" + "="*80)
-        print("CURRENT WORKING QUERY")
+        print("TESTING: fightRankings with speed")
         print("="*80)
-        await tester.test_query(
-            query_type="characterRankings",
+        result = await tester.test_query(
+            query_type="fightRankings",
             encounter_id=encounter_id,
-            metric="dps",
-            leaderboard="LogsOnly",
+            metric="speed",
+            leaderboard=None,
             limit=10
         )
+        
+        # Extract and inspect the first report
+        if result and isinstance(result, dict):
+            rankings = result.get('rankings', [])
+            if rankings and len(rankings) > 0:
+                first_ranking = rankings[0]
+                if 'report' in first_ranking and 'code' in first_ranking['report']:
+                    report_code = first_ranking['report']['code']
+                    print("\n")
+                    await tester.inspect_report(report_code)
         
         # Uncomment to compare multiple queries
         # print("\n\n")

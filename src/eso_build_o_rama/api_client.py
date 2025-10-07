@@ -182,22 +182,26 @@ class ESOLogsAPIClient:
         self, 
         zone_id: int, 
         encounter_id: Optional[int] = None,
-        limit: int = 5,
+        limit: int = 10,
         difficulty: Optional[int] = None,
         use_cache: bool = True
     ) -> List[Dict[str, Any]]:
         """
-        Get top logs for a specific zone/encounter.
+        Get top-ranked reports for a specific zone/encounter using fightRankings.
+        
+        This uses fightRankings (speed metric) to find the top-performing reports,
+        then returns the report codes. The caller can then fetch full reports
+        to analyze all players in those top runs.
         
         Args:
             zone_id: Zone ID (trial)
             encounter_id: Optional specific encounter/boss ID
-            limit: Number of top logs to fetch (default: 5)
+            limit: Number of top reports to fetch (default: 10)
             difficulty: Optional difficulty level
             use_cache: Whether to use cached data if available (default: True)
             
         Returns:
-            List of ranking data
+            List of report dictionaries with code, fightID, and metadata
         """
         # Input validation
         if not isinstance(zone_id, int) or zone_id <= 0:
@@ -208,7 +212,7 @@ class ESOLogsAPIClient:
             raise ValueError("difficulty must be between 1 and 3")
         
         # Create cache key
-        cache_key = f"rankings_{zone_id}_{encounter_id or 'all'}_{limit}"
+        cache_key = f"fight_rankings_{zone_id}_{encounter_id or 'all'}_{limit}"
         if difficulty:
             cache_key += f"_diff{difficulty}"
         
@@ -216,64 +220,22 @@ class ESOLogsAPIClient:
         if use_cache and self.cache_manager:
             cached_data = self.cache_manager.get_cached_response(cache_key)
             if cached_data:
-                logger.info(f"Using cached rankings: zone {zone_id}, encounter {encounter_id}")
+                logger.info(f"Using cached fight rankings: zone {zone_id}, encounter {encounter_id}")
                 return cached_data.get("data", [])
-        query = """
-        query GetRankings(
-          $zoneID: Int!
-          $encounterID: Int
-          $difficulty: Int
-          $limit: Int
-        ) {
-          worldData {
-            encounter(id: $encounterID) {
-              characterRankings(
-                zoneID: $zoneID
-                difficulty: $difficulty
-                limit: $limit
-                metric: dps
-              ) {
-                data {
-                  name
-                  class
-                  spec
-                  amount
-                  report {
-                    code
-                    startTime
-                    fightID
-                  }
-                }
-              }
-            }
-          }
-        }
-        """
-        
-        variables = {
-            "zoneID": zone_id,
-            "encounterID": encounter_id,
-            "difficulty": difficulty,
-            "limit": limit
-        }
-        
         if not encounter_id:
-            logger.error("encounter_id is required for rankings")
+            logger.error("encounter_id is required for fight rankings")
             return []
         
-        logger.info(f"Fetching top {limit} unique ranked logs for zone {zone_id}, encounter {encounter_id}")
+        logger.info(f"Fetching top {limit} ranked reports for zone {zone_id}, encounter {encounter_id}")
         
         try:
-            # Use LogsOnly leaderboard to get rankings with report codes
-            # Note: This returns all available logs (typically 8-12 unique reports)
-            # We'll take the top N after deduplication
-            query_logs_only = '''
+            # Use fightRankings with speed metric to get top-performing reports
+            query_fight_rankings = '''
             query GetTopRankedReports($encounterID: Int!) {
               worldData {
                 encounter(id: $encounterID) {
-                  characterRankings(
-                    metric: dps
-                    leaderboard: LogsOnly
+                  fightRankings(
+                    metric: speed
                   )
                 }
               }
@@ -282,7 +244,7 @@ class ESOLogsAPIClient:
             
             result = await self._retry_on_rate_limit(
                 self.client.execute,
-                query=query_logs_only,
+                query=query_fight_rankings,
                 variables={"encounterID": encounter_id}
             )
             
@@ -296,50 +258,51 @@ class ESOLogsAPIClient:
                 logger.error(f"GraphQL errors: {data['errors']}")
                 return []
             
-            character_rankings = data['data']['worldData']['encounter']['characterRankings']
-            # LogsOnly returns data as JSON directly, not in a rankings sub-field
-            if isinstance(character_rankings, dict):
-                rankings = character_rankings.get('rankings', [])
-            elif isinstance(character_rankings, list):
-                rankings = character_rankings
+            fight_rankings = data['data']['worldData']['encounter']['fightRankings']
+            
+            # Extract rankings data from response
+            if isinstance(fight_rankings, dict):
+                rankings = fight_rankings.get('rankings', [])
+            elif isinstance(fight_rankings, list):
+                rankings = fight_rankings
             else:
-                logger.error(f"Unexpected characterRankings format: {type(character_rankings)}")
+                logger.error(f"Unexpected fightRankings format: {type(fight_rankings)}")
                 return []
             
-            # Extract unique report codes (keep top DPS per report)
-            report_map = {}
-            for ranking in rankings:
+            # fightRankings returns unique reports by default (one ranking per report)
+            # Extract report codes and metadata
+            top_reports = []
+            for ranking in rankings[:limit]:
                 report = ranking.get('report', {})
                 code = report.get('code')
                 
-                if code:  # Only include rankings with report codes
-                    if code not in report_map or ranking['amount'] > report_map[code]['amount']:
-                        report_map[code] = {
-                            "name": ranking['name'],
-                            "class": ranking['class'],
-                            "spec": ranking.get('spec', 'Unknown'),
-                            "amount": ranking['amount'],
-                            "report": {
-                                "code": code,
-                                "startTime": report.get('startTime', 0),
-                                "fightID": report.get('fightID', 1)
-                            }
+                if code:
+                    top_reports.append({
+                        "code": code,
+                        "fightID": report.get('fightID', 1),
+                        "startTime": report.get('startTime', 0),
+                        "duration": ranking.get('duration', 0),
+                        "score": ranking.get('score', 0),
+                        "guild": ranking.get('guild', {}),
+                        "server": ranking.get('server', {}),
+                        "composition": {
+                            "tanks": ranking.get('tanks', 0),
+                            "healers": ranking.get('healers', 0),
+                            "melee": ranking.get('melee', 0),
+                            "ranged": ranking.get('ranged', 0)
                         }
+                    })
             
-            # Sort by DPS and take top N
-            sorted_rankings = sorted(report_map.values(), key=lambda x: x['amount'], reverse=True)
-            top_rankings = sorted_rankings[:limit]
-            
-            logger.info(f"Found {len(top_rankings)} top-ranked reports")
+            logger.info(f"Found {len(top_reports)} top-ranked reports")
             
             # Save to cache
             if self.cache_manager:
-                self.cache_manager.save_cached_response(cache_key, top_rankings)
+                self.cache_manager.save_cached_response(cache_key, top_reports)
             
-            return top_rankings
+            return top_reports
             
         except Exception as e:
-            logger.error(f"Error fetching top logs: {e}")
+            logger.error(f"Error fetching fight rankings: {e}")
             return []
     
     async def get_report(self, report_code: str, use_cache: bool = True) -> Dict[str, Any]:

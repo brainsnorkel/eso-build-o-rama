@@ -211,8 +211,8 @@ class ESOLogsAPIClient:
         if difficulty is not None and (difficulty < 1 or difficulty > 3):
             raise ValueError("difficulty must be between 1 and 3")
         
-        # Create cache key
-        cache_key = f"fight_rankings_{zone_id}_{encounter_id or 'all'}_{limit}"
+        # Create cache key (using "rankings_" prefix for proper subdirectory organization)
+        cache_key = f"rankings_{zone_id}_{encounter_id or 'all'}_{limit}"
         if difficulty:
             cache_key += f"_diff{difficulty}"
         

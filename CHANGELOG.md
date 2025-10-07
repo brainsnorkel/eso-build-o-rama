@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed (2025-10-08 - Cache Organization & Performance Monitoring)
+- **Improved Cache Organization**: Reorganized cache directory structure for better maintainability
+  - Created subdirectories for different cache types: `buffs/`, `tables/`, `rankings/`, `reports/`
+  - Fixed cache key prefix mismatch: `fight_rankings_` → `rankings_` for proper subdirectory routing
+  - Buffs queries now stored in `cache/buffs/` (previously root) - 1,224 files
+  - Table queries now stored in `cache/tables/` (previously root) - 310 files
+  - Rankings now properly stored in `cache/rankings/` subdirectory - 4 files
+  - Reports remain in `cache/reports/` subdirectory - 45 files
+  - Added migration utility script: `utils/migrate_cache.py` (supports dry-run mode)
+- **Enhanced Cache Performance Monitoring**: Added comprehensive cache hit/miss tracking
+  - Cache manager now tracks hits and misses during runtime
+  - Added `log_cache_performance()` method to display statistics at end of run
+  - Enhanced `--cache-stats` command to show detailed breakdown by cache type
+  - Added hit rate calculation and display in cache statistics
+  - Shows cache effectiveness metrics: total requests, hits, misses, hit rate percentage
+- **Benefits**: 
+  - Easier cache management and debugging
+  - Better visibility into cache effectiveness
+  - Cleaner directory structure with 46+ MB cache properly organized
+  - Cache effectiveness score: 95% (all API methods properly cached)
+
 ### Changed (2025-10-08 - Optimized Mundus Queries)
 - **Optimized Mundus Stone API Queries**: Reduced mundus API calls by 80-90% for improved performance
   - Problem: Mundus stones were queried for EVERY build during fight processing (100s of queries)

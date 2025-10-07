@@ -264,13 +264,13 @@ class ESOLogsAPIClient:
         logger.info(f"Fetching top {limit} unique ranked logs for zone {zone_id}, encounter {encounter_id}")
         
         try:
-            # EXPERIMENT: Using reportRankings with playerscore metric
+            # EXPERIMENT: Using fightRankings with playerscore metric
             # Testing if this provides better ranked reports than characterRankings
             query_logs_only = '''
             query GetTopRankedReports($encounterID: Int!) {
               worldData {
                 encounter(id: $encounterID) {
-                  reportRankings(
+                  fightRankings(
                     metric: playerscore
                   )
                 }
@@ -294,14 +294,14 @@ class ESOLogsAPIClient:
                 logger.error(f"GraphQL errors: {data['errors']}")
                 return []
             
-            report_rankings = data['data']['worldData']['encounter']['reportRankings']
+            fight_rankings = data['data']['worldData']['encounter']['fightRankings']
             # Extract rankings data from response
-            if isinstance(report_rankings, dict):
-                rankings = report_rankings.get('rankings', [])
-            elif isinstance(report_rankings, list):
-                rankings = report_rankings
+            if isinstance(fight_rankings, dict):
+                rankings = fight_rankings.get('rankings', [])
+            elif isinstance(fight_rankings, list):
+                rankings = fight_rankings
             else:
-                logger.error(f"Unexpected reportRankings format: {type(report_rankings)}")
+                logger.error(f"Unexpected fightRankings format: {type(fight_rankings)}")
                 return []
             
             # Extract unique report codes (keep top score per report)

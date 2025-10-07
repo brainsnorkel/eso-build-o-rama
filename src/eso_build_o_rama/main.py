@@ -265,18 +265,29 @@ class ESOBuildORM:
             output_dir = self.get_output_directory()
             is_develop = 'dev' in output_dir.lower()
             
-            generator = SocialPreviewGenerator()
+            # Generate to the correct output directory's static folder
+            output_static_dir = Path(output_dir) / "static"
+            output_static_dir.mkdir(parents=True, exist_ok=True)
             
-            # Generate main preview
+            # Also generate to main static directory for reference
+            main_static_dir = Path("static")
+            main_static_dir.mkdir(exist_ok=True)
+            
+            # Generate preview to main static dir first
+            generator = SocialPreviewGenerator(static_dir=str(main_static_dir))
             main_preview = generator.create_main_preview(is_develop)
             logger.info(f"Generated main social preview: {main_preview}")
             
-            # Copy to static directory for web serving
-            static_dir = Path("static")
-            static_dir.mkdir(exist_ok=True)
-            
+            # Copy to output directory's static folder
             main_filename = "social-preview-dev.png" if is_develop else "social-preview.png"
-            shutil.copy2(main_preview, static_dir / main_filename)
+            shutil.copy2(main_static_dir / main_filename, output_static_dir / main_filename)
+            
+            # Also copy the build preview if it exists
+            build_filename = "social-preview-build-dev.png" if is_develop else "social-preview-build.png"
+            if (main_static_dir / build_filename).exists():
+                shutil.copy2(main_static_dir / build_filename, output_static_dir / build_filename)
+            
+            logger.info(f"Copied social previews to {output_static_dir}")
             
         except Exception as e:
             logger.warning(f"Failed to generate social media previews: {e}")

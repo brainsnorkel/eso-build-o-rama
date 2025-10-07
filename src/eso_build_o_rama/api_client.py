@@ -264,16 +264,14 @@ class ESOLogsAPIClient:
         logger.info(f"Fetching top {limit} unique ranked logs for zone {zone_id}, encounter {encounter_id}")
         
         try:
-            # Use LogsOnly leaderboard to get rankings with report codes
-            # Note: This returns all available logs (typically 8-12 unique reports)
-            # We'll take the top N after deduplication
+            # EXPERIMENT: Using reportRankings with playerscore metric
+            # Testing if this provides better ranked reports than characterRankings
             query_logs_only = '''
             query GetTopRankedReports($encounterID: Int!) {
               worldData {
                 encounter(id: $encounterID) {
-                  characterRankings(
-                    metric: dps
-                    leaderboard: LogsOnly
+                  reportRankings(
+                    metric: playerscore
                   )
                 }
               }
@@ -296,17 +294,17 @@ class ESOLogsAPIClient:
                 logger.error(f"GraphQL errors: {data['errors']}")
                 return []
             
-            character_rankings = data['data']['worldData']['encounter']['characterRankings']
-            # LogsOnly returns data as JSON directly, not in a rankings sub-field
-            if isinstance(character_rankings, dict):
-                rankings = character_rankings.get('rankings', [])
-            elif isinstance(character_rankings, list):
-                rankings = character_rankings
+            report_rankings = data['data']['worldData']['encounter']['reportRankings']
+            # Extract rankings data from response
+            if isinstance(report_rankings, dict):
+                rankings = report_rankings.get('rankings', [])
+            elif isinstance(report_rankings, list):
+                rankings = report_rankings
             else:
-                logger.error(f"Unexpected characterRankings format: {type(character_rankings)}")
+                logger.error(f"Unexpected reportRankings format: {type(report_rankings)}")
                 return []
             
-            # Extract unique report codes (keep top DPS per report)
+            # Extract unique report codes (keep top score per report)
             report_map = {}
             for ranking in rankings:
                 report = ranking.get('report', {})
@@ -326,7 +324,7 @@ class ESOLogsAPIClient:
                             }
                         }
             
-            # Sort by DPS and take top N
+            # Sort by playerscore and take top N
             sorted_rankings = sorted(report_map.values(), key=lambda x: x['amount'], reverse=True)
             top_rankings = sorted_rankings[:limit]
             

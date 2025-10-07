@@ -37,33 +37,39 @@ class TrialScanner:
         encounter_name: str
     ) -> Optional[Dict[str, Any]]:
         """
-        Find the shortest successful kill for a specific encounter in a report.
+        Find the shortest fight for a specific encounter in a report.
         
         Args:
             report_data: Full report data
             encounter_name: Name of the encounter/boss to find
             
         Returns:
-            Fight dict with the shortest kill time, or None if no kills found
+            Fight dict with the shortest duration, or None if no fights found
         """
         fights = report_data.get('fights', [])
         
-        # Find all successful kills for this encounter
-        matching_kills = []
+        # Find all fights for this encounter (with difficulty, which indicates boss fights)
+        matching_fights = []
         for fight in fights:
-            if fight.get('name') == encounter_name and fight.get('kill', False):
+            fight_name = fight.get('name', '')
+            difficulty = fight.get('difficulty')
+            
+            # Match by name and prefer fights with difficulty set (real boss attempts)
+            if fight_name == encounter_name and difficulty:
                 duration = fight.get('endTime', 0) - fight.get('startTime', 0)
-                matching_kills.append({
+                matching_fights.append({
                     'id': fight.get('id'),
                     'duration': duration,
                     'fight': fight
                 })
         
-        if not matching_kills:
+        if not matching_fights:
+            logger.debug(f"No fights with difficulty found for '{encounter_name}'")
             return None
         
-        # Return the shortest kill
-        shortest = min(matching_kills, key=lambda x: x['duration'])
+        # Return the shortest fight (fastest clear)
+        shortest = min(matching_fights, key=lambda x: x['duration'])
+        logger.info(f"Found {len(matching_fights)} attempts for {encounter_name}, using fastest (fight {shortest['id']}, {shortest['duration']/1000:.1f}s)")
         return shortest['fight']
     
     async def _process_single_fight(

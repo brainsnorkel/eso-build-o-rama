@@ -182,7 +182,7 @@ class ESOLogsAPIClient:
         self, 
         zone_id: int, 
         encounter_id: Optional[int] = None,
-        limit: int = 10,
+        limit: int = 12,
         difficulty: Optional[int] = None,
         use_cache: bool = True
     ) -> List[Dict[str, Any]]:
@@ -196,7 +196,7 @@ class ESOLogsAPIClient:
         Args:
             zone_id: Zone ID (trial)
             encounter_id: Optional specific encounter/boss ID
-            limit: Number of top reports to fetch (default: 10)
+            limit: Number of top reports to fetch (default: 12)
             difficulty: Optional difficulty level
             use_cache: Whether to use cached data if available (default: True)
             

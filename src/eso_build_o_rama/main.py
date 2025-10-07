@@ -103,7 +103,7 @@ class ESOBuildORM:
             
             # Scan selected trials
             logger.info(f"\nScanning {len(trials_to_scan)} trials...")
-            all_reports = await self.scanner.scan_all_trials(trials_to_scan, top_n=10)
+            all_reports = await self.scanner.scan_all_trials(trials_to_scan, top_n=12)
             
             if not all_reports:
                 logger.error("No reports found!")

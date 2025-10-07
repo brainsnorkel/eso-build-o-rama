@@ -36,6 +36,7 @@ class TrialScanner:
         trial_zone_id: int,
         trial_name: str,
         encounter_id: Optional[int] = None,
+        encounter_name: Optional[str] = None,
         top_n: int = 5
     ) -> List[TrialReport]:
         """
@@ -45,6 +46,7 @@ class TrialScanner:
             trial_zone_id: Zone ID for the trial
             trial_name: Name of the trial
             encounter_id: Optional specific encounter/boss ID
+            encounter_name: Optional encounter/boss name for validation
             top_n: Number of top logs to fetch (default: 5)
             
         Returns:
@@ -79,7 +81,8 @@ class TrialScanner:
                     report = await self._process_report(
                         report_code,
                         fight_id,
-                        trial_name
+                        trial_name,
+                        encounter_name
                     )
                     if report:
                         trial_reports.append(report)
@@ -104,7 +107,8 @@ class TrialScanner:
         self,
         report_code: str,
         fight_id: int,
-        trial_name: str
+        trial_name: str,
+        expected_encounter_name: Optional[str] = None
     ) -> Optional[TrialReport]:
         """Process a single report to extract builds."""
         logger.info(f"Processing report {report_code}, fight {fight_id}")
@@ -125,6 +129,14 @@ class TrialScanner:
         if not fight_info:
             logger.error(f"Fight {fight_id} not found in report")
             return None
+        
+        # Validate fight is for the expected encounter
+        fight_name = fight_info.get('name', '')
+        if expected_encounter_name and fight_name != expected_encounter_name:
+            logger.warning(f"Fight {fight_id} is '{fight_name}', expected '{expected_encounter_name}' - skipping")
+            return None
+        
+        logger.info(f"✓ Validated fight {fight_id} is for encounter: {fight_name}")
         
         # Fetch table data with combatant info - get both Summary (for account names/roles) and DamageDone (for performance)
         summary_data = await self.api_client.get_report_table(
@@ -299,6 +311,7 @@ class TrialScanner:
                         trial_zone_id=trial_id,
                         trial_name=trial_name,
                         encounter_id=enc_id,
+                        encounter_name=enc_name,
                         top_n=top_n
                     )
                     

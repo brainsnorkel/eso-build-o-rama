@@ -132,6 +132,9 @@ class CommonBuild:
     boss_name: str = ""
     fight_id: int = 0
     update_version: str = ""
+    report_code: str = ""  # Report code for mundus queries
+    fight_start_time: int = 0  # Fight start time for mundus queries
+    fight_end_time: int = 0  # Fight end time for mundus queries
     
     def get_display_name(self, abbreviated: bool = False) -> str:
         """

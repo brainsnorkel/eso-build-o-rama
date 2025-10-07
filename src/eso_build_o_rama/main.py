@@ -111,8 +111,8 @@ class ESOBuildORM:
             
             logger.info(f"Successfully scanned {len(all_reports)} trials")
             
-            # Get publishable builds
-            publishable_builds = self.scanner.get_publishable_builds(all_reports)
+            # Get publishable builds (includes optimized mundus fetching)
+            publishable_builds = await self.scanner.get_publishable_builds(all_reports)
             
             if not publishable_builds:
                 logger.warning("No publishable builds found for this trial (need 5+ occurrences for DPS, 3+ for tank/healer)")

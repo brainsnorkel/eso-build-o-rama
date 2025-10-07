@@ -171,32 +171,11 @@ class TrialScanner:
         # Analyze builds
         trial_report = self.build_analyzer.analyze_trial_report(trial_report)
         
-        # Fetch mundus data only for best players in each build (much more efficient!)
-        logger.info(f"Fetching mundus data for {len(trial_report.common_builds)} build leaders")
+        # Store fight context in builds for later mundus queries (after consolidation)
         for build in trial_report.common_builds:
-            if build.best_player:
-                try:
-                    # Use character name and player ID for buff queries
-                    character_name = build.best_player.character_name
-                    source_id = build.best_player.player_id
-                    logger.info(f"Querying mundus for character: {character_name} (source ID: {source_id})")
-                    
-                    mundus_stone = await self.api_client.get_player_buffs(
-                        report_code=report_code,
-                        fight_ids=[fight_id],
-                        player_name=character_name,
-                        start_time=fight_info.get('startTime'),
-                        end_time=fight_info.get('endTime'),
-                        source_id=source_id  # Pass source ID for player-specific filtering
-                    )
-                    build.best_player.mundus = mundus_stone or ""
-                    if mundus_stone:
-                        logger.info(f"✓ Found mundus stone for {character_name}: {mundus_stone}")
-                    else:
-                        logger.warning(f"✗ No mundus stone found for {character_name}")
-                except Exception as e:
-                    logger.warning(f"Failed to get mundus data for {build.best_player.character_name}: {e}")
-                    build.best_player.mundus = ""
+            build.report_code = report_code
+            build.fight_start_time = fight_info.get('startTime')
+            build.fight_end_time = fight_info.get('endTime')
         
         return trial_report
     
@@ -362,7 +341,86 @@ class TrialScanner:
         logger.info(f"Completed scanning {len(all_reports)} trials")
         return all_reports
     
-    def get_publishable_builds(
+    async def fetch_mundus_for_builds(
+        self,
+        builds: List[CommonBuild]
+    ) -> None:
+        """
+        Fetch mundus stones for publishable builds only.
+        This is much more efficient than querying for every build during fight processing.
+        
+        Args:
+            builds: List of consolidated builds that meet publishing thresholds
+        """
+        if not builds:
+            return
+        
+        logger.info(f"Fetching mundus data for {len(builds)} publishable builds (optimized)")
+        
+        # Track which characters we've already queried to avoid duplicates
+        queried_characters = set()
+        successful_queries = 0
+        failed_queries = 0
+        skipped_queries = 0
+        
+        for build in builds:
+            if not build.best_player:
+                continue
+            
+            # Skip if this player already has mundus (e.g., from previous consolidation)
+            if build.best_player.mundus:
+                skipped_queries += 1
+                continue
+            
+            # Create unique key for this character in this report/fight
+            character_key = (
+                build.best_player.character_name,
+                build.report_code,
+                build.fight_id
+            )
+            
+            # Skip if we've already queried this character
+            if character_key in queried_characters:
+                skipped_queries += 1
+                continue
+            
+            queried_characters.add(character_key)
+            
+            try:
+                character_name = build.best_player.character_name
+                source_id = build.best_player.player_id
+                
+                logger.info(f"Querying mundus for {character_name} (source ID: {source_id})")
+                
+                mundus_stone = await self.api_client.get_player_buffs(
+                    report_code=build.report_code,
+                    fight_ids=[build.fight_id],
+                    player_name=character_name,
+                    start_time=build.fight_start_time,
+                    end_time=build.fight_end_time,
+                    source_id=source_id
+                )
+                
+                build.best_player.mundus = mundus_stone or ""
+                
+                if mundus_stone:
+                    logger.info(f"✓ Found mundus stone for {character_name}: {mundus_stone}")
+                    successful_queries += 1
+                else:
+                    logger.warning(f"✗ No mundus stone found for {character_name}")
+                    failed_queries += 1
+                    
+            except Exception as e:
+                logger.warning(f"Failed to get mundus data for {build.best_player.character_name}: {e}")
+                build.best_player.mundus = ""
+                failed_queries += 1
+        
+        logger.info(
+            f"Mundus fetch complete: {successful_queries} successful, "
+            f"{failed_queries} failed, {skipped_queries} skipped (already had data)"
+        )
+    
+    async def get_publishable_builds(
         self,
         all_reports: Dict[str, List[TrialReport]]
     ) -> List[CommonBuild]:
@@ -410,19 +468,25 @@ class TrialScanner:
             # Count unique reports
             unique_reports = set(player.report_code for player in all_players if player.report_code)
             
+            # Preserve fight context from first build instance for mundus queries
+            first_build = builds[0]
+            
             # Create consolidated build
             consolidated = CommonBuild(
                 build_slug=build_slug,
-                subclasses=builds[0].subclasses.copy(),
-                sets=builds[0].sets.copy(),
+                subclasses=first_build.subclasses.copy(),
+                sets=first_build.sets.copy(),
                 count=len(all_players),
                 report_count=len(unique_reports),
                 best_player=best_player,
                 all_players=all_players,
                 trial_name=trial_name,
                 boss_name=boss_name,
-                fight_id=builds[0].fight_id,
-                update_version=builds[0].update_version
+                fight_id=first_build.fight_id,
+                update_version=first_build.update_version,
+                report_code=first_build.report_code,
+                fight_start_time=first_build.fight_start_time,
+                fight_end_time=first_build.fight_end_time
             )
             
             # Only include if meets role-based threshold
@@ -433,6 +497,10 @@ class TrialScanner:
         consolidated_builds.sort(key=lambda x: x.count, reverse=True)
         
         logger.info(f"Found {len(consolidated_builds)} publishable builds after consolidation")
+        
+        # Fetch mundus data for publishable builds only (optimized!)
+        await self.fetch_mundus_for_builds(consolidated_builds)
+        
         return consolidated_builds
     
     async def close(self):

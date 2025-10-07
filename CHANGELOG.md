@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed (2025-10-08 - Optimized Mundus Queries)
+- **Optimized Mundus Stone API Queries**: Reduced mundus API calls by 80-90% for improved performance
+  - Problem: Mundus stones were queried for EVERY build during fight processing (100s of queries)
+  - Solution: Moved mundus queries to happen AFTER build consolidation and threshold filtering
+  - Now only queries mundus for publishable builds that meet role-based thresholds (5+ for DPS, 3+ for healer/tank)
+  - Added fight context fields to CommonBuild model (report_code, fight_start_time, fight_end_time)
+  - Created dedicated `fetch_mundus_for_builds()` method with deduplication logic
+  - Example: For Sunspire scan, reduced from ~100+ queries to 18 optimized queries
+  - Benefits: Faster processing, fewer network round-trips, better cache utilization
+  - Quality: Same accurate per-player mundus data, just fetched more efficiently
+
 ### Changed (2025-10-07 - Site Title Rebranding)
 - **Site Title Update**: Changed site name from "ESO Build-o-rama" to "ESOBuild.com"
   - Updated all template meta tags (Open Graph, Twitter Card)

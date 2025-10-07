@@ -85,7 +85,8 @@ class PageGenerator:
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'page_title': self._get_page_title(build),
             'meta_description': self._get_meta_description(build),
-            'is_develop': self.is_develop
+            'is_develop': self.is_develop,
+            'social_image_url': self._get_social_image_url()
         }
         
         # Debug: Check DPS value being passed to template
@@ -178,7 +179,8 @@ class PageGenerator:
             'trials': trials,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'cache_stats': cache_stats,
-            'is_develop': self.is_develop
+            'is_develop': self.is_develop,
+            'social_image_url': self._get_social_image_url()
         }
         html = template.render(**context)
         
@@ -230,7 +232,8 @@ class PageGenerator:
             'trial_name': trial_name,
             'bosses': sorted_bosses,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
-            'is_develop': self.is_develop
+            'is_develop': self.is_develop,
+            'social_image_url': self._get_social_image_url()
         }
         html = template.render(**context)
         
@@ -367,6 +370,16 @@ class PageGenerator:
                 ordered_grouped[trial] = bosses_data
         
         return ordered_grouped
+    
+    def _get_social_image_url(self) -> str:
+        """Get the URL for social media preview images."""
+        # Social media crawlers need absolute URLs
+        # For development, use the develop branch GitHub URL
+        # For production, use the main branch GitHub URL
+        if self.is_develop:
+            return "https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/develop/static/social-preview-dev.png"
+        else:
+            return "https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/main/static/social-preview.png"
     
     def _get_page_title(self, build: CommonBuild) -> str:
         """Generate page title for a build."""

@@ -115,7 +115,22 @@ class ESOBuildORM:
             publishable_builds = self.scanner.get_publishable_builds(all_reports)
             
             if not publishable_builds:
-                logger.warning("No publishable builds found (need 5+ occurrences)")
+                logger.warning("No publishable builds found for this trial (need 5+ occurrences for DPS, 3+ for tank/healer)")
+                # Still regenerate pages from existing saved builds
+                logger.info("Regenerating pages from existing saved builds...")
+                all_saved_builds = self.data_store.get_all_builds()
+                trials_metadata = self.data_store.get_trials_metadata()
+                
+                if all_saved_builds:
+                    generated_files = self.page_generator.generate_all_pages(
+                        all_saved_builds,
+                        "unknown",
+                        trials_metadata,
+                        None
+                    )
+                    logger.info(f"Generated {len(generated_files)} HTML files from existing data")
+                else:
+                    logger.warning("No existing builds found to generate pages from")
                 return
             
             logger.info(f"\nFound {len(publishable_builds)} publishable builds")

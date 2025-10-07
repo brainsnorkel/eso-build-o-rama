@@ -38,91 +38,103 @@ ARMOR_WEIGHT_NAMES = {
     3: "H",  # Heavy Armor
 }
 
-# Trait ID mapping (from ESO Logs API)
-# Based on authoritative sources: UESP, ESO Wiki, and ESO Logs API documentation
+# Trait name mapping (from ESO Logs API)
+# Trait names from @sheumais's authoritative list (https://github.com/sheumais/logs)
+# IDs are from ESO Logs API observation and may be context-specific (armor/jewelry/weapon)
+# Note: Some IDs map to same trait name but different slot types (e.g., Infused, Training, Nirnhoned)
 TRAIT_NAMES = {
-    # Armor traits
+    # Armor traits (IDs 1-10)
     1: "Divines",           # Increases Mundus Stone effects
-    2: "Impenetrable",           # Increases armor enchantment effect  
-    3: "Infused",      # Increases Critical Resistance
+    2: "Impenetrable",      # Increases Critical Resistance
+    3: "Infused",           # Increases enchantment effectiveness (armor)
     4: "Reinforced",        # Increases Armor value
-    5: "Sturdy",           # Reduces block cost
-    6: "Training",         # Increases experience gained (armor/weapon)
-    7: "Well-Fitted",      # Reduces sprinting/roll dodge cost
-    8: "Reinforced",          # Alternate ID for Divines
+    5: "Sturdy",            # Reduces block cost
+    6: "Training",          # Increases experience gained (armor)
+    7: "Well-Fitted",       # Reduces sprinting and roll dodge cost
+    8: "Nirnhoned",         # Increases Physical and Spell Resistance (armor)
+    9: "Intricate",         # Increases inspiration gained when deconstructing (armor)
+    10: "Invigorating",     # Increases Health, Magicka, and Stamina Recovery (formerly Prosperous)
     
-    # Jewelry traits  
-    11: "Arcane",          # Increases Maximum Magicka
-    12: "Healthy",         # Increases Maximum Health
-    13: "Bloodthirsty",   
-    14: "Harmony",      
-    16: "Infused",    
-    17: "Harmony",         # Increases Synergy effectiveness
-    18: "Protective",      # Increases Physical and Spell Resistance
-    19: "Swift",           # Increases movement speed
-    20: "Triune",          # Increases Health, Magicka, and Stamina
+    # Jewelry traits (IDs 11-20)
+    11: "Arcane",           # Increases Maximum Magicka
+    12: "Healthy",          # Increases Maximum Health
+    13: "Robust",           # Increases Maximum Stamina
+    14: "Bloodthirsty",     # Increases damage against low health enemies
+    15: "Harmony",          # Increases Synergy effectiveness
+    16: "Infused",          # Increases enchantment effectiveness (jewelry)
+    17: "Protective",       # Increases Physical and Spell Resistance (jewelry)
+    18: "Swift",            # Increases movement speed
+    19: "Triune",           # Increases Health, Magicka, and Stamina
+    20: "Intricate",        # Increases inspiration gained when deconstructing (jewelry)
     
-    # Weapon traits
-    21: "Defending",       
-    22: "Infused",        # Chance to gain additional Ultimate
-    23: "Charged",       
-    24: "Decisive",       # Increases weapon damage
-    25: "Powered",         # Increases healing done
-    26: "Infused",         # Increases Weapon and Spell Critical
-    27: "Sharpened",       # Increases Physical and Spell Penetration
-    28: "Nirnhoned"         # Increases experience gained (weapon/armor)
+    # Weapon traits (IDs 21-30)
+    21: "Powered",          # Increases healing done
+    22: "Charged",          # Increases chance to apply status effects
+    23: "Precise",          # Increases Weapon and Spell Critical
+    24: "Infused",          # Increases enchantment effectiveness (weapon)
+    25: "Defending",        # Increases Physical and Spell Resistance (weapon)
+    26: "Training",         # Increases experience gained (weapon)
+    27: "Sharpened",        # Increases Physical and Spell Penetration
+    28: "Decisive",         # Increases Ultimate generation
+    29: "Nirnhoned",        # Increases Weapon and Spell Damage (weapon)
+    30: "Intricate",        # Increases inspiration gained when deconstructing (weapon)
 }
 
 # Enchantment type mapping (from ESO Logs API)
-# Based on authoritative sources: UESP, ESO Wiki, and ESO Logs API documentation
+# IDs 0-36: Authoritative list from @sheumais (https://github.com/sheumais/logs)
+# IDs 37+: Extended ESO Logs API IDs from empirical observation
 ENCHANT_NAMES = {
-    # Weapon enchants
-    2: "Absorb Magicka",         
-    3: "Absorb Stamina",         
+    # Base enchants (IDs 0-36 from @sheumais's authoritative list)
+    0: "None",
+    1: "Absorb Health",
+    2: "Absorb Magicka",
+    3: "Absorb Stamina",
+    4: "Befouled Weapon",
     5: "Berserker",
+    6: "Charged Weapon",
+    7: "Damage Health",
     8: "Damage Shield",
+    9: "Decrease Physical Damage",
+    10: "Decrease Spell Damage",
+    11: "Disease Resistant",
     12: "Fiery Weapon",
+    13: "Fire Resistant",
+    14: "Frost Resistant",
     15: "Frozen Weapon",
     16: "Health",
-
-    19: "Increase Physical Damage", 
+    17: "Health Regen",
+    18: "Increase Bash Damage",
+    19: "Increase Physical Damage",
+    20: "Increase Potion Effectiveness",
     21: "Increase Spell Damage",
+    22: "Magicka",
+    23: "Magicka Regen",
     24: "Poisoned Weapon",
-    25: "Prismatic Defense",
-    26: "Prismatic Defense",      
-    28: "Reduce Armor",        
-    29: "Reduce Block and Bash",     
-    
-    30: "Reduce Feat Cost",     
-    31: "Reduce Potion Cooldown",   
+    25: "Poison Resistant",
+    26: "Prismatic Defense",
+    27: "Prismatic Onslaught",
+    28: "Reduce Armor",
+    29: "Reduce Block and Bash",
+    30: "Reduce Feat Cost",
+    31: "Reduce Potion Cooldown",
     32: "Reduce Power",
     33: "Reduce Spell Cost",
+    34: "Shock Resistant",
+    35: "Stamina",
+    36: "Stamina Regen",
     
-    
-    # Primary stat enchants (ESO Logs uses shorter names)
-    35: "Stamina",              # Max Health / Glyph of Health (Oko essence rune)
-    22: "Magicka",             # Max Magicka / Glyph of Magicka (Makko essence rune)  
-    37: "Health",             # Max Stamina / Glyph of Stamina (Deni essence rune)
-    
-    # Recovery enchants
-    38: "Magicka Recovery",    # Glyph of Magicka Recovery (Makkoma essence rune)
-    39: "Stamina Recovery",    # Glyph of Stamina Recovery (Denima essence rune)
-    40: "Health Recovery",     # Glyph of Health Recovery (Okoma essence rune)
-    
-    # Damage enchants (actual names from ESO Logs)
-    41: "Increase Magical Harm", # Spell Damage / Glyph of Increase Magical Harm (Makderi essence rune)
-    
-    # Critical enchants
-    43: "Spell Critical",      # Glyph of Spell Critical
-    44: "Weapon Critical",     # Glyph of Weapon Critical
-    
-    # Resistance enchants
-    45: "Spell Resist",        # Glyph of Spell Resist
-    46: "Physical Resist",     # Glyph of Physical Resist
-    
-    # Cost reduction enchants
-    47: "Reduce Spell Cost",   # Glyph of Reduce Spell Cost
-    48: "Reduce Feat Cost"     # Glyph of Reduce Feat Cost
+    # Extended ESO Logs API IDs (observed in actual game data)
+    37: "Health",                   # Alternate Health enchant ID
+    38: "Magicka Recovery",         # Glyph of Magicka Recovery
+    39: "Stamina Recovery",         # Glyph of Stamina Recovery
+    40: "Health Recovery",          # Glyph of Health Recovery
+    41: "Increase Magical Harm",    # Spell Damage enchant
+    43: "Spell Critical",           # Glyph of Spell Critical
+    44: "Weapon Critical",          # Glyph of Weapon Critical
+    45: "Spell Resist",             # Glyph of Spell Resist
+    46: "Physical Resist",          # Glyph of Physical Resist
+    47: "Reduce Spell Cost",        # Glyph of Reduce Spell Cost (alternate ID)
+    48: "Reduce Feat Cost",         # Glyph of Reduce Feat Cost (alternate ID)
 }
 
 

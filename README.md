@@ -1,4 +1,4 @@
-# ESO Build-O-Rama
+# ESOBuild.com
 
 Automated analysis and visualization of top-performing Elder Scrolls Online trial builds from ESO Logs.
 

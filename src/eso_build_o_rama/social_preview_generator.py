@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class SocialPreviewGenerator:
-    """Generates social media preview images for the ESO Build-o-rama site."""
+    """Generates social media preview images for the ESOBuild.com site."""
     
     def __init__(self, static_dir: str = "static"):
         """

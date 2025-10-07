@@ -176,7 +176,7 @@ class PageGenerator:
         # Render template
         context = {
             'trials': trials,
-            'generated_date': datetime.utcnow().strftime('%Y-%m-%d %H:%M'),
+            'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'cache_stats': cache_stats,
             'is_develop': self.is_develop
         }

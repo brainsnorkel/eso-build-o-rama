@@ -440,12 +440,12 @@ class ESOLogsAPIClient:
             Table data dictionary (with combatant info if requested)
         """
         # Create cache key based on parameters
+        # MUST include time range to distinguish different fights in the same report
         cache_key = f"table_{report_code}_{data_type}_{include_combatant_info}"
         if fight_ids:
             cache_key += f"_fights_{'_'.join(map(str, sorted(fight_ids)))}"
-        # Removed time range from cache key to increase cache effectiveness
-        # if start_time and end_time:
-        #     cache_key += f"_time_{start_time}_{end_time}"
+        if start_time and end_time:
+            cache_key += f"_time_{int(start_time)}_{int(end_time)}"
         
         # Try to get from cache first
         if use_cache and self.cache_manager:

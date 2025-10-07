@@ -82,7 +82,7 @@ class PageGenerator:
             'update_version': update_version,
             'best_player': build.best_player,
             'trial_slug': trial_slug,
-            'generated_date': datetime.now().strftime('%Y-%m-%d'),
+            'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
             'page_title': self._get_page_title(build),
             'meta_description': self._get_meta_description(build),
             'is_develop': self.is_develop
@@ -176,7 +176,7 @@ class PageGenerator:
         # Render template
         context = {
             'trials': trials,
-            'generated_date': datetime.now().strftime('%Y-%m-%d'),
+            'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
             'cache_stats': cache_stats,
             'is_develop': self.is_develop
         }
@@ -229,7 +229,7 @@ class PageGenerator:
         context = {
             'trial_name': trial_name,
             'bosses': sorted_bosses,
-            'generated_date': datetime.now().strftime('%Y-%m-%d'),
+            'generated_date': datetime.now().strftime('%Y-%m-%d %H:%M'),
             'is_develop': self.is_develop
         }
         html = template.render(**context)

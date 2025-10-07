@@ -7,6 +7,7 @@ import asyncio
 import json
 import logging
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -21,6 +22,7 @@ from .page_generator import PageGenerator
 from .models import CommonBuild
 from .data_store import DataStore
 from .cache_manager import CacheManager
+from .social_preview_generator import SocialPreviewGenerator
 
 # Configure logging
 logging.basicConfig(
@@ -89,6 +91,10 @@ class ESOBuildORM:
         logger.info("="*60)
         
         try:
+            # Generate social media preview images first
+            logger.info("Generating social media preview images...")
+            self._generate_social_previews()
+            
             # Load trials data
             all_trials = self._load_trials()
             
@@ -252,6 +258,28 @@ class ESOBuildORM:
             return most_common
         
         return "unknown"
+    
+    def _generate_social_previews(self):
+        """Generate social media preview images."""
+        try:
+            output_dir = self.get_output_directory()
+            is_develop = 'dev' in output_dir.lower()
+            
+            generator = SocialPreviewGenerator()
+            
+            # Generate main preview
+            main_preview = generator.create_main_preview(is_develop)
+            logger.info(f"Generated main social preview: {main_preview}")
+            
+            # Copy to static directory for web serving
+            static_dir = Path("static")
+            static_dir.mkdir(exist_ok=True)
+            
+            main_filename = "social-preview-dev.png" if is_develop else "social-preview.png"
+            shutil.copy2(main_preview, static_dir / main_filename)
+            
+        except Exception as e:
+            logger.warning(f"Failed to generate social media previews: {e}")
     
     def _print_summary(
         self,

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (2025-01-XX - Social Media Preview System)
+- **Social Media Preview Functionality**: Comprehensive social media preview system for better link sharing
+  - Added `social_preview_generator.py` with PIL-based image generation
+  - Added Open Graph and Twitter Card meta tags to all HTML templates
+  - Added Pillow dependency for image generation capabilities
+  - Added page-specific social media metadata blocks for build, trial, and home pages
+  - Added automatic social preview generation during build process
+  - Added helper scripts for manual preview generation and testing
+  - Generated 1200x630px preview images with site branding and color schemes
+  - Supports both production (green/teal) and development (orange/amber) themes
+
 ### Removed (2025-01-XX - Social Media Preview Cleanup)
 - **Social Media Preview Functionality**: Removed social media preview generation system
   - Removed `social_preview_generator.py` and related image generation code

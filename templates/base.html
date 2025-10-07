@@ -4,6 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block meta_description %}Common builds found in top esologs{% endblock %}">
+    
+    <!-- Social Media Meta Tags -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{% block title %}BS ESO Meta Build Explorer{% if is_develop %} [DEV]{% endif %}{% endblock %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% block meta_description %}Common builds found in top esologs{% endblock %}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% if is_develop %}https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/develop/static/social-preview-dev.png{% else %}https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/main/static/social-preview.png{% endif %}{% endblock %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{% block og_image_alt %}ESO Build-o-rama - Meta Build Explorer{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.url if request else 'https://brainsnorkel.github.io/eso-build-o-rama/' }}{% endblock %}">
+    <meta property="og:site_name" content="ESO Build-o-rama">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@brainsnorkel">
+    <meta name="twitter:creator" content="@brainsnorkel">
+    <meta name="twitter:title" content="{% block twitter_title %}{% block og_title %}{% block title %}BS ESO Meta Build Explorer{% if is_develop %} [DEV]{% endif %}{% endblock %}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{% block og_description %}{% block meta_description %}Common builds found in top esologs{% endblock %}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% block og_image %}{% if is_develop %}https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/develop/static/social-preview-dev.png{% else %}https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/main/static/social-preview.png{% endif %}{% endblock %}{% endblock %}">
+    <meta name="twitter:image:alt" content="{% block twitter_image_alt %}{% block og_image_alt %}ESO Build-o-rama - Meta Build Explorer{% endblock %}{% endblock %}">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="author" content="brainsnorkel">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="{% if is_develop %}#f39c12{% else %}#11998e{% endif %}">
+    
     <title>{% block title %}BS ESO Meta Build Explorer{% if is_develop %} [DEV]{% endif %}{% endblock %}</title>
     <style>
         {% if is_develop %}

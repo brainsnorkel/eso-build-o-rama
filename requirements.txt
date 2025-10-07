@@ -19,6 +19,9 @@ markdown>=3.5.0
 # Data processing
 pydantic>=2.0.0
 
+# Image generation for social media previews
+Pillow>=10.0.0
+
 # Development dependencies
 pytest>=7.4.0
 pytest-asyncio>=0.21.0

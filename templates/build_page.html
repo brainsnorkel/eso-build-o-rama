@@ -4,6 +4,20 @@
 
 {% block meta_description %}{{ meta_description }}{% endblock %}
 
+{% block og_type %}article{% endblock %}
+
+{% block og_title %}{{ build.get_display_name() }} - {{ build.trial_name }} {{ build.boss_name }}{% endblock %}
+
+{% block og_description %}{{ build.get_display_name() }} build achieving {{ best_player.dps|format_dps }} DPS in {{ build.trial_name }} {{ build.boss_name }} by {{ best_player.player_name }}. View detailed gear, abilities, and champion points.{% endblock %}
+
+{% block og_image_alt %}{{ build.get_display_name() }} build for {{ build.trial_name }} {{ build.boss_name }} - {{ best_player.dps|format_dps }} DPS{% endblock %}
+
+{% block twitter_title %}{{ build.get_display_name() }} - {{ build.trial_name }} {{ build.boss_name }}{% endblock %}
+
+{% block twitter_description %}{{ build.get_display_name() }} build achieving {{ best_player.dps|format_dps }} DPS in {{ build.trial_name }} {{ build.boss_name }} by {{ best_player.player_name }}.{% endblock %}
+
+{% block twitter_image_alt %}{{ build.get_display_name() }} build for {{ build.trial_name }} {{ build.boss_name }} - {{ best_player.dps|format_dps }} DPS{% endblock %}
+
 {% block content %}
 <nav style="margin-bottom: 20px; font-size: 0.9em;">
     <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>

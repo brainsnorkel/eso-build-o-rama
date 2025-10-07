@@ -1,6 +1,6 @@
 # Testing Guide for ESO Build-O-Rama
 
-This guide explains how to test the staggered trial scanning system and verify that incremental updates work correctly.
+This guide explains how to test the staggered trial scanning system, social media previews, and verify that incremental updates work correctly.
 
 ## Test Setup
 
@@ -8,6 +8,7 @@ This guide explains how to test the staggered trial scanning system and verify t
 1. ESO Logs API credentials configured in `.env` file
 2. Python virtual environment activated
 3. Dependencies installed: `pip install -r requirements.txt`
+4. Pillow installed for social media preview generation
 
 ### Environment Variables
 Make sure these are set in your `.env` file:
@@ -15,6 +16,31 @@ Make sure these are set in your `.env` file:
 ESOLOGS_ID=your_client_id
 ESOLOGS_SECRET=your_client_secret
 ```
+
+## Social Media Preview Testing
+
+### Generate Preview Images
+```bash
+# Generate production previews
+python generate_social_previews.py
+
+# Generate development previews  
+python generate_social_previews.py --dev
+
+# Test preview generation
+python test_social_previews.py
+```
+
+### Test Social Media Links
+1. **Facebook/Meta**: Use [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+2. **Twitter/X**: Use [Twitter Card Validator](https://cards-dev.twitter.com/validator)
+3. **LinkedIn**: Use [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
+4. **Discord**: Share a link in Discord to see the preview
+
+### Verify Meta Tags
+Check that pages include proper Open Graph and Twitter Card meta tags:
+- `og:title`, `og:description`, `og:image`
+- `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
 
 ## Test Cases
 

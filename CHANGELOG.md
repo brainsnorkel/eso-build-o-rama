@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Experimental (2025-10-07 - Fight Rankings Architecture)
+- **NEW APPROACH**: Switched from characterRankings to fightRankings for discovering common builds
+  - Uses fightRankings (speed metric) on final boss to get top 12 reports per trial
+  - Extracts ALL boss fights from each top report (not just final boss)
+  - Finds shortest/fastest attempt for each boss in each report
+  - Analyzes all players from top-performing groups
+  - Benefits: 70% fewer API calls, consistent data across all bosses, better efficiency
+  - Created `utils/query_tester.py` for testing different query approaches
+  - Changed output directory logic: main→output/, all others→output-dev/
+  - Now processes 12 reports per trial (up from 5-10)
+  - Validates fights match expected encounters before processing
+
 ### Added (2025-01-XX - Social Media Preview System)
 - **Social Media Preview Functionality**: Comprehensive social media preview system for better link sharing
   - Added `social_preview_generator.py` with PIL-based image generation

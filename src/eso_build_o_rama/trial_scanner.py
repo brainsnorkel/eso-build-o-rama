@@ -31,87 +31,69 @@ class TrialScanner:
         self.data_parser = DataParser()
         self.build_analyzer = BuildAnalyzer()
     
-    async def scan_trial(
+    def _find_best_fight_for_encounter(
         self,
-        trial_zone_id: int,
-        trial_name: str,
-        encounter_id: Optional[int] = None,
-        top_n: int = 5
-    ) -> List[TrialReport]:
+        report_data: Dict[str, Any],
+        encounter_name: str
+    ) -> Optional[Dict[str, Any]]:
         """
-        Scan a specific trial and analyze builds.
+        Find the shortest fight for a specific encounter in a report.
         
         Args:
-            trial_zone_id: Zone ID for the trial
-            trial_name: Name of the trial
-            encounter_id: Optional specific encounter/boss ID
-            top_n: Number of top logs to fetch (default: 5)
+            report_data: Full report data
+            encounter_name: Name of the encounter/boss to find
             
         Returns:
-            List of TrialReport objects, one per boss fight
+            Fight dict with the shortest duration, or None if no fights found
         """
-        logger.info(f"Scanning trial: {trial_name} (Zone ID: {trial_zone_id})")
+        fights = report_data.get('fights', [])
         
-        try:
-            # Get top logs for this trial
-            rankings = await self.api_client.get_top_logs(
-                zone_id=trial_zone_id,
-                encounter_id=encounter_id,
-                limit=top_n
-            )
+        # Find all fights for this encounter (with difficulty, which indicates boss fights)
+        matching_fights = []
+        for fight in fights:
+            fight_name = fight.get('name', '')
+            difficulty = fight.get('difficulty')
             
-            if not rankings:
-                logger.warning(f"No rankings found for {trial_name}")
-                return []
-            
-            # Process each log
-            trial_reports = []
-            for ranking in rankings:
-                report_code = ranking.get('report', {}).get('code')
-                fight_id = ranking.get('report', {}).get('fightID')
-                
-                if not report_code or not fight_id:
-                    continue
-                
-                try:
-                    report = await self._process_report(
-                        report_code,
-                        fight_id,
-                        trial_name
-                    )
-                    if report:
-                        trial_reports.append(report)
-                except (KeyError, ValueError, TypeError) as e:
-                    logger.error(f"Error processing report {report_code}: {e}")
-                    continue
-                except Exception as e:
-                    logger.error(f"Unexpected error processing report {report_code}: {e}")
-                    continue
-            
-            logger.info(f"Processed {len(trial_reports)} reports for {trial_name}")
-            return trial_reports
-            
-        except (KeyError, ValueError, TypeError) as e:
-            logger.error(f"Error scanning trial {trial_name}: {e}")
-            return []
-        except Exception as e:
-            logger.error(f"Unexpected error scanning trial {trial_name}: {e}")
-            return []
+            # Match by name and prefer fights with difficulty set (real boss attempts)
+            if fight_name == encounter_name and difficulty:
+                duration = fight.get('endTime', 0) - fight.get('startTime', 0)
+                matching_fights.append({
+                    'id': fight.get('id'),
+                    'duration': duration,
+                    'fight': fight
+                })
+        
+        if not matching_fights:
+            logger.debug(f"No fights with difficulty found for '{encounter_name}'")
+            return None
+        
+        # Return the shortest fight (fastest clear)
+        shortest = min(matching_fights, key=lambda x: x['duration'])
+        logger.info(f"Found {len(matching_fights)} attempts for {encounter_name}, using fastest (fight {shortest['id']}, {shortest['duration']/1000:.1f}s)")
+        return shortest['fight']
     
-    async def _process_report(
+    async def _process_single_fight(
         self,
+        report_data: Dict[str, Any],
         report_code: str,
         fight_id: int,
-        trial_name: str
+        trial_name: str,
+        expected_encounter_name: Optional[str] = None
     ) -> Optional[TrialReport]:
-        """Process a single report to extract builds."""
-        logger.info(f"Processing report {report_code}, fight {fight_id}")
+        """
+        Process a single fight from an already-fetched report.
         
-        # Fetch report data
-        report_data = await self.api_client.get_report(report_code)
-        if not report_data:
-            logger.error(f"Failed to fetch report {report_code}")
-            return None
+        Args:
+            report_data: Already-fetched report data
+            report_code: Report code
+            fight_id: Fight ID to process
+            trial_name: Name of the trial
+            expected_encounter_name: Expected encounter name for validation
+            
+        Returns:
+            TrialReport or None
+        """
+        logger.info(f"Processing fight {fight_id} from report {report_code}")
         
         # Get fight info
         fight_info = None
@@ -121,8 +103,16 @@ class TrialScanner:
                 break
         
         if not fight_info:
-            logger.error(f"Fight {fight_id} not found in report")
+            logger.error(f"Fight {fight_id} not found in report {report_code}")
             return None
+        
+        # Validate fight is for the expected encounter
+        fight_name = fight_info.get('name', '')
+        if expected_encounter_name and fight_name != expected_encounter_name:
+            logger.warning(f"Fight {fight_id} is '{fight_name}', expected '{expected_encounter_name}' - skipping")
+            return None
+        
+        logger.info(f"✓ Processing {fight_name} (fight {fight_id})")
         
         # Fetch table data with combatant info - get both Summary (for account names/roles) and DamageDone (for performance)
         summary_data = await self.api_client.get_report_table(
@@ -286,22 +276,78 @@ class TrialScanner:
                 encounters = trial_zone['encounters']
                 logger.info(f"Found {len(encounters)} encounters for {trial_name}")
                 
-                # Scan each encounter
+                if not encounters:
+                    logger.warning(f"No encounters found for {trial_name}")
+                    continue
+                
+                # Step 1: Get top reports from FINAL BOSS only (represents full trial clears)
+                final_boss = encounters[-1]  # Last encounter is the final boss
+                final_boss_id = final_boss['id']
+                final_boss_name = final_boss['name']
+                
+                logger.info(f"Getting top reports from final boss: {final_boss_name} (ID: {final_boss_id})")
+                top_reports_list = await self.api_client.get_top_logs(
+                    zone_id=trial_id,
+                    encounter_id=final_boss_id,
+                    limit=top_n
+                )
+                
+                if not top_reports_list:
+                    logger.warning(f"No rankings found for final boss {final_boss_name}")
+                    continue
+                
+                logger.info(f"Found {len(top_reports_list)} top-ranked reports from {final_boss_name}")
+                
+                # Step 2: For each top report, extract ALL boss fights from the trial
                 trial_reports = []
-                for encounter in encounters:
-                    enc_id = encounter['id']
-                    enc_name = encounter['name']
+                for report_data in top_reports_list:
+                    report_code = report_data.get('code')
                     
-                    logger.info(f"Scanning encounter: {enc_name} (ID: {enc_id})")
-                    reports = await self.scan_trial(
-                        trial_zone_id=trial_id,
-                        trial_name=trial_name,
-                        encounter_id=enc_id,
-                        top_n=top_n
-                    )
+                    if not report_code:
+                        continue
                     
-                    if reports:
-                        trial_reports.extend(reports)
+                    try:
+                        # Fetch full report once
+                        full_report = await self.api_client.get_report(report_code)
+                        if not full_report:
+                            logger.error(f"Failed to fetch report {report_code}")
+                            continue
+                        
+                        logger.info(f"Processing report {report_code} for all bosses")
+                        
+                        # Process each boss encounter from this report
+                        for encounter in encounters:
+                            enc_id = encounter['id']
+                            enc_name = encounter['name']
+                            
+                            # Find the shortest/fastest kill for this boss in the report
+                            best_fight = self._find_best_fight_for_encounter(
+                                full_report,
+                                enc_name
+                            )
+                            
+                            if not best_fight:
+                                logger.debug(f"No fights found for {enc_name} in report {report_code}")
+                                continue
+                            
+                            # Process this boss fight
+                            try:
+                                trial_report = await self._process_single_fight(
+                                    full_report,
+                                    report_code,
+                                    best_fight['id'],
+                                    trial_name,
+                                    enc_name
+                                )
+                                if trial_report:
+                                    trial_reports.append(trial_report)
+                            except Exception as e:
+                                logger.error(f"Error processing {enc_name} (fight {best_fight['id']}) in report {report_code}: {e}")
+                                continue
+                                
+                    except Exception as e:
+                        logger.error(f"Error processing report {report_code}: {e}")
+                        continue
                 
                 if trial_reports:
                     all_reports[trial_name] = trial_reports

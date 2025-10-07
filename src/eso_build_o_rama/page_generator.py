@@ -229,7 +229,7 @@ class PageGenerator:
         context = {
             'trial_name': trial_name,
             'bosses': sorted_bosses,
-            'generated_date': datetime.utcnow().strftime('%Y-%m-%d %H:%M'),
+            'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'is_develop': self.is_develop
         }
         html = template.render(**context)

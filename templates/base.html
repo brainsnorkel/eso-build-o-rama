@@ -715,7 +715,7 @@
                 </p>
                 <p style="margin-top: 15px; font-size: 0.85em;">
                     © 2025 <a href="https://github.com/brainsnorkel" target="_blank">@brainsnorkel</a> | 
-                    Generated: {{ generated_date }} UTC
+                    Generated: <span id="generated-timestamp" data-utc="{{ generated_date }}">{{ generated_date }}</span>
                 </p>
                 <p style="margin-top: 10px; font-size: 0.85em;">
                     Report issues here: <a href="https://github.com/brainsnorkel/eso-build-o-rama/issues" target="_blank">github.com/brainsnorkel/eso-build-o-rama/issues</a>
@@ -723,5 +723,29 @@
             </div>
         </div>
     </footer>
+    
+    <script>
+        // Convert UTC timestamp to viewer's local timezone
+        (function() {
+            const timestampEl = document.getElementById('generated-timestamp');
+            if (timestampEl) {
+                const utcTime = timestampEl.getAttribute('data-utc');
+                if (utcTime) {
+                    const date = new Date(utcTime);
+                    // Format: "YYYY-MM-DD HH:MM" in local timezone
+                    const formatted = date.getFullYear() + '-' +
+                        String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                        String(date.getDate()).padStart(2, '0') + ' ' +
+                        String(date.getHours()).padStart(2, '0') + ':' +
+                        String(date.getMinutes()).padStart(2, '0');
+                    
+                    // Get timezone abbreviation
+                    const tzString = date.toLocaleTimeString('en-us', {timeZoneName:'short'}).split(' ')[2];
+                    
+                    timestampEl.textContent = formatted + ' ' + tzString;
+                }
+            }
+        })();
+    </script>
 </body>
 </html>

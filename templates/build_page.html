@@ -19,14 +19,24 @@
 {% block twitter_image_alt %}{{ build.get_display_name() }} build for {{ build.trial_name }} {{ build.boss_name }} - {{ best_player.dps|format_dps }} DPS{% endblock %}
 
 {% block content %}
-<nav style="margin-bottom: 20px; font-size: 0.9em;">
-    <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>
-    <span style="color: #666; margin: 0 10px;">/</span>
-    <a href="{{ trial_slug }}.html" style="color: #38ef7d; text-decoration: none;">{{ build.trial_name }}</a>
-    <span style="color: #666; margin: 0 10px;">/</span>
-    <span style="color: #a8edea;">{{ build.boss_name }}</span>
-    <span style="color: #666; margin: 0 10px;">/</span>
-    <span style="color: #fff;">{{ build.get_display_name() }}</span>
+<nav aria-label="Breadcrumb" style="margin-bottom: 20px; font-size: 0.9em;">
+    <ol style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; align-items: center;">
+        <li style="display: flex; align-items: center;">
+            <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>
+            <span style="color: #666; margin: 0 10px;" aria-hidden="true">/</span>
+        </li>
+        <li style="display: flex; align-items: center;">
+            <a href="{{ trial_slug }}.html" style="color: #38ef7d; text-decoration: none;">{{ build.trial_name }}</a>
+            <span style="color: #666; margin: 0 10px;" aria-hidden="true">/</span>
+        </li>
+        <li style="display: flex; align-items: center;">
+            <span style="color: #a8edea;">{{ build.boss_name }}</span>
+            <span style="color: #666; margin: 0 10px;" aria-hidden="true">/</span>
+        </li>
+        <li>
+            <span style="color: #fff;" aria-current="page">{{ build.get_display_name() }}</span>
+        </li>
+    </ol>
 </nav>
 
 <div class="card">
@@ -43,7 +53,11 @@
             <div class="value">{{ best_player.dps|format_dps }} DPS</div>
             <div style="font-size: 0.8em; margin-top: 5px;">
                 <div>{{ best_player.player_name }} - {{ best_player.character_name }}</div>
-                <a href="{{ best_player.player_url }}" target="_blank" style="color: #38ef7d; text-decoration: none; font-size: 0.9em;">
+                <a href="{{ best_player.player_url }}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   style="color: #38ef7d; text-decoration: none; font-size: 0.9em;"
+                   aria-label="View {{ best_player.player_name }}'s character {{ best_player.character_name }} on ESO Logs">
                     View on ESO Logs →
                 </a>
             </div>
@@ -62,13 +76,15 @@
     
     {% if best_player.abilities_bar1 %}
     <h4 style="margin-top: 15px; color: #a8edea;">
-        <span class="status-indicator status-online"></span>Bar 1 (Main)
+        <span class="status-indicator status-online" aria-hidden="true"></span>Bar 1 (Main)
     </h4>
     <div class="abilities-bar">
         {% for ability in best_player.abilities_bar1 %}
-        <div class="ability tooltip" data-tooltip="{{ ability.ability_name }}{% if ability.skill_line %} - {{ ability.skill_line }}{% endif %}">
+        <div class="ability">
             {% if ability.ability_icon %}
-            <img src="../static/icons/{{ ability.ability_icon }}.png" alt="{{ ability.ability_name }}" class="ability-icon">
+            <img src="../static/icons/{{ ability.ability_icon }}.png" 
+                 alt="{{ ability.ability_name }}{% if ability.skill_line %} from {{ ability.skill_line }}{% endif %}" 
+                 class="ability-icon">
             {% endif %}
             <div class="ability-name">{{ ability.ability_name or 'Empty' }}</div>
         </div>
@@ -78,13 +94,15 @@
     
     {% if best_player.abilities_bar2 %}
     <h4 style="margin-top: 15px; color: #a8edea;">
-        <span class="status-indicator status-online"></span>Bar 2 (Backup)
+        <span class="status-indicator status-online" aria-hidden="true"></span>Bar 2 (Backup)
     </h4>
     <div class="abilities-bar">
         {% for ability in best_player.abilities_bar2 %}
-        <div class="ability tooltip" data-tooltip="{{ ability.ability_name }}{% if ability.skill_line %} - {{ ability.skill_line }}{% endif %}">
+        <div class="ability">
             {% if ability.ability_icon %}
-            <img src="../static/icons/{{ ability.ability_icon }}.png" alt="{{ ability.ability_name }}" class="ability-icon">
+            <img src="../static/icons/{{ ability.ability_icon }}.png" 
+                 alt="{{ ability.ability_name }}{% if ability.skill_line %} from {{ ability.skill_line }}{% endif %}" 
+                 class="ability-icon">
             {% endif %}
             <div class="ability-name">{{ ability.ability_name or 'Empty' }}</div>
         </div>
@@ -96,14 +114,16 @@
 
 {% if best_player.gear %}
 <div class="card">
+    <h3>Gear</h3>
     <table>
+        <caption class="sr-only">Equipped gear and sets for {{ best_player.character_name }}</caption>
         <thead>
             <tr>
-                <th>Slot</th>
-                <th>Set</th>
-                <th>Item</th>
-                <th>Trait</th>
-                <th>Enchantment</th>
+                <th scope="col">Slot</th>
+                <th scope="col">Set</th>
+                <th scope="col">Item</th>
+                <th scope="col">Trait</th>
+                <th scope="col">Enchantment</th>
             </tr>
         </thead>
         <tbody>
@@ -153,11 +173,12 @@
 <div class="card">
     <h3>Other Example Players ({{ build.all_players|length }} total)</h3>
     <table>
+        <caption class="sr-only">Other players using this build</caption>
         <thead>
             <tr>
-                <th>Player</th>
-                <th>Character</th>
-                <th>DPS</th>
+                <th scope="col">Player</th>
+                <th scope="col">Character</th>
+                <th scope="col">DPS</th>
             </tr>
         </thead>
         <tbody>
@@ -171,7 +192,11 @@
             <tr>
                 <td data-label="Player">
                     <div>{{ player.player_name }}</div>
-                    <a href="{{ player.player_url }}" target="_blank" style="color: #38ef7d; text-decoration: none; font-size: 0.8em;">
+                    <a href="{{ player.player_url }}" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       style="color: #38ef7d; text-decoration: none; font-size: 0.8em;"
+                       aria-label="View {{ player.player_name }}'s report on ESO Logs">
                         View on ESO Logs →
                     </a>
                 </td>

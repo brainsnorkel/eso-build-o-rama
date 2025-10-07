@@ -45,6 +45,17 @@ A "build" consists of:
 - Ability icons and visual set indicators
 - Direct links to source ESO Logs reports
 
+### Accessibility
+- **WCAG 2.1 Level AA compliant** for screen reader users
+- Skip-to-main-content link for keyboard navigation
+- ARIA landmarks and semantic HTML throughout
+- Proper table headers, captions, and scope attributes
+- Meaningful alt text for all images
+- High-contrast focus indicators for keyboard navigation
+- Accessible breadcrumb navigation
+- Screen reader text for visual indicators (role emojis)
+- See [docs/accessibility.md](docs/accessibility.md) for full details
+
 ### Performance
 - Response caching reduces API calls by approximately 97%
 - Incremental data storage between scans

@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (2025-10-07 - Screen Reader Accessibility)
+- **WCAG 2.1 Level AA Compliance**: Comprehensive accessibility improvements for screen reader users
+  - Added skip-to-main-content link for keyboard navigation
+  - Added ARIA landmarks (banner, main, contentinfo) to all templates
+  - Added `.sr-only` utility class for screen-reader-only content
+  - Added enhanced focus indicators (3px solid outline with 2px offset) for keyboard navigation
+  - Added table captions to all data tables (visually hidden but accessible)
+  - Added `scope="col"` attributes to all table headers
+  - Added screen reader text for role indicators (DPS, Healer, Tank) alongside visual emojis
+  - Added `aria-label` attributes to navigation links for better context
+  - Added semantic breadcrumb navigation with proper ARIA structure
+  - Added meaningful alt text to ability icons including skill line information
+  - Added `rel="noopener noreferrer"` to all external links for security
+  - Created comprehensive `docs/accessibility.md` with testing results and known limitations
+  - Improved link text with descriptive aria-labels for "View Build" links
+  - Implemented proper heading hierarchy throughout all pages
+  - Used `aria-hidden="true"` for decorative elements and visual separators
+
 ### Experimental (2025-10-07 - Fight Rankings Architecture)
 - **NEW APPROACH**: Switched from characterRankings to fightRankings for discovering common builds
   - Uses fightRankings (speed metric) on final boss to get top 12 reports per trial

@@ -25,7 +25,9 @@
     
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
         {% for trial in trials %}
-        <a href="{{ trial.slug }}.html" style="text-decoration: none;">
+        <a href="{{ trial.slug }}.html" 
+           style="text-decoration: none;"
+           aria-label="View builds for {{ trial.name }}">
             <div style="background: linear-gradient(135deg, rgba(56, 239, 125, 0.1) 0%, rgba(17, 153, 142, 0.1) 100%); 
                         padding: 20px; 
                         border-radius: 12px; 

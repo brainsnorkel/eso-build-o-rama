@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed (2025-01-XX - Social Media Preview Cleanup)
+- **Social Media Preview Functionality**: Removed social media preview generation system
+  - Removed `social_preview_generator.py` and related image generation code
+  - Removed Open Graph and Twitter Card meta tags from HTML templates
+  - Removed Pillow dependency from requirements.txt
+  - Simplified page templates by removing social media metadata blocks
+  - Fixed datetime generation to use UTC instead of local time in page generator
+
 ### Fixed (2025-10-06 - Per-Player Mundus Detection)
 - **Correct Per-Player Mundus Stones**: Fixed issue where build pages showed incorrect mundus stones
   - Problem: Buffs table query returned ALL players' buffs, taking first mundus found (could be any player)

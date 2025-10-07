@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate social media preview images for the ESO Build-o-rama site.
+Generate social media preview images for the ESOBuild.com site.
 """
 
 import sys

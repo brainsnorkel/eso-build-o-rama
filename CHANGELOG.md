@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed (2025-10-07 - Site Title Rebranding)
+- **Site Title Update**: Changed site name from "ESO Build-o-rama" to "ESOBuild.com"
+  - Updated all template meta tags (Open Graph, Twitter Card)
+  - Updated page titles and headers in base.html and home.html
+  - Updated social preview generator class docstrings
+  - Updated README.md main title
+  - Consistent branding across all pages and documentation
+
 ### Added (2025-10-07 - Screen Reader Accessibility)
 - **WCAG 2.1 Level AA Compliance**: Comprehensive accessibility improvements for screen reader users
   - Added skip-to-main-content link for keyboard navigation

@@ -136,22 +136,27 @@ class CommonBuild:
     def get_display_name(self) -> str:
         """Get a human-readable name for the build."""
         subclass_names = {
+            "animal": "Animal Companions",
+            "ardent": "Ardent Flame",
             "ass": "Assassination",
-            "ardent": "Ardent Flame", 
-            "herald": "Herald of the Tome",
-            "dawn": "Dawn's Wrath",
-            "shadow": "Shadow",
-            "siphon": "Siphoning",
-            "spear": "Aedric Spear",
-            "resto": "Restoring Light",
-            "storm": "Storm Calling",
+            "bone": "Bone Tyrant",
+            "curative": "Curative Runeforms",
             "daedric": "Daedric Summoning",
             "dark": "Dark Magic",
-            "bone": "Bone Tyrant",
-            "living": "Living Death",
-            "winter": "Winter's Embrace",
+            "dawn": "Dawn's Wrath",
             "draconic": "Draconic Power",
             "earthen": "Earthen Heart",
+            "grave": "Grave Lord",
+            "green": "Green Balance",
+            "herald": "Herald of the Tome",
+            "living": "Living Death",
+            "resto": "Restoring Light",
+            "shadow": "Shadow",
+            "siphon": "Siphoning",
+            "soldier": "Soldier of Apocrypha",
+            "spear": "Aedric Spear",
+            "storm": "Storm Calling",
+            "winter": "Winter's Embrace",
             "x": "Unknown"
         }
         

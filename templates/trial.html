@@ -48,7 +48,10 @@
                     {% endif %}
                 </td>
                 <td data-label="Build"><strong>{{ build.get_display_name() }}</strong></td>
-                <td data-label="Sets">{{ build.sets|join(', ') if build.sets else 'Various' }}</td>
+                <td data-label="Sets">
+                    {% set sorted_sets = build.get_sorted_sets() %}
+                    {{ sorted_sets|join(', ') if sorted_sets else 'Various' }}
+                </td>
                 <td data-label="Frequency">{{ build.count }} players in {{ build.report_count }} reports</td>
                 <td data-label="DPS">{{ build.best_player.dps|format_dps }}</td>
                 <td data-label="Player">{{ build.best_player.player_name }}</td>

@@ -1,0 +1,72 @@
+# Cursor AI Rules for ESO Build-O-Rama
+
+## Pre-Merge to Main Workflow
+
+**IMPORTANT**: Before merging any branch to `main`, you MUST run the deployment check:
+
+```bash
+./scripts/pre-merge-check.sh output-dev
+```
+
+Or manually:
+
+```bash
+python3 scripts/deployment_check.py output-dev
+```
+
+### Required Steps Before Merging to Main:
+
+1. ✅ Generate test build: `python3 -m src.eso_build_o_rama.main --trial-id 1`
+2. ✅ Run deployment check: `./scripts/pre-merge-check.sh output-dev`
+3. ✅ All checks must pass (exit code 0)
+4. ✅ Only then merge: `git checkout main && git merge develop`
+
+### What Gets Checked:
+
+- Home page loads with trial content
+- Trial pages have bosses and builds
+- Build pages have player info
+- Mundus stones are not "Unknown"
+- No missing ability icons
+
+### Bypass (Emergency Only):
+
+Only use `--no-verify` on git push if absolutely necessary and you understand the risks.
+
+## Development Workflow
+
+### Branch Strategy:
+- `develop` - Main development branch
+- `feature/*` - New features
+- `bugfix/*` - Bug fixes
+- `main` - Production-ready code (protected)
+
+### Before Committing:
+- Run linter if available
+- Test locally if possible
+- Write clear commit messages
+
+### Testing Locally:
+```bash
+# Generate builds
+python3 -m src.eso_build_o_rama.main --trial-id <id>
+
+# Serve locally
+cd output-dev && python3 -m http.server 8080
+
+# Test at http://localhost:8080
+```
+
+## Code Style
+
+- Follow PEP 8 for Python
+- Use type hints where possible
+- Add docstrings to public functions
+- Keep functions focused and small
+
+## When Making Changes to Templates:
+
+- Test in output-dev first
+- Verify all trials load
+- Check mobile responsiveness
+- Ensure ESO-Hub tooltips work (if applicable)

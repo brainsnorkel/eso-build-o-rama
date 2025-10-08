@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (2025-10-08 - SEO Improvements)
+- **Comprehensive SEO Implementation**: Major improvements for search engine discoverability
+  - Added automatic sitemap.xml generation with all pages (home, trials, builds)
+  - Added robots.txt generation with crawler directives and sitemap reference
+  - Implemented Schema.org JSON-LD structured data on all pages:
+    - WebSite schema on home page with Elder Scrolls Online context
+    - BreadcrumbList schema on all pages for navigation hierarchy
+    - HowTo schema on build pages with gear supplies and ability steps
+  - Added canonical URLs to all pages to prevent duplicate content issues
+  - Enhanced meta descriptions with keyword-rich, role-specific content
+  - Added keywords meta tag with relevant ESO search terms
+  - Improved page titles with role and location context
+  - Updated all templates (base.html, home.html, trial.html, build_page.html) with SEO blocks
+  - Added SEO validation section to TESTING.md with validation tools and procedures
+  - Documented SEO features in README.md with submission instructions
+- **Home Page Cleanup**: Removed cache effectiveness statistics from trial boxes for cleaner UI
+
 ### Changed (2025-10-08 - Cache Organization & Performance Monitoring)
 - **Improved Cache Organization**: Reorganized cache directory structure for better maintainability
   - Created subdirectories for different cache types: `buffs/`, `tables/`, `rankings/`, `reports/`

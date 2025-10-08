@@ -1,20 +1,47 @@
 {% extends "base.html" %}
 
-{% block title %}{{ trial_name }} - Top Builds{% endblock %}
+{% block title %}{{ trial_name }} - ESO Trial Builds | ESOBuild.com{% endblock %}
 
-{% block meta_description %}Common meta builds from top players in {{ trial_name }}. Discover the most effective gear sets and abilities used by high-performing ESO players.{% endblock %}
+{% block meta_description %}Best {{ trial_name }} builds for Elder Scrolls Online. Common meta builds, gear sets, and abilities from top ESO Logs players. DPS, tank, and healer builds for all {{ trial_name }} boss encounters.{% endblock %}
 
-{% block og_title %}{{ trial_name }} - Top Builds{% endblock %}
+{% block keywords %}{{ trial_name }}, ESO {{ trial_name }}, {{ trial_name }} builds, ESO trial builds, {{ trial_name }} gear sets, Elder Scrolls Online {{ trial_name }}{% endblock %}
 
-{% block og_description %}Common meta builds from top players in {{ trial_name }}. Discover the most effective gear sets and abilities used by high-performing ESO players.{% endblock %}
+{% block canonical_url %}{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/{{ trial_name.lower().replace(' ', '-') }}.html{% else %}https://esobuild.com/{{ trial_name.lower().replace(' ', '-') }}.html{% endif %}{% endblock %}
+
+{% block og_title %}{{ trial_name }} - ESO Trial Builds{% endblock %}
+
+{% block og_description %}Best {{ trial_name }} builds for Elder Scrolls Online. Common meta builds, gear sets, and abilities from top ESO Logs players.{% endblock %}
 
 {% block og_image_alt %}{{ trial_name }} - Top Builds{% endblock %}
 
-{% block twitter_title %}{{ trial_name }} - Common ESO Meta Builds{% endblock %}
+{% block twitter_title %}{{ trial_name }} - ESO Meta Builds{% endblock %}
 
-{% block twitter_description %}Common meta builds from top players in {{ trial_name }}. Discover effective gear sets and strategies.{% endblock %}
+{% block twitter_description %}Best {{ trial_name }} builds from top players. Discover effective gear sets and strategies for all boss encounters.{% endblock %}
 
 {% block twitter_image_alt %}{{ trial_name }} - Top Builds{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/index.html{% else %}https://esobuild.com/index.html{% endif %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ trial_name }}",
+      "item": "{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/{{ trial_name.lower().replace(' ', '-') }}.html{% else %}https://esobuild.com/{{ trial_name.lower().replace(' ', '-') }}.html{% endif %}"
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <nav aria-label="Breadcrumb" style="margin-bottom: 20px; font-size: 0.9em;">

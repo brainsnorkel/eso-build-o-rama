@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}ESOBuild.com - Meta Build Explorer{% if is_develop %} [DEV]{% endif %}{% endblock %}
+{% block title %}ESOBuild.com - Elder Scrolls Online Trial Builds & Gear Sets{% if is_develop %} [DEV]{% endif %}{% endblock %}
 
-{% block meta_description %}Discover the most effective ESO builds from top-performing players. Explore meta builds, gear sets, and strategies for all trials based on real data from ESO Logs.{% endblock %}
+{% block meta_description %}Discover the best ESO builds from top-performing players. Complete trial builds, gear sets, abilities, and strategies for all Elder Scrolls Online trials based on real ESO Logs data. DPS, tank, and healer builds updated daily.{% endblock %}
 
-{% block og_title %}ESOBuild.com - Meta Build Explorer{% endblock %}
+{% block keywords %}ESO builds, Elder Scrolls Online builds, ESO trial builds, ESO gear sets, ESO meta builds, ESO Logs, ESO PvE builds, ESO DPS builds, ESO tank builds, ESO healer builds, ESO endgame builds, best ESO builds{% endblock %}
 
-{% block og_description %}Discover the most effective ESO builds from top-performing players. Explore meta builds, gear sets, and strategies for all trials based on real data from ESO Logs.{% endblock %}
+{% block canonical_url %}{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/index.html{% else %}https://esobuild.com/index.html{% endif %}{% endblock %}
+
+{% block og_title %}ESOBuild.com - Elder Scrolls Online Trial Builds{% endblock %}
+
+{% block og_description %}Discover the best ESO builds from top-performing players. Complete trial builds, gear sets, and strategies for all Elder Scrolls Online trials based on real ESO Logs data.{% endblock %}
 
 {% block og_image_alt %}ESOBuild.com - Meta Build Explorer for The Elder Scrolls Online{% endblock %}
 
-{% block twitter_title %}ESOBuild.com - Meta Build Explorer{% endblock %}
+{% block twitter_title %}ESOBuild.com - ESO Trial Builds{% endblock %}
 
-{% block twitter_description %}Discover the most effective ESO builds from top-performing players. Explore meta builds, gear sets, and strategies for all trials.{% endblock %}
+{% block twitter_description %}Best ESO builds from top players. Trial builds, gear sets, and strategies for all Elder Scrolls Online trials.{% endblock %}
 
 {% block twitter_image_alt %}ESOBuild.com - Meta Build Explorer for The Elder Scrolls Online{% endblock %}
 
@@ -48,11 +52,6 @@
                         <span style="color: #a8edea;">{{ trial.top_build.best_player.player_name }} - {{ trial.top_build.best_player.character_name }}</span>
                         <span style="color: #38ef7d; font-weight: 600;">{{ trial.top_build.best_player.dps|format_dps }}</span>
                     </div>
-                    {% if trial.cache_stats %}
-                    <div style="margin-top: 8px; font-size: 0.7em; color: #666; text-align: center;">
-                        Cache effectiveness: API calls obviated by cache: {{ trial.cache_stats.cache_hits }}. Hitting Esologs.com: {{ trial.cache_stats.cache_misses }}
-                    </div>
-                    {% endif %}
                 </div>
                 {% endif %}
             </div>

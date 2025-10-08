@@ -30,8 +30,30 @@
     <meta name="author" content="brainsnorkel">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="{% if is_develop %}#f39c12{% else %}#11998e{% endif %}">
+    <meta name="keywords" content="{% block keywords %}ESO, Elder Scrolls Online, builds, trial builds, gear sets, meta builds, ESO Logs, PvE builds, DPS builds, tank builds, healer builds{% endblock %}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{% block canonical_url %}{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/index.html{% else %}https://esobuild.com/index.html{% endif %}{% endblock %}">
     
     <title>{% block title %}ESO Meta Build Explorer{% if is_develop %} [DEV]{% endif %}{% endblock %}</title>
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ESOBuild.com",
+      "alternateName": "ESO Meta Build Explorer",
+      "url": "{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/{% else %}https://esobuild.com/{% endif %}",
+      "description": "Discover the most effective ESO builds from top-performing players. Explore meta builds, gear sets, and strategies for all trials based on real data from ESO Logs.",
+      "about": {
+        "@type": "VideoGame",
+        "name": "The Elder Scrolls Online",
+        "gamePlatform": ["PC", "PlayStation", "Xbox"]
+      }
+    }
+    </script>
+    {% block structured_data %}{% endblock %}
     <style>
         {% if is_develop %}
         /* Development Color Scheme - Orange/Amber */

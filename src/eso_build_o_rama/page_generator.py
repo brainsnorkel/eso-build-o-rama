@@ -291,8 +291,122 @@ class PageGenerator:
                 logger.error(f"Error generating page for {build.build_slug}: {e}")
                 continue
         
+        # Generate sitemap.xml
+        sitemap_path = self.generate_sitemap(all_builds, builds_by_trial)
+        generated_files['sitemap'] = sitemap_path
+        
+        # Generate robots.txt
+        robots_path = self.generate_robots_txt()
+        generated_files['robots'] = robots_path
+        
         logger.info(f"Generated {len(generated_files)} pages")
         return generated_files
+    
+    def generate_sitemap(
+        self,
+        all_builds: List[CommonBuild],
+        builds_by_trial: Dict[str, Dict[str, Dict[str, Any]]]
+    ) -> str:
+        """
+        Generate sitemap.xml for search engine discovery.
+        
+        Args:
+            all_builds: List of all common builds
+            builds_by_trial: Grouped builds by trial
+            
+        Returns:
+            Path to generated sitemap.xml file
+        """
+        logger.info("Generating sitemap.xml")
+        
+        # Determine base URL based on environment
+        base_url = "https://brainsnorkel.github.io/eso-build-o-rama" if self.is_develop else "https://esobuild.com"
+        
+        # Start XML document
+        xml_lines = [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+        ]
+        
+        # Current timestamp for lastmod
+        lastmod = datetime.utcnow().strftime('%Y-%m-%d')
+        
+        # Add home page
+        xml_lines.extend([
+            '  <url>',
+            f'    <loc>{base_url}/index.html</loc>',
+            f'    <lastmod>{lastmod}</lastmod>',
+            '    <changefreq>daily</changefreq>',
+            '    <priority>1.0</priority>',
+            '  </url>',
+        ])
+        
+        # Add trial pages
+        for trial_name in builds_by_trial.keys():
+            trial_slug = trial_name.lower().replace(' ', '-')
+            xml_lines.extend([
+                '  <url>',
+                f'    <loc>{base_url}/{trial_slug}.html</loc>',
+                f'    <lastmod>{lastmod}</lastmod>',
+                '    <changefreq>weekly</changefreq>',
+                '    <priority>0.8</priority>',
+                '  </url>',
+            ])
+        
+        # Add individual build pages
+        for build in all_builds:
+            trial_slug = build.trial_name.lower().replace(' ', '-').replace("'", "")
+            boss_slug = build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and')
+            filename = f"{trial_slug}-{boss_slug}-{build.build_slug}.html"
+            
+            xml_lines.extend([
+                '  <url>',
+                f'    <loc>{base_url}/{filename}</loc>',
+                f'    <lastmod>{lastmod}</lastmod>',
+                '    <changefreq>weekly</changefreq>',
+                '    <priority>0.6</priority>',
+                '  </url>',
+            ])
+        
+        # Close XML document
+        xml_lines.append('</urlset>')
+        
+        # Write sitemap
+        sitemap_content = '\n'.join(xml_lines)
+        filepath = self.output_dir / 'sitemap.xml'
+        filepath.write_text(sitemap_content, encoding='utf-8')
+        
+        logger.info(f"Generated sitemap.xml with {len(all_builds) + len(builds_by_trial) + 1} URLs: {filepath}")
+        return str(filepath)
+    
+    def generate_robots_txt(self) -> str:
+        """
+        Generate robots.txt for search engine crawlers.
+        
+        Returns:
+            Path to generated robots.txt file
+        """
+        logger.info("Generating robots.txt")
+        
+        # Determine base URL based on environment
+        base_url = "https://brainsnorkel.github.io/eso-build-o-rama" if self.is_develop else "https://esobuild.com"
+        
+        robots_content = f"""# robots.txt for ESOBuild.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: {base_url}/sitemap.xml
+
+# Disallow cache directory (if exposed)
+Disallow: /cache/
+"""
+        
+        filepath = self.output_dir / 'robots.txt'
+        filepath.write_text(robots_content, encoding='utf-8')
+        
+        logger.info(f"Generated robots.txt: {filepath}")
+        return str(filepath)
     
     def _load_boss_order(self) -> Dict[str, List[str]]:
         """Load boss order from trial_bosses.json."""
@@ -382,23 +496,26 @@ class PageGenerator:
             return "https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/main/static/social-preview.png"
     
     def _get_page_title(self, build: CommonBuild) -> str:
-        """Generate page title for a build."""
+        """Generate SEO-optimized page title for a build."""
         display_name = build.get_display_name()
-        sets = ' / '.join(build.sets) if build.sets else 'Unknown Sets'
         trial = build.trial_name
         boss = build.boss_name
-        return f"{display_name} - {sets} | {trial} - {boss} | ESO Build-O-Rama"
+        role = build.best_player.role.upper() if build.best_player else 'DPS'
+        return f"{display_name} {role} Build - {trial} {boss} | ESO Build Guide"
     
     def _get_meta_description(self, build: CommonBuild) -> str:
-        """Generate meta description for a build."""
+        """Generate meta description for a build with SEO keywords."""
         display_name = build.get_display_name()
         sets = ' / '.join(build.sets) if build.sets else 'Unknown Sets'
         trial = build.trial_name
         boss = build.boss_name
+        role = build.best_player.role.upper() if build.best_player else 'DPS'
+        dps = self._format_dps(build.best_player.dps) if build.best_player else 'N/A'
         
         return (
-            f"Top performing {display_name} build with {sets} "
-            f"from {trial} - {boss}. Featuring {build.count} top players."
+            f"{display_name} {role} build for {trial} {boss} in Elder Scrolls Online. "
+            f"{dps} DPS with {sets} gear sets. Complete ESO build guide with abilities, "
+            f"gear, and mundus stone. Seen in {build.count} top ESO Logs reports."
         )
     
     @staticmethod

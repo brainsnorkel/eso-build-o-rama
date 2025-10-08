@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed (2025-10-09 - Mundus Stone Display Fix)
+- **Issue #2: Mundus collected but not showing**
+  - **Root Cause**: When pages were generated, freshly scanned builds (with mundus data) were saved to builds.json, but then ALL builds were reloaded from disk (including old trials without mundus). This caused newly scanned trials to show empty mundus fields.
+  - **Solution**: Implemented build merging logic that replaces loaded builds with fresh builds where available, ensuring mundus data from new scans persists through the page generation process.
+  - **Impact**: Mundus stones now display correctly on all newly scanned trial builds.
+  - **Note**: Old trials in builds.json may still have empty mundus until they are re-scanned by the 14-hour update cycle.
+
 ### Changed (2025-10-08 - GitHub Actions Schedule Update)
 - **Reduced Deployment Frequency**: Changed from 7-hour to 14-hour update cycle
   - Updated cron schedule from every 30 minutes to every hour

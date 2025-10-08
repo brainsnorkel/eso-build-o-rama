@@ -157,6 +157,23 @@ class ESOBuildORM:
             # Generate pages using all saved builds
             logger.info("\nGenerating HTML pages...")
             all_saved_builds = self.data_store.get_all_builds()
+            
+            # BUGFIX: Merge freshly scanned builds (with mundus) into loaded builds
+            # This ensures newly scanned trials have mundus data in generated pages
+            if publishable_builds:
+                # Create a mapping of (trial_name, boss_name, build_slug) to fresh builds
+                fresh_builds_map = {}
+                for fresh_build in publishable_builds:
+                    key = (fresh_build.trial_name, fresh_build.boss_name, fresh_build.build_slug)
+                    fresh_builds_map[key] = fresh_build
+                
+                # Replace loaded builds with fresh ones where available
+                for i, loaded_build in enumerate(all_saved_builds):
+                    key = (loaded_build.trial_name, loaded_build.boss_name, loaded_build.build_slug)
+                    if key in fresh_builds_map:
+                        all_saved_builds[i] = fresh_builds_map[key]
+                        logger.debug(f"Replaced loaded build with fresh: {loaded_build.build_slug}")
+            
             trials_metadata = self.data_store.get_trials_metadata()
             update_version = self._get_most_common_version(all_reports)
             

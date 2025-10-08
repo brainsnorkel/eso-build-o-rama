@@ -70,7 +70,8 @@ TRAIT_NAMES = {
     25: "Powered",         # Increases healing done
     26: "Infused",         # Increases Weapon and Spell Critical
     27: "Sharpened",       # Increases Physical and Spell Penetration
-    28: "Nirnhoned"         # Increases experience gained (weapon/armor)
+    28: "Nirnhoned",         # Increases experience gained (weapon/armor)
+    31: "Precise"
 }
 
 # Enchantment type mapping (from ESO Logs API)

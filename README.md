@@ -44,12 +44,11 @@ A "build" consists of:
 - Responsive design with proper touch targets
 - Ability icons and visual set indicators
 - Direct links to source ESO Logs reports
-- **Interactive Tooltips**: Hover over gear sets, abilities, and mundus stones for detailed information
+- **Interactive Gear Tooltips**: Hover over gear sets and mundus stones for detailed information
   - Powered by ESO-Hub's external tooltip system
-  - Shows set bonuses, ability damage/effects, and mundus stone stats
-  - Works on all gear set names, abilities (both bars), and mundus stones
-  - Tooltips appear automatically on hover (desktop) or tap (mobile)
-  - Links open detailed ESO-Hub pages in new tabs
+  - Shows set bonuses, stats, and acquisition info
+  - Works on all gear set names, mundus stones
+  - Links open detailed ESO-Hub pages
 
 ### Accessibility
 - **WCAG 2.1 Level AA compliant** for screen reader users

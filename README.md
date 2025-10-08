@@ -68,7 +68,7 @@ A "build" consists of:
   - Cache performance monitoring with hit/miss tracking
   - See [docs/cache_system.md](docs/cache_system.md) for full documentation
 - Incremental data storage between scans
-- Staggered trial scanning (one trial every 30 minutes)
+- Staggered trial scanning (one trial every hour)
 - Rate limit compliance (2-second delays, automatic retry)
 - Static HTML generation for fast page loads
 
@@ -85,7 +85,7 @@ A "build" consists of:
 
 ### Deployment
 - GitHub Actions for automated scanning
-- Staggered schedule (each trial updated every 7 hours)
+- Staggered schedule (each trial updated every 14 hours)
 - GitHub Pages hosting with CDN distribution
 - Branch isolation (develop for testing, main for production)
 
@@ -382,30 +382,30 @@ Tables convert to vertical cards on mobile:
 
 ### Schedule
 
-Workflow runs every 30 minutes, cycling through 14 trials. Each trial updates approximately every 7 hours.
+Workflow runs every hour, cycling through 14 trials. Each trial updates approximately every 14 hours.
 
-**Reference time**: Sunday 8:32 PM UTC
+**Reference time**: 20:00 UTC (8:00 PM UTC)
 
 ```
-Index 0  (8:32 PM)  → Aetherian Archive
-Index 1  (9:02 PM)  → Hel Ra Citadel
-Index 2  (9:32 PM)  → Sanctum Ophidia
-Index 3  (10:02 PM) → Maw of Lorkhaj
-Index 4  (10:32 PM) → Halls of Fabrication
-Index 5  (11:02 PM) → Asylum Sanctorium
-Index 6  (11:32 PM) → Cloudrest
-Index 7  (12:02 AM) → Sunspire
-Index 8  (12:32 AM) → Kyne's Aegis
-Index 9  (1:02 AM)  → Rockgrove
-Index 10 (1:32 AM)  → Dreadsail Reef
-Index 11 (2:02 AM)  → Sanity's Edge
-Index 12 (2:32 AM)  → Lucent Citadel
-Index 13 (3:02 AM)  → Ossein Cage
+Index 0  (20:00 UTC) → Aetherian Archive
+Index 1  (21:00 UTC) → Hel Ra Citadel
+Index 2  (22:00 UTC) → Sanctum Ophidia
+Index 3  (23:00 UTC) → Maw of Lorkhaj
+Index 4  (00:00 UTC) → Halls of Fabrication
+Index 5  (01:00 UTC) → Asylum Sanctorium
+Index 6  (02:00 UTC) → Cloudrest
+Index 7  (03:00 UTC) → Sunspire
+Index 8  (04:00 UTC) → Kyne's Aegis
+Index 9  (05:00 UTC) → Rockgrove
+Index 10 (06:00 UTC) → Dreadsail Reef
+Index 11 (07:00 UTC) → Sanity's Edge
+Index 12 (08:00 UTC) → Lucent Citadel
+Index 13 (09:00 UTC) → Ossein Cage
 ```
 
 ### Triggers
 
-1. **Schedule**: `0,30 * * * *` (every 30 minutes)
+1. **Schedule**: `0 * * * *` (every hour at :00)
 2. **Manual**: Workflow dispatch with optional trial_id parameter
 3. **Push**: Main branch only (develop branch excluded)
 

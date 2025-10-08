@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed (2025-10-08 - GitHub Actions Schedule Update)
+- **Reduced Deployment Frequency**: Changed from 7-hour to 14-hour update cycle
+  - Updated cron schedule from every 30 minutes to every hour
+  - Changed trial determination logic from minutes to hours since reference
+  - Each trial now updates every 14 hours instead of every 7 hours
+  - Reference time: 20:00 UTC (8:00 PM UTC) for Aetherian Archive
+  - Reduces GitHub Actions usage and API load
+  - Updated README.md with new schedule timings
+
 ### Added (2025-10-08 - ESO-Hub Tooltip Integration)
 - **Interactive Gear Tooltips**: Integrated ESO-Hub's tooltip system for rich hover information
   - Added ESO-Hub external CSS and JavaScript to all pages

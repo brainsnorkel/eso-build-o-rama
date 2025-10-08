@@ -2,10 +2,10 @@ name: Generate ESO Builds (Staggered)
 
 on:
   schedule:
-    # Every 30 minutes, cycling through all 14 trials sequentially
-    # AA at 1:00 AM, HRC at 1:30 AM, SO at 2:00 AM, etc.
-    # Each trial gets updated every 7 hours (14 trials × 30 minutes)
-    - cron: '0,30 * * * *'  # Every 30 minutes
+    # Every hour, cycling through all 14 trials sequentially
+    # AA at 20:00 UTC, HRC at 21:00 UTC, SO at 22:00 UTC, etc.
+    # Each trial gets updated every 14 hours (14 trials × 1 hour)
+    - cron: '0 * * * *'  # Every hour at :00
   workflow_dispatch:
     inputs:
       trial_id:
@@ -35,24 +35,22 @@ jobs:
             echo "trial_id=${{ inputs.trial_id }}" >> $GITHUB_OUTPUT
           else
             # Sequential trial scheduling: AA, HRC, SO, MoL, HoF, AS, CR, SS, KA, RG, DSR, SE, LC, OC
-            # Each trial runs every 24 hours (repeats the same sequence daily)
-            # Starting reference: 20:32 UTC today for AA (cycle restarted)
+            # Each trial runs every 14 hours (one trial per hour)
+            # Starting reference: 20:00 UTC for AA
             
             CURRENT_HOUR=$(date -u +%H | sed 's/^0*//' || echo "0")
-            CURRENT_MINUTE=$(date -u +%M | sed 's/^0*//' || echo "0")
             
-            # Minutes since 20:32 UTC today (restart reference)
+            # Hours since 20:00 UTC reference
             REFERENCE_HOUR=20
-            REFERENCE_MINUTE=32
-            TOTAL_MINUTES_SINCE_REFERENCE=$(( (CURRENT_HOUR - REFERENCE_HOUR) * 60 + CURRENT_MINUTE - REFERENCE_MINUTE ))
+            HOURS_SINCE_REFERENCE=$(( CURRENT_HOUR - REFERENCE_HOUR ))
             
             # Handle negative values (if current time is before reference)
-            if [ $TOTAL_MINUTES_SINCE_REFERENCE -lt 0 ]; then
-              TOTAL_MINUTES_SINCE_REFERENCE=$((TOTAL_MINUTES_SINCE_REFERENCE + 24 * 60))
+            if [ $HOURS_SINCE_REFERENCE -lt 0 ]; then
+              HOURS_SINCE_REFERENCE=$((HOURS_SINCE_REFERENCE + 24))
             fi
             
-            # Trial index = (minutes since reference / 30) % 14
-            TRIAL_INDEX=$(( (TOTAL_MINUTES_SINCE_REFERENCE / 30) % 14 ))
+            # Trial index = hours since reference % 14
+            TRIAL_INDEX=$(( HOURS_SINCE_REFERENCE % 14 ))
             
             # Map trial index to actual trial IDs
             case $TRIAL_INDEX in
@@ -74,7 +72,7 @@ jobs:
             esac
             
             echo "Current time: $(date -u '+%Y-%m-%d %H:%M') UTC"
-            echo "Minutes since 20:32 UTC (restart reference): $TOTAL_MINUTES_SINCE_REFERENCE"
+            echo "Hours since 20:00 UTC reference: $HOURS_SINCE_REFERENCE"
             echo "Trial index: $TRIAL_INDEX"
           fi
       

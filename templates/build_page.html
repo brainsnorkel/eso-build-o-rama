@@ -157,7 +157,15 @@
         
         <div class="info-box">
             <div class="label">Mundus</div>
-            <div class="value">{{ best_player.mundus or 'Unknown' }}</div>
+            <div class="value">
+                {% if best_player.mundus and best_player.mundus != 'Unknown' %}
+                    <a href="{{ best_player.mundus|eso_hub_mundus_url }}" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: underline;">
+                        {{ best_player.mundus }}
+                    </a>
+                {% else %}
+                    Unknown
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
@@ -223,7 +231,15 @@
             {% if gear.slot not in ['backup_necklace', 'backup_ring1'] and gear.slot not in ['slot_14', 'slot_15'] %}
             <tr>
                 <td data-label="Slot"><strong>{{ gear.slot|title }}</strong></td>
-                <td data-label="Set">{{ gear.set_name or 'N/A' }}</td>
+                <td data-label="Set">
+                    {% if gear.set_name %}
+                        <a href="{{ gear.set_name|eso_hub_set_url }}" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">
+                            {{ gear.set_name }}
+                        </a>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
                 <td data-label="Item">
                     {% if gear.slot in ['head', 'chest', 'shoulders', 'belt', 'hands', 'legs', 'feet'] and gear.armor_weight %}
                         {{ gear.item_name or 'N/A' }} ({{ gear.armor_weight }})
@@ -243,7 +259,9 @@
     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
         {% for set_name, count in best_player.sets_equipped.items() %}
         <div style="background: rgba(168, 237, 234, 0.1); padding: 8px 15px; border-radius: 5px; border: 1px solid rgba(168, 237, 234, 0.3);">
-            {{ set_name }} ({{ count }} pieces)
+            <a href="{{ set_name|eso_hub_set_url }}" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">
+                {{ set_name }}
+            </a> ({{ count }} pieces)
         </div>
         {% endfor %}
     </div>

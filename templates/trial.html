@@ -102,7 +102,13 @@
                 <td data-label="Build"><strong>{{ build.get_display_name(abbreviated=True) }}</strong></td>
                 <td data-label="Signature Sets">
                     {% set sorted_sets = build.get_sorted_sets() %}
-                    {{ sorted_sets|join(', ') if sorted_sets else 'Various' }}
+                    {% if sorted_sets %}
+                        {% for set_name in sorted_sets %}
+                            <a href="{{ set_name|eso_hub_set_url }}" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">{{ set_name }}</a>{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        Various
+                    {% endif %}
                 </td>
                 <td data-label="Frequency">{{ build.count }} players in {{ build.report_count }} reports</td>
                 <td data-label="DPS">{{ build.best_player.dps|format_dps }}</td>

@@ -52,6 +52,9 @@ class PageGenerator:
         self.env.filters['format_dps'] = self._format_dps
         self.env.filters['format_percentage'] = self._format_percentage
         self.env.filters['format_timestamp'] = self._format_timestamp
+        self.env.filters['eso_hub_set_url'] = self._eso_hub_set_url
+        self.env.filters['eso_hub_ability_url'] = self._eso_hub_ability_url
+        self.env.filters['eso_hub_mundus_url'] = self._eso_hub_mundus_url
         
         logger.info(f"Page generator initialized (templates: {template_dir}, output: {output_dir})")
     
@@ -546,3 +549,82 @@ Disallow: /cache/
             return dt.strftime('%Y-%m-%d %H:%M UTC')
         except (ValueError, TypeError):
             return timestamp_str
+    
+    @staticmethod
+    def _eso_hub_set_url(set_name: str) -> str:
+        """
+        Generate ESO-Hub URL for a gear set.
+        
+        Args:
+            set_name: Name of the gear set
+            
+        Returns:
+            ESO-Hub URL for the set
+            
+        Examples:
+            "Deadly Strike" -> "https://eso-hub.com/en/sets/deadly-strike"
+            "Perfected Slivers of the Null Arca" -> "https://eso-hub.com/en/sets/slivers-of-the-null-arca"
+        """
+        if not set_name or set_name == 'N/A':
+            return '#'
+        
+        # Remove "Perfected" prefix
+        slug = set_name.replace('Perfected ', '')
+        
+        # Convert to lowercase and slugify
+        slug = slug.lower()
+        slug = slug.replace("'", '')  # Remove apostrophes
+        slug = slug.replace(' ', '-')  # Spaces to dashes
+        slug = slug.replace('&', 'and')  # Ampersand to 'and'
+        
+        return f"https://eso-hub.com/en/sets/{slug}"
+    
+    @staticmethod
+    def _eso_hub_ability_url(ability_name: str) -> str:
+        """
+        Generate ESO-Hub URL for an ability.
+        
+        Args:
+            ability_name: Name of the ability
+            
+        Returns:
+            ESO-Hub URL for the ability
+            
+        Examples:
+            "Crystal Weapon" -> "https://eso-hub.com/en/skills/crystal-weapon"
+        """
+        if not ability_name or ability_name == 'Empty':
+            return '#'
+        
+        # Convert to lowercase and slugify
+        slug = ability_name.lower()
+        slug = slug.replace("'", '')  # Remove apostrophes
+        slug = slug.replace(' ', '-')  # Spaces to dashes
+        slug = slug.replace('&', 'and')  # Ampersand to 'and'
+        
+        return f"https://eso-hub.com/en/skills/{slug}"
+    
+    @staticmethod
+    def _eso_hub_mundus_url(mundus_name: str) -> str:
+        """
+        Generate ESO-Hub URL for a mundus stone.
+        
+        Args:
+            mundus_name: Name of the mundus stone
+            
+        Returns:
+            ESO-Hub URL for the mundus stone
+            
+        Examples:
+            "The Thief" -> "https://eso-hub.com/en/guides/the-thief"
+        """
+        if not mundus_name or mundus_name == 'Unknown':
+            return '#'
+        
+        # Convert to lowercase and slugify
+        slug = mundus_name.lower()
+        slug = slug.replace("'", '')  # Remove apostrophes
+        slug = slug.replace(' ', '-')  # Spaces to dashes
+        
+        # Mundus stones are in the guides section
+        return f"https://eso-hub.com/en/guides/{slug}"

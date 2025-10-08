@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (2025-10-08 - ESO-Hub Tooltip Integration)
+- **Interactive Gear Tooltips**: Integrated ESO-Hub's tooltip system for rich hover information
+  - Added ESO-Hub external CSS and JavaScript to all pages
+  - Created Jinja2 filter functions for ESO-Hub URL generation
+  - Made all gear set names clickable with ESO-Hub links
+  - Made mundus stone names clickable with tooltip support
+  - Added tooltips to gear table set names
+  - Added tooltips to "Sets Used" summary boxes
+  - Added tooltips to signature sets in trial page tables
+  - Automatic tooltip display on hover (no user configuration needed)
+  - URL slugification handles "Perfected" prefix removal
+  - Links open ESO-Hub pages in new tabs for detailed information
+  - Zero-maintenance solution (ESO-Hub maintains the data)
+  - Improves user experience with instant access to set bonuses
+
 ### Added (2025-10-08 - SEO Improvements)
 - **Comprehensive SEO Implementation**: Major improvements for search engine discoverability
   - Added automatic sitemap.xml generation with all pages (home, trials, builds)

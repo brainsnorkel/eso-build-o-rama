@@ -35,6 +35,10 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{% block canonical_url %}{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/index.html{% else %}https://esobuild.com/index.html{% endif %}{% endblock %}">
     
+    <!-- ESO-Hub Tooltips -->
+    <link rel="stylesheet" href="https://eso-hub.com/css/external/tooltips.css">
+    <script src="https://eso-hub.com/js/external/tooltips.js" defer></script>
+    
     <title>{% block title %}ESO Meta Build Explorer{% if is_develop %} [DEV]{% endif %}{% endblock %}</title>
     
     <!-- Structured Data (JSON-LD) -->

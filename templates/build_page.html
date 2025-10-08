@@ -180,14 +180,22 @@
     </h4>
     <div class="abilities-bar">
         {% for ability in best_player.abilities_bar1 %}
+        {% if ability.ability_name and ability.ability_name != 'Empty' %}
+        <a href="{{ ability.ability_name|eso_hub_ability_url }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+            <div class="ability">
+                {% if ability.ability_icon %}
+                <img src="../static/icons/{{ ability.ability_icon }}.png" 
+                     alt="{{ ability.ability_name }}{% if ability.skill_line %} from {{ ability.skill_line }}{% endif %}" 
+                     class="ability-icon">
+                {% endif %}
+                <div class="ability-name">{{ ability.ability_name }}</div>
+            </div>
+        </a>
+        {% else %}
         <div class="ability">
-            {% if ability.ability_icon %}
-            <img src="../static/icons/{{ ability.ability_icon }}.png" 
-                 alt="{{ ability.ability_name }}{% if ability.skill_line %} from {{ ability.skill_line }}{% endif %}" 
-                 class="ability-icon">
-            {% endif %}
-            <div class="ability-name">{{ ability.ability_name or 'Empty' }}</div>
+            <div class="ability-name">Empty</div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
     {% endif %}
@@ -198,14 +206,22 @@
     </h4>
     <div class="abilities-bar">
         {% for ability in best_player.abilities_bar2 %}
+        {% if ability.ability_name and ability.ability_name != 'Empty' %}
+        <a href="{{ ability.ability_name|eso_hub_ability_url }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+            <div class="ability">
+                {% if ability.ability_icon %}
+                <img src="../static/icons/{{ ability.ability_icon }}.png" 
+                     alt="{{ ability.ability_name }}{% if ability.skill_line %} from {{ ability.skill_line }}{% endif %}" 
+                     class="ability-icon">
+                {% endif %}
+                <div class="ability-name">{{ ability.ability_name }}</div>
+            </div>
+        </a>
+        {% else %}
         <div class="ability">
-            {% if ability.ability_icon %}
-            <img src="../static/icons/{{ ability.ability_icon }}.png" 
-                 alt="{{ ability.ability_name }}{% if ability.skill_line %} from {{ ability.skill_line }}{% endif %}" 
-                 class="ability-icon">
-            {% endif %}
-            <div class="ability-name">{{ ability.ability_name or 'Empty' }}</div>
+            <div class="ability-name">Empty</div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
     {% endif %}

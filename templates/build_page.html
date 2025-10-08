@@ -1,22 +1,114 @@
 {% extends "base.html" %}
 
-{% block title %}{{ page_title }}{% endblock %}
+{% block title %}{{ build.get_display_name() }} - {{ build.trial_name }} {{ build.boss_name }} | ESO Build Guide{% endblock %}
 
-{% block meta_description %}{{ meta_description }}{% endblock %}
+{% block meta_description %}{{ build.get_display_name() }} {{ best_player.role|upper }} build for {{ build.trial_name }} {{ build.boss_name }} in Elder Scrolls Online. {{ best_player.dps|format_dps }} DPS with {{ build.get_sorted_sets()|join(', ') }} gear sets. Complete guide with abilities, gear, and mundus stone.{% endblock %}
+
+{% block keywords %}{{ build.get_display_name() }}, ESO {{ build.get_display_name() }}, {{ build.trial_name }} {{ build.boss_name }} build, {{ best_player.role }} build, {% for set_name in build.get_sorted_sets() %}{{ set_name }}, {% endfor %}ESO build guide, Elder Scrolls Online{% endblock %}
+
+{% block canonical_url %}{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/{{ trial_slug }}-{{ build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and') }}-{{ build.build_slug }}.html{% else %}https://esobuild.com/{{ trial_slug }}-{{ build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and') }}-{{ build.build_slug }}.html{% endif %}{% endblock %}
 
 {% block og_type %}article{% endblock %}
 
-{% block og_title %}@{{ best_player.player_name }} - {{ build.get_display_name() }} - {{ build.trial_name }} {{ build.boss_name }}{% endblock %}
+{% block og_title %}{{ build.get_display_name() }} - {{ build.trial_name }} {{ build.boss_name }} | ESO Build{% endblock %}
 
-{% block og_description %}{{ build.get_display_name() }} build achieving {{ best_player.dps|format_dps }} DPS in {{ build.trial_name }} {{ build.boss_name }} by {{ best_player.player_name }}. View detailed gear, abilities, and champion points.{% endblock %}
+{% block og_description %}{{ build.get_display_name() }} {{ best_player.role|upper }} build achieving {{ best_player.dps|format_dps }} DPS in {{ build.trial_name }} {{ build.boss_name }}. Complete gear, abilities, and mundus stone guide by {{ best_player.player_name }}.{% endblock %}
 
 {% block og_image_alt %}{{ build.get_display_name() }} build for {{ build.trial_name }} {{ build.boss_name }} - {{ best_player.dps|format_dps }} DPS{% endblock %}
 
-{% block twitter_title %}@{{ best_player.player_name }} - {{ build.get_display_name() }} - {{ build.trial_name }} {{ build.boss_name }}{% endblock %}
+{% block twitter_title %}{{ build.get_display_name() }} - {{ build.trial_name }} {{ build.boss_name }}{% endblock %}
 
-{% block twitter_description %}{{ build.get_display_name() }} build achieving {{ best_player.dps|format_dps }} DPS in {{ build.trial_name }} {{ build.boss_name }} by {{ best_player.player_name }}.{% endblock %}
+{% block twitter_description %}{{ build.get_display_name() }} {{ best_player.role|upper }} build: {{ best_player.dps|format_dps }} DPS by @{{ best_player.player_name }}.{% endblock %}
 
 {% block twitter_image_alt %}{{ build.get_display_name() }} build for {{ build.trial_name }} {{ build.boss_name }} - {{ best_player.dps|format_dps }} DPS{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/index.html{% else %}https://esobuild.com/index.html{% endif %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ build.trial_name }}",
+      "item": "{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/{{ trial_slug }}.html{% else %}https://esobuild.com/{{ trial_slug }}.html{% endif %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ build.boss_name }}",
+      "item": "{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/{{ trial_slug }}.html{% else %}https://esobuild.com/{{ trial_slug }}.html{% endif %}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "{{ build.get_display_name() }}",
+      "item": "{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/{{ trial_slug }}-{{ build.boss_name.lower().replace(' ', '-').replace(\"'\", \"\").replace('&', 'and') }}-{{ build.build_slug }}.html{% else %}https://esobuild.com/{{ trial_slug }}-{{ build.boss_name.lower().replace(' ', '-').replace(\"'\", \"\").replace('&', 'and') }}-{{ build.build_slug }}.html{% endif %}"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "{{ build.get_display_name() }} Build for {{ build.trial_name }} {{ build.boss_name }}",
+  "description": "Complete {{ best_player.role|upper }} build guide for {{ build.trial_name }} {{ build.boss_name }} in Elder Scrolls Online, achieving {{ best_player.dps|format_dps }} DPS.",
+  "about": {
+    "@type": "VideoGame",
+    "name": "The Elder Scrolls Online"
+  },
+  "supply": [
+    {% for set_name in build.get_sorted_sets() %}
+    {
+      "@type": "HowToSupply",
+      "name": "{{ set_name }} Gear Set"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+    {% if best_player.mundus %}
+    ,{
+      "@type": "HowToSupply",
+      "name": "{{ best_player.mundus }} Mundus Stone"
+    }
+    {% endif %}
+  ],
+  "step": [
+    {% if best_player.abilities_bar1 %}
+    {
+      "@type": "HowToStep",
+      "name": "Configure Bar 1 Abilities",
+      "text": "Set up main ability bar with: {% for ability in best_player.abilities_bar1 %}{{ ability.ability_name or 'Empty' }}{% if not loop.last %}, {% endif %}{% endfor %}"
+    }{% if best_player.abilities_bar2 %},{% endif %}
+    {% endif %}
+    {% if best_player.abilities_bar2 %}
+    {
+      "@type": "HowToStep",
+      "name": "Configure Bar 2 Abilities",
+      "text": "Set up backup ability bar with: {% for ability in best_player.abilities_bar2 %}{{ ability.ability_name or 'Empty' }}{% if not loop.last %}, {% endif %}{% endfor %}"
+    },
+    {% endif %}
+    {
+      "@type": "HowToStep",
+      "name": "Equip Gear Sets",
+      "text": "Equip {{ build.get_sorted_sets()|join(' and ') }} gear sets as shown in the gear table below"
+    }
+  ],
+  "totalTime": "PT30M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "value": "{{ best_player.dps }}",
+    "description": "DPS Performance"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <nav aria-label="Breadcrumb" style="margin-bottom: 20px; font-size: 0.9em;">

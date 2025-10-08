@@ -67,6 +67,17 @@ A "build" consists of:
 - Rate limit compliance (2-second delays, automatic retry)
 - Static HTML generation for fast page loads
 
+### Search Engine Optimization (SEO)
+- **Comprehensive SEO Implementation** for better search engine discoverability
+  - Automatically generated sitemap.xml with all pages
+  - robots.txt for crawler guidance
+  - Structured data (Schema.org JSON-LD) on all pages
+  - Canonical URLs to prevent duplicate content issues
+  - Keyword-rich meta descriptions tailored to each page
+  - BreadcrumbList schema for navigation context
+  - HowTo schema on build pages for rich results
+  - WebSite schema with Elder Scrolls Online context
+
 ### Deployment
 - GitHub Actions for automated scanning
 - Staggered schedule (each trial updated every 7 hours)
@@ -284,11 +295,65 @@ API Version: v2
 - Report data
 - Player buffs
 
+## SEO Features
+
+### Sitemap Generation
+
+Every build generation automatically creates `sitemap.xml` with:
+- All build pages, trial pages, and home page
+- Last modified dates
+- Change frequency hints for crawlers
+- Priority values (1.0 for home, 0.8 for trials, 0.6 for builds)
+
+### Robots.txt
+
+Automatically generated `robots.txt` file:
+- Allows all search engine crawlers
+- Points to sitemap.xml location
+- Disallows crawling of cache directory
+
+### Structured Data
+
+JSON-LD structured data on all pages:
+- **Home page**: WebSite schema with Elder Scrolls Online context
+- **Trial pages**: BreadcrumbList for navigation hierarchy
+- **Build pages**: HowTo schema with gear supplies and ability steps, plus BreadcrumbList
+
+### Meta Tags
+
+Comprehensive meta tags on every page:
+- Unique, keyword-rich meta descriptions
+- Keywords meta tag with relevant ESO search terms
+- Canonical URLs to prevent duplicate content
+- Open Graph and Twitter Card tags for social sharing
+
+### Submitting to Search Engines
+
+After deploying to production:
+
+**Google Search Console**:
+1. Visit [Google Search Console](https://search.google.com/search-console)
+2. Add property: `esobuild.com`
+3. Verify ownership (DNS TXT record or HTML file)
+4. Submit sitemap: `https://esobuild.com/sitemap.xml`
+5. Monitor index coverage and search performance
+
+**Bing Webmaster Tools**:
+1. Visit [Bing Webmaster Tools](https://www.bing.com/webmasters)
+2. Add site: `esobuild.com`
+3. Verify ownership
+4. Submit sitemap: `https://esobuild.com/sitemap.xml`
+
+**Validation Tools**:
+- [Google Rich Results Test](https://search.google.com/test/rich-results) - Test structured data
+- [Schema.org Validator](https://validator.schema.org/) - Validate JSON-LD
+- [XML Sitemap Validator](https://www.xml-sitemaps.com/validate-xml-sitemap.html) - Check sitemap
+
 ## Page Generation
 
 ### Templates (Jinja2)
 
-- `base.html` - Base template with header, footer, responsive CSS
+- `base.html` - Base template with header, footer, responsive CSS, structured data
 - `index_page.html` - Home page listing all trials and builds
 - `trial.html` - Per-trial page with boss-grouped builds
 - `build_page.html` - Detailed build page

@@ -157,15 +157,7 @@
         
         <div class="info-box">
             <div class="label">Mundus</div>
-            <div class="value">
-                {% if best_player.mundus and best_player.mundus != 'Unknown' %}
-                    <a href="{{ best_player.mundus|eso_hub_mundus_url }}" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: underline;">
-                        {{ best_player.mundus }}
-                    </a>
-                {% else %}
-                    Unknown
-                {% endif %}
-            </div>
+            <div class="value">{{ best_player.mundus or 'Unknown' }}</div>
         </div>
     </div>
 </div>

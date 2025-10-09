@@ -338,23 +338,25 @@ class DataParser:
             dps_percentage = 0  # TODO: Calculate from total damage
             
             # Get Healing stats
-            # In entries format, 'overheal' is overheal, but we need actual healing
-            # The API provides 'total' for healing in Healing table
+            # Total healing output = effective healing + overheal
+            # The API provides 'total' for effective healing and 'overheal' for wasted healing
             healing = 0
             healing_percentage = 0
             if role == "healer":
-                # For healers, we need to get healing from the Healing table
-                # This will need a separate API call, but we can extract it if available
+                # Calculate total healing output (effective + overheal)
                 if 'total' in player_data and player_data.get('type') == 'healing':
                     # If this is healing table data
-                    total_healing = player_data.get('total', 0)
+                    effective_healing = player_data.get('total', 0)
+                    overheal = player_data.get('overheal', 0)
+                    total_healing_output = effective_healing + overheal
                     active_time_ms = player_data.get('activeTime', 1)
-                    healing = (total_healing / active_time_ms) * 1000 if active_time_ms > 0 else 0
+                    healing = (total_healing_output / active_time_ms) * 1000 if active_time_ms > 0 else 0
                 elif 'overheal' in player_data:
-                    # Fallback: use overheal as a proxy (not ideal but better than nothing)
-                    total_overheal = player_data.get('overheal', 0)
+                    # Fallback: if we only have overheal from DamageDone table
+                    # Note: DamageDone table may not have full healing data
+                    overheal = player_data.get('overheal', 0)
                     active_time_ms = player_data.get('activeTime', 1)
-                    healing = (total_overheal / active_time_ms) * 1000 if active_time_ms > 0 else 0
+                    healing = (overheal / active_time_ms) * 1000 if active_time_ms > 0 else 0
             
             # Create player URL in the correct format
             # Format: https://www.esologs.com/reports/{report_code}?fight={fight_id}&type=summary&source={player_id}

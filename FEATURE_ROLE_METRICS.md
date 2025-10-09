@@ -16,7 +16,9 @@ This feature adds support for displaying role-appropriate performance metrics in
 ### 1. Data Layer (`src/eso_build_o_rama/data_parser.py`)
 - Added healing data extraction from API responses
 - Populated `healing` and `healing_percentage` fields in `PlayerBuild` model
-- Falls back to using `overheal` data if direct healing metrics unavailable
+- **HPS calculation includes both effective healing AND overheal** (total healing output)
+- Formula: `HPS = (effective_healing + overheal) / active_time_ms * 1000`
+- Falls back to using only `overheal` data if full healing table unavailable
 
 ### 2. Model Layer (`src/eso_build_o_rama/models.py`)
 - Added `get_primary_metric()` method to `PlayerBuild` class
@@ -46,6 +48,10 @@ Updated all templates to use role-specific metrics:
 2. **Better Role Representation**: Each role shows the metric most relevant to their performance
 3. **Clearer Comparisons**: When comparing builds, you see the metric that matters for that role
 4. **Extensible Design**: Easy to add tank-specific metrics (damage taken, mitigation, etc.) in the future
+5. **Complete Healing Picture**: Including overheal shows total healing output, not just what was "needed"
+   - Overheal demonstrates a healer's proactive healing and preparedness
+   - Higher overheal can indicate better positioning and anticipation
+   - Matches how healers are actually evaluated in competitive play
 
 ## Known Limitations
 
@@ -95,8 +101,9 @@ Updated all templates to use role-specific metrics:
 
 2. **Enhanced Healer Metrics**:
    - Query dedicated Healing table for more accurate HPS
-   - Show overheal percentage
+   - Show overheal percentage separately (e.g., "120K HPS (15% overheal)")
    - Show healing breakdown by spell
+   - Display effective healing vs overheal ratio
 
 3. **Sorting by Role Metric**:
    - Sort healers by HPS for "best player"

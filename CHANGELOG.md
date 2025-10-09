@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Implementation Details**:
     - Added `healing` and `healing_percentage` fields to `PlayerBuild` model (already existed but weren't populated)
     - Updated `data_parser.py` to extract healing data from API responses for healer roles
+    - **HPS calculation includes both effective healing AND overheal** for complete healing output
     - Added `get_primary_metric()` and `get_primary_metric_name()` methods to `PlayerBuild` class
     - Created `format_metric` Jinja2 filter for formatting both DPS and HPS values
     - Updated all templates to show role-appropriate metrics:
@@ -20,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       - `trial.html`: Performance column shows DPS/HPS based on role
       - `home.html`: Top build displays show appropriate metric
   - **Display Changes**:
-    - Healers: Shows "X.XK HPS" or "X.XM HPS"
+    - Healers: Shows "X.XK HPS" or "X.XM HPS" (total healing output including overheal)
     - Tanks: Still shows DPS (could be expanded to show tank-specific metrics)
     - DPS: Shows "X.XK DPS" or "X.XM DPS" as before
   - **Benefits**:

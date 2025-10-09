@@ -318,17 +318,37 @@ class ESOBuildORM:
             
             # Generate preview to main static dir first
             generator = SocialPreviewGenerator(static_dir=str(main_static_dir))
+            
+            # Generate main preview (home page)
             main_preview = generator.create_main_preview(is_develop)
             logger.info(f"Generated main social preview: {main_preview}")
             
-            # Copy to output directory's static folder
-            main_filename = "social-preview-dev.png" if is_develop else "social-preview.png"
-            shutil.copy2(main_static_dir / main_filename, output_static_dir / main_filename)
+            # Generate build preview (build pages)
+            build_preview = generator.create_build_preview(
+                build_name="Magicka Sorcerer",
+                trial_name="Hel Ra Citadel", 
+                boss_name="The Warrior",
+                dps="120,000",
+                player_name="TopPlayer",
+                is_develop=is_develop
+            )
+            logger.info(f"Generated build social preview: {build_preview}")
             
-            # Also copy the build preview if it exists
-            build_filename = "social-preview-build-dev.png" if is_develop else "social-preview-build.png"
-            if (main_static_dir / build_filename).exists():
-                shutil.copy2(main_static_dir / build_filename, output_static_dir / build_filename)
+            # Generate trial-specific previews
+            trial_names = [
+                'Aetherian Archive', 'Hel Ra Citadel', 'Sanctum Ophidia',
+                'Maw of Lorkhaj', 'The Halls of Fabrication', 'Asylum Sanctorium',
+                'Cloudrest', 'Sunspire', 'Kyne\'s Aegis', 'Rockgrove',
+                'Dreadsail Reef', 'Sanity\'s Edge', 'Lucent Citadel', 'Ossein Cage'
+            ]
+            
+            for trial_name in trial_names:
+                trial_preview = generator.create_trial_preview(trial_name, is_develop)
+                logger.info(f"Generated trial preview for {trial_name}: {trial_preview}")
+            
+            # Copy all generated previews to output directory's static folder
+            for preview_file in main_static_dir.glob("social-preview*.png"):
+                shutil.copy2(preview_file, output_static_dir / preview_file.name)
             
             logger.info(f"Copied social previews to {output_static_dir}")
             

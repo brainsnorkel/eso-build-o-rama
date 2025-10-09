@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed (2025-10-09 - Site Subtitle Update)
+- **Updated Site Subtitle**: Changed subtitle from "Common builds found in top esologs" to "The latest ESO meta trial builds from ESOLogs. Updated every day."
+  - Updated in base.html header (line 796)
+  - Updated in meta description tag (line 6)
+  - Updated in Open Graph description (line 12)
+  - Updated in Twitter Card description (line 25)
+  - More accurate description of site functionality and update frequency
+  - Better SEO with clear messaging about content freshness
+
 ### Added (2025-10-09 - Role-Specific Performance Metrics)
 - **Feature: HPS Display for Healers**
   - **Overview**: Healers now show HPS (Healing Per Second) instead of DPS in build displays

@@ -32,28 +32,38 @@
         <a href="{{ trial.slug }}.html" 
            style="text-decoration: none;"
            aria-label="View builds for {{ trial.name }}">
-            <div style="background: linear-gradient(135deg, rgba(56, 239, 125, 0.1) 0%, rgba(17, 153, 142, 0.1) 100%); 
+            <div style="background: linear-gradient(135deg, rgba(56, 239, 125, 0.1) 0%, rgba(17, 153, 142, 0.1) 100%){% if trial.name|trial_background_image %}, url('{{ trial.name|trial_background_image }}'){% endif %}; 
+                        background-size: cover;
+                        background-position: center;
+                        background-blend-mode: overlay;
                         padding: 20px; 
                         border-radius: 12px; 
                         border: 1px solid rgba(56, 239, 125, 0.3);
                         transition: all 0.3s ease;
-                        cursor: pointer;"
+                        cursor: pointer;
+                        position: relative;
+                        overflow: hidden;"
                  onmouseover="this.style.borderColor='rgba(56, 239, 125, 0.6)'; this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(56, 239, 125, 0.3)';"
                  onmouseout="this.style.borderColor='rgba(56, 239, 125, 0.3)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
                 
-                <h3 style="color: #38ef7d; margin-bottom: 15px;">{{ trial.name }}</h3>
+                <!-- Dark overlay for better text readability -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.3); border-radius: 12px; z-index: 0;"></div>
                 
-                {% if trial.top_build %}
-                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                    <div style="font-size: 0.9em; color: #a8edea; margin-bottom: 5px;">Top Performing Build:</div>
-                    <div style="font-weight: 600; color: #fff;">{{ trial.top_build.get_display_name(abbreviated=True) }}</div>
-                    <div style="font-size: 0.85em; color: #a8edea; margin-top: 5px;">{{ trial.top_build.boss_name }}</div>
-                    <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.9em;">
-                        <span style="color: #a8edea;">{{ trial.top_build.best_player.player_name }} - {{ trial.top_build.best_player.character_name }}</span>
-                        <span style="color: #38ef7d; font-weight: 600;">{{ trial.top_build.best_player.get_primary_metric()|format_metric }} {{ trial.top_build.best_player.get_primary_metric_name() }}</span>
+                <div style="position: relative; z-index: 1;">
+                    <h3 style="color: #38ef7d; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">{{ trial.name }}</h3>
+                
+                    {% if trial.top_build %}
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                        <div style="font-size: 0.9em; color: #a8edea; margin-bottom: 5px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">Top Performing Build:</div>
+                        <div style="font-weight: 600; color: #fff; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.get_display_name(abbreviated=True) }}</div>
+                        <div style="font-size: 0.85em; color: #a8edea; margin-top: 5px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.boss_name }}</div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.9em;">
+                            <span style="color: #a8edea; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.best_player.player_name }} - {{ trial.top_build.best_player.character_name }}</span>
+                            <span style="color: #38ef7d; font-weight: 600; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.best_player.get_primary_metric()|format_metric }} {{ trial.top_build.best_player.get_primary_metric_name() }}</span>
+                        </div>
                     </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </a>
         {% endfor %}

@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (2025-10-10 - Trial Graphics and Site Banner)
+- **Trial Background Images**: Added faint alpha-blended background images to trial boxes on home page
+  - Processed 14 trial artwork images for optimal display
+  - Created trial-specific backgrounds at 600px width with 15% opacity
+  - Images positioned as subtle backgrounds with dark overlay for text readability
+  - Added `trial_background_image` Jinja2 filter for trial name to image mapping
+  - Updated `home.html` template to include background images in trial cards
+- **Social Card Backgrounds**: Prepared 1200x630px social card backgrounds for each trial
+  - Center-cropped and resized to social media dimensions
+  - 30% opacity for visibility while maintaining branding
+  - Ready for future social media preview integration
+- **Site Banner**: Added character artwork as header background
+  - Processed `site_banner_characterload.png` to 120px height
+  - Right-aligned crop to preserve character positioning
+  - 20% opacity for subtle background effect
+  - Applied to header across all pages via `base.html`
+- **Image Processing Script**: Created `process_trial_art.py` for automated image optimization
+  - Handles resizing, cropping, and alpha transparency adjustments
+  - Generates three versions: trial backgrounds, social backgrounds, and site banner
+  - Uses PIL/Pillow for high-quality image processing
+  - Output organized in `static/trial-backgrounds/`, `static/social-backgrounds/`, and `static/banners/`
+- **Trial Image Mapping**: Complete mapping of 14 trials to artwork filenames
+  - Aetherian Archive, Hel Ra Citadel, Sanctum Ophidia
+  - Maw of Lorkhaj, Halls of Fabrication, Asylum Sanctorium
+  - Cloudrest, Sunspire, Kyne's Aegis
+  - Rockgrove, Dreadsail Reef, Sanity's Edge
+  - Lucent Citadel, Ossein Cage
+
 ### Changed (2025-10-09 - Site Subtitle Update)
 - **Updated Site Subtitle**: Changed subtitle from "Common builds found in top esologs" to "The latest ESO meta trial builds from ESOLogs. Updated every day."
   - Updated in base.html header (line 796)

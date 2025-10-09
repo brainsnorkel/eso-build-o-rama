@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Trial Graphics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: #e8e8e8;
+            padding: 20px;
+        }
+        .trial-box {
+            background: linear-gradient(135deg, rgba(56, 239, 125, 0.1) 0%, rgba(17, 153, 142, 0.1) 100%), url('static/trial-backgrounds/ossein_cage.png');
+            background-size: cover, cover;
+            background-position: center, center;
+            background-blend-mode: normal, overlay;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(56, 239, 125, 0.3);
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            max-width: 400px;
+        }
+        .trial-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            z-index: 0;
+        }
+        .trial-box-content {
+            position: relative;
+            z-index: 1;
+        }
+        h2 {
+            color: #38ef7d;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        header {
+            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%), url('static/banners/site_banner.png');
+            background-size: cover, auto 100%;
+            background-position: center, right center;
+            background-blend-mode: normal, overlay;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ESO Meta Build Explorer</h1>
+        <p>The latest ESO meta trial builds from ESOLogs. Updated every day.</p>
+    </header>
+
+    <h2>Trial Box with Background</h2>
+    <div class="trial-box">
+        <div class="trial-box-content">
+            <h2>Ossein Cage</h2>
+            <p style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">
+                This trial box should have a faint background image of Ossein Cage artwork.
+            </p>
+        </div>
+    </div>
+
+    <h2>All Trial Backgrounds</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">
+        <div style="background: url('static/trial-backgrounds/aetherianarchive.png'); background-size: cover; height: 150px; border: 1px solid #38ef7d; border-radius: 8px;"></div>
+        <div style="background: url('static/trial-backgrounds/dreadsail_reef.png'); background-size: cover; height: 150px; border: 1px solid #38ef7d; border-radius: 8px;"></div>
+        <div style="background: url('static/trial-backgrounds/sunspire.png'); background-size: cover; height: 150px; border: 1px solid #38ef7d; border-radius: 8px;"></div>
+        <div style="background: url('static/trial-backgrounds/rockgrove.png'); background-size: cover; height: 150px; border: 1px solid #38ef7d; border-radius: 8px;"></div>
+    </div>
+</body>
+</html>
+

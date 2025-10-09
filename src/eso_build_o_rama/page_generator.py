@@ -56,6 +56,8 @@ class PageGenerator:
         self.env.filters['eso_hub_set_url'] = self._eso_hub_set_url
         self.env.filters['eso_hub_ability_url'] = self._eso_hub_ability_url
         self.env.filters['eso_hub_mundus_url'] = self._eso_hub_mundus_url
+        self.env.filters['trial_background_image'] = self._trial_background_image
+        self.env.filters['trial_social_image'] = self._trial_social_image
         
         logger.info(f"Page generator initialized (templates: {template_dir}, output: {output_dir})")
     
@@ -642,3 +644,81 @@ Disallow: /cache/
         
         # Mundus stones are in the guides section
         return f"https://eso-hub.com/en/guides/{slug}"
+    
+    @staticmethod
+    def _trial_background_image(trial_name: str) -> str:
+        """
+        Get the background image path for a trial.
+        
+        Args:
+            trial_name: Name of the trial (e.g., "Aetherian Archive")
+            
+        Returns:
+            Path to the trial background image
+            
+        Examples:
+            "Aetherian Archive" -> "static/trial-backgrounds/aetherianarchive.png"
+            "Dreadsail Reef" -> "static/trial-backgrounds/dreadsail_reef.png"
+        """
+        # Mapping of trial names to image filenames
+        trial_image_map = {
+            "Aetherian Archive": "aetherianarchive",
+            "Hel Ra Citadel": "helracitadel",
+            "Sanctum Ophidia": "sanctum_ophidia",
+            "Maw of Lorkhaj": "maw_of_lorkaj",
+            "The Halls of Fabrication": "hallsoffabrication",
+            "Asylum Sanctorium": "asylumsanctorium",
+            "Cloudrest": "cloudrest",
+            "Sunspire": "sunspire",
+            "Kyne's Aegis": "kynesaegis",
+            "Rockgrove": "rockgrove",
+            "Dreadsail Reef": "dreadsail_reef",
+            "Sanity's Edge": "sanitysedge",
+            "Lucent Citadel": "lucentcitadel",
+            "Ossein Cage": "ossein_cage"
+        }
+        
+        image_name = trial_image_map.get(trial_name, "")
+        if not image_name:
+            return ""
+        
+        return f"static/trial-backgrounds/{image_name}.png"
+    
+    @staticmethod
+    def _trial_social_image(trial_name: str) -> str:
+        """
+        Get the social card background image path for a trial.
+        
+        Args:
+            trial_name: Name of the trial (e.g., "Aetherian Archive")
+            
+        Returns:
+            Path to the trial social background image
+            
+        Examples:
+            "Aetherian Archive" -> "static/social-backgrounds/aetherianarchive.png"
+            "Dreadsail Reef" -> "static/social-backgrounds/dreadsail_reef.png"
+        """
+        # Mapping of trial names to image filenames
+        trial_image_map = {
+            "Aetherian Archive": "aetherianarchive",
+            "Hel Ra Citadel": "helracitadel",
+            "Sanctum Ophidia": "sanctum_ophidia",
+            "Maw of Lorkhaj": "maw_of_lorkaj",
+            "The Halls of Fabrication": "hallsoffabrication",
+            "Asylum Sanctorium": "asylumsanctorium",
+            "Cloudrest": "cloudrest",
+            "Sunspire": "sunspire",
+            "Kyne's Aegis": "kynesaegis",
+            "Rockgrove": "rockgrove",
+            "Dreadsail Reef": "dreadsail_reef",
+            "Sanity's Edge": "sanitysedge",
+            "Lucent Citadel": "lucentcitadel",
+            "Ossein Cage": "ossein_cage"
+        }
+        
+        image_name = trial_image_map.get(trial_name, "")
+        if not image_name:
+            return ""
+        
+        return f"static/social-backgrounds/{image_name}.png"

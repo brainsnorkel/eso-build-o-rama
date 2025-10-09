@@ -136,12 +136,42 @@ class TrialScanner:
             logger.error(f"Failed to fetch damage data for report {report_code}")
             return None
         
+        # Fetch healing data for HPS calculation
+        healing_data = await self.api_client.get_report_table(
+            report_code=report_code,
+            start_time=fight_info.get('startTime'),
+            end_time=fight_info.get('endTime'),
+            data_type="Healing",
+            include_combatant_info=False
+        )
+        
+        if healing_data:
+            logger.info(f"✓ Fetched healing data for {report_code}")
+        else:
+            logger.warning(f"No healing data available for {report_code}")
+        
+        # Fetch casts data for CPS calculation
+        casts_data = await self.api_client.get_report_table(
+            report_code=report_code,
+            start_time=fight_info.get('startTime'),
+            end_time=fight_info.get('endTime'),
+            data_type="Casts",
+            include_combatant_info=False
+        )
+        
+        if casts_data:
+            logger.info(f"✓ Fetched casts data for {report_code}")
+        else:
+            logger.warning(f"No casts data available for {report_code}")
+        
         # Parse player builds (use damage_data for performance, summary_data for account names/roles)
         players = self.data_parser.parse_report_data(
             report_data,
             damage_data,
             fight_id,
-            player_details_data=summary_data
+            player_details_data=summary_data,
+            healing_data=healing_data,
+            casts_data=casts_data
         )
         
         if not players:

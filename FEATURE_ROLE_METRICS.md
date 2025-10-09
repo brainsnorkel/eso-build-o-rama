@@ -8,7 +8,7 @@
 
 This feature adds support for displaying role-appropriate performance metrics in build displays:
 - **Healers**: Show HPS (Healing Per Second) instead of DPS
-- **Tanks**: Will show CPS (Casts Per Second) when implemented, currently show DPS
+- **Tanks**: Will show CPM (Casts Per Minute) when implemented, currently show DPS
 - **DPS**: Show DPS as before
 
 ## Changes Made
@@ -60,11 +60,11 @@ Updated all templates to use role-specific metrics:
    - Falls back to DPS if healing data is missing
    - May need separate API call to get healing table data
 
-2. **Tank CPS Not Implemented**:
+2. **Tank CPM Not Implemented**:
    - Tanks still show DPS
-   - CPS (Casts Per Second) requires Casts table integration
+   - CPM (Casts Per Minute) requires Casts table integration
    - Could be extended to show:
-     - Total ability casts per second
+     - Total ability casts per minute
      - Combat engagement level
      - Ability usage frequency
 

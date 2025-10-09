@@ -144,7 +144,9 @@ class DataParser:
         report_data: Dict[str, Any],
         table_data: Any,
         fight_id: int,
-        player_details_data: Any = None
+        player_details_data: Any = None,
+        healing_data: Any = None,
+        casts_data: Any = None
     ) -> List[PlayerBuild]:
         """
         Parse report and table data to extract player builds.
@@ -270,6 +272,21 @@ class DataParser:
             players = self._deduplicate_players(players)
             logger.info(f"After deduplication: {len(players)} unique players")
             
+            # Extract and merge HPS data from Healing table
+            if healing_data:
+                healing_lookup = self._extract_healing_data(healing_data)
+                self._merge_healing_data(players, healing_lookup)
+                logger.info(f"Extracted healing data for {len(healing_lookup)} players")
+            
+            # Extract and merge CPM data from Casts table
+            if casts_data:
+                # Calculate fight duration in minutes from report data
+                fight_duration_minutes = self._get_fight_duration_minutes(report_data, fight_id)
+                
+                cpm_lookup = self._extract_cpm_data(casts_data, fight_duration_minutes)
+                self._merge_cpm_data(players, cpm_lookup)
+                logger.info(f"Extracted CPM data for {len(cpm_lookup)} players")
+            
             return players
             
         except (KeyError, ValueError, TypeError) as e:
@@ -358,13 +375,13 @@ class DataParser:
                     active_time_ms = player_data.get('activeTime', 1)
                     healing = (overheal / active_time_ms) * 1000 if active_time_ms > 0 else 0
             
-            # Get Casts Per Second (CPS) for tanks
-            # CPS = Total ability casts per second
+            # Get Casts Per Minute (CPM) for tanks
+            # CPM = Total ability casts per minute
             crowd_control = 0
             if role == "tank":
-                # For now, tanks will show DPS since CPS data requires Casts table parsing
+                # For now, tanks will show DPS since CPM data requires Casts table parsing
                 # This is a placeholder for future tank-specific metrics
-                # CPS will be calculated from Casts table: total_casts / fight_duration
+                # CPM will be calculated from Casts table: total_casts / (fight_duration_minutes)
                 crowd_control = 0  # Placeholder - tanks will fall back to DPS
             
             # Create player URL in the correct format
@@ -585,3 +602,120 @@ class DataParser:
                 return fight
         
         return None
+    
+    def _extract_healing_data(self, healing_data: Any) -> Dict[int, float]:
+        """
+        Extract healing data from Healing table.
+        
+        Args:
+            healing_data: Healing table data from API
+            
+        Returns:
+            Dictionary mapping player_id to HPS value
+        """
+        healing_lookup = {}
+        
+        try:
+            if hasattr(healing_data, 'report_data') and hasattr(healing_data.report_data, 'report'):
+                healing_table = healing_data.report_data.report.table
+                entries = healing_table['data'].get('entries', [])
+                
+                for entry in entries:
+                    player_id = entry.get('id')
+                    if player_id:
+                        # Calculate HPS including overheal
+                        effective_healing = entry.get('total', 0)
+                        overheal = entry.get('overheal', 0)
+                        active_time_ms = entry.get('activeTime', 1)
+                        
+                        # Total healing output = effective + overheal
+                        total_healing = effective_healing + overheal
+                        hps = (total_healing / active_time_ms) * 1000 if active_time_ms > 0 else 0
+                        
+                        healing_lookup[player_id] = hps
+                        
+        except Exception as e:
+            logger.warning(f"Failed to extract healing data: {e}")
+        
+        return healing_lookup
+    
+    def _merge_healing_data(self, players: List[PlayerBuild], healing_lookup: Dict[int, float]) -> None:
+        """
+        Merge healing data into player objects.
+        
+        Args:
+            players: List of PlayerBuild objects
+            healing_lookup: Dictionary mapping player_id to HPS value
+        """
+        for player in players:
+            if player.player_id in healing_lookup:
+                player.healing = healing_lookup[player.player_id]
+                logger.debug(f"Added {player.healing:,.0f} HPS to {player.character_name}")
+    
+    def _extract_cpm_data(self, casts_data: Any, fight_duration_minutes: float) -> Dict[int, float]:
+        """
+        Extract CPM data from Casts table.
+        
+        Args:
+            casts_data: Casts table data from API
+            fight_duration_minutes: Fight duration in minutes
+            
+        Returns:
+            Dictionary mapping player_id to CPM value
+        """
+        cpm_lookup = {}
+        
+        try:
+            if hasattr(casts_data, 'report_data') and hasattr(casts_data.report_data, 'report'):
+                casts_table = casts_data.report_data.report.table
+                entries = casts_table['data'].get('entries', [])
+                
+                for entry in entries:
+                    player_id = entry.get('id')
+                    if player_id:
+                        # Count total ability casts (all abilities)
+                        total_casts = 0
+                        for ability in entry.get('abilities', []):
+                            total_casts += ability.get('total', 0)
+                        
+                        # Calculate CPM = total casts / fight duration in minutes
+                        cpm = total_casts / fight_duration_minutes if fight_duration_minutes > 0 else 0
+                        cpm_lookup[player_id] = cpm
+                        
+        except Exception as e:
+            logger.warning(f"Failed to extract CPM data: {e}")
+        
+        return cpm_lookup
+    
+    def _merge_cpm_data(self, players: List[PlayerBuild], cpm_lookup: Dict[int, float]) -> None:
+        """
+        Merge CPM data into player objects.
+        
+        Args:
+            players: List of PlayerBuild objects
+            cpm_lookup: Dictionary mapping player_id to CPM value
+        """
+        for player in players:
+            if player.player_id in cpm_lookup:
+                player.crowd_control = cpm_lookup[player.player_id]
+                logger.debug(f"Added {player.crowd_control:.1f} CPM to {player.character_name}")
+    
+    def _get_fight_duration_minutes(self, report_data: Dict[str, Any], fight_id: int) -> float:
+        """
+        Get fight duration in minutes from report data.
+        
+        Args:
+            report_data: Report data containing fight information
+            fight_id: Fight ID to get duration for
+            
+        Returns:
+            Fight duration in minutes
+        """
+        for fight in report_data.get('fights', []):
+            if fight.get('id') == fight_id:
+                start_time = fight.get('startTime', 0)
+                end_time = fight.get('endTime', 0)
+                duration_ms = end_time - start_time
+                return duration_ms / (1000 * 60) if duration_ms > 0 else 1
+        
+        return 1  # Default to 1 minute if fight not found

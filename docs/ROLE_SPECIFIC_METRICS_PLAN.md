@@ -1,11 +1,11 @@
-# Plan: Accurate Role-Specific Metrics (DPS, HPS, CPS)
+# Plan: Accurate Role-Specific Metrics (DPS, HPS, CPM)
 
 ## Overview
 
 This plan outlines how to implement accurate role-specific performance metrics:
 - **DPS**: Damage Per Second (for DPS players)
 - **HPS**: Healing Per Second (for healers) 
-- **CPS**: Casts Per Second (for tanks)
+- **CPM**: Casts Per Minute (for tanks)
 
 ## Current State Analysis
 
@@ -17,7 +17,7 @@ This plan outlines how to implement accurate role-specific performance metrics:
 
 ### ❌ What Needs Implementation
 - **HPS**: Currently placeholder - needs Healing table integration
-- **CPS**: Not implemented - needs casts frequency calculation for tanks
+- **CPM**: Not implemented - needs casts frequency calculation for tanks
 - **Data merging**: Need to combine multiple API table responses
 
 ---
@@ -53,11 +53,11 @@ hps = (total_healing / active_time_ms) * 1000
 
 ---
 
-### Phase 2: CPS for Tanks
+### Phase 2: CPM for Tanks
 
-#### 2.1 CPS Definition
-**Casts Per Second** should measure:
-- **Total ability casts per second**: All ability usage frequency
+#### 2.1 CPM Definition
+**Casts Per Minute** should measure:
+- **Total ability casts per minute**: All ability usage frequency
 - **Active casting rate**: How frequently the tank is using abilities
 - **Combat engagement**: Overall activity level in combat
 
@@ -67,16 +67,16 @@ hps = (total_healing / active_time_ms) * 1000
 - `DamageTaken` table - Track mitigation events
 - `Buffs` table - Track defensive buff uptime
 
-#### 2.3 CPS Calculation Strategy
+#### 2.3 CPM Calculation Strategy
 ```python
-# Casts Per Second = Total ability casts / fight duration
+# Casts Per Minute = Total ability casts / fight duration in minutes
 total_casts = sum(ability.get('total', 0) for ability in player_abilities)
-fight_duration_seconds = fight_duration_ms / 1000
-cps = total_casts / fight_duration_seconds
+fight_duration_minutes = fight_duration_ms / (1000 * 60)
+cpm = total_casts / fight_duration_minutes
 
 # Example:
-# Tank used 120 abilities total in a 180-second fight
-# CPS = 120 / 180 = 0.67 casts per second
+# Tank used 120 abilities total in a 180-second (3-minute) fight
+# CPM = 120 / 3 = 40 casts per minute
 ```
 
 ---
@@ -210,11 +210,11 @@ async def _process_single_fight(self, ...):
     )
 ```
 
-#### 2.2 CPS Calculation in `data_parser.py`
+#### 2.2 CPM Calculation in `data_parser.py`
 ```python
-def _extract_cps_data(self, casts_data, fight_duration_seconds):
-    """Extract CPS data from Casts table."""
-    cps_lookup = {}
+def _extract_cpm_data(self, casts_data, fight_duration_minutes):
+    """Extract CPM data from Casts table."""
+    cpm_lookup = {}
     
     if hasattr(casts_data, 'report_data'):
         casts_table = casts_data.report_data.report.table
@@ -228,11 +228,11 @@ def _extract_cps_data(self, casts_data, fight_duration_seconds):
                 for ability in entry.get('abilities', []):
                     total_casts += ability.get('total', 0)
                 
-                # Calculate CPS = total casts / fight duration
-                cps = total_casts / fight_duration_seconds if fight_duration_seconds > 0 else 0
-                cps_lookup[player_id] = cps
+                # Calculate CPM = total casts / fight duration in minutes
+                cpm = total_casts / fight_duration_minutes if fight_duration_minutes > 0 else 0
+                cpm_lookup[player_id] = cpm
     
-    return cps_lookup
+    return cpm_lookup
 ```
 
 ### Step 3: Enhanced Model Methods
@@ -283,19 +283,19 @@ def get_primary_metric_name(self) -> str:
    python3 -m src.eso_build_o_rama.main --trial-id 18  # Aetherian Archive
    ```
 
-2. **Verify CPS values**
+2. **Verify CPM values**
    - Check logs for "Fetched casts data"
-   - Verify tank builds show CPS > 0
-   - Typical CPS range: 0.5-1.5 for active tanks
+   - Verify tank builds show CPM > 0
+   - Typical CPM range: 30-90 for active tanks
 
 3. **Validate against ability usage**
-   - Check that tanks with more active ability usage show higher CPS
+   - Check that tanks with more active ability usage show higher CPM
    - Verify tanks with longer fights have proportionally higher total casts
 
 ### Phase 3 Testing: Integration
 1. **Mixed role testing**
    - Generate builds for a full trial with all roles
-   - Verify DPS shows DPS, healers show HPS, tanks show CPS
+   - Verify DPS shows DPS, healers show HPS, tanks show CPM
 
 2. **Fallback testing**
    - Test with incomplete data (missing healing/casts tables)
@@ -379,7 +379,7 @@ casts_cache_key = f"table_{report_code}_Casts_False_{time}_{fights}"
 
 ### Functional Metrics
 - ✅ Healers show accurate HPS (100K-400K range)
-- ✅ Tanks show meaningful CPS (0.5-2.0 range)
+- ✅ Tanks show meaningful CPM (30-90 range)
 - ✅ DPS continues to show accurate DPS
 - ✅ All builds display correct role-specific metrics
 

@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       - `home.html`: Top build displays show appropriate metric
   - **Display Changes**:
     - Healers: Shows "X.XK HPS" or "X.XM HPS" (total healing output including overheal)
-    - Tanks: Will show "X.X CPS" (casts per second) when implemented, currently shows DPS
+    - Tanks: Will show "X.X CPM" (casts per minute) when implemented, currently shows DPS
     - DPS: Shows "X.XK DPS" or "X.XM DPS" as before
   - **Benefits**:
     - More meaningful metrics for non-DPS roles
@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Known Limitations**:
     - Healing data may not be available in all API responses
     - Falls back to DPS if healing data is unavailable
-    - Tank CPS (casts per second) not yet implemented - requires Casts table integration
+    - Tank CPM (casts per minute) not yet implemented - requires Casts table integration
   - **Branch**: `feature/role-specific-metrics`
 
 ### Fixed (2025-10-09 - Mundus Stone Display Fix)

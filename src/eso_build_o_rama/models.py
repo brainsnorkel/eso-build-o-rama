@@ -67,7 +67,7 @@ class PlayerBuild:
     dps_percentage: float = 0.0
     healing: float = 0.0
     healing_percentage: float = 0.0
-    crowd_control: float = 0.0  # For tanks - casts per second (renamed for consistency)
+    crowd_control: float = 0.0  # For tanks - casts per minute (CPM)
     
     # Build components
     gear: List[GearPiece] = field(default_factory=list)
@@ -95,7 +95,7 @@ class PlayerBuild:
     def get_primary_metric(self) -> float:
         """
         Get the primary performance metric for this player based on role.
-        Returns HPS for healers, CPS (casts per second) for tanks (if available), DPS for all others.
+        Returns HPS for healers, CPM (casts per minute) for tanks (if available), DPS for all others.
         """
         if self.role.lower() == "healer" and self.healing > 0:
             return self.healing
@@ -106,12 +106,12 @@ class PlayerBuild:
     def get_primary_metric_name(self) -> str:
         """
         Get the name of the primary metric for this player based on role.
-        Returns 'HPS' for healers, 'CPS' (casts per second) for tanks (if available), 'DPS' for all others.
+        Returns 'HPS' for healers, 'CPM' (casts per minute) for tanks (if available), 'DPS' for all others.
         """
         if self.role.lower() == "healer" and self.healing > 0:
             return "HPS"
         elif self.role.lower() == "tank" and self.crowd_control > 0:
-            return "CPS"
+            return "CPM"
         return "DPS"
     
     def get_build_slug(self) -> str:

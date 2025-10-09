@@ -494,11 +494,8 @@ Disallow: /cache/
     def _get_social_image_url(self, page_type: str = 'home', trial_name: str = None) -> str:
         """Get the URL for social media preview images."""
         # Social media crawlers need absolute URLs
-        # Use the actual site domain so images are served from the deployed site
-        if self.is_develop:
-            base_url = "https://brainsnorkel.github.io/eso-build-o-rama/"
-        else:
-            base_url = "https://esobuild.com/"
+        # Always use esobuild.com domain for social previews (works for both dev and prod)
+        base_url = "https://esobuild.com/"
         
         if page_type == 'trial' and trial_name:
             # Use trial-specific social preview

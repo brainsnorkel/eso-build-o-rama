@@ -39,11 +39,11 @@ class SocialPreviewGenerator:
         Returns:
             Path to the generated image
         """
-        # Create image with gradient background
-        img = Image.new('RGB', (self.image_width, self.image_height), color='#1a1a2e')
+        # Create image with site banner background
+        img = self._create_background_with_banner()
         draw = ImageDraw.Draw(img)
         
-        # Color scheme
+        # Color scheme for decorative elements
         if is_develop:
             primary_color = '#f39c12'
             secondary_color = '#e67e22'
@@ -52,9 +52,6 @@ class SocialPreviewGenerator:
             primary_color = '#11998e'
             secondary_color = '#38ef7d'
             accent_color = '#a8edea'
-        
-        # Draw gradient background
-        self._draw_gradient_background(draw, primary_color, secondary_color)
         
         # Try to load fonts, fallback to default if not available
         try:
@@ -141,11 +138,11 @@ class SocialPreviewGenerator:
         Returns:
             Path to the generated image
         """
-        # Create image with gradient background
-        img = Image.new('RGB', (self.image_width, self.image_height), color='#1a1a2e')
+        # Create image with site banner background
+        img = self._create_background_with_banner()
         draw = ImageDraw.Draw(img)
         
-        # Color scheme
+        # Color scheme for decorative elements
         if is_develop:
             primary_color = '#f39c12'
             secondary_color = '#e67e22'
@@ -154,9 +151,6 @@ class SocialPreviewGenerator:
             primary_color = '#11998e'
             secondary_color = '#38ef7d'
             accent_color = '#a8edea'
-        
-        # Draw gradient background
-        self._draw_gradient_background(draw, primary_color, secondary_color)
         
         # Try to load fonts
         try:
@@ -229,6 +223,189 @@ class SocialPreviewGenerator:
         
         logger.info(f"Generated build preview image: {output_path}")
         return output_path
+    
+    def create_trial_preview(self, trial_name: str, is_develop: bool = False) -> Path:
+        """
+        Create a preview image for a specific trial.
+        
+        Args:
+            trial_name: Name of the trial
+            is_develop: Whether this is for development environment
+            
+        Returns:
+            Path to the generated image
+        """
+        # Create image with trial-specific background
+        img = self._create_background_with_trial(trial_name)
+        draw = ImageDraw.Draw(img)
+        
+        # Color scheme
+        if is_develop:
+            primary_color = '#f39c12'
+            secondary_color = '#e67e22'
+            accent_color = '#f1c40f'
+        else:
+            primary_color = '#11998e'
+            secondary_color = '#38ef7d'
+            accent_color = '#a8edea'
+        
+        # Try to load fonts
+        try:
+            title_font = ImageFont.truetype("/System/Library/Fonts/Arial Bold.ttf", 72)
+            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 36)
+            description_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 28)
+        except (OSError, IOError):
+            try:
+                title_font = ImageFont.truetype("arial.ttf", 72)
+                subtitle_font = ImageFont.truetype("arial.ttf", 36)
+                description_font = ImageFont.truetype("arial.ttf", 28)
+            except (OSError, IOError):
+                title_font = ImageFont.load_default()
+                subtitle_font = ImageFont.load_default()
+                description_font = ImageFont.load_default()
+        
+        # Trial title
+        title_text = trial_name
+        title_bbox = draw.textbbox((0, 0), title_text, font=title_font)
+        title_width = title_bbox[2] - title_bbox[0]
+        title_x = (self.image_width - title_width) // 2
+        title_y = 180
+        
+        # Draw title with shadow effect
+        draw.text((title_x + 3, title_y + 3), title_text, fill='#000000', font=title_font)
+        draw.text((title_x, title_y), title_text, fill='#ffffff', font=title_font)
+        
+        # Subtitle
+        subtitle_text = "ESOBuild.com"
+        if is_develop:
+            subtitle_text += " [DEV]"
+        subtitle_bbox = draw.textbbox((0, 0), subtitle_text, font=subtitle_font)
+        subtitle_width = subtitle_bbox[2] - subtitle_bbox[0]
+        subtitle_x = (self.image_width - subtitle_width) // 2
+        subtitle_y = title_y + 90
+        
+        draw.text((subtitle_x, subtitle_y), subtitle_text, fill=accent_color, font=subtitle_font)
+        
+        # Description
+        description_lines = [
+            "Explore meta builds and top performers",
+            "for this trial on ESOBuild.com"
+        ]
+        
+        description_y = subtitle_y + 80
+        for i, line in enumerate(description_lines):
+            line_bbox = draw.textbbox((0, 0), line, font=description_font)
+            line_width = line_bbox[2] - line_bbox[0]
+            line_x = (self.image_width - line_width) // 2
+            draw.text((line_x, description_y + (i * 40)), line, fill='#e8e8e8', font=description_font)
+        
+        # Add decorative elements
+        self._corner_icons = []  # Reset corner icons
+        self._draw_decorative_elements(draw, primary_color, accent_color)
+        
+        # Paste ability icons on top
+        for icon, position in self._corner_icons:
+            img.paste(icon, position, icon if icon.mode == 'RGBA' else None)
+        
+        # Save image
+        trial_slug = trial_name.lower().replace(' ', '').replace('-', '')
+        filename = f"social-preview-{trial_slug}-dev.png" if is_develop else f"social-preview-{trial_slug}.png"
+        output_path = self.static_dir / filename
+        img.save(output_path, "PNG", optimize=True)
+        
+        logger.info(f"Generated trial preview image: {output_path}")
+        return output_path
+    
+    def _create_background_with_banner(self) -> Image.Image:
+        """Create background using the site banner."""
+        # Start with dark background
+        img = Image.new('RGB', (self.image_width, self.image_height), color='#1a1a2e')
+        
+        # Try to load site banner
+        banner_path = self.static_dir / "banners" / "site_banner.png"
+        if banner_path.exists():
+            try:
+                banner = Image.open(banner_path)
+                # Resize banner to fit width, maintaining aspect ratio
+                banner_width = self.image_width
+                banner_height = int(banner_width * banner.height / banner.width)
+                
+                if banner_height < self.image_height:
+                    # If banner is shorter than needed, crop from center
+                    banner = banner.resize((banner_width, banner_height), Image.Resampling.LANCZOS)
+                    # Create overlay for the full height
+                    overlay = Image.new('RGB', (self.image_width, self.image_height), color='#1a1a2e')
+                    # Paste banner in the center
+                    paste_y = (self.image_height - banner_height) // 2
+                    overlay.paste(banner, (0, paste_y))
+                    banner = overlay
+                else:
+                    # If banner is taller, resize to fit height
+                    banner = banner.resize((banner_width, self.image_height), Image.Resampling.LANCZOS)
+                
+                # Apply alpha blend (35% opacity)
+                banner = banner.convert('RGBA')
+                banner.putalpha(int(255 * 0.35))
+                
+                # Create overlay
+                overlay = Image.new('RGBA', (self.image_width, self.image_height), (0, 0, 0, 0))
+                overlay.paste(banner, (0, 0), banner)
+                
+                # Convert back to RGB
+                img = Image.alpha_composite(img.convert('RGBA'), overlay).convert('RGB')
+                
+            except Exception as e:
+                logger.warning(f"Failed to load site banner: {e}")
+        
+        return img
+    
+    def _create_background_with_trial(self, trial_name: str) -> Image.Image:
+        """Create background using trial-specific graphics."""
+        # Start with dark background
+        img = Image.new('RGB', (self.image_width, self.image_height), color='#1a1a2e')
+        
+        # Map trial name to image filename
+        trial_mapping = {
+            'Aetherian Archive': 'aetherianarchive',
+            'Hel Ra Citadel': 'helracitadel',
+            'Sanctum Ophidia': 'sanctumophidia',
+            'Maw of Lorkhaj': 'maw_of_lorkaj',
+            'The Halls of Fabrication': 'hallsoffabrication',
+            'Asylum Sanctorium': 'asylumsanctorium',
+            'Cloudrest': 'cloudrest',
+            'Sunspire': 'sunspire',
+            'Kyne\'s Aegis': 'kynesaegis',
+            'Rockgrove': 'rockgrove',
+            'Dreadsail Reef': 'dreadsail_reef',
+            'Sanity\'s Edge': 'sanitysedge',
+            'Lucent Citadel': 'lucentcitadel',
+            'Ossein Cage': 'ossein_cage'
+        }
+        
+        trial_slug = trial_mapping.get(trial_name, trial_name.lower().replace(' ', '').replace('-', '').replace('\'', ''))
+        trial_bg_path = self.static_dir / "social-backgrounds" / f"{trial_slug}.png"
+        
+        if trial_bg_path.exists():
+            try:
+                trial_bg = Image.open(trial_bg_path)
+                # Resize to fit social media dimensions
+                trial_bg = trial_bg.resize((self.image_width, self.image_height), Image.Resampling.LANCZOS)
+                
+                # Apply alpha blend (30% opacity)
+                trial_bg = trial_bg.convert('RGBA')
+                trial_bg.putalpha(int(255 * 0.3))
+                
+                # Create overlay
+                overlay = Image.new('RGBA', (self.image_width, self.image_height), (0, 0, 0, 0))
+                overlay.paste(trial_bg, (0, 0), trial_bg)
+                
+                # Convert back to RGB
+                img = Image.alpha_composite(img.convert('RGBA'), overlay).convert('RGB')
+                
+            except Exception as e:
+                logger.warning(f"Failed to load trial background for {trial_name}: {e}")
+        
+        return img
     
     def _draw_gradient_background(self, draw: ImageDraw.Draw, color1: str, color2: str):
         """Draw a rich multi-stop gradient background with depth."""

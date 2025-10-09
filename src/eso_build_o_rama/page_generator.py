@@ -92,7 +92,7 @@ class PageGenerator:
             'page_title': self._get_page_title(build),
             'meta_description': self._get_meta_description(build),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url()
+            'social_image_url': self._get_social_image_url('build')
         }
         
         # Debug: Check DPS value being passed to template
@@ -186,7 +186,7 @@ class PageGenerator:
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'cache_stats': cache_stats,
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url()
+            'social_image_url': self._get_social_image_url('home')
         }
         html = template.render(**context)
         
@@ -239,7 +239,7 @@ class PageGenerator:
             'bosses': sorted_bosses,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url()
+            'social_image_url': self._get_social_image_url('trial', trial_name)
         }
         html = template.render(**context)
         
@@ -491,15 +491,24 @@ Disallow: /cache/
         
         return ordered_grouped
     
-    def _get_social_image_url(self) -> str:
+    def _get_social_image_url(self, page_type: str = 'home', trial_name: str = None) -> str:
         """Get the URL for social media preview images."""
         # Social media crawlers need absolute URLs
-        # For development, use the develop branch GitHub URL
-        # For production, use the main branch GitHub URL
-        if self.is_develop:
-            return "https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/develop/static/social-preview-dev.png"
+        # Always use esobuild.com domain for social previews (works for both dev and prod)
+        base_url = "https://esobuild.com/"
+        
+        if page_type == 'trial' and trial_name:
+            # Use trial-specific social preview
+            trial_slug = trial_name.lower().replace(' ', '').replace('-', '').replace('\'', '')
+            filename = f"social-preview-{trial_slug}-dev.png" if self.is_develop else f"social-preview-{trial_slug}.png"
+        elif page_type == 'build':
+            # Use site banner for build pages
+            filename = "social-preview-build-dev.png" if self.is_develop else "social-preview-build.png"
         else:
-            return "https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/main/static/social-preview.png"
+            # Use site banner for home page
+            filename = "social-preview-dev.png" if self.is_develop else "social-preview.png"
+        
+        return f"{base_url}static/{filename}"
     
     def _get_page_title(self, build: CommonBuild) -> str:
         """Generate SEO-optimized page title for a build."""

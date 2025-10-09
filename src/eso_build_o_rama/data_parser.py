@@ -358,6 +358,15 @@ class DataParser:
                     active_time_ms = player_data.get('activeTime', 1)
                     healing = (overheal / active_time_ms) * 1000 if active_time_ms > 0 else 0
             
+            # Get Casts Per Second (CPS) for tanks
+            # CPS = Total ability casts per second
+            crowd_control = 0
+            if role == "tank":
+                # For now, tanks will show DPS since CPS data requires Casts table parsing
+                # This is a placeholder for future tank-specific metrics
+                # CPS will be calculated from Casts table: total_casts / fight_duration
+                crowd_control = 0  # Placeholder - tanks will fall back to DPS
+            
             # Create player URL in the correct format
             # Format: https://www.esologs.com/reports/{report_code}?fight={fight_id}&type=summary&source={player_id}
             report_code = report_data.get('code', '')

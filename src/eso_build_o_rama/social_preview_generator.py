@@ -115,10 +115,13 @@ class SocialPreviewGenerator:
         for icon, position in self._corner_icons:
             img.paste(icon, position, icon if icon.mode == 'RGBA' else None)
         
-        # Save image
+        # Save image with optimization
         filename = "social-preview-dev.png" if is_develop else "social-preview.png"
         output_path = self.static_dir / filename
-        img.save(output_path, "PNG", optimize=True)
+        
+        # Optimize for smaller file size while maintaining quality
+        img = img.convert('P', palette=Image.ADAPTIVE, colors=256)
+        img.save(output_path, "PNG", optimize=True, compress_level=9)
         
         logger.info(f"Generated social preview image: {output_path}")
         return output_path
@@ -195,10 +198,13 @@ class SocialPreviewGenerator:
         for icon, position in self._corner_icons:
             img.paste(icon, position, icon if icon.mode == 'RGBA' else None)
         
-        # Save image
+        # Save image with optimization
         filename = f"social-preview-build-dev.png" if is_develop else "social-preview-build.png"
         output_path = self.static_dir / filename
-        img.save(output_path, "PNG", optimize=True)
+        
+        # Optimize for smaller file size while maintaining quality
+        img = img.convert('P', palette=Image.ADAPTIVE, colors=256)
+        img.save(output_path, "PNG", optimize=True, compress_level=9)
         
         logger.info(f"Generated build preview image: {output_path}")
         return output_path
@@ -286,11 +292,14 @@ class SocialPreviewGenerator:
         for icon, position in self._corner_icons:
             img.paste(icon, position, icon if icon.mode == 'RGBA' else None)
         
-        # Save image
+        # Save image with optimization
         trial_slug = trial_name.lower().replace(' ', '').replace('-', '')
         filename = f"social-preview-{trial_slug}-dev.png" if is_develop else f"social-preview-{trial_slug}.png"
         output_path = self.static_dir / filename
-        img.save(output_path, "PNG", optimize=True)
+        
+        # Optimize for smaller file size while maintaining quality
+        img = img.convert('P', palette=Image.ADAPTIVE, colors=256)
+        img.save(output_path, "PNG", optimize=True, compress_level=9)
         
         logger.info(f"Generated trial preview image: {output_path}")
         return output_path

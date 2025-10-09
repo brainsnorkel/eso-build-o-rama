@@ -494,10 +494,11 @@ Disallow: /cache/
     def _get_social_image_url(self, page_type: str = 'home', trial_name: str = None) -> str:
         """Get the URL for social media preview images."""
         # Social media crawlers need absolute URLs
-        # For development, use the develop branch GitHub URL
-        # For production, use the main branch GitHub URL
-        base_url = "https://raw.githubusercontent.com/brainsnorkel/eso-build-o-rama/"
-        branch = "develop" if self.is_develop else "main"
+        # Use the actual site domain so images are served from the deployed site
+        if self.is_develop:
+            base_url = "https://brainsnorkel.github.io/eso-build-o-rama/"
+        else:
+            base_url = "https://esobuild.com/"
         
         if page_type == 'trial' and trial_name:
             # Use trial-specific social preview
@@ -510,7 +511,7 @@ Disallow: /cache/
             # Use site banner for home page
             filename = "social-preview-dev.png" if self.is_develop else "social-preview.png"
         
-        return f"{base_url}{branch}/static/{filename}"
+        return f"{base_url}static/{filename}"
     
     def _get_page_title(self, build: CommonBuild) -> str:
         """Generate SEO-optimized page title for a build."""

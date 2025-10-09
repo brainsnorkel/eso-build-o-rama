@@ -18,7 +18,7 @@
 
 {% block twitter_title %}{{ build.get_display_name() }} - {{ build.trial_name }} {{ build.boss_name }}{% endblock %}
 
-{% block twitter_description %}{{ build.get_display_name() }} {{ best_player.role|upper }} build: {{ best_player.dps|format_dps }} DPS by @{{ best_player.player_name }}.{% endblock %}
+{% block twitter_description %}{{ build.get_display_name() }} {{ best_player.role|upper }} build: {{ best_player.dps|format_dps }} DPS featuring @{{ best_player.player_name }}.{% endblock %}
 
 {% block twitter_image_alt %}{{ build.get_display_name() }} build for {{ build.trial_name }} {{ build.boss_name }} - {{ best_player.dps|format_dps }} DPS{% endblock %}
 

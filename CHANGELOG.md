@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Images positioned as backgrounds with dark overlay (50% opacity) for text readability
   - Added `trial_background_image` Jinja2 filter for trial name to image mapping
   - Updated `home.html` template to include background images in trial cards
-  - Trial images used only for trial link boxes on home page
+  - Trial images used for trial link boxes on home page AND trial page headers
 - **Social Card Backgrounds**: Prepared 1200x630px social card backgrounds for each trial
   - Center-cropped and resized to social media dimensions
   - 30% opacity for visibility while maintaining branding

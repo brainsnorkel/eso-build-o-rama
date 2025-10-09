@@ -56,11 +56,22 @@
     </ol>
 </nav>
 
-<div class="card">
-    <h2>{{ trial_name }}</h2>
-    <p style="color: #a8edea; margin-top: 10px;">
-        Common builds from top-performing players across all boss encounters
-    </p>
+<div class="card" style="background: linear-gradient(135deg, rgba(56, 239, 125, 0.1) 0%, rgba(17, 153, 142, 0.1) 100%){% if trial_name|trial_background_image %}, url('{{ trial_name|trial_background_image }}'){% endif %}; 
+            background-size: cover, cover;
+            background-position: center, right center;
+            background-blend-mode: normal, overlay;
+            position: relative;
+            overflow: hidden;">
+    
+    <!-- Dark overlay for better text readability -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); border-radius: 12px; z-index: 0;"></div>
+    
+    <div style="position: relative; z-index: 1;">
+        <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">{{ trial_name }}</h2>
+        <p style="color: #a8edea; margin-top: 10px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">
+            Common builds from top-performing players across all boss encounters
+        </p>
+    </div>
 </div>
 
 {% for boss_name, builds in bosses.items() %}

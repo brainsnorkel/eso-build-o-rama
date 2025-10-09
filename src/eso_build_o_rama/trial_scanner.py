@@ -358,8 +358,9 @@ class TrialScanner:
         
         logger.info(f"Fetching mundus data for {len(builds)} publishable builds (optimized)")
         
-        # Track which characters we've already queried to avoid duplicates
-        queried_characters = set()
+        # Track mundus for each character to avoid duplicate queries and share results
+        # Use character name only (not fight-specific) since mundus is character-wide
+        character_mundus_map = {}  # character_name -> mundus_stone
         successful_queries = 0
         failed_queries = 0
         skipped_queries = 0
@@ -373,19 +374,14 @@ class TrialScanner:
                 skipped_queries += 1
                 continue
             
-            # Create unique key for this character in this report/fight
-            character_key = (
-                build.best_player.character_name,
-                build.report_code,
-                build.fight_id
-            )
+            character_name = build.best_player.character_name
             
-            # Skip if we've already queried this character
-            if character_key in queried_characters:
+            # If we've already queried this character, use their mundus
+            if character_name in character_mundus_map:
+                build.best_player.mundus = character_mundus_map[character_name]
+                logger.info(f"→ Copied mundus '{character_mundus_map[character_name]}' to {character_name} for {build.boss_name}")
                 skipped_queries += 1
                 continue
-            
-            queried_characters.add(character_key)
             
             try:
                 character_name = build.best_player.character_name
@@ -405,20 +401,41 @@ class TrialScanner:
                 build.best_player.mundus = mundus_stone or ""
                 
                 if mundus_stone:
+                    # Only store successful mundus results (not empty strings)
+                    character_mundus_map[character_name] = mundus_stone
                     logger.info(f"✓ Found mundus stone for {character_name}: {mundus_stone}")
+                    logger.debug(f"  Set mundus '{mundus_stone}' on best_player object id={id(build.best_player)}")
                     successful_queries += 1
                 else:
-                    logger.warning(f"✗ No mundus stone found for {character_name}")
+                    # Don't store empty results - let other boss fights try
+                    logger.warning(f"✗ No mundus stone found for {character_name} in this fight (will try other bosses)")
                     failed_queries += 1
                     
             except Exception as e:
-                logger.warning(f"Failed to get mundus data for {build.best_player.character_name}: {e}")
+                logger.warning(f"Failed to get mundus data for {character_name}: {e}")
                 build.best_player.mundus = ""
+                # Don't store exception results - let other boss fights try
                 failed_queries += 1
+        
+        # Second pass: Copy successful mundus to builds that failed
+        # This handles cases where a character fails on one boss but succeeds on another
+        backfill_count = 0
+        for build in builds:
+            if not build.best_player:
+                continue
+            
+            character_name = build.best_player.character_name
+            
+            # If this build doesn't have mundus but we found it for this character elsewhere
+            if not build.best_player.mundus and character_name in character_mundus_map:
+                build.best_player.mundus = character_mundus_map[character_name]
+                logger.info(f"→ Backfilled mundus '{character_mundus_map[character_name]}' to {character_name} for {build.boss_name}")
+                backfill_count += 1
         
         logger.info(
             f"Mundus fetch complete: {successful_queries} successful, "
-            f"{failed_queries} failed, {skipped_queries} skipped (already had data)"
+            f"{failed_queries} failed, {skipped_queries} skipped (already had data), "
+            f"{backfill_count} backfilled"
         )
     
     async def get_publishable_builds(

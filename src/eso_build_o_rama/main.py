@@ -145,6 +145,13 @@ class ESOBuildORM:
                 # Single trial mode - save this trial's data
                 update_version = self._get_most_common_version(all_reports)
                 for trial_name_scanned, trial_builds in self._group_builds_by_trial(publishable_builds).items():
+                    # DEBUG: Log mundus status just before saving
+                    mundus_count = sum(1 for b in trial_builds if b.best_player and b.best_player.mundus)
+                    logger.info(f"DEBUG: Before save - {len(trial_builds)} builds, {mundus_count} have mundus")
+                    for build in trial_builds[:3]:
+                        if build.best_player:
+                            logger.debug(f"  Build {build.build_slug[:40]}: mundus='{build.best_player.mundus}' (obj id={id(build.best_player)})")
+                    
                     self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version, cache_stats)
                     logger.info(f"Saved {len(trial_builds)} builds for trial '{trial_name_scanned}'")
             else:

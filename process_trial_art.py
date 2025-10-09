@@ -24,7 +24,7 @@ BANNER_DIR.mkdir(parents=True, exist_ok=True)
 
 # Trial box background settings
 TRIAL_BOX_WIDTH = 600  # Max width for trial boxes
-TRIAL_BOX_ALPHA = 0.15  # Very faint for background
+TRIAL_BOX_ALPHA = 0.35  # Brighter for trial links
 
 # Social card settings
 SOCIAL_WIDTH = 1200
@@ -33,7 +33,7 @@ SOCIAL_ALPHA = 0.3  # More visible for social cards
 
 # Banner settings
 BANNER_HEIGHT = 120  # Height of header
-BANNER_ALPHA = 0.2  # Faint background
+BANNER_ALPHA = 0.35  # Brighter background for site/builds
 
 
 def process_trial_background(source_path: Path, output_path: Path):

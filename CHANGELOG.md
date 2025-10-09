@@ -8,21 +8,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added (2025-10-10 - Trial Graphics and Site Banner)
-- **Trial Background Images**: Added faint alpha-blended background images to trial boxes on home page
+- **Trial Background Images**: Added alpha-blended background images to trial boxes on home page
   - Processed 14 trial artwork images for optimal display
-  - Created trial-specific backgrounds at 600px width with 15% opacity
-  - Images positioned as subtle backgrounds with dark overlay for text readability
+  - Created trial-specific backgrounds at 600px width with 35% opacity (increased for better visibility)
+  - Images positioned as backgrounds with dark overlay (50% opacity) for text readability
   - Added `trial_background_image` Jinja2 filter for trial name to image mapping
   - Updated `home.html` template to include background images in trial cards
+  - Trial images used only for trial link boxes on home page
 - **Social Card Backgrounds**: Prepared 1200x630px social card backgrounds for each trial
   - Center-cropped and resized to social media dimensions
   - 30% opacity for visibility while maintaining branding
   - Ready for future social media preview integration
-- **Site Banner**: Added character artwork as header background
+- **Site Banner**: Added character artwork as background for entire site
   - Processed `site_banner_characterload.png` to 120px height
   - Right-aligned crop to preserve character positioning
-  - 20% opacity for subtle background effect
-  - Applied to header across all pages via `base.html`
+  - 35% opacity for better visibility (increased from 20%)
+  - Applied as fixed background to body element across all pages
+  - Used for header, build pages, trial pages, and home page
+  - Creates consistent visual theme throughout the site
 - **Image Processing Script**: Created `process_trial_art.py` for automated image optimization
   - Handles resizing, cropping, and alpha transparency adjustments
   - Generates three versions: trial backgrounds, social backgrounds, and site banner

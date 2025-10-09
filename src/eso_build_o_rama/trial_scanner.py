@@ -228,6 +228,13 @@ class TrialScanner:
         """
         logger.info(f"Scanning {len(trial_list)} trials")
         
+        # Load trial_bosses.json for authoritative boss list
+        from pathlib import Path
+        import json
+        bosses_file = Path(__file__).parent.parent.parent / "data" / "trial_bosses.json"
+        with open(bosses_file, 'r') as f:
+            trial_bosses_data = json.load(f)
+        
         # Get zones with encounters first
         logger.info("Fetching zone and encounter data...")
         zones = await self.api_client.get_zones()
@@ -295,7 +302,10 @@ class TrialScanner:
                         
                         logger.info(f"Processing report {report_code} for all bosses")
                         
-                        # Process each boss encounter from this report
+                        # Track which bosses we've processed
+                        processed_bosses = set()
+                        
+                        # Step 2a: Process each boss encounter from API
                         for encounter in encounters:
                             enc_id = encounter['id']
                             enc_name = encounter['name']
@@ -321,9 +331,45 @@ class TrialScanner:
                                 )
                                 if trial_report:
                                     trial_reports.append(trial_report)
+                                    processed_bosses.add(enc_name)
                             except Exception as e:
                                 logger.error(f"Error processing {enc_name} (fight {best_fight['id']}) in report {report_code}: {e}")
                                 continue
+                        
+                        # Step 2b: Process missing bosses from trial_bosses.json
+                        # This catches intermediate bosses like Spiral Descender that aren't in API encounters
+                        valid_bosses = set(trial_bosses_data.get('trial_bosses', {}).get(trial_name, []))
+                        missing_bosses = valid_bosses - processed_bosses
+                        
+                        if missing_bosses:
+                            logger.info(f"Scanning for {len(missing_bosses)} additional boss(es) not in API encounters: {missing_bosses}")
+                            
+                            for boss_name in missing_bosses:
+                                # Find best fight for this boss
+                                best_fight = self._find_best_fight_for_encounter(
+                                    full_report,
+                                    boss_name
+                                )
+                                
+                                if not best_fight:
+                                    logger.debug(f"No fights found for {boss_name} in report {report_code}")
+                                    continue
+                                
+                                # Process this boss fight
+                                try:
+                                    trial_report = await self._process_single_fight(
+                                        full_report,
+                                        report_code,
+                                        best_fight['id'],
+                                        trial_name,
+                                        boss_name
+                                    )
+                                    if trial_report:
+                                        trial_reports.append(trial_report)
+                                        logger.info(f"✓ Processed additional boss: {boss_name}")
+                                except Exception as e:
+                                    logger.error(f"Error processing {boss_name} (fight {best_fight['id']}) in report {report_code}: {e}")
+                                    continue
                                 
                     except Exception as e:
                         logger.error(f"Error processing report {report_code}: {e}")

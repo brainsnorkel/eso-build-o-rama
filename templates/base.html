@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{% block meta_description %}Common builds found in top esologs{% endblock %}">
+    <meta name="description" content="{% block meta_description %}The latest ESO meta trial builds from ESOLogs. Updated every day.{% endblock %}">
     
     <!-- Social Media Meta Tags -->
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:title" content="{% block og_title %}ESOBuild.com{% if is_develop %} [DEV]{% endif %}{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Common builds found in top esologs{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}The latest ESO meta trial builds from ESOLogs. Updated every day.{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{{ social_image_url|default('static/social-preview.png') }}{% endblock %}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
     <meta name="twitter:site" content="@brainsnorkel">
     <meta name="twitter:creator" content="@brainsnorkel">
     <meta name="twitter:title" content="{% block twitter_title %}ESOBuild.com{% if is_develop %} [DEV]{% endif %}{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Common builds found in top esologs{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}The latest ESO meta trial builds from ESOLogs. Updated every day.{% endblock %}">
     <meta name="twitter:image" content="{% block twitter_image %}{{ social_image_url|default('static/social-preview.png') }}{% endblock %}">
     <meta name="twitter:image:alt" content="{% block twitter_image_alt %}ESOBuild.com - Meta Build Explorer{% endblock %}">
     
@@ -793,7 +793,7 @@
     <header role="banner">
         <div class="container">
             <h1>ESO Meta Build Explorer{% if is_develop %} <span style="color: #f39c12; font-size: 0.6em; border: 2px solid #f39c12; padding: 2px 8px; border-radius: 4px;">DEV</span>{% endif %}</h1>
-            <p class="subtitle">Common builds found in top esologs</p>
+            <p class="subtitle">The latest ESO meta trial builds from ESOLogs. Updated every day.</p>
         </div>
     </header>
     

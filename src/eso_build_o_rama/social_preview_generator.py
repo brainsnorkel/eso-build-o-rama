@@ -54,10 +54,11 @@ class SocialPreviewGenerator:
             accent_color = '#a8edea'
         
         # Try to load fonts, fallback to default if not available
+        # Increased sizes for better readability over background images
         try:
-            title_font = ImageFont.truetype("/System/Library/Fonts/Arial Bold.ttf", 72)
-            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 36)
-            description_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 28)
+            title_font = ImageFont.truetype("/System/Library/Fonts/Arial Bold.ttf", 96)
+            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 48)
+            description_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 36)
         except (OSError, IOError):
             try:
                 title_font = ImageFont.truetype("arial.ttf", 72)
@@ -152,61 +153,39 @@ class SocialPreviewGenerator:
             secondary_color = '#38ef7d'
             accent_color = '#a8edea'
         
-        # Try to load fonts
+        # Try to load fonts - increased sizes for readability
         try:
-            title_font = ImageFont.truetype("/System/Library/Fonts/Arial Bold.ttf", 60)
-            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 32)
-            info_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 24)
+            title_font = ImageFont.truetype("/System/Library/Fonts/Arial Bold.ttf", 96)
+            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 48)
         except (OSError, IOError):
             try:
-                title_font = ImageFont.truetype("arial.ttf", 60)
-                subtitle_font = ImageFont.truetype("arial.ttf", 32)
-                info_font = ImageFont.truetype("arial.ttf", 24)
+                title_font = ImageFont.truetype("arial.ttf", 96)
+                subtitle_font = ImageFont.truetype("arial.ttf", 48)
             except (OSError, IOError):
                 title_font = ImageFont.load_default()
                 subtitle_font = ImageFont.load_default()
-                info_font = ImageFont.load_default()
         
-        # Build title
-        title_text = build_name
+        # Simplified title: just "esobuild.com"
+        title_text = "esobuild.com"
         title_bbox = draw.textbbox((0, 0), title_text, font=title_font)
         title_width = title_bbox[2] - title_bbox[0]
         title_x = (self.image_width - title_width) // 2
-        title_y = 80
+        title_y = 200
         
-        # Draw title with shadow
-        draw.text((title_x + 2, title_y + 2), title_text, fill='#000000', font=title_font)
+        # Draw title with strong shadow for readability
+        draw.text((title_x + 4, title_y + 4), title_text, fill='#000000', font=title_font)
         draw.text((title_x, title_y), title_text, fill='#ffffff', font=title_font)
         
-        # Trial and boss
-        trial_boss_text = f"{trial_name} - {boss_name}"
-        trial_boss_bbox = draw.textbbox((0, 0), trial_boss_text, font=subtitle_font)
-        trial_boss_width = trial_boss_bbox[2] - trial_boss_bbox[0]
-        trial_boss_x = (self.image_width - trial_boss_width) // 2
-        trial_boss_y = title_y + 80
+        # Subtitle: "Build Page"
+        subtitle_text = "Build Page"
+        subtitle_bbox = draw.textbbox((0, 0), subtitle_text, font=subtitle_font)
+        subtitle_width = subtitle_bbox[2] - subtitle_bbox[0]
+        subtitle_x = (self.image_width - subtitle_width) // 2
+        subtitle_y = title_y + 110
         
-        draw.text((trial_boss_x, trial_boss_y), trial_boss_text, fill=accent_color, font=subtitle_font)
-        
-        # DPS highlight
-        dps_text = f"{dps} DPS"
-        dps_bbox = draw.textbbox((0, 0), dps_text, font=subtitle_font)
-        dps_width = dps_bbox[2] - dps_bbox[0]
-        dps_x = (self.image_width - dps_width) // 2
-        dps_y = trial_boss_y + 60
-        
-        # Draw DPS with glow effect
-        for offset in range(3, 0, -1):
-            draw.text((dps_x + offset, dps_y + offset), dps_text, fill='#ff6b6b', font=subtitle_font)
-        draw.text((dps_x, dps_y), dps_text, fill='#ff6b6b', font=subtitle_font)
-        
-        # Player info
-        player_text = f"by {player_name}"
-        player_bbox = draw.textbbox((0, 0), player_text, font=info_font)
-        player_width = player_bbox[2] - player_bbox[0]
-        player_x = (self.image_width - player_width) // 2
-        player_y = dps_y + 60
-        
-        draw.text((player_x, player_y), player_text, fill='#e8e8e8', font=info_font)
+        # Draw subtitle with shadow
+        draw.text((subtitle_x + 3, subtitle_y + 3), subtitle_text, fill='#000000', font=subtitle_font)
+        draw.text((subtitle_x, subtitle_y), subtitle_text, fill=accent_color, font=subtitle_font)
         
         # Add decorative elements
         self._corner_icons = []  # Reset corner icons
@@ -249,16 +228,16 @@ class SocialPreviewGenerator:
             secondary_color = '#38ef7d'
             accent_color = '#a8edea'
         
-        # Try to load fonts
+        # Try to load fonts - increased sizes for readability over backgrounds
         try:
-            title_font = ImageFont.truetype("/System/Library/Fonts/Arial Bold.ttf", 72)
-            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 36)
-            description_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 28)
+            title_font = ImageFont.truetype("/System/Library/Fonts/Arial Bold.ttf", 96)
+            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 48)
+            description_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 36)
         except (OSError, IOError):
             try:
-                title_font = ImageFont.truetype("arial.ttf", 72)
-                subtitle_font = ImageFont.truetype("arial.ttf", 36)
-                description_font = ImageFont.truetype("arial.ttf", 28)
+                title_font = ImageFont.truetype("arial.ttf", 96)
+                subtitle_font = ImageFont.truetype("arial.ttf", 48)
+                description_font = ImageFont.truetype("arial.ttf", 36)
             except (OSError, IOError):
                 title_font = ImageFont.load_default()
                 subtitle_font = ImageFont.load_default()

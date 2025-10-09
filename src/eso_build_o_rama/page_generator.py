@@ -50,6 +50,7 @@ class PageGenerator:
         
         # Add custom filters
         self.env.filters['format_dps'] = self._format_dps
+        self.env.filters['format_metric'] = self._format_metric
         self.env.filters['format_percentage'] = self._format_percentage
         self.env.filters['format_timestamp'] = self._format_timestamp
         self.env.filters['eso_hub_set_url'] = self._eso_hub_set_url
@@ -524,6 +525,19 @@ Disallow: /cache/
     @staticmethod
     def _format_dps(value: float) -> str:
         """Format DPS value for display."""
+        if value >= 1_000_000:
+            return f"{value / 1_000_000:.2f}M"
+        elif value >= 1_000:
+            return f"{value / 1_000:.1f}K"
+        else:
+            return f"{int(value)}"
+    
+    @staticmethod
+    def _format_metric(value: float) -> str:
+        """
+        Format a metric value (DPS/HPS) for display.
+        This is an alias for _format_dps to keep template code cleaner.
+        """
         if value >= 1_000_000:
             return f"{value / 1_000_000:.2f}M"
         elif value >= 1_000:

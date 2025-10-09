@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (2025-10-09 - Role-Specific Performance Metrics)
+- **Feature: HPS Display for Healers**
+  - **Overview**: Healers now show HPS (Healing Per Second) instead of DPS in build displays
+  - **Implementation Details**:
+    - Added `healing` and `healing_percentage` fields to `PlayerBuild` model (already existed but weren't populated)
+    - Updated `data_parser.py` to extract healing data from API responses for healer roles
+    - **HPS calculation includes both effective healing AND overheal** for complete healing output
+    - Added `get_primary_metric()` and `get_primary_metric_name()` methods to `PlayerBuild` class
+    - Created `format_metric` Jinja2 filter for formatting both DPS and HPS values
+    - Updated all templates to show role-appropriate metrics:
+      - `build_page.html`: Model Player and Other Example Players sections
+      - `trial.html`: Performance column shows DPS/HPS based on role
+      - `home.html`: Top build displays show appropriate metric
+  - **Display Changes**:
+    - Healers: Shows "X.XK HPS" or "X.XM HPS" (total healing output including overheal)
+    - Tanks: Will show "X.X CPM" (casts per minute) when implemented, currently shows DPS
+    - DPS: Shows "X.XK DPS" or "X.XM DPS" as before
+  - **Benefits**:
+    - More meaningful metrics for non-DPS roles
+    - Better representation of healer performance
+    - Clearer role distinction in build comparisons
+  - **Known Limitations**:
+    - Healing data may not be available in all API responses
+    - Falls back to DPS if healing data is unavailable
+    - Tank CPM (casts per minute) not yet implemented - requires Casts table integration
+  - **Branch**: `feature/role-specific-metrics`
+
 ### Fixed (2025-10-09 - Mundus Stone Display Fix)
 - **Issue #2: Mundus collected but not showing**
   - **Root Cause**: When pages were generated, freshly scanned builds (with mundus data) were saved to builds.json, but then ALL builds were reloaded from disk (including old trials without mundus). This caused newly scanned trials to show empty mundus fields.

@@ -76,7 +76,7 @@
                 <th scope="col">Build</th>
                 <th scope="col">Signature Sets</th>
                 <th scope="col">Frequency</th>
-                <th scope="col">DPS</th>
+                <th scope="col">Performance</th>
                 <th scope="col">Player Character</th>
                 <th scope="col">Details</th>
             </tr>
@@ -111,7 +111,7 @@
                     {% endif %}
                 </td>
                 <td data-label="Frequency">{{ build.count }} players in {{ build.report_count }} reports</td>
-                <td data-label="DPS">{{ build.best_player.dps|format_dps }}</td>
+                <td data-label="Performance">{{ build.best_player.get_primary_metric()|format_metric }} {{ build.best_player.get_primary_metric_name() }}</td>
                 <td data-label="Player Character">{{ build.best_player.player_name }} - {{ build.best_player.character_name }}</td>
                 <td data-label="Details">
                     <a href="{{ build.trial_name.lower().replace(' ', '-').replace("'", "") }}-{{ build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and') }}-{{ build.build_slug }}.html" 

@@ -142,7 +142,7 @@
         
         <div class="info-box">
             <div class="label">Model Player</div>
-            <div class="value">{{ best_player.dps|format_dps }} DPS</div>
+            <div class="value">{{ best_player.get_primary_metric()|format_metric }} {{ best_player.get_primary_metric_name() }}</div>
             <div style="font-size: 0.8em; margin-top: 5px;">
                 <div>{{ best_player.player_name }} - {{ best_player.character_name }}</div>
                 <a href="{{ best_player.player_url }}" 
@@ -280,7 +280,7 @@
             <tr>
                 <th scope="col">Player</th>
                 <th scope="col">Character</th>
-                <th scope="col">DPS</th>
+                <th scope="col">{{ best_player.get_primary_metric_name() }}</th>
             </tr>
         </thead>
         <tbody>
@@ -303,7 +303,7 @@
                     </a>
                 </td>
                 <td data-label="Character">{{ player.character_name }}</td>
-                <td data-label="DPS">{{ player.dps|format_dps }}</td>
+                <td data-label="{{ best_player.get_primary_metric_name() }}">{{ player.get_primary_metric()|format_metric }}</td>
             </tr>
             {% endfor %}
         </tbody>

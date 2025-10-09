@@ -91,6 +91,24 @@ class PlayerBuild:
     boss_name: str = ""
     player_url: str = ""
     
+    def get_primary_metric(self) -> float:
+        """
+        Get the primary performance metric for this player based on role.
+        Returns HPS for healers, DPS for all others.
+        """
+        if self.role.lower() == "healer" and self.healing > 0:
+            return self.healing
+        return self.dps
+    
+    def get_primary_metric_name(self) -> str:
+        """
+        Get the name of the primary metric for this player based on role.
+        Returns 'HPS' for healers, 'DPS' for all others.
+        """
+        if self.role.lower() == "healer" and self.healing > 0:
+            return "HPS"
+        return "DPS"
+    
     def get_build_slug(self) -> str:
         """Generate a build slug for identification."""
         # Sort subclasses alphabetically

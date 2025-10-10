@@ -331,9 +331,9 @@ class SocialPreviewGenerator:
                     # If banner is taller, resize to fit height
                     banner = banner.resize((banner_width, self.image_height), Image.Resampling.LANCZOS)
                 
-                # Apply alpha blend (35% opacity)
+                # Apply alpha blend (60% opacity)
                 banner = banner.convert('RGBA')
-                banner.putalpha(int(255 * 0.35))
+                banner.putalpha(int(255 * 0.6))
                 
                 # Create overlay
                 overlay = Image.new('RGBA', (self.image_width, self.image_height), (0, 0, 0, 0))
@@ -379,9 +379,9 @@ class SocialPreviewGenerator:
                 # Resize to fit social media dimensions
                 trial_bg = trial_bg.resize((self.image_width, self.image_height), Image.Resampling.LANCZOS)
                 
-                # Apply alpha blend (30% opacity)
+                # Apply alpha blend (55% opacity)
                 trial_bg = trial_bg.convert('RGBA')
-                trial_bg.putalpha(int(255 * 0.3))
+                trial_bg.putalpha(int(255 * 0.55))
                 
                 # Create overlay
                 overlay = Image.new('RGBA', (self.image_width, self.image_height), (0, 0, 0, 0))

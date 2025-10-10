@@ -103,7 +103,24 @@ jobs:
       
       - name: Copy static assets to output
         run: |
-          cp -r static output/
+          # Copy icons (always needed)
+          mkdir -p output/static/icons
+          cp -r static/icons/* output/static/icons/
+          
+          # Copy other static assets if they don't exist in output
+          # (preserves optimized versions committed to repo)
+          for dir in banners trial-backgrounds social-backgrounds; do
+            if [ -d "static/$dir" ]; then
+              mkdir -p "output/static/$dir"
+              # Only copy if destination doesn't have files
+              if [ ! "$(ls -A output/static/$dir 2>/dev/null)" ]; then
+                cp -r static/$dir/* output/static/$dir/ 2>/dev/null || true
+              fi
+            fi
+          done
+          
+          # Do NOT copy social-preview*.png files - use pre-optimized versions from repo
+          # The workflow generates them fresh, but they're larger than the optimized versions
       
       - name: Setup Pages
         uses: actions/configure-pages@v4

@@ -98,6 +98,7 @@ jobs:
         env:
           ESOLOGS_ID: ${{ secrets.ESOLOGS_ID }}
           ESOLOGS_SECRET: ${{ secrets.ESOLOGS_SECRET }}
+          SKIP_SOCIAL_PREVIEW_GENERATION: 'true'
         run: |
           python -m src.eso_build_o_rama.main --trial-id ${{ steps.trial.outputs.trial_id }}
       

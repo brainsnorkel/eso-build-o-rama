@@ -92,8 +92,13 @@ class ESOBuildORM:
         
         try:
             # Generate social media preview images first
-            logger.info("Generating social media preview images...")
-            self._generate_social_previews()
+            # Skip in CI to use pre-optimized versions from repo
+            skip_social_gen = os.getenv('SKIP_SOCIAL_PREVIEW_GENERATION', 'false').lower() == 'true'
+            if not skip_social_gen:
+                logger.info("Generating social media preview images...")
+                self._generate_social_previews()
+            else:
+                logger.info("Skipping social preview generation (using pre-optimized versions from repo)")
             
             # Load trials data
             all_trials = self._load_trials()

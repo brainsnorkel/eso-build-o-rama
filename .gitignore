@@ -55,11 +55,6 @@ data/
 !data/trial_bosses.json
 !output/builds.json
 
-# Cache
-cache/
-!cache/
-cache/**/*.json
-
 # Testing
 .pytest_cache/
 .coverage

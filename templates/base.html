@@ -821,7 +821,16 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
     <header role="banner">
-        <div class="container">
+        <div class="container" style="position: relative;">
+            <!-- About link in top right -->
+            <div style="position: absolute; top: 10px; right: 20px; z-index: 10;">
+                <a href="/about.html" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9em; font-weight: 500; padding: 8px 16px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all 0.3s ease;" 
+                   onmouseover="this.style.background='rgba(56, 239, 125, 0.2)'; this.style.color='#38ef7d';" 
+                   onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='rgba(255, 255, 255, 0.9)';">
+                    About
+                </a>
+            </div>
+            
             <h1>ESO Meta Build Explorer{% if is_develop %} <span style="color: #f39c12; font-size: 0.6em; border: 2px solid #f39c12; padding: 2px 8px; border-radius: 4px;">DEV</span>{% endif %}</h1>
             <p class="subtitle">The latest ESO meta trial builds from ESOLogs. Updated every day.</p>
         </div>

@@ -26,7 +26,7 @@ Establish how many slots of each set this character is wearing in total, and on 
 
 A "build" for purposes of selecting an example character, is a subclass combination (e.g. Assassination/Herald of the Tome/Ardent Fire) and two five piece sets on one or two of the player's bars.  The tool could create a "slug" with sorted abbreviated subclasses and sets to identify common build. e.g. ass-ardent-herald-ansuuls-torment-deadly-strike
 
-If a "build" appears five or more times in the collected builds for this fight then it is a "common build"
+If a "build" appears five or more times in the collected builds for this fight then it is a "common build" (2 or more times for tank and healer builds)
 
 * Pick the the highest DPS character with each unique common build for consideration to publish
   

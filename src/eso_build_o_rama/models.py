@@ -59,6 +59,7 @@ class PlayerBuild:
     character_name: str = ""
     player_id: Optional[int] = None
     character_id: Optional[int] = None
+    source_id: Optional[int] = None  # ESO Logs source ID for linking to player summary
     class_name: str = ""
     role: str = ""  # dps, healer, tank
     
@@ -253,7 +254,7 @@ class CommonBuild:
         
         # Different thresholds based on role
         if role in ['tank', 'healer']:
-            return self.count >= 3
+            return self.count >= 2
         else:  # DPS or unknown
             return self.count >= 5
 

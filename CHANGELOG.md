@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Changed (2025-10-11 - Build Requirements and About Page)
+- **Build Requirements**: Changed minimum build requirements for healers and tanks from 3 to 2 occurrences
+- **About Page**: Added comprehensive about page with site banner background image
+- **Navigation**: Added About link to top right of site header
+- **Home Page**: Removed "About This Data" section from home page (replaced with dedicated About page)
+- **Documentation**: Updated home page text and design documentation to reflect new build requirements
+
+### Removed (2025-10-11 - Caching System)
+- **Caching System**: Completely removed the caching system to simplify the codebase and ensure fresh data on every run
+  - Deleted `cache_manager.py` module
+  - Removed all cache-related parameters from `ESOLogsAPIClient`, `TrialScanner`, and `ESOBuildORM`
+  - Removed `--use-cache`, `--no-cache`, `--clear-cache`, and `--cache-stats` command-line arguments
+  - Removed `cache/` directory and its .gitignore entries
+  - Removed cache statistics from builds data structure
+  - System now always fetches fresh data from ESO Logs API
+
+### Added (2025-10-11 - About Page Features)
+- **About Page Template**: Created `templates/about.html` with comprehensive site information
+- **About Banner**: Processed `site_banner_characterload.png` for about page background (1920x1080px, 25% opacity)
+- **Page Generation**: Integrated about page generation into `PageGenerator.generate_all_pages()`
+- **Navigation Link**: Added styled About link in site header with hover effects
+
+### Added (2025-10-11 - CSV Data Export)
+- **CSV Exporter Module**: Created `csv_exporter.py` to export comprehensive player data for analysis
+- **Download CSV Button**: Added styled download button to trial pages for accessing raw data
+- **Player Data Export**: CSV includes all players from all scanned fights with:
+  - Player identification (handle, character name, ESO Logs link)
+  - Build information (slug, subclasses, signature sets)
+  - Performance metrics (DPS, HPS, CPM, primary metric)
+  - Complete gear slots with set names
+  - Full ability bars (front and back)
+  - Mundus stone information
+- **Automated Generation**: CSV files are automatically generated during trial scanning
+- **File Naming**: CSVs are named `{trial-slug}-data.csv` (e.g., `aetherian-archive-data.csv`)
+
+### Technical Changes (2025-10-11)
+- **Build Filtering**: Implemented role-specific build filtering in `BuildAnalyzer`:
+  - DPS builds: minimum 5 occurrences
+  - Healer/Tank builds: minimum 2 occurrences
+- **Constants**: Added `MINIMUM_HEALER_TANK_BUILD_OCCURRENCES = 2` to `BuildAnalyzer`
+- **Filtering Logic**: Enhanced `analyze_trial_report()` to filter builds based on role and count
+- **Debug Logging**: Added detailed logging for build filtering decisions
+
+### Fixed (2025-10-11)
+- **Build Consolidation Threshold**: Fixed `CommonBuild.meets_threshold()` in `models.py` to use 2 occurrences for healers/tanks (was incorrectly still using 3), ensuring consistency with `BuildAnalyzer` filtering logic
+- **Build Consolidation Logic**: **CRITICAL FIX** - Removed per-fight filtering from `BuildAnalyzer.analyze_trial_report()`. Previously, builds were filtered by minimum occurrence count (5 for DPS, 2 for healers/tanks) BEFORE consolidation across reports, which prevented builds from accumulating. Now ALL builds are passed to consolidation, and filtering only happens AFTER aggregating players across all reports. This resulted in finding 30 builds for Aetherian Archive vs only 1 build previously.
+- **About Page Breadcrumb**: Added breadcrumb navigation link at top of about page to return to home
+- **Missing Return Statements**: Fixed missing return statements in `api_client.py` methods (`get_top_logs`, `get_report`) that were accidentally removed during cache cleanup
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 

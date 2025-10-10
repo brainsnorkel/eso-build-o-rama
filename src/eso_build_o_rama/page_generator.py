@@ -117,8 +117,7 @@ class PageGenerator:
     def generate_home_page(
         self,
         builds_by_trial: Dict[str, Dict[str, Dict[str, Any]]],
-        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None,
-        cache_stats: Optional[Dict[str, Any]] = None
+        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None
     ) -> str:
         """
         Generate the home page listing all trials.
@@ -126,7 +125,6 @@ class PageGenerator:
         Args:
             builds_by_trial: Dictionary of {trial_name: {boss_name: {'builds': [builds], 'total_reports': int}}}
             trials_metadata: Optional metadata about trials including cache stats
-            cache_stats: Optional global cache statistics (hits, misses, etc.) - deprecated, use per-trial stats
             
         Returns:
             Path to generated HTML file
@@ -162,16 +160,12 @@ class PageGenerator:
             trial_id = trial_id_map.get(trial_name, 0)  # Default to 0 if not found
             
             # Get cache stats from trials_metadata
-            trial_cache_stats = None
-            if trials_metadata and trial_name in trials_metadata:
-                trial_cache_stats = trials_metadata[trial_name].get('cache_stats')
             
             trials.append({
                 'name': trial_name,
                 'slug': trial_slug,
                 'top_build': top_build,
                 'id': trial_id,
-                'cache_stats': trial_cache_stats
             })
         
         # Sort trials by trial ID in descending order (newest trials first)
@@ -184,7 +178,6 @@ class PageGenerator:
         context = {
             'trials': trials,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
-            'cache_stats': cache_stats,
             'is_develop': self.is_develop,
             'social_image_url': self._get_social_image_url('home')
         }
@@ -251,12 +244,37 @@ class PageGenerator:
         logger.info(f"Generated trial page: {filepath}")
         return str(filepath)
     
+    def generate_about_page(self) -> str:
+        """
+        Generate the about page.
+        
+        Returns:
+            Path to generated HTML file
+        """
+        logger.info("Generating about page")
+        
+        # Load template
+        template = self.env.get_template('about.html')
+        
+        # Render template
+        context = {
+            'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'is_develop': self.is_develop
+        }
+        html = template.render(**context)
+        
+        # Write file
+        filepath = self.output_dir / 'about.html'
+        filepath.write_text(html, encoding='utf-8')
+        
+        logger.info(f"Generated about page: {filepath}")
+        return str(filepath)
+    
     def generate_all_pages(
         self,
         all_builds: List[CommonBuild],
         update_version: str,
-        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None,
-        cache_stats: Optional[Dict[str, Any]] = None
+        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None
     ) -> Dict[str, str]:
         """
         Generate all build pages and index.
@@ -265,7 +283,6 @@ class PageGenerator:
             all_builds: List of all common builds
             update_version: Game update version
             trials_metadata: Optional metadata about trials including last updated times
-            cache_stats: Optional cache statistics (hits, misses, etc.)
             
         Returns:
             Dictionary mapping build slugs to file paths
@@ -278,8 +295,12 @@ class PageGenerator:
         builds_by_trial = self._group_builds_by_trial(all_builds)
         
         # Generate home page (index.html) with trial links
-        home_path = self.generate_home_page(builds_by_trial, trials_metadata, cache_stats)
+        home_path = self.generate_home_page(builds_by_trial, trials_metadata)
         generated_files['home'] = home_path
+        
+        # Generate about page
+        about_path = self.generate_about_page()
+        generated_files['about'] = about_path
         
         # Generate individual trial pages
         for trial_name, trial_data in builds_by_trial.items():
@@ -344,6 +365,16 @@ class PageGenerator:
             f'    <lastmod>{lastmod}</lastmod>',
             '    <changefreq>daily</changefreq>',
             '    <priority>1.0</priority>',
+            '  </url>',
+        ])
+        
+        # Add about page
+        xml_lines.extend([
+            '  <url>',
+            f'    <loc>{base_url}/about.html</loc>',
+            f'    <lastmod>{lastmod}</lastmod>',
+            '    <changefreq>monthly</changefreq>',
+            '    <priority>0.5</priority>',
             '  </url>',
         ])
         

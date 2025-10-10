@@ -56,8 +56,7 @@ class DataStore:
         self, 
         trial_name: str, 
         builds: List[CommonBuild], 
-        update_version: str,
-        cache_stats: Optional[Dict[str, Any]] = None
+        update_version: str
     ) -> None:
         """
         Save builds for a specific trial, updating the JSON file.
@@ -66,7 +65,6 @@ class DataStore:
             trial_name: Name of the trial
             builds: List of CommonBuild objects to save
             update_version: Game update version (e.g., 'U48')
-            cache_stats: Optional cache statistics from the scan
         """
         # Load existing data
         data = self.load_builds_data()
@@ -78,8 +76,7 @@ class DataStore:
         data["trials"][trial_name] = {
             "builds": serialized_builds,
             "last_updated": datetime.now(timezone.utc).isoformat(),
-            "update_version": update_version,
-            "cache_stats": cache_stats
+            "update_version": update_version
         }
         
         # Update last full update timestamp
@@ -129,7 +126,6 @@ class DataStore:
                 "last_updated": trial_data.get("last_updated"),
                 "update_version": trial_data.get("update_version"),
                 "build_count": len(trial_data.get("builds", [])),
-                "cache_stats": trial_data.get("cache_stats")
             }
         
         return metadata
@@ -153,6 +149,7 @@ class DataStore:
             "trial_name": build.trial_name,
             "boss_name": build.boss_name,
             "fight_id": build.fight_id,
+            "report_code": build.report_code,
             "update_version": build.update_version,
             "best_player": self._serialize_player(build.best_player) if build.best_player else None,
             "all_players": [self._serialize_player(p) for p in build.all_players]
@@ -188,6 +185,7 @@ class DataStore:
                 trial_name=data.get("trial_name", ""),
                 boss_name=data.get("boss_name", ""),
                 fight_id=data.get("fight_id", 0),
+                report_code=data.get("report_code", ""),
                 update_version=data.get("update_version", ""),
                 best_player=best_player,
                 all_players=all_players
@@ -211,6 +209,7 @@ class DataStore:
             "character_name": player.character_name,
             "player_id": player.player_id,
             "character_id": player.character_id,
+            "source_id": player.source_id,
             "class_name": player.class_name,
             "role": player.role,
             "dps": player.dps,
@@ -260,6 +259,7 @@ class DataStore:
                 character_name=data.get("character_name", ""),
                 player_id=data.get("player_id"),
                 character_id=data.get("character_id"),
+                source_id=data.get("source_id"),
                 class_name=data.get("class_name", ""),
                 role=data.get("role", ""),
                 dps=data.get("dps", 0.0),

@@ -394,6 +394,7 @@ class DataParser:
                 character_name=character_name,
                 player_name=player_name,
                 player_id=player_id,  # Source ID for API queries
+                source_id=player_id,  # Same as player_id - used for ESO Logs links
                 class_name=class_name,
                 role=role,
                 dps=dps,
@@ -533,7 +534,8 @@ class DataParser:
         trial_name: str,
         boss_name: str,
         report_code: str,
-        update_version: str
+        update_version: str,
+        fight_id: int = 0
     ) -> TrialReport:
         """
         Create a TrialReport from parsed player builds.
@@ -551,6 +553,7 @@ class DataParser:
         trial_report = TrialReport(
             trial_name=trial_name,
             boss_name=boss_name,
+            fight_id=fight_id,
             all_players=players,
             report_code=report_code,
             update_version=update_version,

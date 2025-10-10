@@ -22,7 +22,7 @@
 
 {% block content %}
 <div class="card">
-    <h2>ESO Trials</h2>
+    <h2>Top Builds for Elder Scrolls Online Trials</h2>
     <p style="margin-bottom: 20px; color: #a8edea;">
         Select a trial to view boss-specific builds selected from top-scoring reports
     </p>
@@ -56,6 +56,11 @@
                     <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
                         <div style="font-size: 0.9em; color: #a8edea; margin-bottom: 5px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">Top Performing Build:</div>
                         <div style="font-weight: 600; color: #fff; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.get_display_name(abbreviated=True) }}</div>
+                        <div style="font-size: 0.8em; color: #a8edea; margin-top: 5px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">
+                            {% for set_name in trial.top_build.get_sorted_sets() %}
+                                {{ set_name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </div>
                         <div style="font-size: 0.85em; color: #a8edea; margin-top: 5px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.boss_name }}</div>
                         <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.9em;">
                             <span style="color: #a8edea; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.best_player.player_name }} - {{ trial.top_build.best_player.character_name }}</span>
@@ -68,20 +73,5 @@
         </a>
         {% endfor %}
     </div>
-</div>
-
-<div class="card">
-    <h3>About This Data</h3>
-    <p style="line-height: 1.8;">
-        This page shows the most frequently seen builds from the top 10 ranked esologs.com reports, for each boss, for each trial. 
-        A build is listed here if it appears 5 or more times among players in these top ranked reports. 
-        3 or more times for tank and healer builds. If there are no "common" builds for a boss or a trial (sorry vSO) then none will be shown.
-    </p>
-    <p style="margin-top: 10px; line-height: 1.8;">
-        To this tool, a "build" is a unique combination of subclasses (skill lines), and two 5-piece gear sets with 4 or more pieces of each equipped.
-    </p>
-    <p style="margin-top: 10px; line-height: 1.8;">
-        <strong>Data Source:</strong> ESO Logs public logged trial rankings. Reports are regenerated daily one trial at a time.
-    </p>
 </div>
 {% endblock %}

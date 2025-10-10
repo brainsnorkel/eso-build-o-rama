@@ -11,7 +11,6 @@ from typing import Dict, List, Optional, Any
 from dotenv import load_dotenv
 from esologs import Client, get_access_token
 from esologs._generated.exceptions import GraphQLClientHttpError
-from .cache_manager import CacheManager
 
 logger = logging.getLogger(__name__)
 
@@ -34,8 +33,7 @@ class ESOLogsAPIClient:
         client_secret: Optional[str] = None,
         min_request_delay: float = DEFAULT_MIN_REQUEST_DELAY,
         max_retries: int = DEFAULT_MAX_RETRIES,
-        retry_delay: float = DEFAULT_RETRY_DELAY,
-        cache_manager: Optional[CacheManager] = None
+        retry_delay: float = DEFAULT_RETRY_DELAY
     ):
         """
         Initialize the ESO Logs API client.
@@ -46,7 +44,6 @@ class ESOLogsAPIClient:
             min_request_delay: Minimum delay between API requests in seconds (default: 2.0)
             max_retries: Maximum number of retries for rate-limited requests (default: 3)
             retry_delay: Delay in seconds after hitting rate limit (default: 120)
-            cache_manager: Cache manager instance for caching API responses (optional)
         """
         self.client_id = client_id or os.getenv("ESOLOGS_ID")
         self.client_secret = client_secret or os.getenv("ESOLOGS_SECRET")
@@ -58,9 +55,6 @@ class ESOLogsAPIClient:
         self.max_retries = max_retries
         self.retry_delay = retry_delay
         self.last_request_time = 0
-        
-        # Cache manager
-        self.cache_manager = cache_manager
         
         # Get access token and initialize the client
         self.access_token = get_access_token(self.client_id, self.client_secret)
@@ -129,25 +123,13 @@ class ESOLogsAPIClient:
         
         raise Exception(f"Failed after {self.max_retries} retries")
     
-    async def get_zones(self, use_cache: bool = True) -> List[Dict[str, Any]]:
+    async def get_zones(self) -> List[Dict[str, Any]]:
         """
         Get all available zones (trials).
-        
-        Args:
-            use_cache: Whether to use cached data if available (default: True)
         
         Returns:
             List of zone dictionaries with id, name, and encounters
         """
-        cache_key = "zones"
-        
-        # Try to get from cache first
-        if use_cache and self.cache_manager:
-            cached_data = self.cache_manager.get_cached_response(cache_key)
-            if cached_data:
-                logger.info("Using cached zones data")
-                return cached_data.get("data", [])
-        
         logger.info("Fetching available zones")
         result = await self._retry_on_rate_limit(self.client.get_zones)
         
@@ -168,11 +150,6 @@ class ESOLogsAPIClient:
                 zones.append(zone_dict)
             
             logger.info(f"Found {len(zones)} zones")
-            
-            # Save to cache
-            if self.cache_manager:
-                self.cache_manager.save_cached_response(cache_key, zones)
-            
             return zones
         
         logger.warning("No zones found")
@@ -183,8 +160,7 @@ class ESOLogsAPIClient:
         zone_id: int, 
         encounter_id: Optional[int] = None,
         limit: int = 12,
-        difficulty: Optional[int] = None,
-        use_cache: bool = True
+        difficulty: Optional[int] = None
     ) -> List[Dict[str, Any]]:
         """
         Get top-ranked reports for a specific zone/encounter using fightRankings.
@@ -198,7 +174,6 @@ class ESOLogsAPIClient:
             encounter_id: Optional specific encounter/boss ID
             limit: Number of top reports to fetch (default: 12)
             difficulty: Optional difficulty level
-            use_cache: Whether to use cached data if available (default: True)
             
         Returns:
             List of report dictionaries with code, fightID, and metadata
@@ -211,20 +186,6 @@ class ESOLogsAPIClient:
         if difficulty is not None and (difficulty < 1 or difficulty > 3):
             raise ValueError("difficulty must be between 1 and 3")
         
-        # Create cache key (using "rankings_" prefix for proper subdirectory organization)
-        cache_key = f"rankings_{zone_id}_{encounter_id or 'all'}_{limit}"
-        if difficulty:
-            cache_key += f"_diff{difficulty}"
-        
-        # Try to get from cache first
-        if use_cache and self.cache_manager:
-            cached_data = self.cache_manager.get_cached_response(cache_key)
-            if cached_data:
-                logger.info(f"Using cached fight rankings: zone {zone_id}, encounter {encounter_id}")
-                return cached_data.get("data", [])
-        if not encounter_id:
-            logger.error("encounter_id is required for fight rankings")
-            return []
         
         logger.info(f"Fetching top {limit} ranked reports for zone {zone_id}, encounter {encounter_id}")
         
@@ -294,24 +255,18 @@ class ESOLogsAPIClient:
                     })
             
             logger.info(f"Found {len(top_reports)} top-ranked reports")
-            
-            # Save to cache
-            if self.cache_manager:
-                self.cache_manager.save_cached_response(cache_key, top_reports)
-            
             return top_reports
             
         except Exception as e:
             logger.error(f"Error fetching fight rankings: {e}")
             return []
     
-    async def get_report(self, report_code: str, use_cache: bool = True) -> Dict[str, Any]:
+    async def get_report(self, report_code: str) -> Dict[str, Any]:
         """
         Get detailed report information by code.
         
         Args:
             report_code: Report code from ESO Logs
-            use_cache: Whether to use cached data if available (default: True)
             
         Returns:
             Report data dictionary
@@ -322,15 +277,7 @@ class ESOLogsAPIClient:
         if len(report_code) < 8 or len(report_code) > 16:
             raise ValueError("report_code must be between 8 and 16 characters")
         
-        # Create cache key
-        cache_key = f"report_{report_code}"
         
-        # Try to get from cache first
-        if use_cache and self.cache_manager:
-            cached_data = self.cache_manager.get_cached_response(cache_key)
-            if cached_data:
-                logger.info(f"Using cached report: {report_code}")
-                return cached_data.get("data", {})
         query = """
         query GetReportByCode($code: String!) {
           reportData {
@@ -405,11 +352,6 @@ class ESOLogsAPIClient:
             }
             
             logger.info(f"Fetched report: {report.get('title', 'Unknown')} with {len(report['fights'])} fights")
-            
-            # Save to cache
-            if self.cache_manager:
-                self.cache_manager.save_cached_response(cache_key, report)
-            
             return report
             
         except Exception as e:
@@ -423,8 +365,7 @@ class ESOLogsAPIClient:
         end_time: Optional[float] = None,
         fight_ids: Optional[List[int]] = None,
         data_type: str = "DamageDone",
-        include_combatant_info: bool = False,
-        use_cache: bool = True
+        include_combatant_info: bool = False
     ) -> Dict[str, Any]:
         """
         Get table data for a report (DPS, damage breakdown, etc.).
@@ -436,25 +377,10 @@ class ESOLogsAPIClient:
             fight_ids: Optional list of fight IDs
             data_type: Type of data (DamageDone, Healing, Summary, etc.)
             include_combatant_info: If True, includes ability bars and gear (CRITICAL for build analysis!)
-            use_cache: Whether to use cached data if available (default: True)
             
         Returns:
             Table data dictionary (with combatant info if requested)
         """
-        # Create cache key based on parameters
-        # MUST include time range to distinguish different fights in the same report
-        cache_key = f"table_{report_code}_{data_type}_{include_combatant_info}"
-        if fight_ids:
-            cache_key += f"_fights_{'_'.join(map(str, sorted(fight_ids)))}"
-        if start_time and end_time:
-            cache_key += f"_time_{int(start_time)}_{int(end_time)}"
-        
-        # Try to get from cache first
-        if use_cache and self.cache_manager:
-            cached_data = self.cache_manager.get_cached_response(cache_key)
-            if cached_data:
-                logger.info(f"Using cached table data: {report_code} ({data_type})")
-                return cached_data.get("data", {})
         
         query = """
         query GetReportTable(
@@ -499,10 +425,6 @@ class ESOLogsAPIClient:
             )
             
             if result:
-                # Save to cache
-                if self.cache_manager:
-                    self.cache_manager.save_cached_response(cache_key, result)
-                
                 return result
             
             logger.warning("No table data found")
@@ -540,15 +462,6 @@ class ESOLogsAPIClient:
     ) -> Optional[str]:
         """Get mundus stone from player's buff uptime by checking mundus ability IDs."""
         
-        # Create cache key
-        cache_key = f"buffs_{report_code}_{player_name}_{start_time}_{end_time}"
-        
-        # Try to get from cache first
-        if self.cache_manager:
-            cached_data = self.cache_manager.get_cached_response(cache_key)
-            if cached_data:
-                logger.info(f"Using cached buff data for {player_name}")
-                return cached_data.get("data")
         
         # Use sourceID to filter Buffs table to this specific player
         try:
@@ -596,9 +509,6 @@ class ESOLogsAPIClient:
                                 logger.info(f"✓ Found mundus: {mundus_name} (ID: {ability_id}) for {player_name}")
                                 
                                 # Since we filtered by source_id, this is THIS PLAYER's mundus
-                                if self.cache_manager:
-                                    self.cache_manager.save_cached_response(cache_key, mundus_name)
-                                
                                 return mundus_name
                     
                     logger.warning(f"No mundus buffs found in {len(auras)} auras for {player_name}")
@@ -606,10 +516,6 @@ class ESOLogsAPIClient:
                     logger.warning(f"No auras data in Buffs table for {player_name}")
             else:
                 logger.warning(f"Failed to get Buffs table for {player_name}")
-            
-            # Save empty result to cache
-            if self.cache_manager:
-                self.cache_manager.save_cached_response(cache_key, None)
             
             return None
             

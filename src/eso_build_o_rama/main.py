@@ -21,8 +21,8 @@ from .trial_scanner import TrialScanner
 from .page_generator import PageGenerator
 from .models import CommonBuild
 from .data_store import DataStore
-from .cache_manager import CacheManager
 from .social_preview_generator import SocialPreviewGenerator
+from .csv_exporter import CSVExporter
 
 # Configure logging
 logging.basicConfig(
@@ -53,28 +53,16 @@ class ESOBuildORM:
             # Default to 'output-dev' if git command fails (safer for development)
             return 'output-dev'
     
-    def __init__(self, use_cache: bool = True, clear_cache: bool = False):
-        """
-        Initialize the application.
-        
-        Args:
-            use_cache: Whether to use API response caching (default: True)
-            clear_cache: Whether to clear existing cache on startup (default: False)
-        """
-        self.cache_manager = CacheManager() if use_cache else None
-        
-        # Clear cache if requested
-        if clear_cache and self.cache_manager:
-            self.cache_manager.clear_cache()
-            logger.info("Cache cleared on startup")
-        
+    def __init__(self):
+        """Initialize the application."""
         # Determine output directory based on git branch
         output_dir = self.get_output_directory()
         logger.info(f"Using output directory: {output_dir}")
         
-        self.scanner = TrialScanner(cache_manager=self.cache_manager)
+        self.scanner = TrialScanner()
         self.page_generator = PageGenerator(output_dir=output_dir)
         self.data_store = DataStore(builds_file=f"{output_dir}/builds.json")
+        self.csv_exporter = CSVExporter(output_dir=output_dir)
         self.trials_file = Path(__file__).parent.parent.parent / "data" / "trials.json"
     
     async def run(self, test_mode: bool = False, trial_name: Optional[str] = None, trial_id: Optional[int] = None):
@@ -136,11 +124,6 @@ class ESOBuildORM:
             logger.info(f"\nFound {len(publishable_builds)} publishable builds")
             
             # Save trial data incrementally
-            # Get cache statistics if available
-            cache_stats = None
-            if hasattr(self, 'cache_manager'):
-                cache_stats = self.cache_manager.get_cache_stats()
-            
             if trial_name or trial_id:
                 # Single trial mode - save this trial's data
                 update_version = self._get_most_common_version(all_reports)
@@ -152,14 +135,34 @@ class ESOBuildORM:
                         if build.best_player:
                             logger.debug(f"  Build {build.build_slug[:40]}: mundus='{build.best_player.mundus}' (obj id={id(build.best_player)})")
                     
-                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version, cache_stats)
+                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version)
                     logger.info(f"Saved {len(trial_builds)} builds for trial '{trial_name_scanned}'")
+                    
+                    # Generate CSV export for this trial
+                    if trial_name_scanned in all_reports:
+                        logger.info(f"Generating CSV export for '{trial_name_scanned}'...")
+                        csv_path = self.csv_exporter.export_trial_data(
+                            trial_name=trial_name_scanned,
+                            all_reports=all_reports[trial_name_scanned],
+                            report_codes={}  # Will be extracted from reports
+                        )
+                        logger.info(f"✅ CSV export saved: {csv_path}")
             else:
                 # Full scan mode - save all trials
                 update_version = self._get_most_common_version(all_reports)
                 for trial_name_scanned, trial_builds in self._group_builds_by_trial(publishable_builds).items():
-                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version, cache_stats)
+                    self.data_store.save_trial_builds(trial_name_scanned, trial_builds, update_version)
                     logger.info(f"Saved {len(trial_builds)} builds for trial '{trial_name_scanned}'")
+                    
+                    # Generate CSV export for this trial
+                    if trial_name_scanned in all_reports:
+                        logger.info(f"Generating CSV export for '{trial_name_scanned}'...")
+                        csv_path = self.csv_exporter.export_trial_data(
+                            trial_name=trial_name_scanned,
+                            all_reports=all_reports[trial_name_scanned],
+                            report_codes={}  # Will be extracted from reports
+                        )
+                        logger.info(f"✅ CSV export saved: {csv_path}")
             
             # Generate pages using all saved builds
             logger.info("\nGenerating HTML pages...")
@@ -190,8 +193,7 @@ class ESOBuildORM:
             generated_files = self.page_generator.generate_all_pages(
                 all_saved_builds,
                 update_version,
-                trials_metadata,
-                cache_stats
+                trials_metadata
             )
             
             logger.info(f"Generated {len(generated_files)} HTML files")
@@ -200,8 +202,6 @@ class ESOBuildORM:
             self._print_summary(publishable_builds, generated_files)
             
             # Log cache performance
-            if self.cache_manager:
-                self.cache_manager.log_cache_performance()
             
             logger.info("\n" + "="*60)
             logger.info("ESO Build-O-Rama - Complete!")
@@ -334,6 +334,10 @@ class ESOBuildORM:
             )
             logger.info(f"Generated build social preview: {build_preview}")
             
+            # Generate about page preview
+            about_preview = generator.create_about_preview(is_develop)
+            logger.info(f"Generated about social preview: {about_preview}")
+            
             # Generate trial-specific previews
             trial_names = [
                 'Aetherian Archive', 'Hel Ra Citadel', 'Sanctum Ophidia',
@@ -392,16 +396,6 @@ async def main():
     parser.add_argument('--trial-id', type=int, help='Specific trial ID to scan')
     parser.add_argument('--test', action='store_true', help='Test mode - scan only first trial')
     
-    # Cache control arguments
-    parser.add_argument('--use-cache', action='store_true', default=True, 
-                       help='Use cached API responses when available (default: True)')
-    parser.add_argument('--no-cache', action='store_true', 
-                       help='Disable caching (fetch all data from API)')
-    parser.add_argument('--clear-cache', action='store_true', 
-                       help='Clear existing cache before running')
-    parser.add_argument('--cache-stats', action='store_true', 
-                       help='Show cache statistics and exit')
-    
     args = parser.parse_args()
     
     # Check branch for safety - prevent develop branch from running in GitHub Actions
@@ -419,31 +413,7 @@ async def main():
     except Exception:
         pass  # Ignore git errors
     
-    # Handle cache stats
-    if args.cache_stats:
-        cache_manager = CacheManager()
-        stats = cache_manager.get_cache_stats()
-        print(f"Cache Statistics:")
-        print(f"  Cache directory: {stats['cache_dir']}")
-        print(f"  Total files: {stats['total_files']}")
-        print(f"  Total size: {stats['total_size_bytes'] / 1024 / 1024:.2f} MB")
-        print(f"\nBy Type:")
-        print(f"  Reports: {stats['by_type']['reports']['count']} files ({stats['by_type']['reports']['size_bytes'] / 1024:.1f} KB)")
-        print(f"  Rankings: {stats['by_type']['rankings']['count']} files ({stats['by_type']['rankings']['size_bytes'] / 1024:.1f} KB)")
-        print(f"  Buffs: {stats['by_type']['buffs']['count']} files ({stats['by_type']['buffs']['size_bytes'] / 1024:.1f} KB)")
-        print(f"  Tables: {stats['by_type']['tables']['count']} files ({stats['by_type']['tables']['size_bytes'] / 1024:.1f} KB)")
-        print(f"  Other: {stats['by_type']['other']['count']} files ({stats['by_type']['other']['size_bytes'] / 1024:.1f} KB)")
-        print(f"\nSession Statistics:")
-        print(f"  Cache hits: {stats['cache_hits']}")
-        print(f"  Cache misses: {stats['cache_misses']}")
-        if stats['cache_hits'] + stats['cache_misses'] > 0:
-            print(f"  Hit rate: {stats['hit_rate']*100:.1f}%")
-        return
-    
-    # Determine cache settings
-    use_cache = args.use_cache and not args.no_cache
-    
-    app = ESOBuildORM(use_cache=use_cache, clear_cache=args.clear_cache)
+    app = ESOBuildORM()
     
     # Determine scan mode
     if args.trial_id:

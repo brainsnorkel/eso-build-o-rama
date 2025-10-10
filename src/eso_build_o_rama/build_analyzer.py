@@ -18,7 +18,8 @@ class BuildAnalyzer:
     
     # Constants for build analysis
     MINIMUM_SET_PIECES = 4  # Minimum pieces for a meaningful set bonus
-    MINIMUM_COMMON_BUILD_OCCURRENCES = 5  # Minimum occurrences to be considered a "common build"
+    MINIMUM_COMMON_BUILD_OCCURRENCES = 5  # Minimum occurrences for DPS builds
+    MINIMUM_HEALER_TANK_BUILD_OCCURRENCES = 2  # Minimum occurrences for healer and tank builds
     MAX_SUBCLASSES = 3  # Maximum number of subclasses per character
     
     def __init__(self):
@@ -49,7 +50,7 @@ class BuildAnalyzer:
         # Group players by build slug
         build_groups = self._group_players_by_build(trial_report.all_players)
         
-        # Create build objects for ALL builds (not just 5+)
+        # Create build objects for ALL builds, then filter by role-specific minimums
         all_builds = []
         for build_slug, players in build_groups.items():
             common_build = self._create_common_build(build_slug, players, trial_report)
@@ -58,11 +59,11 @@ class BuildAnalyzer:
         # Sort by count (most common first)
         all_builds.sort(key=lambda x: x.count, reverse=True)
         
-        # Store ALL builds for debugging
-        common_builds = all_builds
-        
-        trial_report.common_builds = common_builds
-        logger.info(f"Found {len(common_builds)} common builds")
+        # Return ALL builds without filtering
+        # Filtering will be done after consolidation in get_publishable_builds()
+        # This allows builds to accumulate across multiple reports before threshold check
+        trial_report.common_builds = all_builds
+        logger.info(f"Found {len(all_builds)} builds from this fight (pre-consolidation)")
         
         return trial_report
     

@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}About - ESOBuild.com{% if is_develop %} [DEV]{% endif %}{% endblock %}
+
+{% block meta_description %}Learn about ESOBuild.com - the comprehensive Elder Scrolls Online trial build database powered by real ESO Logs data.{% endblock %}
+
+{% block keywords %}about esobuild, ESO build database, Elder Scrolls Online builds, ESO Logs integration{% endblock %}
+
+{% block canonical_url %}{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/about.html{% else %}https://esobuild.com/about.html{% endif %}{% endblock %}
+
+{% block og_title %}About ESOBuild.com{% endblock %}
+
+{% block og_description %}Learn about ESOBuild.com - the comprehensive Elder Scrolls Online trial build database powered by real ESO Logs data.{% endblock %}
+
+{% block og_image_alt %}About ESOBuild.com - ESO Trial Build Database{% endblock %}
+
+{% block twitter_title %}About ESOBuild.com{% endblock %}
+
+{% block twitter_description %}Learn about ESOBuild.com - the comprehensive ESO trial build database.{% endblock %}
+
+{% block twitter_image_alt %}About ESOBuild.com - ESO Trial Build Database{% endblock %}
+
+{% block og_image %}{% if is_develop %}https://esobuild.com/static/social-preview-about-dev.png{% else %}https://esobuild.com/static/social-preview-about.png{% endif %}{% endblock %}
+
+{% block twitter_image %}{% if is_develop %}https://esobuild.com/static/social-preview-about-dev.png{% else %}https://esobuild.com/static/social-preview-about.png{% endif %}{% endblock %}
+
+{% block extra_styles %}
+<style>
+    /* Ensure about page background displays properly */
+    body {
+        background-attachment: scroll !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Background image with overlay -->
+<div style="position: relative; min-height: 100vh; background: url('static/banners/about_banner.png'); background-size: cover; background-position: center; background-attachment: fixed;">
+    <!-- Dark overlay for text readability -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 1;"></div>
+    
+    <!-- Content -->
+    <div style="position: relative; z-index: 2; padding: 40px 20px;">
+        <div class="container">
+            <div class="card" style="background: rgba(26, 26, 46, 0.95); backdrop-filter: blur(10px);">
+                <!-- Breadcrumb -->
+                <div style="margin-bottom: 20px;">
+                    <a href="/" style="color: #a8edea; text-decoration: none; font-size: 0.9em; display: inline-flex; align-items: center; transition: color 0.3s ease;" onmouseover="this.style.color='#38ef7d'" onmouseout="this.style.color='#a8edea'">
+                        <span style="margin-right: 5px;">←</span> Home
+                    </a>
+                </div>
+                
+                <h1 style="color: #38ef7d; text-align: center; margin-bottom: 30px;">About ESOBuild.com</h1>
+                
+                <div style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                    <p style="font-size: 1.1em; margin-bottom: 25px;">
+                        ESOBuild.com is an up-to-date report of "meta" Elder Scrolls Online trial builds, 
+                        automatically curated from real ESO Logs data. It lets you explore effective 
+                        and popular builds used by top-performing players for each trial and boss encounter. 
+                        In short, it answers the question: "what is meta right now?" with real data from top players. 
+                    </p>
+                    <p style="font-size: 1.1em; margin-bottom: 25px;">
+                        Built by @brainsnorkel (PC NA). Let me know in game mail if you find it useful, or open an issue on the <a href="https://github.com/brainsnorkel/eso-build-o-rama/issues" target="_blank" style="color: #38ef7d;">GitHub issues tracker</a>, if you find a problem.
+                    </p>                    
+                    <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">How It Works</h2>
+                    <p style="margin-bottom: 20px;">
+                        To this tool, a "build" is a unique combination of subclasses 
+                        (skill lines), and two "5-piece" gear sets with 4 or more pieces 
+                        of each equipped. This is a simplifying assumption, and other heuristics 
+                        may be added later (come back 5/2/2/2/1 builds!). 
+                    </p>
+                    <p style="margin-bottom: 20px;">
+                        ESO Build scans the top-ranked trial reports (with logs) from ESO Logs, 
+                        analyzing player builds in each boss fight to identify the most frequent 
+                        gear and subclass combinations: the meta. This might not pick the highest 
+                        DPS (they might have a unique build) but it will find common builds. 
+                        ESOBuild.com is better at finding DPS builds than healers and tanks because of 
+                        their lower numbers and proliferation of subclass options. However, esologs.com links 
+                        are provided so you can explore group composition at esologs.com and dig out 
+                        those unique builds.
+                    </p>
+                    <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Build Requirements</h2>
+                    <p style="margin-bottom: 20px;">
+                        A build is considered "common" and included in our report if it appears:
+                    </p>
+                    <ul style="margin-left: 30px; margin-bottom: 25px;">
+                        <li><strong>5 or more times</strong> for DPS builds</li>
+                        <li><strong>2 or more times</strong> for healer and tank builds</li>
+                    </ul>
+                    <p style="margin-bottom: 20px;">
+                        This ensures we only showcase builds that have been seen in multiple 
+                        successful, top-ranked, trial runs.
+                    </p>
+                    
+                    <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Data Source</h2>
+                    <p style="margin-bottom: 20px;">
+                        All build data comes from <a href="https://www.esologs.com" target="_blank" style="color: #38ef7d;">ESO Logs</a>, 
+                        the premier logging platform for Elder Scrolls Online. We analyze the 10 top ranked 
+                        reports for each trial to ensure we're capturing the most successful common builds.
+                    </p>
+                    
+                    <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Updates</h2>
+                    <p style="margin-bottom: 20px;">
+                        Builds are updated daily, with trials processed one at a time.
+                    </p>
+                    <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Links & Resources</h2>
+                    <ul style="margin-left: 30px; margin-bottom: 25px; line-height: 2;">
+                        <li>
+                            <a href="https://www.esologs.com" target="_blank" style="color: #38ef7d;">ESO Logs</a> &mdash; Source of player logs and build data
+                        </li>
+                        <li>
+                            <a href="https://en.uesp.net/wiki/Online:Online" target="_blank" style="color: #38ef7d;">UESP.net ESO Wiki</a> &mdash; Ability, set and item reference
+                        </li>
+                        <li>
+                            <a href="https://www.esoui.com/downloads/info2241-LibSets.html" target="_blank" style="color: #38ef7d;">LibSets by Baertram</a> &mdash; Comprehensive set data for ESO
+                        </li>
+                        <li>
+                            <a href="https://github.com/brainsnorkel/ESO-Log-Build-and-Buff-Summary" target="_blank" style="color: #38ef7d;">ESO-Log-Build-and-Buff-Summary</a> &mdash; Subclass/build parsing
+                        </li>
+                        <li>
+                            <a href="https://github.com/sheumais/esoskillbarbuilder" target="_blank" style="color: #38ef7d;">ESO SkillBar Builder by sheumais</a> &mdash; Ability icons
+                        </li>
+                        <li>
+                            <a href="https://www.skinnycheeks.gg" target="_blank" style="color: #38ef7d;">Skinny Cheeks</a> &mdash; Excellent build advice with references and advice for CP, race, food, and potions
+                        </li>
+                        <li>
+                            <a href="https://www.elderscrollsonline.com/en-us/home" target="_blank" style="color: #38ef7d;">Official ESO Site</a> &mdash; The Elder Scrolls Online Game
+                        </li>
+                        <li>
+                            <a href="https://github.com/brainsnorkel/eso-build-o-rama" target="_blank" style="color: #38ef7d;">ESOBuild.com on GitHub</a> &mdash; View Source Code
+                        </li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(56, 239, 125, 0.3);">
+                        <p style="margin-top: 15px;">
+                            <a href="/" style="color: #38ef7d; text-decoration: none; font-weight: 600;">
+                                ← Back to Builds
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

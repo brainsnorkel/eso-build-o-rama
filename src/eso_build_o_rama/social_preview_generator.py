@@ -304,6 +304,90 @@ class SocialPreviewGenerator:
         logger.info(f"Generated trial preview image: {output_path}")
         return output_path
     
+    def create_about_preview(self, is_develop: bool = False) -> Path:
+        """
+        Create social preview image for the about page.
+        
+        Args:
+            is_develop: Whether this is for the development version
+            
+        Returns:
+            Path to the generated image
+        """
+        logger.info(f"Creating about page preview image (develop: {is_develop})")
+        
+        # Create background with site banner
+        img = self._create_background_with_banner()
+        
+        # Color scheme for text elements
+        if is_develop:
+            title_color = '#f39c12'
+            subtitle_color = '#e67e22'
+            description_color = '#f1c40f'
+        else:
+            title_color = '#38ef7d'
+            subtitle_color = '#a8edea'
+            description_color = '#e8e8e8'
+        
+        # Create drawing context
+        draw = ImageDraw.Draw(img)
+        
+        # Define fonts
+        try:
+            title_font = ImageFont.truetype("/System/Library/Fonts/Arial Bold.ttf", 96)
+            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 48)
+            description_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 36)
+        except OSError:
+            # Fallback to default font
+            title_font = ImageFont.truetype("arial.ttf", 96)
+            subtitle_font = ImageFont.truetype("arial.ttf", 48)
+            description_font = ImageFont.truetype("arial.ttf", 36)
+        
+        # Define text content
+        title = "About ESOBuild.com"
+        subtitle = "ESO Trial Build Database"
+        description = "Learn about our comprehensive database of Elder Scrolls Online trial builds, powered by real ESO Logs data."
+        
+        # Calculate text positions
+        title_bbox = draw.textbbox((0, 0), title, font=title_font)
+        title_width = title_bbox[2] - title_bbox[0]
+        title_height = title_bbox[3] - title_bbox[1]
+        
+        subtitle_bbox = draw.textbbox((0, 0), subtitle, font=subtitle_font)
+        subtitle_width = subtitle_bbox[2] - subtitle_bbox[0]
+        
+        # Center text horizontally
+        title_x = (self.image_width - title_width) // 2
+        subtitle_x = (self.image_width - subtitle_width) // 2
+        
+        # Vertical positioning
+        start_y = 100
+        title_y = start_y
+        subtitle_y = title_y + title_height + 20
+        description_y = subtitle_y + 60
+        
+        # Draw title with shadow
+        draw.text((title_x + 3, title_y + 3), title, font=title_font, fill=(0, 0, 0, 128))
+        draw.text((title_x, title_y), title, font=title_font, fill=title_color)
+        
+        # Draw subtitle with shadow
+        draw.text((subtitle_x + 2, subtitle_y + 2), subtitle, font=subtitle_font, fill=(0, 0, 0, 128))
+        draw.text((subtitle_x, subtitle_y), subtitle, font=subtitle_font, fill=subtitle_color)
+        
+        # Draw description (simple text, no wrapping for now)
+        draw.text((50, description_y), description, font=description_font, fill=description_color)
+        
+        # Determine output filename
+        filename = "social-preview-about-dev.png" if is_develop else "social-preview-about.png"
+        output_path = self.static_dir / filename
+        
+        # Optimize for smaller file size while maintaining quality
+        img = img.convert('P', palette=Image.ADAPTIVE, colors=256)
+        img.save(output_path, "PNG", optimize=True, compress_level=9)
+        
+        logger.info(f"Generated about preview image: {output_path}")
+        return output_path
+    
     def _create_background_with_banner(self) -> Image.Image:
         """Create background using the site banner."""
         # Start with dark background

@@ -19,15 +19,14 @@ logger = logging.getLogger(__name__)
 class TrialScanner:
     """Scans ESO Logs trials to identify top-performing builds."""
     
-    def __init__(self, api_client: Optional[ESOLogsAPIClient] = None, cache_manager=None):
+    def __init__(self, api_client: Optional[ESOLogsAPIClient] = None):
         """
         Initialize the trial scanner.
         
         Args:
             api_client: Optional API client instance
-            cache_manager: Optional cache manager instance
         """
-        self.api_client = api_client or ESOLogsAPIClient(cache_manager=cache_manager)
+        self.api_client = api_client or ESOLogsAPIClient()
         self.data_parser = DataParser()
         self.build_analyzer = BuildAnalyzer()
     
@@ -166,14 +165,14 @@ class TrialScanner:
         
         # Parse player builds (use damage_data for performance, summary_data for account names/roles)
         players = self.data_parser.parse_report_data(
-            report_data,
-            damage_data,
-            fight_id,
-            player_details_data=summary_data,
-            healing_data=healing_data,
-            casts_data=casts_data
-        )
-        
+                report_data,
+                damage_data,
+                fight_id,
+                player_details_data=summary_data,
+                healing_data=healing_data,
+                casts_data=casts_data
+            )
+
         if not players:
             logger.warning(f"No players found in report {report_code}")
             return None
@@ -196,7 +195,8 @@ class TrialScanner:
             trial_name,
             boss_name,
             report_code,
-            update_version=self._get_update_version(report_data)
+            update_version=self._get_update_version(report_data),
+            fight_id=fight_id
         )
         
         # Analyze builds

@@ -50,7 +50,12 @@
                 <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); border-radius: 12px; z-index: 0;"></div>
                 
                 <div style="position: relative; z-index: 1;">
-                    <h3 style="color: #38ef7d; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">{{ trial.name }}</h3>
+                    <h3 style="color: #38ef7d; margin-bottom: 5px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">{{ trial.name }}</h3>
+                    {% if trial.last_updated %}
+                    <div style="font-size: 0.7em; color: rgba(168, 237, 234, 0.7); margin-bottom: 10px; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);">
+                        Last updated: <span class="trial-timestamp" data-utc="{{ trial.last_updated }}">{{ trial.last_updated }}</span>
+                    </div>
+                    {% endif %}
                 
                     {% if trial.top_build %}
                     <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
@@ -74,4 +79,33 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+    // Convert UTC timestamps to viewer's local timezone
+    (function() {
+        const timestampElements = document.querySelectorAll('.trial-timestamp');
+        timestampElements.forEach(function(el) {
+            const utcTime = el.getAttribute('data-utc');
+            if (utcTime) {
+                try {
+                    const date = new Date(utcTime);
+                    // Format: "MMM DD, YYYY at HH:MM AM/PM"
+                    const formatted = date.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric', 
+                        year: 'numeric' 
+                    }) + ' at ' + date.toLocaleTimeString('en-US', { 
+                        hour: 'numeric', 
+                        minute: '2-digit', 
+                        hour12: true 
+                    });
+                    el.textContent = formatted;
+                } catch (e) {
+                    // If parsing fails, leave the original text
+                    console.error('Failed to parse timestamp:', utcTime, e);
+                }
+            }
+        });
+    })();
+</script>
 {% endblock %}

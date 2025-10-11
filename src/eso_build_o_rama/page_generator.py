@@ -162,13 +162,17 @@ class PageGenerator:
             trial_slug = trial_name.lower().replace(' ', '-')
             trial_id = trial_id_map.get(trial_name, 0)  # Default to 0 if not found
             
-            # Get cache stats from trials_metadata
+            # Get last updated time from trials_metadata
+            last_updated = None
+            if trials_metadata and trial_name in trials_metadata:
+                last_updated = trials_metadata[trial_name].get('last_updated')
             
             trials.append({
                 'name': trial_name,
                 'slug': trial_slug,
                 'top_build': top_build,
                 'id': trial_id,
+                'last_updated': last_updated,
             })
         
         # Sort trials by trial ID in descending order (newest trials first)
@@ -597,7 +601,7 @@ Disallow: /cache/
     
     @staticmethod
     def _format_timestamp(timestamp_str: str) -> str:
-        """Format timestamp for display."""
+        """Format timestamp for display in local time."""
         if not timestamp_str:
             return "Never"
         
@@ -605,7 +609,9 @@ Disallow: /cache/
             from datetime import datetime
             # Parse ISO format timestamp
             dt = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
-            return dt.strftime('%Y-%m-%d %H:%M UTC')
+            # Convert to local time
+            local_dt = dt.astimezone()
+            return local_dt.strftime('%b %d, %Y at %I:%M %p')
         except (ValueError, TypeError):
             return timestamp_str
     

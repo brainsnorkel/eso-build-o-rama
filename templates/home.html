@@ -69,10 +69,11 @@
                                 {{ set_name }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </div>
-                        <div style="font-size: 0.85em; color: #a8edea; margin-top: 5px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.boss_name }}</div>
-                        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.9em;">
-                            <span style="color: #a8edea; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.best_player.player_name }} - {{ trial.top_build.best_player.character_name }}</span>
-                            <span style="color: #38ef7d; font-weight: 600; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.best_player.get_primary_metric()|format_metric }} {{ trial.top_build.best_player.get_primary_metric_name() }}</span>
+                        <div style="font-size: 0.85em; color: #a8edea; margin-top: 5px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">Encounter: {{ trial.top_build.boss_name }}</div>
+                        <div style="margin-top: 10px; font-size: 0.9em;">
+                            <div style="color: #a8edea; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.best_player.player_name }}</div>
+                            <div style="color: #a8edea; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); font-size: 0.95em; margin-top: 2px;">{{ trial.top_build.best_player.character_name }}</div>
+                            <div style="color: #38ef7d; font-weight: 600; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); margin-top: 5px;">{{ trial.top_build.best_player.get_primary_metric()|format_metric }} {{ trial.top_build.best_player.get_primary_metric_name() }}</div>
                         </div>
                     </div>
                     {% endif %}

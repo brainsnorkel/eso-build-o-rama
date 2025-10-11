@@ -3,9 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Common builds found in top esologs">
-    <title>Sunspire - Common ESO Builds</title>
+    <meta name="description" content="Best Sunspire builds for Elder Scrolls Online. Common meta builds, gear sets, and abilities from top ESO Logs players. DPS, tank, and healer builds for all Sunspire boss encounters.">
+    
+    <!-- Social Media Meta Tags -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sunspire - ESO Trial Builds">
+    <meta property="og:description" content="Best Sunspire builds for Elder Scrolls Online. Common meta builds, gear sets, and abilities from top ESO Logs players.">
+    <meta property="og:image" content="https://esobuild.com/static/social-preview-sunspire.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Sunspire - Top Builds">
+    <meta property="og:url" content="https://brainsnorkel.github.io/eso-build-o-rama/">
+    <meta property="og:site_name" content="ESOBuild.com">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@brainsnorkel">
+    <meta name="twitter:creator" content="@brainsnorkel">
+    <meta name="twitter:title" content="Sunspire - ESO Meta Builds">
+    <meta name="twitter:description" content="Best Sunspire builds from top players. Discover effective gear sets and strategies for all boss encounters.">
+    <meta name="twitter:image" content="https://esobuild.com/static/social-preview-sunspire.png">
+    <meta name="twitter:image:alt" content="Sunspire - Top Builds">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="author" content="brainsnorkel">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#11998e">
+    <meta name="keywords" content="Sunspire, ESO Sunspire, Sunspire builds, ESO trial builds, Sunspire gear sets, Elder Scrolls Online Sunspire">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://esobuild.com/sunspire.html">
+    
+    <!-- ESO-Hub Tooltips -->
+    <link rel="stylesheet" href="https://eso-hub.com/css/external/tooltips.css">
+    <script src="https://eso-hub.com/js/external/tooltips.js" defer></script>
+    
+    <title>Sunspire - ESO Trial Builds | ESOBuild.com</title>
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ESOBuild.com",
+      "alternateName": "ESO Meta Build Explorer",
+      "url": "https://esobuild.com/",
+      "description": "Discover the most effective ESO builds from top-performing players. Explore meta builds, gear sets, and strategies for all trials based on real data from ESO Logs.",
+      "about": {
+        "@type": "VideoGame",
+        "name": "The Elder Scrolls Online",
+        "gamePlatform": ["PC", "PlayStation", "Xbox"]
+      }
+    }
+    </script>
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://esobuild.com/index.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Sunspire",
+      "item": "https://esobuild.com/sunspire.html"
+    }
+  ]
+}
+</script>
+
     <style>
+        
+        /* Production Color Scheme - Green/Teal */
+        :root {
+            --primary-gradient-start: #11998e;
+            --primary-gradient-end: #38ef7d;
+            --accent-color: #38ef7d;
+            --accent-light: #a8edea;
+            --header-bg-start: #2d1b69;
+            --header-bg-end: #11998e;
+            --card-border: rgba(56, 239, 125, 0.3);
+            --card-hover-border: rgba(56, 239, 125, 0.5);
+        }
+        
+        
         * {
             margin: 0;
             padding: 0;
@@ -17,6 +105,9 @@
             line-height: 1.6;
             color: #e8e8e8;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
             position: relative;
         }
@@ -43,13 +134,37 @@
         }
         
         header {
-            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+            background: linear-gradient(135deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
             color: white;
             padding: 30px 0;
             margin-bottom: 30px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             position: relative;
             overflow: hidden;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            top: -130px; /* Start 130px higher (extends above header, shows lower crop of image) */
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 1200px; /* Match container width */
+            max-width: calc(100vw - 40px); /* Respect padding on mobile */
+            background: url('static/banners/site_banner.png');
+            background-size: cover; /* Span full width, crop top/bottom */
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0.35;
+            
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        header .container {
+            position: relative;
+            z-index: 1; /* Keep text above background */
         }
         
         header::before {
@@ -106,7 +221,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #11998e, #38ef7d, #11998e);
+            background: linear-gradient(90deg, var(--primary-gradient-start), var(--primary-gradient-end), var(--primary-gradient-start));
             background-size: 200% 100%;
             animation: gradient-flow 3s ease infinite;
         }
@@ -119,13 +234,13 @@
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-            border-color: rgba(255, 255, 255, 0.3);
+            border-color: var(--card-hover-border);
         }
         
         .card h2 {
             color: #ffffff;
             margin-bottom: 20px;
-            border-bottom: 2px solid #38ef7d;
+            border-bottom: 2px solid var(--accent-color);
             padding-bottom: 12px;
             font-size: 1.8em;
             font-weight: 600;
@@ -165,7 +280,7 @@
         }
         
         th {
-            background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+            background: linear-gradient(135deg, var(--header-bg-start) 0%, var(--header-bg-end) 100%);
             color: white;
             font-weight: 600;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
@@ -191,7 +306,7 @@
             backdrop-filter: blur(5px);
             padding: 18px;
             border-radius: 8px;
-            border-left: 4px solid #38ef7d;
+            border-left: 4px solid var(--accent-color);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             position: relative;
@@ -215,13 +330,13 @@
         
         .info-box:hover {
             transform: translateY(-2px);
-            border-left-color: #11998e;
+            border-left-color: var(--primary-gradient-start);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
         .info-box .label {
             font-weight: 600;
-            color: #a8edea;
+            color: var(--accent-light);
             font-size: 0.9em;
             margin-bottom: 8px;
             text-transform: uppercase;
@@ -285,6 +400,7 @@
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
         }
         
@@ -333,7 +449,7 @@
             color: #e8f8f5;
             padding: 40px 0;
             margin-top: 60px;
-            border-top: 3px solid #38ef7d;
+            border-top: 3px solid var(--accent-color);
             position: relative;
         }
         
@@ -348,15 +464,15 @@
         }
         
         footer a {
-            color: #38ef7d;
+            color: var(--accent-color);
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
         }
         
         footer a:hover {
-            color: #11998e;
-            text-shadow: 0 0 8px rgba(56, 239, 125, 0.5);
+            color: var(--primary-gradient-start);
+            text-shadow: 0 0 8px var(--card-border);
         }
         
         footer a::after {
@@ -492,6 +608,51 @@
             opacity: 1;
         }
         
+        /* Accessibility Utilities */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #38ef7d;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 1000;
+            font-weight: 600;
+            border-radius: 0 0 4px 0;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Enhanced Focus Indicators */
+        *:focus {
+            outline: 3px solid #38ef7d;
+            outline-offset: 2px;
+        }
+        
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        
+        *:focus-visible {
+            outline: 3px solid #38ef7d;
+            outline-offset: 2px;
+        }
+        
         /* Scrollbar Styling */
         ::-webkit-scrollbar {
             width: 8px;
@@ -521,19 +682,123 @@
             }
             
             header h1 {
-                font-size: 2em;
+                font-size: 1.8em;
+            }
+            
+            header .subtitle {
+                font-size: 0.95em;
             }
             
             .container {
-                padding: 15px;
+                padding: 10px;
             }
             
             .card {
-                padding: 20px;
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .card h2 {
+                font-size: 1.4em;
+            }
+            
+            .card h3 {
+                font-size: 1.1em;
             }
             
             .abilities-bar::before {
                 left: 15px;
+            }
+            
+            /* Mobile-friendly table: Convert to card layout */
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            
+            /* Hide table headers */
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            tr {
+                margin-bottom: 15px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                padding: 12px;
+            }
+            
+            tr:hover {
+                transform: none;
+            }
+            
+            td {
+                border: none;
+                position: relative;
+                padding: 10px 10px 10px 45%;
+                text-align: right;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+            
+            /* Add labels before each cell */
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 40%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: #a8edea;
+                font-size: 0.85em;
+            }
+            
+            /* Special styling for role icon */
+            td:first-child {
+                padding-top: 15px;
+                font-size: 1.5em;
+            }
+            
+            /* Make links more prominent on mobile */
+            td a {
+                padding: 8px 15px;
+                background: rgba(52, 152, 219, 0.2);
+                border-radius: 5px;
+                display: inline-block;
+                font-weight: 600;
+            }
+            
+            /* Ability styling on mobile */
+            .ability {
+                min-height: 60px;
+            }
+            
+            .ability-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .ability-name {
+                font-size: 0.75em;
+            }
+            
+            /* Info boxes on mobile */
+            .info-box {
+                padding: 12px;
+            }
+            
+            .info-box .label {
+                font-size: 0.8em;
+            }
+            
+            .info-box .value {
+                font-size: 1.1em;
             }
         }
         
@@ -559,26 +824,82 @@
     
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>BS ESO Meta Build Explorer</h1>
-            <p class="subtitle">Common builds found in top esologs</p>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header role="banner">
+        <div class="container" style="position: relative;">
+            <!-- About link in top right -->
+            <div style="position: absolute; top: 10px; right: 20px; z-index: 10;">
+                <a href="/about.html" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9em; font-weight: 500; padding: 8px 16px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all 0.3s ease;" 
+                   onmouseover="this.style.background='rgba(56, 239, 125, 0.2)'; this.style.color='#38ef7d';" 
+                   onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='rgba(255, 255, 255, 0.9)';">
+                    About
+                </a>
+            </div>
+            
+            <h1>ESO Meta Build Explorer</h1>
+            <p class="subtitle">The latest ESO meta trial builds from ESOLogs. Updated every day.</p>
         </div>
     </header>
     
-    <main class="container">
+    <main id="main-content" role="main" class="container">
         
-<nav style="margin-bottom: 20px; font-size: 0.9em;">
-    <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>
-    <span style="color: #666; margin: 0 10px;">/</span>
-    <span style="color: #a8edea;">Sunspire</span>
+<nav aria-label="Breadcrumb" style="margin-bottom: 20px; font-size: 0.9em;">
+    <ol style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; align-items: center;">
+        <li style="display: flex; align-items: center;">
+            <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>
+            <span style="color: #666; margin: 0 10px;" aria-hidden="true">/</span>
+        </li>
+        <li>
+            <span style="color: #a8edea;" aria-current="page">Sunspire</span>
+        </li>
+    </ol>
 </nav>
 
-<div class="card">
-    <h2>Sunspire</h2>
-    <p style="color: #a8edea; margin-top: 10px;">
-        Common builds from top-performing players across all boss encounters
-    </p>
+<div class="card" style="background: linear-gradient(135deg, rgba(56, 239, 125, 0.1) 0%, rgba(17, 153, 142, 0.1) 100%), url('static/trial-backgrounds/sunspire.png'); 
+            background-size: cover, cover;
+            background-position: center, right center;
+            background-blend-mode: normal, overlay;
+            position: relative;
+            overflow: hidden;">
+    
+    <!-- Dark overlay for better text readability -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); border-radius: 12px; z-index: 0;"></div>
+    
+    <div style="position: relative; z-index: 1;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div>
+                <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); margin: 0;">Sunspire</h2>
+                <p style="color: #a8edea; margin-top: 10px; margin-bottom: 0; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">
+                    Common builds from top-performing players across all boss encounters
+                </p>
+            </div>
+            <div>
+                <a href="sunspire-data.csv" 
+                   download 
+                   style="display: inline-flex; 
+                          align-items: center; 
+                          gap: 8px;
+                          padding: 10px 20px; 
+                          background: rgba(56, 239, 125, 0.2); 
+                          border: 2px solid #38ef7d; 
+                          border-radius: 8px; 
+                          color: #38ef7d; 
+                          text-decoration: none; 
+                          font-weight: 600;
+                          transition: all 0.3s ease;
+                          backdrop-filter: blur(10px);"
+                   onmouseover="this.style.background='rgba(56, 239, 125, 0.3)'; this.style.transform='translateY(-2px)';" 
+                   onmouseout="this.style.background='rgba(56, 239, 125, 0.2)'; this.style.transform='translateY(0)';">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 12l-4-4h2.5V4h3v4H12l-4 4z"/>
+                        <path d="M2 14h12v2H2z"/>
+                    </svg>
+                    Download CSV
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -587,87 +908,168 @@
     
     
     <table>
+        <caption class="sr-only">Builds for Lokkestiiz</caption>
         <thead>
             <tr>
-                <th>Role</th>
-                <th>Build</th>
-                <th>Sets</th>
-                <th>Popularity</th>
-                <th>DPS</th>
-                <th>Player</th>
-                <th>Details</th>
+                <th scope="col">Role</th>
+                <th scope="col">Build</th>
+                <th scope="col">Signature Sets</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">Metric</th>
+                <th scope="col">Player Character</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
         <tbody>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Assassination / Herald of the Tome</strong></td>
-                <td>Perfected Slivers of the Null Arca, Highland Sentinel</td>
-                <td>11 players in 7 reports</td>
-                <td>225.2K</td>
-                <td>@TheHeim</td>
-                <td><a href="sunspire-lokkestiiz-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/highland-sentinel" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Highland Sentinel</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">11 players in 7 reports</td>
+                <td data-label="Metric">225.2K DPS</td>
+                <td data-label="Player Character">@TheHeim - Kynes left Skyrim</td>
+                <td data-label="Details">
+                    <a href="sunspire-lokkestiiz-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Assassination / Herald of the Tome</strong></td>
-                <td>Tide-Born Wildstalker, Perfected Slivers of the Null Arca</td>
-                <td>8 players in 6 reports</td>
-                <td>131.1K</td>
-                <td>@Veluzed</td>
-                <td><a href="sunspire-lokkestiiz-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/tide-born-wildstalker" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Tide-Born Wildstalker</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">8 players in 6 reports</td>
+                <td data-label="Metric">131.1K DPS</td>
+                <td data-label="Player Character">@Veluzed - Kazumi Rosé</td>
+                <td data-label="Details">
+                    <a href="sunspire-lokkestiiz-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Assassination / Herald of the Tome</strong></td>
-                <td>Perfected Ansuul&#39;s Torment, Deadly Strike</td>
-                <td>6 players in 5 reports</td>
-                <td>160.1K</td>
-                <td>@Rainbow_Stay</td>
-                <td><a href="sunspire-lokkestiiz-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/ansuuls-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Ansuul&#39;s Torment</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">6 players in 5 reports</td>
+                <td data-label="Metric">160.1K DPS</td>
+                <td data-label="Player Character">@Rainbow_Stay - Lucien E&#39;layne</td>
+                <td data-label="Details">
+                    <a href="sunspire-lokkestiiz-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Assassination / Herald of the Tome</strong></td>
-                <td>Perfected Slivers of the Null Arca, Deadly Strike</td>
-                <td>6 players in 4 reports</td>
-                <td>124.7K</td>
-                <td>@fheS</td>
-                <td><a href="sunspire-lokkestiiz-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">6 players in 4 reports</td>
+                <td data-label="Metric">124.7K DPS</td>
+                <td data-label="Player Character">@fheS - Better Oakensorc</td>
+                <td data-label="Details">
+                    <a href="sunspire-lokkestiiz-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Aedric Spear / Herald of the Tome</strong></td>
-                <td>Perfected Slivers of the Null Arca, Highland Sentinel</td>
-                <td>5 players in 2 reports</td>
-                <td>145.6K</td>
-                <td>@Eakeys</td>
-                <td><a href="sunspire-lokkestiiz-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Aedric / Ardent / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/highland-sentinel" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Highland Sentinel</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">5 players in 2 reports</td>
+                <td data-label="Metric">145.6K DPS</td>
+                <td data-label="Player Character">@Eakeys - we have beamplar at home</td>
+                <td data-label="Details">
+                    <a href="sunspire-lokkestiiz-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Aedric / Ardent / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
         </tbody>
@@ -680,45 +1082,78 @@
     
     
     <table>
+        <caption class="sr-only">Builds for Yolnahkriin</caption>
         <thead>
             <tr>
-                <th>Role</th>
-                <th>Build</th>
-                <th>Sets</th>
-                <th>Popularity</th>
-                <th>DPS</th>
-                <th>Player</th>
-                <th>Details</th>
+                <th scope="col">Role</th>
+                <th scope="col">Build</th>
+                <th scope="col">Signature Sets</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">Metric</th>
+                <th scope="col">Player Character</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
         <tbody>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Aedric Spear / Herald of the Tome</strong></td>
-                <td>Perfected Slivers of the Null Arca, Highland Sentinel</td>
-                <td>17 players in 4 reports</td>
-                <td>147.8K</td>
-                <td>@korgaard</td>
-                <td><a href="sunspire-yolnahkriin-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Aedric / Ardent / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/highland-sentinel" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Highland Sentinel</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">17 players in 4 reports</td>
+                <td data-label="Metric">147.8K DPS</td>
+                <td data-label="Player Character">@korgaard - Sivayn</td>
+                <td data-label="Details">
+                    <a href="sunspire-yolnahkriin-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Aedric / Ardent / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Assassination / Herald of the Tome</strong></td>
-                <td>Perfected Slivers of the Null Arca, Highland Sentinel</td>
-                <td>11 players in 5 reports</td>
-                <td>253.8K</td>
-                <td>@TheHeim</td>
-                <td><a href="sunspire-yolnahkriin-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/highland-sentinel" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Highland Sentinel</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">11 players in 5 reports</td>
+                <td data-label="Metric">253.8K DPS</td>
+                <td data-label="Player Character">@TheHeim - Kynes left Skyrim</td>
+                <td data-label="Details">
+                    <a href="sunspire-yolnahkriin-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
         </tbody>
@@ -731,73 +1166,138 @@
     
     
     <table>
+        <caption class="sr-only">Builds for Nahviintaas</caption>
         <thead>
             <tr>
-                <th>Role</th>
-                <th>Build</th>
-                <th>Sets</th>
-                <th>Popularity</th>
-                <th>DPS</th>
-                <th>Player</th>
-                <th>Details</th>
+                <th scope="col">Role</th>
+                <th scope="col">Build</th>
+                <th scope="col">Signature Sets</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">Metric</th>
+                <th scope="col">Player Character</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
         <tbody>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Aedric Spear / Herald of the Tome</strong></td>
-                <td>Perfected Ansuul&#39;s Torment, Deadly Strike</td>
-                <td>6 players in 4 reports</td>
-                <td>135.5K</td>
-                <td>@Iztlal</td>
-                <td><a href="sunspire-nahviintaas-ardent-herald-spear-deadly-strike-perfected-ansuuls-torment.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Aedric / Ardent / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/ansuuls-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Ansuul&#39;s Torment</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">6 players in 4 reports</td>
+                <td data-label="Metric">135.5K DPS</td>
+                <td data-label="Player Character">@Iztlal - J&#39;Cree</td>
+                <td data-label="Details">
+                    <a href="sunspire-nahviintaas-ardent-herald-spear-deadly-strike-perfected-ansuuls-torment.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Aedric / Ardent / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Aedric Spear / Herald of the Tome</strong></td>
-                <td>Perfected Slivers of the Null Arca, Deadly Strike</td>
-                <td>5 players in 4 reports</td>
-                <td>142.1K</td>
-                <td>@Simondu0</td>
-                <td><a href="sunspire-nahviintaas-ardent-herald-spear-deadly-strike-perfected-slivers-of-the-null-arca.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Aedric / Ardent / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">5 players in 4 reports</td>
+                <td data-label="Metric">142.1K DPS</td>
+                <td data-label="Player Character">@Simondu0 - Arkanistdunull</td>
+                <td data-label="Details">
+                    <a href="sunspire-nahviintaas-ardent-herald-spear-deadly-strike-perfected-slivers-of-the-null-arca.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Aedric / Ardent / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ⚔️
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
                     
                 </td>
-                <td><strong>Ardent Flame / Aedric Spear / Herald of the Tome</strong></td>
-                <td>Perfected Slivers of the Null Arca, Highland Sentinel</td>
-                <td>5 players in 3 reports</td>
-                <td>137.9K</td>
-                <td>@Esstarossa</td>
-                <td><a href="sunspire-nahviintaas-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Aedric / Ardent / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/highland-sentinel" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Highland Sentinel</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">5 players in 3 reports</td>
+                <td data-label="Metric">137.9K DPS</td>
+                <td data-label="Player Character">@Esstarossa - Estarossa Of Hate</td>
+                <td data-label="Details">
+                    <a href="sunspire-nahviintaas-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Aedric / Ardent / Herald build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
             <tr>
-                <td style="text-align: center; font-size: 1.5em;">
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
                     
-                        ✚
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
                     
                 </td>
-                <td><strong>Siphoning / Restoring Light / Green</strong></td>
-                <td>Powerful Assault, Master Architect</td>
-                <td>3 players in 3 reports</td>
-                <td>6.0K</td>
-                <td>@Bleek707</td>
-                <td><a href="sunspire-nahviintaas-green-resto-siphon-master-architect-powerful-assault.html" style="color: #3498db; text-decoration: none;">View Build →</a></td>
+                <td data-label="Build"><strong>Green / Restoring / Siphoning</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/master-architect" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Master Architect</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/powerful-assault" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Powerful Assault</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">3 players in 3 reports</td>
+                <td data-label="Metric">6.0K DPS</td>
+                <td data-label="Player Character">@Bleek707 - bleekblades</td>
+                <td data-label="Details">
+                    <a href="sunspire-nahviintaas-green-resto-siphon-master-architect-powerful-assault.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Green / Restoring / Siphoning build">
+                        View Build →
+                    </a>
+                </td>
             </tr>
             
         </tbody>
@@ -809,47 +1309,46 @@
 
     </main>
     
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
             <div class="credits">
-                <p><strong>Credits & Resources:</strong></p>
-                <p>
-                    Data from <a href="https://www.esologs.com" target="_blank">ESO Logs</a> | 
-                    Reference data from <a href="https://en.uesp.net/wiki/Online:Online" target="_blank">UESP.net</a> | 
-                    Set information from <a href="https://www.esoui.com/downloads/info2241-LibSets.html" target="_blank">LibSets by Baertram</a> | 
-                    Icons from <a href="https://github.com/sheumais/esoskillbarbuilder" target="_blank">esoskillbarbuilder</a>
-                </p>
-                <p>
-                    <a href="https://www.elderscrollsonline.com" target="_blank">The Elder Scrolls Online</a> © 2025 ZeniMax Media Inc.
-                </p>
                 <p style="margin-top: 15px; font-size: 0.85em;">
-                    © 2025 <a href="https://github.com/brainsnorkel" target="_blank">@brainsnorkel</a> | 
-                    Generated: <span id="localized-date">2025-10-06</span>
+                    <a href="https://www.esologs.com" target="_blank" rel="noopener noreferrer">ESO Logs</a> | 
+                    Reference <a href="https://en.uesp.net/wiki/Online:Online" target="_blank" rel="noopener noreferrer">UESP.net</a> | 
+                    Set info <a href="https://www.esoui.com/downloads/info2241-LibSets.html" target="_blank" rel="noopener noreferrer">LibSets by Baertram</a> | 
+                    Icons from Sheumais' <a href="https://github.com/sheumais/esoskillbarbuilder" target="_blank" rel="noopener noreferrer">ESO Skill Bar Builder</a> and a plug for <a href="https://github.com/sheumais/logs/" target="_blank" rel="noopener noreferrer">ESO Log Tool</a>
+                <p style="margin-top: 15px; font-size: 0.85em;">
+                    © 2025 <a href="https://github.com/brainsnorkel" target="_blank" rel="noopener noreferrer">@brainsnorkel</a> 
+                    Updated <span id="generated-timestamp" data-utc="2025-10-11T01:38:26Z">2025-10-11T01:38:26Z</span> |
+                    Source & Issues: <a href="https://github.com/brainsnorkel/eso-build-o-rama/issues" target="_blank" rel="noopener noreferrer">github</a> | 
+                    <a href="https://www.elderscrollsonline.com" target="_blank" rel="noopener noreferrer">The Elder Scrolls Online™</a> © ZeniMax Media Inc | GitHub Pages + Cloudflare | Gear links <a href="https://eso-hub.com" target="_blank" rel="noopener noreferrer">eso-hub.com</a>
                 </p>
             </div>
         </div>
     </footer>
-
+    
     <script>
-        // Update the date to show localized time for the viewer
-        function updateLocalizedDate() {
-            const dateElement = document.getElementById('localized-date');
-            if (dateElement) {
-                const now = new Date();
-                const localizedDate = now.toLocaleString('sv-SE', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false
-                });
-                dateElement.textContent = localizedDate;
+        // Convert UTC timestamp to viewer's local timezone
+        (function() {
+            const timestampEl = document.getElementById('generated-timestamp');
+            if (timestampEl) {
+                const utcTime = timestampEl.getAttribute('data-utc');
+                if (utcTime) {
+                    const date = new Date(utcTime);
+                    // Format: "YYYY-MM-DD HH:MM" in local timezone
+                    const formatted = date.getFullYear() + '-' +
+                        String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                        String(date.getDate()).padStart(2, '0') + ' ' +
+                        String(date.getHours()).padStart(2, '0') + ':' +
+                        String(date.getMinutes()).padStart(2, '0');
+                    
+                    // Get timezone abbreviation
+                    const tzString = date.toLocaleTimeString('en-us', {timeZoneName:'short'}).split(' ')[2];
+                    
+                    timestampEl.textContent = formatted + ' ' + tzString;
+                }
             }
-        }
-
-        // Update the date when the page loads
-        document.addEventListener('DOMContentLoaded', updateLocalizedDate);
+        })();
     </script>
 </body>
 </html>

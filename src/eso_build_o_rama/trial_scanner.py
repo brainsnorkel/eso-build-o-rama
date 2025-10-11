@@ -114,6 +114,29 @@ class TrialScanner:
         
         logger.info(f"✓ Processing {fight_name} (fight {fight_id})")
         
+        # Special case: Xoryn fight in Lucent Citadel
+        # The API lists "Xoryn" as a separate fight, but the real encounter is "Arcane Knot"
+        # which is a longer fight (trash + mini-bosses + Xoryn boss) at fight_id - 1
+        override_boss_name = None
+        if trial_name == "Lucent Citadel" and expected_encounter_name == "Xoryn":
+            adjusted_fight_id = fight_id - 1
+            logger.info(f"⚠️  Xoryn detected - adjusting fight ID from {fight_id} to {adjusted_fight_id} for Arcane Knot encounter")
+            
+            # Find the adjusted fight
+            adjusted_fight_info = None
+            for fight in report_data.get('fights', []):
+                if fight.get('id') == adjusted_fight_id:
+                    adjusted_fight_info = fight
+                    break
+            
+            if adjusted_fight_info:
+                fight_id = adjusted_fight_id
+                fight_info = adjusted_fight_info
+                override_boss_name = "Arcane Knot/Xoryn"
+                logger.info(f"✓ Using adjusted fight: {adjusted_fight_info.get('name', 'Unknown')} (fight {adjusted_fight_id})")
+            else:
+                logger.warning(f"Could not find adjusted fight {adjusted_fight_id} for Xoryn - using original fight {fight_id}")
+        
         # Fetch table data with combatant info - get both Summary (for account names/roles) and DamageDone (for performance)
         summary_data = await self.api_client.get_report_table(
             report_code=report_code,
@@ -189,7 +212,7 @@ class TrialScanner:
             return None
         
         # Create trial report
-        boss_name = fight_info.get('name', 'Unknown Boss')
+        boss_name = override_boss_name if override_boss_name else fight_info.get('name', 'Unknown Boss')
         trial_report = self.data_parser.create_trial_report(
             valid_players,
             trial_name,

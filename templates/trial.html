@@ -154,7 +154,7 @@
                 <td data-label="Metric">{{ build.best_player.get_primary_metric()|format_metric }} {{ build.best_player.get_primary_metric_name() }}</td>
                 <td data-label="Player Character">{{ build.best_player.player_name }} - {{ build.best_player.character_name }}</td>
                 <td data-label="Details">
-                    <a href="{{ build.trial_name.lower().replace(' ', '-').replace("'", "") }}-{{ build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and') }}-{{ build.build_slug }}.html" 
+                    <a href="{{ build.trial_name.lower().replace(' ', '-').replace("'", "") }}-{{ build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and').replace('/', '-') }}-{{ build.build_slug }}.html" 
                        style="color: #3498db; text-decoration: none;"
                        aria-label="View details for {{ build.get_display_name(abbreviated=True) }} build">
                         View Build →

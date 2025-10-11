@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed (2025-10-12 - Xoryn Fight ID in Lucent Citadel) - Issue #5
+- **Xoryn Fight Processing**: Fixed Xoryn fight in Lucent Citadel to use the correct fight ID
+  - The ESO Logs API lists "Xoryn" as a separate fight, but the actual full encounter is "Arcane Knot"
+  - Arcane Knot includes trash, mini-bosses, and ends with Xoryn boss fight
+  - Added special case handling in `trial_scanner.py` to detect Xoryn and use fight ID - 1
+  - Boss name now displays as "Arcane Knot/Xoryn" to reflect the full encounter
+  - Updated `page_generator.py` to handle "/" character in boss names for file path generation
+  - Updated `trial.html` template to handle "/" character in boss names for link generation
+  - All build data (DPS, HPS, CPM, mundus) now correctly gathered from the full encounter
+
 ### Changed (2025-10-11 - Build Requirements and About Page)
 - **Build Requirements**: Changed minimum build requirements for healers and tanks from 2 to 3 occurrences
 - **About Page**: Added comprehensive about page with site banner background image

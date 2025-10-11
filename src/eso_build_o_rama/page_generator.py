@@ -104,7 +104,7 @@ class PageGenerator:
         
         # Generate filename with trial and boss (no version prefix)
         trial_slug = build.trial_name.lower().replace(' ', '-').replace("'", "")
-        boss_slug = build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and')
+        boss_slug = build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and').replace('/', '-')
         filename = f"{trial_slug}-{boss_slug}-{build.build_slug}.html"
         filepath = self.output_dir / filename
         
@@ -400,7 +400,7 @@ class PageGenerator:
         # Add individual build pages
         for build in all_builds:
             trial_slug = build.trial_name.lower().replace(' ', '-').replace("'", "")
-            boss_slug = build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and')
+            boss_slug = build.boss_name.lower().replace(' ', '-').replace("'", "").replace('&', 'and').replace('/', '-')
             filename = f"{trial_slug}-{boss_slug}-{build.build_slug}.html"
             
             xml_lines.extend([

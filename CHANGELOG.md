@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed (2025-10-12 - Social Preview Image URLs with Apostrophes)
+- **URL Apostrophe Issue**: Renamed social preview image files to remove apostrophes from filenames
+  - Affects trials with apostrophes: "Sanity's Edge" and "Kyne's Aegis"
+  - Files renamed: `sanity'sedge` → `sanitysedge`, `kyne'saegis` → `kynesaegis`
+  - Fixes Discord embed thumbnail extraction for these trials
+  - Safer for URLs and prevents encoding issues
+
 ### Fixed (2025-10-12 - Discord Social Image Cache) - Issue #7
 - **Discord Cache Fix (Proper)**: Discord ignores query parameters, so implemented filename-based versioning
   - Created new copies of all social preview images with `-b2` suffix (35 images)

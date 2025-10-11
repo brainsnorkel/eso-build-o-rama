@@ -94,7 +94,7 @@ class PageGenerator:
             'page_title': self._get_page_title(build),
             'meta_description': self._get_meta_description(build),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url('build'),
+            'social_image_url': self._get_social_image_url('build', None, app_version),
             'app_version': app_version
         }
         
@@ -191,7 +191,7 @@ class PageGenerator:
             'trials': trials,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url('home'),
+            'social_image_url': self._get_social_image_url('home', None, app_version),
             'app_version': app_version
         }
         html = template.render(**context)
@@ -247,7 +247,7 @@ class PageGenerator:
             'bosses': sorted_bosses,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url('trial', trial_name),
+            'social_image_url': self._get_social_image_url('trial', trial_name, app_version),
             'app_version': app_version
         }
         html = template.render(**context)
@@ -544,28 +544,36 @@ Disallow: /cache/
         
         return ordered_grouped
     
-    def _get_social_image_url(self, page_type: str = 'home', trial_name: str = None) -> str:
+    def _get_social_image_url(self, page_type: str = 'home', trial_name: str = None, app_version: str = "1.0.0") -> str:
         """Get the URL for social media preview images."""
         # Social media crawlers need absolute URLs
         # Always use esobuild.com domain for social previews (works for both dev and prod)
         base_url = "https://esobuild.com/"
         
-        # Version parameter to bust Discord's aggressive image cache
-        # Increment this when social preview images change
-        cache_version = "v2"
+        # Discord ignores query parameters, so we use versioned filenames (b2, b3, etc)
+        # Plus add query param with major.minor version for other crawlers
+        # Extract major.minor from app_version (e.g., "1.2.5" -> "1.2")
+        try:
+            version_parts = app_version.split('.')
+            major_minor = f"{version_parts[0]}.{version_parts[1]}" if len(version_parts) >= 2 else app_version
+        except:
+            major_minor = "1.0"
+        
+        # Current image version suffix (increment when images change: b2, b3, b4, etc)
+        image_version = "b2"
         
         if page_type == 'trial' and trial_name:
             # Use trial-specific social preview
             trial_slug = trial_name.lower().replace(' ', '').replace('-', '').replace('\'', '')
-            filename = f"social-preview-{trial_slug}-dev.png" if self.is_develop else f"social-preview-{trial_slug}.png"
+            filename = f"social-preview-{trial_slug}-dev-{image_version}.png" if self.is_develop else f"social-preview-{trial_slug}-{image_version}.png"
         elif page_type == 'build':
             # Use site banner for build pages
-            filename = "social-preview-build-dev.png" if self.is_develop else "social-preview-build.png"
+            filename = f"social-preview-build-dev-{image_version}.png" if self.is_develop else f"social-preview-build-{image_version}.png"
         else:
             # Use site banner for home page
-            filename = "social-preview-dev.png" if self.is_develop else "social-preview.png"
+            filename = f"social-preview-dev-{image_version}.png" if self.is_develop else f"social-preview-{image_version}.png"
         
-        return f"{base_url}static/{filename}?{cache_version}"
+        return f"{base_url}static/{filename}?v={major_minor}"
     
     def _get_page_title(self, build: CommonBuild) -> str:
         """Generate SEO-optimized page title for a build."""

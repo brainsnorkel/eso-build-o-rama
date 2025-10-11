@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed (2025-10-12 - Discord Social Image Cache) - Issue #7
+- **Discord Cache Fix (Proper)**: Discord ignores query parameters, so implemented filename-based versioning
+  - Created new copies of all social preview images with `-b2` suffix (35 images)
+  - Updated image URLs to use versioned filenames (b2, b3, b4, etc)
+  - Added query parameter with major.minor version (e.g., `?v=1.2`) for other crawlers
+  - To update images in future: copy to new version suffix (e.g., -b3) and increment `image_version` variable
+  - Example URL: `https://esobuild.com/static/social-preview-b2.png?v=1.2`
+
 ### Added (2025-10-12 - Version System)
 - **Version System**: Implemented application versioning system
   - Created VERSION file in project root (currently v1.1.0)

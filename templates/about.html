@@ -55,29 +55,29 @@
                 <div style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
                     <p style="font-size: 1.1em; margin-bottom: 25px;">
                         ESOBuild.com is an up-to-date report of "meta" Elder Scrolls Online trial builds, 
-                        automatically curated from real ESO Logs data. It lets you explore effective 
-                        and popular builds used by top-performing players for each trial and boss encounter. 
-                        In short, it answers the question: "what is meta right now?" with real data from top players. 
+                        automatically curated from the top 10 ranked ESO Logs reports for each trial. It lets you explore builds 
+                        used by top-performing players for each trial and boss encounter. 
+                        In short, it answers the question: "what is meta right now?" 
                     </p>
                     <p style="font-size: 1.1em; margin-bottom: 25px;">
-                        Built by @brainsnorkel (PC NA). Let me know in game mail if you find it useful, or open an issue on the <a href="https://github.com/brainsnorkel/eso-build-o-rama/issues" target="_blank" style="color: #38ef7d;">GitHub issues tracker</a>, if you find a problem.
+                        ESOBuild is built by <pre>@brainsnorkel</pre> (my PC NA handle). Let me know in game mail if you find it useful, or open an issue in <a href="https://github.com/brainsnorkel/eso-build-o-rama/issues" target="_blank" style="color: #38ef7d;">GitHub</a> if you find a problem or want to talk about features.
                     </p>                    
                     <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">How It Works</h2>
                     <p style="margin-bottom: 20px;">
                         To this tool, a "build" is a unique combination of subclasses 
                         (skill lines), and two "5-piece" gear sets with 4 or more pieces 
-                        of each equipped. This is a simplifying assumption, and other heuristics 
-                        may be added later (come back 5/2/2/2/1 builds!). 
+                        of each equipped. Yes, this is a simplifying assumption. Other heuristics 
+                        may be added later other (hello 5/2/2/2/1 builds?) build patterns. 
                     </p>
                     <p style="margin-bottom: 20px;">
-                        ESO Build scans the top-ranked trial reports (with logs) from ESO Logs, 
-                        analyzing player builds in each boss fight to identify the most frequent 
-                        gear and subclass combinations: the meta. This might not pick the highest 
-                        DPS (they might have a unique build) but it will find common builds. 
-                        ESOBuild.com is better at finding DPS builds than healers and tanks because of 
-                        their lower numbers and proliferation of subclass options. However, esologs.com links 
-                        are provided so you can explore group composition at esologs.com and dig out 
-                        those unique builds.
+                        ESO Build scans the top-ranked trial reports that have logs using the ESO Logs API. 
+                        Player gear and subclass information is extracted from each boss fight to identify the most frequently-seen combinations: the meta. 
+                        This approach might not end up selecting the build of the highest DPS if they have a unique build. 
+                        It will find common builds. 
+                        Also note that ESOBuild.com is way better at finding DPS builds than healers and tanks.  
+                        There are lower numbers and of healers and tanks, and a proliferation of subclass options makes it hard to select common builds from a small sample. 
+                        However, esologs.com links are provided so you can explore group composition at esologs.com and dig out 
+                        more unique builds.
                     </p>
                     <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Build Requirements</h2>
                     <p style="margin-bottom: 20px;">
@@ -88,20 +88,20 @@
                         <li><strong>3 or more times</strong> for healer and tank builds</li>
                     </ul>
                     <p style="margin-bottom: 20px;">
-                        This ensures we only showcase builds that have been seen in multiple 
-                        successful, top-ranked, trial runs.
+                        This ensures we only show builds that have been seen used by multiple players for that fight across the 10 top-ranked reports.
                     </p>
                     
                     <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Data Source</h2>
                     <p style="margin-bottom: 20px;">
                         All build data comes from <a href="https://www.esologs.com" target="_blank" style="color: #38ef7d;">ESO Logs</a>, 
-                        the premier logging platform for Elder Scrolls Online. We analyze the 10 top ranked 
-                        reports for each trial to ensure we're capturing the most successful common builds.
+                        the premier log analysis site for Elder Scrolls Online. If you are uploading encounter logs to esologs.com, I recommend using 
+                        <a href="https://github.com/sheumais/logs" target="_blank" style="color: #38ef7d;">ESO Log Tool by sheumais</a> for better upload speed than the default client, 
+                        and helpful features like script enumeration for scribed abilities. 
                     </p>
                     
                     <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Updates</h2>
                     <p style="margin-bottom: 20px;">
-                        Builds are updated from esologs.com once every 14 hours, with a different trial processed each hour diring the 14 hours. 
+                        Trial builds are updated from esologs.com once every 14 hours, with a different trial processed each hour. 
                         Trials are processed in order from oldest: AA, to newest: OC. The site is hosted in GitHub Pages and proxied by Cloudflare, 
                         so content is agressively cached. The footer in the home page shows the last updated time in your timezone. 
                     </p>

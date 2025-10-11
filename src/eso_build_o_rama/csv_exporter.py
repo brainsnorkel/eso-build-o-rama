@@ -19,7 +19,7 @@ class CSVExporter:
     GEAR_SLOTS = [
         'head', 'chest', 'shoulders', 'hands', 'waist', 'legs', 'feet',
         'necklace', 'ring1', 'ring2',
-        'main_hand', 'off_hand'
+        'main_hand', 'off_hand', 'backup_main_hand', 'backup_off_hand'
     ]
     
     def __init__(self, output_dir: str = "output"):

@@ -535,6 +535,10 @@ Disallow: /cache/
         # Always use esobuild.com domain for social previews (works for both dev and prod)
         base_url = "https://esobuild.com/"
         
+        # Version parameter to bust Discord's aggressive image cache
+        # Increment this when social preview images change
+        cache_version = "v2"
+        
         if page_type == 'trial' and trial_name:
             # Use trial-specific social preview
             trial_slug = trial_name.lower().replace(' ', '').replace('-', '').replace('\'', '')
@@ -546,7 +550,7 @@ Disallow: /cache/
             # Use site banner for home page
             filename = "social-preview-dev.png" if self.is_develop else "social-preview.png"
         
-        return f"{base_url}static/{filename}"
+        return f"{base_url}static/{filename}?{cache_version}"
     
     def _get_page_title(self, build: CommonBuild) -> str:
         """Generate SEO-optimized page title for a build."""

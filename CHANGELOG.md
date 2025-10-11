@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed (2025-10-12 - Social Image Cache Busting)
+- **Discord Cache Issue**: Added version parameter to social embed image URLs to bust Discord's aggressive cache
+  - Discord permanently caches Open Graph images, causing old/broken images to persist
+  - Added `?v2` parameter to all social preview image URLs
+  - Future image updates can increment the version parameter to force cache refresh
+  - Affects all social media previews (home, trial, and build pages)
+
 ### Fixed (2025-10-12 - Xoryn Fight ID in Lucent Citadel) - Issue #5
 - **Xoryn Fight Processing**: Fixed Xoryn fight in Lucent Citadel to use the correct fight ID
   - The ESO Logs API lists "Xoryn" as a separate fight, but the actual full encounter is "Arcane Knot"

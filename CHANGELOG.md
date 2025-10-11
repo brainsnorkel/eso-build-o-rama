@@ -11,6 +11,14 @@ All notable changes to this project will be documented in this file.
 - **Home Page**: Removed "About This Data" section from home page (replaced with dedicated About page)
 - **Documentation**: Updated home page text and design documentation to reflect new build requirements
 
+### Fixed (2025-10-11 - Trial Box Layout Consistency)
+- **Trial Box Heights**: Fixed inconsistent trial box heights on home page for uniform grid layout
+  - Changed from `min-height: 240px` to fixed `height: 320px` for all trial boxes
+  - Added `justify-content: space-between` for better content distribution
+  - Restructured content layout with flexbox for consistent spacing
+  - Ensures all trial boxes have the same height regardless of content length
+  - Creates clean, professional grid appearance across all trial cards
+
 ### Removed (2025-10-11 - Caching System)
 - **Caching System**: Completely removed the caching system to simplify the codebase and ensure fresh data on every run
   - Deleted `cache_manager.py` module

@@ -64,7 +64,8 @@ class PageGenerator:
     def generate_build_page(
         self,
         build: CommonBuild,
-        update_version: str
+        update_version: str,
+        app_version: str = "1.0.0"
     ) -> str:
         """
         Generate a single build page.
@@ -72,6 +73,7 @@ class PageGenerator:
         Args:
             build: CommonBuild object
             update_version: Game update version (e.g., 'U48')
+            app_version: Application version for display
             
         Returns:
             Path to generated HTML file
@@ -92,7 +94,8 @@ class PageGenerator:
             'page_title': self._get_page_title(build),
             'meta_description': self._get_meta_description(build),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url('build')
+            'social_image_url': self._get_social_image_url('build'),
+            'app_version': app_version
         }
         
         # Debug: Check DPS value being passed to template
@@ -117,7 +120,8 @@ class PageGenerator:
     def generate_home_page(
         self,
         builds_by_trial: Dict[str, Dict[str, Dict[str, Any]]],
-        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None
+        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None,
+        app_version: str = "1.0.0"
     ) -> str:
         """
         Generate the home page listing all trials.
@@ -125,6 +129,7 @@ class PageGenerator:
         Args:
             builds_by_trial: Dictionary of {trial_name: {boss_name: {'builds': [builds], 'total_reports': int}}}
             trials_metadata: Optional metadata about trials including cache stats
+            app_version: Application version for display
             
         Returns:
             Path to generated HTML file
@@ -186,7 +191,8 @@ class PageGenerator:
             'trials': trials,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url('home')
+            'social_image_url': self._get_social_image_url('home'),
+            'app_version': app_version
         }
         html = template.render(**context)
         
@@ -200,7 +206,8 @@ class PageGenerator:
     def generate_trial_page(
         self,
         trial_name: str,
-        bosses: Dict[str, List[CommonBuild]]
+        bosses: Dict[str, List[CommonBuild]],
+        app_version: str = "1.0.0"
     ) -> str:
         """
         Generate a trial page with all bosses and their builds.
@@ -208,6 +215,7 @@ class PageGenerator:
         Args:
             trial_name: Name of the trial
             bosses: Dictionary of {boss_name: [builds]}
+            app_version: Application version for display
             
         Returns:
             Path to generated HTML file
@@ -239,7 +247,8 @@ class PageGenerator:
             'bosses': sorted_bosses,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url('trial', trial_name)
+            'social_image_url': self._get_social_image_url('trial', trial_name),
+            'app_version': app_version
         }
         html = template.render(**context)
         
@@ -251,9 +260,12 @@ class PageGenerator:
         logger.info(f"Generated trial page: {filepath}")
         return str(filepath)
     
-    def generate_about_page(self) -> str:
+    def generate_about_page(self, app_version: str = "1.0.0") -> str:
         """
         Generate the about page.
+        
+        Args:
+            app_version: Application version for display
         
         Returns:
             Path to generated HTML file
@@ -266,7 +278,8 @@ class PageGenerator:
         # Render template
         context = {
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
-            'is_develop': self.is_develop
+            'is_develop': self.is_develop,
+            'app_version': app_version
         }
         html = template.render(**context)
         
@@ -281,7 +294,8 @@ class PageGenerator:
         self,
         all_builds: List[CommonBuild],
         update_version: str,
-        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None
+        trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None,
+        app_version: str = "1.0.0"
     ) -> Dict[str, str]:
         """
         Generate all build pages and index.
@@ -290,6 +304,7 @@ class PageGenerator:
             all_builds: List of all common builds
             update_version: Game update version
             trials_metadata: Optional metadata about trials including last updated times
+            app_version: Application version for display
             
         Returns:
             Dictionary mapping build slugs to file paths
@@ -302,24 +317,24 @@ class PageGenerator:
         builds_by_trial = self._group_builds_by_trial(all_builds)
         
         # Generate home page (index.html) with trial links
-        home_path = self.generate_home_page(builds_by_trial, trials_metadata)
+        home_path = self.generate_home_page(builds_by_trial, trials_metadata, app_version)
         generated_files['home'] = home_path
         
         # Generate about page
-        about_path = self.generate_about_page()
+        about_path = self.generate_about_page(app_version)
         generated_files['about'] = about_path
         
         # Generate individual trial pages
         for trial_name, trial_data in builds_by_trial.items():
             # Extract just the bosses data for trial page generation
             bosses_data = {boss: data['builds'] for boss, data in trial_data.items()}
-            trial_path = self.generate_trial_page(trial_name, bosses_data)
+            trial_path = self.generate_trial_page(trial_name, bosses_data, app_version)
             generated_files[f'trial_{trial_name.lower().replace(" ", "_")}'] = trial_path
         
         # Generate individual build pages
         for build in all_builds:
             try:
-                filepath = self.generate_build_page(build, update_version)
+                filepath = self.generate_build_page(build, update_version, app_version)
                 generated_files[build.build_slug] = filepath
             except Exception as e:
                 logger.error(f"Error generating page for {build.build_slug}: {e}")

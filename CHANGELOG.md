@@ -4,7 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-### Fixed (2025-10-12 - Social Image Cache Busting)
+### Added (2025-10-12 - Version System)
+- **Version System**: Implemented application versioning system
+  - Created VERSION file in project root (currently v1.1.0)
+  - Version displayed in footer of all generated pages
+  - Version read automatically during build process
+  - Reminder saved to bump version before merging to main
+  - Follows semantic versioning (MAJOR.MINOR.PATCH)
+
+### Changed (2025-10-12 - Footer Attribution)
+- **ESO Logs Attribution**: Changed footer text from "ESO Logs" to "With thanks ESO Logs" for better acknowledgment
+
+### Fixed (2025-10-12 - Social Image Cache Busting) - Issue #7
 - **Discord Cache Issue**: Added version parameter to social embed image URLs to bust Discord's aggressive cache
   - Discord permanently caches Open Graph images, causing old/broken images to persist
   - Added `?v2` parameter to all social preview image URLs

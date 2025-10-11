@@ -36,6 +36,15 @@ logger = logging.getLogger(__name__)
 class ESOBuildORM:
     """Main application orchestrator."""
     
+    def get_version(self) -> str:
+        """Read version from VERSION file."""
+        version_file = Path(__file__).parent.parent.parent / 'VERSION'
+        try:
+            return version_file.read_text().strip()
+        except FileNotFoundError:
+            logger.warning("VERSION file not found, using default version")
+            return "1.0.0"
+    
     def get_output_directory(self) -> str:
         """Determine output directory based on git branch."""
         try:
@@ -119,7 +128,7 @@ class ESOBuildORM:
                         all_saved_builds,
                         "unknown",
                         trials_metadata,
-                        None
+                        self.get_version()
                     )
                     logger.info(f"Generated {len(generated_files)} HTML files from existing data")
                 else:
@@ -198,7 +207,8 @@ class ESOBuildORM:
             generated_files = self.page_generator.generate_all_pages(
                 all_saved_builds,
                 update_version,
-                trials_metadata
+                trials_metadata,
+                self.get_version()
             )
             
             logger.info(f"Generated {len(generated_files)} HTML files")

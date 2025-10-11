@@ -254,7 +254,7 @@ class CommonBuild:
         
         # Different thresholds based on role
         if role in ['tank', 'healer']:
-            return self.count >= 2
+            return self.count >= 3
         else:  # DPS or unknown
             return self.count >= 5
 

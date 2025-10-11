@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Changed (2025-10-11 - Build Requirements and About Page)
-- **Build Requirements**: Changed minimum build requirements for healers and tanks from 3 to 2 occurrences
+- **Build Requirements**: Changed minimum build requirements for healers and tanks from 2 to 3 occurrences
 - **About Page**: Added comprehensive about page with site banner background image
 - **Navigation**: Added About link to top right of site header
 - **Home Page**: Removed "About This Data" section from home page (replaced with dedicated About page)

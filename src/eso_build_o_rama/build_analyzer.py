@@ -19,7 +19,7 @@ class BuildAnalyzer:
     # Constants for build analysis
     MINIMUM_SET_PIECES = 4  # Minimum pieces for a meaningful set bonus
     MINIMUM_COMMON_BUILD_OCCURRENCES = 5  # Minimum occurrences for DPS builds
-    MINIMUM_HEALER_TANK_BUILD_OCCURRENCES = 2  # Minimum occurrences for healer and tank builds
+    MINIMUM_HEALER_TANK_BUILD_OCCURRENCES = 3  # Minimum occurrences for healer and tank builds
     MAX_SUBCLASSES = 3  # Maximum number of subclasses per character
     
     def __init__(self):

@@ -55,12 +55,12 @@
                 <div style="max-width: 800px; margin: 0 auto; line-height: 1.8;">
                     <p style="font-size: 1.1em; margin-bottom: 25px;">
                         ESOBuild.com is an up-to-date report of "meta" Elder Scrolls Online trial builds, 
-                        automatically curated from the top 10 ranked ESO Logs reports for each trial. It lets you explore builds 
+                        automatically curated from the top 12 ranked ESO Logs reports for each trial. It lets you explore builds 
                         used by top-performing players for each trial and boss encounter. 
                         In short, it answers the question: "what is meta right now?" 
                     </p>
                     <p style="font-size: 1.1em; margin-bottom: 25px;">
-                        ESOBuild is built by <pre>@brainsnorkel</pre> (my PC NA handle). Let me know in game mail if you find it useful, or open an issue in <a href="https://github.com/brainsnorkel/eso-build-o-rama/issues" target="_blank" style="color: #38ef7d;">GitHub</a> if you find a problem or want to talk about features.
+                        ESOBuild is built by @brainsnorkel(my ESO PC NA handle and GitHub account name). Let me know in game mail if you find this site useful. If you find a problem, or have suggestions,open an issue in <a href="https://github.com/brainsnorkel/eso-build-o-rama/issues" target="_blank" style="color: #38ef7d;">GitHub</a>.
                     </p>                    
                     <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">How It Works</h2>
                     <p style="margin-bottom: 20px;">
@@ -71,13 +71,11 @@
                     </p>
                     <p style="margin-bottom: 20px;">
                         ESO Build scans the top-ranked trial reports that have logs using the ESO Logs API. 
-                        Player gear and subclass information is extracted from each boss fight to identify the most frequently-seen combinations: the meta. 
-                        This approach might not end up selecting the build of the highest DPS if they have a unique build. 
-                        It will find common builds. 
-                        Also note that ESOBuild.com is way better at finding DPS builds than healers and tanks.  
-                        There are lower numbers and of healers and tanks, and a proliferation of subclass options makes it hard to select common builds from a small sample. 
-                        However, esologs.com links are provided so you can explore group composition at esologs.com and dig out 
-                        more unique builds.
+                        Player gear and subclass information is extracted from leaderboard report boss fights to identify the most frequently-seen combinations in top reports. Arguably, this is "the meta" for each fight. 
+                        This approach might not end up selecting the highest DPS if they have a unique build.
+                        ESOBuild.com is way better at finding DPS builds than healers and tanks.  
+                        There are lower numbers of healers and tanks than dps, and the large number of viable subclass options makes it hard to find common tank and healer builds from this small sample. I try to be gentle with the ESOLogs API. 
+                        esologs.com links are provided, and raw CSV data, so you can dig around in the source data for the less frequently seen builds.
                     </p>
                     <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Build Requirements</h2>
                     <p style="margin-bottom: 20px;">
@@ -94,17 +92,11 @@
                     <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Data Source</h2>
                     <p style="margin-bottom: 20px;">
                         All build data comes from <a href="https://www.esologs.com" target="_blank" style="color: #38ef7d;">ESO Logs</a>, 
-                        the premier log analysis site for Elder Scrolls Online. If you are uploading encounter logs to esologs.com, I recommend using 
-                        <a href="https://github.com/sheumais/logs" target="_blank" style="color: #38ef7d;">ESO Log Tool by sheumais</a> for better upload speed than the default client, 
-                        and helpful features like script enumeration for scribed abilities. 
+                        the preeminent encounterlog analysis site for Elder Scrolls Online. If you are uploading encounter logs to esologs.com, I recommend uploading with 
+                        <a href="https://github.com/sheumais/logs" target="_blank" style="color: #38ef7d;">ESO Log Tool by sheumais</a>. It provides much better upload speed than the esologs.com client, 
+                        and many helpful features like script enumeration for scribed abilities and improved stack tracking for many sets and buffs/debuffs. 
                     </p>
                     
-                    <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Updates</h2>
-                    <p style="margin-bottom: 20px;">
-                        Trial builds are updated from esologs.com once every 14 hours, with a different trial processed each hour. 
-                        Trials are processed in order from oldest: AA, to newest: OC. The site is hosted in GitHub Pages and proxied by Cloudflare, 
-                        so content is agressively cached. The footer in the home page shows the last updated time in your timezone. 
-                    </p>
                     <h2 style="color: #38ef7d; margin-top: 40px; margin-bottom: 20px;">Links & Resources</h2>
                     <ul style="margin-left: 30px; margin-bottom: 25px; line-height: 2;">
                         <li>

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.4] - 2025-10-12
+
+### Changed (2025-10-12 - About Page Content Updates)
+- **About Page Text**: Updated about page to reflect current implementation
+  - Changed "top 10" to "top 12" ranked reports (reflects actual implementation)
+  - Improved wording and clarity in "How It Works" section
+  - Removed duplicate "Updates" section (information is on home page)
+  - Improved author attribution and contact information formatting
+  - Enhanced ESO Log Tool description with more details about features
+
 ### Fixed (2025-10-12 - Social Preview Image URLs with Apostrophes)
 - **URL Apostrophe Issue**: Renamed social preview image files to remove apostrophes from filenames
   - Affects trials with apostrophes: "Sanity's Edge" and "Kyne's Aegis"

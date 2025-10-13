@@ -160,6 +160,10 @@ class CommonBuild:
     fight_start_time: int = 0  # Fight start time for mundus queries
     fight_end_time: int = 0  # Fight end time for mundus queries
     
+    # Aggregation fields (for TL;DR feature)
+    trials_appeared_in: List[str] = field(default_factory=list)  # List of trial names where this build appears
+    is_aggregated: bool = False  # Flag to indicate this is cross-trial aggregation
+    
     def get_display_name(self, abbreviated: bool = False) -> str:
         """
         Get a human-readable name for the build.

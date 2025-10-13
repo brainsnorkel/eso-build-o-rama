@@ -388,6 +388,136 @@ class SocialPreviewGenerator:
         logger.info(f"Generated about preview image: {output_path}")
         return output_path
     
+    def create_tldr_preview(self, is_develop: bool = False) -> Path:
+        """
+        Create social preview image for the TL;DR page.
+        
+        Args:
+            is_develop: Whether this is for the development version
+            
+        Returns:
+            Path to the generated image
+        """
+        logger.info(f"Creating TL;DR page preview image (develop: {is_develop})")
+        
+        # Create background with West Weald image
+        img = self._create_background_with_west_weald()
+        
+        # Color scheme for text elements
+        if is_develop:
+            title_color = '#f39c12'
+            subtitle_color = '#e67e22'
+            description_color = '#f1c40f'
+        else:
+            title_color = '#38ef7d'
+            subtitle_color = '#a8edea'
+            description_color = '#e8e8e8'
+        
+        # Create drawing context
+        draw = ImageDraw.Draw(img)
+        
+        # Define fonts
+        try:
+            title_font = ImageFont.truetype("/System/Library/Fonts/Arial Bold.ttf", 96)
+            subtitle_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 48)
+            description_font = ImageFont.truetype("/System/Library/Fonts/Arial.ttf", 36)
+        except OSError:
+            # Fallback to default font
+            title_font = ImageFont.truetype("arial.ttf", 96)
+            subtitle_font = ImageFont.truetype("arial.ttf", 48)
+            description_font = ImageFont.truetype("arial.ttf", 36)
+        
+        # Define text content
+        title = "TL;DR: Top Boss Fight Builds"
+        subtitle = "Most Common Builds Across All Trials"
+        description = "Discover the most frequently used builds across all Elder Scrolls Online trials, aggregated from top-performing players."
+        
+        # Calculate text positions
+        title_bbox = draw.textbbox((0, 0), title, font=title_font)
+        title_width = title_bbox[2] - title_bbox[0]
+        title_height = title_bbox[3] - title_bbox[1]
+        
+        subtitle_bbox = draw.textbbox((0, 0), subtitle, font=subtitle_font)
+        subtitle_width = subtitle_bbox[2] - subtitle_bbox[0]
+        
+        # Center text horizontally
+        title_x = (self.image_width - title_width) // 2
+        subtitle_x = (self.image_width - subtitle_width) // 2
+        
+        # Vertical positioning
+        start_y = 100
+        title_y = start_y
+        subtitle_y = title_y + title_height + 20
+        description_y = subtitle_y + 60
+        
+        # Draw title with shadow
+        draw.text((title_x + 3, title_y + 3), title, font=title_font, fill=(0, 0, 0, 128))
+        draw.text((title_x, title_y), title, font=title_font, fill=title_color)
+        
+        # Draw subtitle with shadow
+        draw.text((subtitle_x + 2, subtitle_y + 2), subtitle, font=subtitle_font, fill=(0, 0, 0, 128))
+        draw.text((subtitle_x, subtitle_y), subtitle, font=subtitle_font, fill=subtitle_color)
+        
+        # Draw description (simple text, no wrapping for now)
+        draw.text((50, description_y), description, font=description_font, fill=description_color)
+        
+        # Determine output filename
+        filename = "social-preview-tldr-dev-b2.png" if is_develop else "social-preview-tldr-b2.png"
+        output_path = self.static_dir / filename
+        
+        # Optimize for smaller file size while maintaining quality
+        img = img.convert('P', palette=Image.ADAPTIVE, colors=256)
+        img.save(output_path, "PNG", optimize=True, compress_level=9)
+        
+        logger.info(f"Generated TL;DR preview image: {output_path}")
+        return output_path
+    
+    def _create_background_with_west_weald(self) -> Image.Image:
+        """Create background using the West Weald image."""
+        # Start with dark background
+        img = Image.new('RGB', (self.image_width, self.image_height), color='#1a1a2e')
+        
+        # Try to load West Weald background
+        west_weald_path = Path("eso-art") / "top-build-back-west-weald.png"
+        if west_weald_path.exists():
+            try:
+                background = Image.open(west_weald_path)
+                
+                # Convert to RGBA if needed
+                if background.mode != 'RGBA':
+                    background = background.convert('RGBA')
+                
+                # Calculate dimensions for center crop
+                target_aspect = self.image_width / self.image_height
+                img_aspect = background.width / background.height
+                
+                if img_aspect > target_aspect:
+                    # Image is wider - crop width
+                    new_width = int(background.height * target_aspect)
+                    left = (background.width - new_width) // 2
+                    background = background.crop((left, 0, left + new_width, background.height))
+                else:
+                    # Image is taller - crop height
+                    new_height = int(background.width / target_aspect)
+                    top = (background.height - new_height) // 2
+                    background = background.crop((0, top, background.width, top + new_height))
+                
+                # Resize to social card dimensions
+                background = background.resize((self.image_width, self.image_height), Image.Resampling.LANCZOS)
+                
+                # Apply alpha transparency (30% opacity)
+                alpha = background.split()[3]
+                alpha = alpha.point(lambda x: int(x * 0.3))
+                background.putalpha(alpha)
+                
+                # Paste onto dark background
+                img.paste(background, (0, 0), background)
+                
+            except Exception as e:
+                logger.warning(f"Could not load West Weald background: {e}")
+        
+        return img
+    
     def _create_background_with_banner(self) -> Image.Image:
         """Create background using the site banner."""
         # Start with dark background

@@ -290,6 +290,97 @@ class PageGenerator:
         logger.info(f"Generated about page: {filepath}")
         return str(filepath)
     
+    def generate_tldr_summary_page(self, aggregated_builds: Dict[str, List[CommonBuild]], app_version: str = "1.0.0") -> str:
+        """
+        Generate the TL;DR summary page showing top builds across all trials.
+        
+        Args:
+            aggregated_builds: Dictionary mapping role names to lists of aggregated builds
+            app_version: Application version for display
+            
+        Returns:
+            Path to generated HTML file
+        """
+        logger.info("Generating TL;DR summary page")
+        
+        # Combine all builds into a single "All Encounters" section
+        all_builds = []
+        for role, builds in aggregated_builds.items():
+            all_builds.extend(builds)
+        
+        # Sort by role (DPS first, then Healer, then Tank)
+        role_order = {'dps': 0, 'healer': 1, 'tank': 2}
+        all_builds.sort(key=lambda b: role_order.get(b.best_player.role.lower() if b.best_player else 'dps', 3))
+        
+        bosses = {"All Encounters": all_builds}
+        
+        # Load template
+        template = self.env.get_template('trial.html')
+        
+        # Render template
+        context = {
+            'trial_name': "TL;DR: Top Boss Fight Builds",
+            'bosses': bosses,
+            'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'is_develop': self.is_develop,
+            'social_image_url': self._get_social_image_url('trial', "TL;DR: Top Boss Fight Builds", app_version),
+            'app_version': app_version
+        }
+        html = template.render(**context)
+        
+        # Write file
+        filepath = self.output_dir / 'tldr-top-builds.html'
+        filepath.write_text(html, encoding='utf-8')
+        
+        logger.info(f"Generated TL;DR summary page: {filepath}")
+        return str(filepath)
+    
+    def generate_aggregated_build_page(self, build: CommonBuild, update_version: str, app_version: str = "1.0.0") -> str:
+        """
+        Generate an aggregated build page showing build data across all trials.
+        
+        Args:
+            build: Aggregated CommonBuild object
+            update_version: Game update version (e.g., 'U48')
+            app_version: Application version for display
+            
+        Returns:
+            Path to generated HTML file
+        """
+        logger.info(f"Generating aggregated build page: {build.build_slug}")
+        
+        # Load template
+        template = self.env.get_template('build_page.html')
+        
+        # Prepare data for template
+        context = {
+            'build': build,
+            'update_version': update_version,
+            'best_player': build.best_player,
+            'trial_slug': 'tldr-top-builds',
+            'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'page_title': self._get_page_title(build),
+            'meta_description': self._get_meta_description(build),
+            'is_develop': self.is_develop,
+            'social_image_url': self._get_social_image_url('build', None, app_version),
+            'app_version': app_version,
+            'trials_list': build.trials_appeared_in,  # Additional context for aggregated builds
+            'is_aggregated': True
+        }
+        
+        # Render template
+        html = template.render(**context)
+        
+        # Generate filename
+        filename = f"tldr-{build.build_slug}.html"
+        filepath = self.output_dir / filename
+        
+        # Write file
+        filepath.write_text(html, encoding='utf-8')
+        
+        logger.info(f"Generated aggregated build page: {filepath}")
+        return str(filepath)
+    
     def generate_all_pages(
         self,
         all_builds: List[CommonBuild],
@@ -397,6 +488,16 @@ class PageGenerator:
             f'    <lastmod>{lastmod}</lastmod>',
             '    <changefreq>monthly</changefreq>',
             '    <priority>0.5</priority>',
+            '  </url>',
+        ])
+        
+        # Add TL;DR summary page
+        xml_lines.extend([
+            '  <url>',
+            f'    <loc>{base_url}/tldr-top-builds.html</loc>',
+            f'    <lastmod>{lastmod}</lastmod>',
+            '    <changefreq>daily</changefreq>',
+            '    <priority>0.9</priority>',
             '  </url>',
         ])
         
@@ -751,7 +852,8 @@ Disallow: /cache/
             "Dreadsail Reef": "dreadsail_reef",
             "Sanity's Edge": "sanitysedge",
             "Lucent Citadel": "lucentcitadel",
-            "Ossein Cage": "ossein_cage"
+            "Ossein Cage": "ossein_cage",
+            "TL;DR: Top Boss Fight Builds": "top-builds"
         }
         
         image_name = trial_image_map.get(trial_name, "")
@@ -790,7 +892,8 @@ Disallow: /cache/
             "Dreadsail Reef": "dreadsail_reef",
             "Sanity's Edge": "sanitysedge",
             "Lucent Citadel": "lucentcitadel",
-            "Ossein Cage": "ossein_cage"
+            "Ossein Cage": "ossein_cage",
+            "TL;DR: Top Boss Fight Builds": "top-builds"
         }
         
         image_name = trial_image_map.get(trial_name, "")

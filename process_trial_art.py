@@ -168,6 +168,16 @@ def main():
         
         print()
     
+    # Process TL;DR background
+    tldr_file = SOURCE_DIR / "top-build-back-west-weald.png"
+    if tldr_file.exists():
+        print("Processing TL;DR background")
+        tldr_trial_output = TRIAL_BG_DIR / "top-builds.png"
+        tldr_social_output = SOCIAL_BG_DIR / "top-builds.png"
+        process_trial_background(tldr_file, tldr_trial_output)
+        process_social_background(tldr_file, tldr_social_output)
+        print()
+    
     # Process site banner
     banner_file = SOURCE_DIR / "site_banner_characterload.png"
     if banner_file.exists():

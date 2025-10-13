@@ -276,3 +276,80 @@ class BuildAnalyzer:
                     set_counts[set_name] += count
         
         return dict(set_counts)
+    
+    def aggregate_builds_across_trials(self, all_builds: List[CommonBuild]) -> Dict[str, List[CommonBuild]]:
+        """
+        Aggregate builds across all trials by role and build signature.
+        Returns up to 5 most common builds per role.
+        
+        Args:
+            all_builds: List of all CommonBuild objects from all trials
+            
+        Returns:
+            Dictionary mapping role names to lists of aggregated builds
+        """
+        logger.info(f"Aggregating {len(all_builds)} builds across all trials")
+        
+        # Group builds by role and build signature
+        role_builds = defaultdict(lambda: defaultdict(list))
+        
+        for build in all_builds:
+            if not build.best_player:
+                continue
+                
+            role = build.best_player.role.lower()
+            build_slug = build.build_slug
+            
+            # Group by role and build signature
+            role_builds[role][build_slug].append(build)
+        
+        # Aggregate builds for each role
+        aggregated_by_role = {}
+        
+        for role, builds_by_slug in role_builds.items():
+            aggregated_builds = []
+            
+            for build_slug, builds in builds_by_slug.items():
+                # Aggregate data across trials
+                total_players = sum(build.count for build in builds)
+                total_reports = sum(build.report_count for build in builds)
+                
+                # Collect all trials where this build appears
+                trials_appeared = list(set(build.trial_name for build in builds))
+                
+                # Find the highest metric player across all trials
+                best_player = None
+                best_metric = 0
+                
+                for build in builds:
+                    if build.best_player:
+                        metric = build.best_player.get_primary_metric()
+                        if metric > best_metric:
+                            best_metric = metric
+                            best_player = build.best_player
+                
+                if best_player:
+                    # Create aggregated build
+                    aggregated_build = CommonBuild(
+                        build_slug=build_slug,
+                        subclasses=builds[0].subclasses.copy(),
+                        sets=builds[0].sets.copy(),
+                        count=total_players,
+                        report_count=total_reports,
+                        best_player=best_player,
+                        all_players=[],  # Not needed for aggregated builds
+                        trial_name="TL;DR: Top Boss Fight Builds",
+                        boss_name="All Encounters",
+                        fight_id=0,
+                        update_version=builds[0].update_version,
+                        trials_appeared_in=trials_appeared,
+                        is_aggregated=True
+                    )
+                    aggregated_builds.append(aggregated_build)
+            
+            # Sort by total player count (descending) and take top 5
+            aggregated_builds.sort(key=lambda x: x.count, reverse=True)
+            aggregated_by_role[role] = aggregated_builds[:5]
+        
+        logger.info(f"Aggregated builds by role: {[(role, len(builds)) for role, builds in aggregated_by_role.items()]}")
+        return aggregated_by_role

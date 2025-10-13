@@ -204,12 +204,30 @@ class ESOBuildORM:
             logger.info(f"Using game version: {update_version}")
             logger.info(f"Total builds across all trials: {len(all_saved_builds)}")
             
+            # Generate TL;DR summary page (NEW - non-breaking addition)
+            logger.info("Generating TL;DR summary page...")
+            from .build_analyzer import BuildAnalyzer
+            build_analyzer = BuildAnalyzer()
+            aggregated_builds = build_analyzer.aggregate_builds_across_trials(all_saved_builds)
+            tldr_path = self.page_generator.generate_tldr_summary_page(aggregated_builds, self.get_version())
+            
+            # Generate aggregated build pages
+            for role, builds in aggregated_builds.items():
+                for build in builds:
+                    agg_path = self.page_generator.generate_aggregated_build_page(build, update_version, self.get_version())
+            
             generated_files = self.page_generator.generate_all_pages(
                 all_saved_builds,
                 update_version,
                 trials_metadata,
                 self.get_version()
             )
+            
+            # Add TL;DR pages to generated files
+            generated_files['tldr_summary'] = tldr_path
+            for role, builds in aggregated_builds.items():
+                for build in builds:
+                    generated_files[f'tldr_{build.build_slug}'] = f"tldr-{build.build_slug}.html"
             
             logger.info(f"Generated {len(generated_files)} HTML files")
             
@@ -352,6 +370,10 @@ class ESOBuildORM:
             # Generate about page preview
             about_preview = generator.create_about_preview(is_develop)
             logger.info(f"Generated about social preview: {about_preview}")
+            
+            # Generate TL;DR page preview
+            tldr_preview = generator.create_tldr_preview(is_develop)
+            logger.info(f"Generated TL;DR social preview: {tldr_preview}")
             
             # Generate trial-specific previews
             trial_names = [

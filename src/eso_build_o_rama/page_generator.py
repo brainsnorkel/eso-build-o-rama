@@ -322,11 +322,11 @@ class PageGenerator:
         
         # Render template
         context = {
-            'trial_name': "TL;DR: Top Builds",
+            'trial_name': "Top Builds",
             'bosses': bosses,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url('trial', "TL;DR: Top Builds", app_version),
+            'social_image_url': self._get_social_image_url('trial', "Top Builds", app_version),
             'app_version': app_version,
             'hide_download_button': True  # Hide download button for TL;DR page
         }
@@ -859,7 +859,7 @@ Disallow: /cache/
             "Sanity's Edge": "sanitysedge",
             "Lucent Citadel": "lucentcitadel",
             "Ossein Cage": "ossein_cage",
-            "TL;DR: Top Builds": "top-builds"
+            "Top Builds": "top-builds"
         }
         
         image_name = trial_image_map.get(trial_name, "")
@@ -899,7 +899,7 @@ Disallow: /cache/
             "Sanity's Edge": "sanitysedge",
             "Lucent Citadel": "lucentcitadel",
             "Ossein Cage": "ossein_cage",
-            "TL;DR: Top Builds": "top-builds"
+            "Top Builds": "top-builds"
         }
         
         image_name = trial_image_map.get(trial_name, "")

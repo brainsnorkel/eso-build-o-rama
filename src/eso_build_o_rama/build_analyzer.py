@@ -320,6 +320,7 @@ class BuildAnalyzer:
                 # Find the highest metric player across all trials
                 best_player = None
                 best_metric = 0
+                best_player_build = None
                 
                 for build in builds:
                     if build.best_player:
@@ -327,9 +328,10 @@ class BuildAnalyzer:
                         if metric > best_metric:
                             best_metric = metric
                             best_player = build.best_player
+                            best_player_build = build
                 
-                if best_player:
-                    # Create aggregated build
+                if best_player and best_player_build:
+                    # Create aggregated build with original trial/boss info for linking
                     aggregated_build = CommonBuild(
                         build_slug=build_slug,
                         subclasses=builds[0].subclasses.copy(),
@@ -338,9 +340,9 @@ class BuildAnalyzer:
                         report_count=total_reports,
                         best_player=best_player,
                         all_players=[],  # Not needed for aggregated builds
-                        trial_name="TL;DR: Top Builds",
-                        boss_name="All Encounters",
-                        fight_id=0,
+                        trial_name=best_player_build.trial_name,  # Use original trial name for linking
+                        boss_name=best_player_build.boss_name,    # Use original boss name for linking
+                        fight_id=best_player_build.fight_id,      # Use original fight ID for linking
                         update_version=builds[0].update_version,
                         trials_appeared_in=trials_appeared,
                         is_aggregated=True

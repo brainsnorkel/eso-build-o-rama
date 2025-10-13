@@ -428,7 +428,7 @@ class SocialPreviewGenerator:
             description_font = ImageFont.truetype("arial.ttf", 36)
         
         # Define text content
-        title = "TL;DR: Top Builds"
+        title = "Top Builds"
         subtitle = "Most Common Builds Across All Trials"
         description = "Discover the most frequently used builds across all Elder Scrolls Online trials, aggregated from top-performing players."
         

@@ -338,7 +338,7 @@ class BuildAnalyzer:
                         report_count=total_reports,
                         best_player=best_player,
                         all_players=[],  # Not needed for aggregated builds
-                        trial_name="TL;DR: Top Boss Fight Builds",
+                        trial_name="TL;DR: Top Builds",
                         boss_name="All Encounters",
                         fight_id=0,
                         update_version=builds[0].update_version,

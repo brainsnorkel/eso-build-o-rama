@@ -220,7 +220,8 @@ class ESOBuildORM:
                 all_saved_builds,
                 update_version,
                 trials_metadata,
-                self.get_version()
+                self.get_version(),
+                aggregated_builds
             )
             
             # Add TL;DR pages to generated files

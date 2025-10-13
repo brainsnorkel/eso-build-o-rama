@@ -74,6 +74,7 @@
                     Common builds from top-performing players across all boss encounters
                 </p>
             </div>
+            {% if not hide_download_button %}
             <div>
                 <a href="{{ trial_name.lower().replace("'", "").replace(' ', '-') }}-data.csv" 
                    download 
@@ -99,6 +100,7 @@
                     Download CSV
                 </a>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>

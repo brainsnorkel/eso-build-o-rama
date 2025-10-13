@@ -121,7 +121,8 @@ class PageGenerator:
         self,
         builds_by_trial: Dict[str, Dict[str, Dict[str, Any]]],
         trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None,
-        app_version: str = "1.0.0"
+        app_version: str = "1.0.0",
+        aggregated_builds: Optional[Dict[str, List[CommonBuild]]] = None
     ) -> str:
         """
         Generate the home page listing all trials.
@@ -130,6 +131,7 @@ class PageGenerator:
             builds_by_trial: Dictionary of {trial_name: {boss_name: {'builds': [builds], 'total_reports': int}}}
             trials_metadata: Optional metadata about trials including cache stats
             app_version: Application version for display
+            aggregated_builds: Optional aggregated builds data for TL;DR card
             
         Returns:
             Path to generated HTML file
@@ -192,7 +194,8 @@ class PageGenerator:
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'is_develop': self.is_develop,
             'social_image_url': self._get_social_image_url('home', None, app_version),
-            'app_version': app_version
+            'app_version': app_version,
+            'aggregated_builds': aggregated_builds
         }
         html = template.render(**context)
         
@@ -319,12 +322,13 @@ class PageGenerator:
         
         # Render template
         context = {
-            'trial_name': "TL;DR: Top Boss Fight Builds",
+            'trial_name': "TL;DR: Top Builds",
             'bosses': bosses,
             'generated_date': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
             'is_develop': self.is_develop,
-            'social_image_url': self._get_social_image_url('trial', "TL;DR: Top Boss Fight Builds", app_version),
-            'app_version': app_version
+            'social_image_url': self._get_social_image_url('trial', "TL;DR: Top Builds", app_version),
+            'app_version': app_version,
+            'hide_download_button': True  # Hide download button for TL;DR page
         }
         html = template.render(**context)
         
@@ -386,7 +390,8 @@ class PageGenerator:
         all_builds: List[CommonBuild],
         update_version: str,
         trials_metadata: Optional[Dict[str, Dict[str, Any]]] = None,
-        app_version: str = "1.0.0"
+        app_version: str = "1.0.0",
+        aggregated_builds: Optional[Dict[str, List[CommonBuild]]] = None
     ) -> Dict[str, str]:
         """
         Generate all build pages and index.
@@ -396,6 +401,7 @@ class PageGenerator:
             update_version: Game update version
             trials_metadata: Optional metadata about trials including last updated times
             app_version: Application version for display
+            aggregated_builds: Optional aggregated builds data for TL;DR card
             
         Returns:
             Dictionary mapping build slugs to file paths
@@ -408,7 +414,7 @@ class PageGenerator:
         builds_by_trial = self._group_builds_by_trial(all_builds)
         
         # Generate home page (index.html) with trial links
-        home_path = self.generate_home_page(builds_by_trial, trials_metadata, app_version)
+        home_path = self.generate_home_page(builds_by_trial, trials_metadata, app_version, aggregated_builds)
         generated_files['home'] = home_path
         
         # Generate about page
@@ -853,7 +859,7 @@ Disallow: /cache/
             "Sanity's Edge": "sanitysedge",
             "Lucent Citadel": "lucentcitadel",
             "Ossein Cage": "ossein_cage",
-            "TL;DR: Top Boss Fight Builds": "top-builds"
+            "TL;DR: Top Builds": "top-builds"
         }
         
         image_name = trial_image_map.get(trial_name, "")
@@ -893,7 +899,7 @@ Disallow: /cache/
             "Sanity's Edge": "sanitysedge",
             "Lucent Citadel": "lucentcitadel",
             "Ossein Cage": "ossein_cage",
-            "TL;DR: Top Boss Fight Builds": "top-builds"
+            "TL;DR: Top Builds": "top-builds"
         }
         
         image_name = trial_image_map.get(trial_name, "")

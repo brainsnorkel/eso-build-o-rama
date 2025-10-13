@@ -306,16 +306,22 @@ class PageGenerator:
         """
         logger.info("Generating TL;DR summary page")
         
-        # Combine all builds into a single "All Encounters" section
-        all_builds = []
-        for role, builds in aggregated_builds.items():
-            all_builds.extend(builds)
+        # Create separate sections for each role
+        bosses = {}
         
-        # Sort by role (DPS first, then Healer, then Tank)
+        # Define role display names and order
+        role_display_names = {
+            'dps': 'Top DPS Builds',
+            'healer': 'Top Healer Builds', 
+            'tank': 'Top Tank Builds'
+        }
+        
         role_order = {'dps': 0, 'healer': 1, 'tank': 2}
-        all_builds.sort(key=lambda b: role_order.get(b.best_player.role.lower() if b.best_player else 'dps', 3))
         
-        bosses = {"All Encounters": all_builds}
+        # Sort roles by order and create boss sections
+        for role in sorted(aggregated_builds.keys(), key=lambda r: role_order.get(r, 3)):
+            if role in aggregated_builds and aggregated_builds[role]:
+                bosses[role_display_names[role]] = aggregated_builds[role]
         
         # Load template
         template = self.env.get_template('trial.html')

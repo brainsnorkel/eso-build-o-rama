@@ -618,7 +618,182 @@ class TrialScanner:
         # Fetch mundus data for publishable builds only (optimized!)
         await self.fetch_mundus_for_builds(consolidated_builds)
         
+        # Ensure minimum 2 builds per role for each boss
+        consolidated_builds = await self._ensure_minimum_role_representation(
+            consolidated_builds, 
+            all_reports
+        )
+        
         return consolidated_builds
+    
+    async def _ensure_minimum_role_representation(
+        self,
+        consolidated_builds: List[CommonBuild],
+        all_reports: Dict[str, List[TrialReport]]
+    ) -> List[CommonBuild]:
+        """
+        Ensure at least 2 builds per role (DPS, healer, tank) for each boss fight.
+        Adds top performers from the best report when threshold-based filtering
+        produces fewer than 2 builds per role.
+        
+        Args:
+            consolidated_builds: List of builds that met threshold requirements
+            all_reports: Dictionary of trial reports by trial name
+            
+        Returns:
+            Augmented list of builds with minimum role representation
+        """
+        from collections import defaultdict
+        
+        # Group builds by (trial_name, boss_name) to check role representation
+        builds_by_boss = defaultdict(list)
+        for build in consolidated_builds:
+            key = (build.trial_name, build.boss_name)
+            builds_by_boss[key].append(build)
+        
+        # Track builds we need to add
+        additional_builds = []
+        
+        for (trial_name, boss_name), builds in builds_by_boss.items():
+            # Count builds per role
+            role_counts = defaultdict(int)
+            existing_build_slugs = set()
+            
+            for build in builds:
+                if build.best_player:
+                    role = build.best_player.role.lower()
+                    role_counts[role] += 1
+                    existing_build_slugs.add(build.build_slug)
+            
+            # Check if we need to add builds for any role
+            roles_needing_builds = []
+            for role in ['dps', 'healer', 'tank']:
+                if role_counts[role] < 2:
+                    roles_needing_builds.append(role)
+            
+            if not roles_needing_builds:
+                continue  # All roles have at least 2 builds
+            
+            # Get the top report for this trial
+            if trial_name not in all_reports or not all_reports[trial_name]:
+                logger.warning(f"No reports found for trial {trial_name}")
+                continue
+            
+            # Find the report for this specific boss
+            boss_report = None
+            for report in all_reports[trial_name]:
+                if report.boss_name == boss_name:
+                    boss_report = report
+                    break
+            
+            if not boss_report:
+                logger.warning(f"No report found for boss {boss_name} in trial {trial_name}")
+                continue
+            
+            # Add fallback builds for roles that need them
+            for role in roles_needing_builds:
+                role_players = []
+                report_used = None
+                
+                # Try reports in order of ranking until we find players of this role
+                for report in all_reports[trial_name]:
+                    if report.boss_name == boss_name:
+                        role_players = [p for p in report.all_players if p.role.lower() == role]
+                        if role_players:
+                            report_used = report
+                            logger.info(f"Found {len(role_players)} {role} players in report for {boss_name}")
+                            break
+                
+                if not role_players:
+                    logger.info(f"No {role} players found in any report for {boss_name}")
+                    continue
+                
+                # Sort by primary metric for the role
+                if role == 'dps':
+                    role_players.sort(key=lambda p: p.dps, reverse=True)
+                elif role == 'healer':
+                    role_players.sort(key=lambda p: p.healing, reverse=True)
+                else:  # tank
+                    # For tanks, we'll use DPS as a proxy since we don't have damage taken data
+                    role_players.sort(key=lambda p: p.dps, reverse=True)
+                
+                # Add top performers until we have 2 total builds for this role
+                builds_needed = 2 - role_counts[role]
+                added_count = 0
+                
+                for player in role_players:
+                    if added_count >= builds_needed:
+                        break
+                    
+                    # Create a build slug for this player
+                    build_slug = player.get_build_slug()
+                    
+                    # Skip if we already have this build
+                    if build_slug in existing_build_slugs:
+                        continue
+                    
+                    # Create a CommonBuild for this single player
+                    fallback_build = self._create_fallback_build(player, report_used)
+                    additional_builds.append(fallback_build)
+                    existing_build_slugs.add(build_slug)
+                    added_count += 1
+                
+                if added_count > 0:
+                    logger.info(f"Added {added_count} fallback {role} builds for {boss_name}")
+        
+        # Combine original builds with additional fallback builds
+        all_builds = consolidated_builds + additional_builds
+        
+        # Sort by count (most popular first)
+        all_builds.sort(key=lambda x: x.count, reverse=True)
+        
+        logger.info(f"Total builds after ensuring minimum role representation: {len(all_builds)}")
+        
+        return all_builds
+    
+    def _create_fallback_build(self, player: PlayerBuild, trial_report: TrialReport) -> CommonBuild:
+        """
+        Create a CommonBuild from a single player for fallback role representation.
+        
+        Args:
+            player: The player to create a build for
+            trial_report: The trial report context
+            
+        Returns:
+            CommonBuild object representing this single player's build
+        """
+        from .models import CommonBuild
+        
+        # Extract build components from the player
+        subclasses = player.subclasses.copy() if player.subclasses else ['x', 'x', 'x']
+        sets = []
+        
+        # Get the two most common sets
+        if player.sets_equipped:
+            sorted_sets = sorted(player.sets_equipped.items(), key=lambda x: x[1], reverse=True)
+            for set_name, count in sorted_sets[:2]:
+                if count >= 4:  # Minimum pieces for a meaningful set
+                    sets.append(set_name)
+        
+        # Create fallback build
+        fallback_build = CommonBuild(
+            build_slug=player.get_build_slug(),
+            subclasses=subclasses,
+            sets=sets,
+            count=1,  # Single player
+            report_count=1,  # Single report
+            best_player=player,
+            all_players=[player],
+            trial_name=trial_report.trial_name,
+            boss_name=trial_report.boss_name,
+            fight_id=trial_report.fight_id,
+            update_version=trial_report.update_version,
+            report_code=trial_report.report_code,
+            fight_start_time=0,  # Default value since TrialReport doesn't have this
+            fight_end_time=0    # Default value since TrialReport doesn't have this
+        )
+        
+        return fallback_build
     
     async def close(self):
         """Close the API client connection."""

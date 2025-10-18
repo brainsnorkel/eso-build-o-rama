@@ -257,8 +257,9 @@ class CommonBuild:
         role = self.best_player.role.lower()
         
         # Different thresholds based on role
+        # Balanced threshold for tanks/healers - not too restrictive, not too permissive
         if role in ['tank', 'healer']:
-            return self.count >= 3
+            return self.count >= 2
         else:  # DPS or unknown
             return self.count >= 5
 

@@ -615,185 +615,122 @@ class TrialScanner:
         
         logger.info(f"Found {len(consolidated_builds)} publishable builds after consolidation")
         
+        # Apply fallback mechanism for roles with insufficient representation
+        consolidated_builds = await self._apply_role_fallback(all_reports, consolidated_builds)
+        
         # Fetch mundus data for publishable builds only (optimized!)
         await self.fetch_mundus_for_builds(consolidated_builds)
         
-        # Ensure minimum 2 builds per role for each boss
-        consolidated_builds = await self._ensure_minimum_role_representation(
-            consolidated_builds, 
-            all_reports
-        )
-        
         return consolidated_builds
     
-    async def _ensure_minimum_role_representation(
+    async def _apply_role_fallback(
         self,
-        consolidated_builds: List[CommonBuild],
-        all_reports: Dict[str, List[TrialReport]]
+        all_reports: Dict[str, List[TrialReport]],
+        consolidated_builds: List[CommonBuild]
     ) -> List[CommonBuild]:
         """
-        Ensure at least 2 builds per role (DPS, healer, tank) for each boss fight.
-        Adds top performers from the best report when threshold-based filtering
-        produces fewer than 2 builds per role.
-        
-        Args:
-            consolidated_builds: List of builds that met threshold requirements
-            all_reports: Dictionary of trial reports by trial name
-            
-        Returns:
-            Augmented list of builds with minimum role representation
+        Apply fallback mechanism for roles with insufficient representation.
+        If a fight has < 2 players of a specific role, grab example characters
+        from the highest-ranked report for that fight.
         """
         from collections import defaultdict
         
-        # Group builds by (trial_name, boss_name) to check role representation
-        builds_by_boss = defaultdict(list)
+        # Group builds by (trial_name, boss_name) to check role representation per fight
+        builds_by_fight = defaultdict(list)
         for build in consolidated_builds:
             key = (build.trial_name, build.boss_name)
-            builds_by_boss[key].append(build)
+            builds_by_fight[key].append(build)
         
-        # Track builds we need to add
-        additional_builds = []
-        
-        for (trial_name, boss_name), builds in builds_by_boss.items():
-            # Count builds per role
+        # Check each fight for role representation
+        fallback_builds = []
+        for (trial_name, boss_name), builds in builds_by_fight.items():
+            # Count roles in this fight
             role_counts = defaultdict(int)
-            existing_build_slugs = set()
-            
             for build in builds:
                 if build.best_player:
                     role = build.best_player.role.lower()
-                    role_counts[role] += 1
-                    existing_build_slugs.add(build.build_slug)
+                    role_counts[role] += build.count
             
-            # Check if we need to add builds for any role
-            roles_needing_builds = []
-            for role in ['dps', 'healer', 'tank']:
+            # Check if we need fallback for healers or tanks
+            for role in ['healer', 'tank']:
                 if role_counts[role] < 2:
-                    roles_needing_builds.append(role)
-            
-            if not roles_needing_builds:
-                continue  # All roles have at least 2 builds
-            
-            # Get the top report for this trial
-            if trial_name not in all_reports or not all_reports[trial_name]:
-                logger.warning(f"No reports found for trial {trial_name}")
-                continue
-            
-            # Find the report for this specific boss
-            boss_report = None
-            for report in all_reports[trial_name]:
-                if report.boss_name == boss_name:
-                    boss_report = report
-                    break
-            
-            if not boss_report:
-                logger.warning(f"No report found for boss {boss_name} in trial {trial_name}")
-                continue
-            
-            # Add fallback builds for roles that need them
-            for role in roles_needing_builds:
-                role_players = []
-                report_used = None
-                
-                # Try reports in order of ranking until we find players of this role
-                for report in all_reports[trial_name]:
-                    if report.boss_name == boss_name:
-                        role_players = [p for p in report.all_players if p.role.lower() == role]
+                    logger.info(f"Fight {trial_name} - {boss_name} has only {role_counts[role]} {role}s, applying fallback")
+                    
+                    # Find the highest-ranked report for this fight
+                    highest_ranked_report = None
+                    if trial_name in all_reports:
+                        # Sort reports by some ranking criteria (e.g., report code or date)
+                        sorted_reports = sorted(
+                            all_reports[trial_name],
+                            key=lambda r: r.report_code,
+                            reverse=True
+                        )
+                        
+                        # Find the first report that has this boss
+                        for report in sorted_reports:
+                            if report.boss_name == boss_name:
+                                highest_ranked_report = report
+                                break
+                    
+                    if highest_ranked_report:
+                        # Get all players of the missing role from the highest-ranked report
+                        role_players = [
+                            player for player in highest_ranked_report.all_players
+                            if player.role.lower() == role
+                        ]
+                        
                         if role_players:
-                            report_used = report
-                            logger.info(f"Found {len(role_players)} {role} players in report for {boss_name}")
-                            break
-                
-                if not role_players:
-                    logger.info(f"No {role} players found in any report for {boss_name}")
-                    continue
-                
-                # Sort by primary metric for the role
-                if role == 'dps':
-                    role_players.sort(key=lambda p: p.dps, reverse=True)
-                elif role == 'healer':
-                    role_players.sort(key=lambda p: p.healing, reverse=True)
-                else:  # tank
-                    # For tanks, we'll use DPS as a proxy since we don't have damage taken data
-                    role_players.sort(key=lambda p: p.dps, reverse=True)
-                
-                # Add top performers until we have 2 total builds for this role
-                builds_needed = 2 - role_counts[role]
-                added_count = 0
-                
-                for player in role_players:
-                    if added_count >= builds_needed:
-                        break
-                    
-                    # Create a build slug for this player
-                    build_slug = player.get_build_slug()
-                    
-                    # Skip if we already have this build
-                    if build_slug in existing_build_slugs:
-                        continue
-                    
-                    # Create a CommonBuild for this single player
-                    fallback_build = self._create_fallback_build(player, report_used)
-                    additional_builds.append(fallback_build)
-                    existing_build_slugs.add(build_slug)
-                    added_count += 1
-                
-                if added_count > 0:
-                    logger.info(f"Added {added_count} fallback {role} builds for {boss_name}")
+                            # Create fallback builds for these players
+                            for player in role_players[:2]:  # Limit to 2 examples
+                                fallback_build = self._create_fallback_build(player, highest_ranked_report)
+                                if fallback_build:
+                                    fallback_builds.append(fallback_build)
+                                    logger.info(f"Added fallback {role} build: {player.character_name}")
         
-        # Combine original builds with additional fallback builds
-        all_builds = consolidated_builds + additional_builds
+        # Combine original builds with fallback builds
+        all_builds = consolidated_builds + fallback_builds
         
-        # Sort by count (most popular first)
-        all_builds.sort(key=lambda x: x.count, reverse=True)
+        # Sort by count (most popular first), with fallback builds at the end
+        all_builds.sort(key=lambda x: (x.count, x.trial_name, x.boss_name), reverse=True)
         
-        logger.info(f"Total builds after ensuring minimum role representation: {len(all_builds)}")
-        
+        logger.info(f"Added {len(fallback_builds)} fallback builds, total: {len(all_builds)}")
         return all_builds
     
-    def _create_fallback_build(self, player: PlayerBuild, trial_report: TrialReport) -> CommonBuild:
-        """
-        Create a CommonBuild from a single player for fallback role representation.
-        
-        Args:
-            player: The player to create a build for
-            trial_report: The trial report context
+    def _create_fallback_build(self, player: 'PlayerBuild', report: 'TrialReport') -> Optional['CommonBuild']:
+        """Create a fallback CommonBuild from a single player."""
+        try:
+            # Generate build slug for this player
+            build_slug = player.get_build_slug()
             
-        Returns:
-            CommonBuild object representing this single player's build
-        """
-        from .models import CommonBuild
-        
-        # Extract build components from the player
-        subclasses = player.subclasses.copy() if player.subclasses else ['x', 'x', 'x']
-        sets = []
-        
-        # Get the two most common sets
-        if player.sets_equipped:
-            sorted_sets = sorted(player.sets_equipped.items(), key=lambda x: x[1], reverse=True)
-            for set_name, count in sorted_sets[:2]:
-                if count >= 4:  # Minimum pieces for a meaningful set
-                    sets.append(set_name)
-        
-        # Create fallback build
-        fallback_build = CommonBuild(
-            build_slug=player.get_build_slug(),
-            subclasses=subclasses,
-            sets=sets,
-            count=1,  # Single player
-            report_count=1,  # Single report
-            best_player=player,
-            all_players=[player],
-            trial_name=trial_report.trial_name,
-            boss_name=trial_report.boss_name,
-            fight_id=trial_report.fight_id,
-            update_version=trial_report.update_version,
-            report_code=trial_report.report_code,
-            fight_start_time=0,  # Default value since TrialReport doesn't have this
-            fight_end_time=0    # Default value since TrialReport doesn't have this
-        )
-        
-        return fallback_build
+            # Convert sets_equipped dict to list format for CommonBuild
+            sets_list = []
+            if player.sets_equipped:
+                # Get the two most common sets (same logic as in _create_common_build)
+                sorted_sets = sorted(player.sets_equipped.items(), key=lambda x: x[1], reverse=True)
+                for set_name, count in sorted_sets[:2]:
+                    if count >= 2:  # MINIMUM_SET_PIECES from BuildAnalyzer
+                        sets_list.append(set_name)
+            
+            # Create a CommonBuild with count=1 to indicate it's a fallback
+            fallback_build = CommonBuild(
+                build_slug=build_slug,
+                subclasses=player.subclasses.copy(),
+                sets=sets_list,
+                count=1,  # Mark as fallback
+                report_count=1,
+                best_player=player,
+                all_players=[player],
+                trial_name=report.trial_name,
+                boss_name=report.boss_name,
+                fight_id=report.fight_id,
+                update_version=report.update_version,
+                report_code=report.report_code
+            )
+            
+            return fallback_build
+        except Exception as e:
+            logger.error(f"Error creating fallback build for {player.character_name}: {e}")
+            return None
     
     async def close(self):
         """Close the API client connection."""

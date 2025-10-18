@@ -97,19 +97,56 @@ class BuildAnalyzer:
         
         logger.debug(f"Player {player.character_name}: {build_slug} (DPS: {player.dps:,})")
     
+    def _normalize_set_name(self, set_name: str) -> str:
+        """
+        Normalize set name for counting purposes.
+        Treats 'Perfected {set name}' and '{set name}' as the same set.
+        Returns the normalized name for counting and the original name for display.
+        """
+        if not set_name:
+            return set_name
+        
+        # Remove 'Perfected ' prefix for counting purposes
+        if set_name.startswith('Perfected '):
+            return set_name[10:]  # Remove 'Perfected ' prefix
+        return set_name
+    
+    def _get_preferred_set_name(self, set_names: List[str]) -> str:
+        """
+        Get the preferred set name for display.
+        Prefers 'Perfected {set name}' over '{set name}' when both exist.
+        """
+        if not set_names:
+            return ""
+        
+        # Check if any set name has 'Perfected' prefix
+        perfected_names = [name for name in set_names if name.startswith('Perfected ')]
+        if perfected_names:
+            return perfected_names[0]  # Return first perfected name
+        
+        # Otherwise return the first name
+        return set_names[0]
+    
     def _analyze_gear_sets(self, player: PlayerBuild) -> None:
         """Analyze gear to determine set counts per bar."""
-        # Count sets for each bar
+        # Count sets for each bar (using normalized names for counting)
         bar1_sets = defaultdict(int)
         bar2_sets = defaultdict(int)
         total_sets = defaultdict(int)
         
+        # Track original set names for display purposes
+        set_name_mapping = defaultdict(list)  # normalized_name -> [original_names]
+        
         for gear in player.gear:
             if gear.set_name and gear.set_name.strip():
-                set_name = gear.set_name.strip()
+                original_set_name = gear.set_name.strip()
+                normalized_set_name = self._normalize_set_name(original_set_name)
+                
+                # Track original names for this normalized set
+                set_name_mapping[normalized_set_name].append(original_set_name)
                 
                 # Always add to total count (for "Sets Used" display)
-                total_sets[set_name] += 1
+                total_sets[normalized_set_name] += 1
                 
                 # Skip mythics and arena weapons from bar-specific set counts (they don't contribute to 5-piece bonuses)
                 if self._is_mythic_item(gear.item_name) or self._is_arena_weapon(gear.item_name):
@@ -117,12 +154,12 @@ class BuildAnalyzer:
                 
                 # Add to appropriate bar count
                 if gear.bar == 1:
-                    bar1_sets[set_name] += 1
+                    bar1_sets[normalized_set_name] += 1
                 elif gear.bar == 2:
-                    bar2_sets[set_name] += 1
+                    bar2_sets[normalized_set_name] += 1
                 else:
                     # If bar is not specified, assume bar 1
-                    bar1_sets[set_name] += 1
+                    bar1_sets[normalized_set_name] += 1
         
         # Handle 2H weapons and staves (count as 2 pieces)
         for gear in player.gear:
@@ -130,10 +167,14 @@ class BuildAnalyzer:
                 # Check if it's a 2H weapon or staff
                 if self._is_two_handed_weapon(gear.item_name):
                     if gear.set_name and gear.set_name.strip():
-                        set_name = gear.set_name.strip()
+                        original_set_name = gear.set_name.strip()
+                        normalized_set_name = self._normalize_set_name(original_set_name)
+                        
+                        # Track original names for this normalized set
+                        set_name_mapping[normalized_set_name].append(original_set_name)
                         
                         # Always add to total count (for "Sets Used" display)
-                        total_sets[set_name] += 1
+                        total_sets[normalized_set_name] += 1
                         
                         # Skip arena weapons from bar-specific counts (they don't contribute to 5-piece bonuses)
                         if self._is_arena_weapon(gear.item_name):
@@ -141,15 +182,32 @@ class BuildAnalyzer:
                         
                         # Add extra count for 2H weapons (they count as 2 pieces for set bonuses)
                         if gear.bar == 1 or gear.bar == 0:
-                            bar1_sets[set_name] += 1  # Already counted 1, add 1 more
+                            bar1_sets[normalized_set_name] += 1  # Already counted 1, add 1 more
                         elif gear.bar == 2:
-                            bar2_sets[set_name] += 1
+                            bar2_sets[normalized_set_name] += 1
         
-        player.sets_equipped = dict(total_sets)
-        player.sets_bar1 = dict(bar1_sets)
-        player.sets_bar2 = dict(bar2_sets)
+        # Convert normalized counts back to preferred display names
+        final_total_sets = {}
+        final_bar1_sets = {}
+        final_bar2_sets = {}
         
-        logger.debug(f"Sets for {player.character_name}: {dict(total_sets)}")
+        for normalized_name, count in total_sets.items():
+            preferred_name = self._get_preferred_set_name(set_name_mapping[normalized_name])
+            final_total_sets[preferred_name] = count
+        
+        for normalized_name, count in bar1_sets.items():
+            preferred_name = self._get_preferred_set_name(set_name_mapping[normalized_name])
+            final_bar1_sets[preferred_name] = count
+        
+        for normalized_name, count in bar2_sets.items():
+            preferred_name = self._get_preferred_set_name(set_name_mapping[normalized_name])
+            final_bar2_sets[preferred_name] = count
+        
+        player.sets_equipped = final_total_sets
+        player.sets_bar1 = final_bar1_sets
+        player.sets_bar2 = final_bar2_sets
+        
+        logger.debug(f"Sets for {player.character_name}: {final_total_sets}")
     
     def _is_two_handed_weapon(self, item_name: str) -> bool:
         """Check if an item is a 2H weapon or staff."""

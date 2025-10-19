@@ -78,6 +78,8 @@
                                             <span style="color: #4ecdc4; font-size: 1.2em;">✚</span>
                                         {% elif role == 'tank' %}
                                             <span style="color: #45b7d1; font-size: 1.2em;">🛡️</span>
+                                        {% elif role == 'trash' %}
+                                            <span style="color: #a8edea; font-size: 1.2em;">🗑️</span>
                                         {% endif %}
                                         <span style="color: #fff; font-weight: 600; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ top_build.get_display_name(abbreviated=True) }}</span>
                                         <div style="font-size: 0.8em; color: #a8edea; margin-top: 2px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">

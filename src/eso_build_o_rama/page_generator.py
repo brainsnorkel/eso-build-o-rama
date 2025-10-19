@@ -321,7 +321,19 @@ class PageGenerator:
         # Sort roles by order and create boss sections
         for role in sorted(aggregated_builds.keys(), key=lambda r: role_order.get(r, 3)):
             if role in aggregated_builds and aggregated_builds[role]:
+                # Skip the 'trash' role - we'll handle it separately
+                if role == 'trash':
+                    continue
+                    
+                # Add boss builds section
                 bosses[role_display_names[role]] = aggregated_builds[role]
+        
+        # Add consolidated trash builds section at the bottom
+        if 'trash' in aggregated_builds and aggregated_builds['trash']:
+            # Sort trash builds by count (most popular first)
+            trash_builds = aggregated_builds['trash']
+            trash_builds.sort(key=lambda x: x.count, reverse=True)
+            bosses["Top Trash Builds"] = trash_builds[:10]  # Top 10 trash builds
         
         # Load template
         template = self.env.get_template('trial.html')

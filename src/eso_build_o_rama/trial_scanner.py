@@ -423,6 +423,41 @@ class TrialScanner:
                                 except Exception as e:
                                     logger.error(f"Error processing {boss_name} (fight {best_fight['id']}) in report {report_code}: {e}")
                                     continue
+                        
+                        # Step 2c: Process trash fights from this report
+                        logger.info(f"Processing trash fights from report {report_code}")
+                        trash_fights = self._get_trash_fights(full_report, trial_name)
+                        
+                        if trash_fights:
+                            logger.info(f"Found {len(trash_fights)} trash fights in report {report_code}")
+                            
+                            # Select representative trash fights (median and longest)
+                            selected_trash_fights = self._select_representative_trash_fights(trash_fights)
+                            
+                            # Process each selected trash fight with boss_name="Trash Builds"
+                            for trash_fight in selected_trash_fights:
+                                try:
+                                    # Process this trash fight (skip name validation)
+                                    trial_report = await self._process_single_fight(
+                                        full_report,
+                                        report_code,
+                                        trash_fight['id'],
+                                        trial_name,
+                                        None  # Skip name validation for trash fights
+                                    )
+                                    if trial_report:
+                                        # Override boss name to consolidate all trash
+                                        trial_report.boss_name = "Trash Builds"
+                                        # Also update boss names of individual builds
+                                        for build in trial_report.common_builds:
+                                            build.boss_name = "Trash Builds"
+                                        trial_reports.append(trial_report)
+                                        logger.info(f"✓ Processed trash fight: Trash Builds (duration: {trash_fight['duration']/1000:.1f}s)")
+                                except Exception as e:
+                                    logger.error(f"Error processing trash fight {trash_fight['id']} in report {report_code}: {e}")
+                                    continue
+                        else:
+                            logger.info(f"No trash fights found in report {report_code}")
                                 
                     except Exception as e:
                         logger.error(f"Error processing report {report_code}: {e}")
@@ -560,7 +595,11 @@ class TrialScanner:
             for report in reports:
                 # Get all common builds from this report (not filtered by threshold yet)
                 for build in report.common_builds:
-                    key = (build.trial_name, build.boss_name, build.build_slug)
+                    # For trash builds, consolidate across all fights by using a special key
+                    if build.boss_name == "Trash Builds":
+                        key = (build.trial_name, "Trash Builds", build.build_slug)
+                    else:
+                        key = (build.trial_name, build.boss_name, build.build_slug)
                     build_groups[key].append(build)
         
         # Consolidate builds with the same key
@@ -617,6 +656,19 @@ class TrialScanner:
         
         # Apply fallback mechanism for roles with insufficient representation
         consolidated_builds = await self._apply_role_fallback(all_reports, consolidated_builds)
+        
+        # Filter trash builds to only include DPS
+        filtered_builds = []
+        for build in consolidated_builds:
+            if build.boss_name == "Trash Builds":
+                # Only include DPS builds for trash
+                if build.best_player and build.best_player.role.lower() == 'dps':
+                    filtered_builds.append(build)
+            else:
+                # Include all roles for boss fights
+                filtered_builds.append(build)
+        
+        consolidated_builds = filtered_builds
         
         # Fetch mundus data for publishable builds only (optimized!)
         await self.fetch_mundus_for_builds(consolidated_builds)
@@ -731,6 +783,101 @@ class TrialScanner:
         except Exception as e:
             logger.error(f"Error creating fallback build for {player.character_name}: {e}")
             return None
+    
+    def _get_trash_fights(self, report_data: Dict[str, Any], trial_name: str) -> List[Dict[str, Any]]:
+        """
+        Get trash fights between first and last known boss for the trial.
+        Returns list of fight dicts sorted by duration.
+        """
+        # Skip trials with insignificant/no trash
+        if trial_name in ['Asylum Sanctorium', 'Cloudrest']:
+            return []
+        
+        fights = report_data.get('fights', [])
+        
+        # Load boss order from trial_bosses.json
+        import json
+        import os
+        
+        # Get the path to trial_bosses.json
+        current_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        bosses_file = os.path.join(current_dir, 'data', 'trial_bosses.json')
+        
+        try:
+            with open(bosses_file, 'r') as f:
+                bosses_data = json.load(f)
+                trial_bosses = bosses_data.get('trial_bosses', {}).get(trial_name, [])
+        except (FileNotFoundError, KeyError):
+            logger.warning(f"Could not load boss data for {trial_name}, skipping trash filtering")
+            return []
+        
+        if not trial_bosses:
+            logger.warning(f"No boss data found for {trial_name}, skipping trash filtering")
+            return []
+        
+        # Find first and last boss fight IDs in this report
+        first_boss_name = trial_bosses[0]
+        last_boss_name = trial_bosses[-1]
+        
+        first_boss_fight_id = None
+        last_boss_fight_id = None
+        
+        for fight in fights:
+            fight_name = fight.get('name', '')
+            if fight_name == first_boss_name and fight.get('difficulty'):
+                first_boss_fight_id = fight.get('id')
+            elif fight_name == last_boss_name and fight.get('difficulty'):
+                last_boss_fight_id = fight.get('id')
+        
+        if first_boss_fight_id is None or last_boss_fight_id is None:
+            logger.warning(f"Could not find boss bounds for {trial_name} (first: {first_boss_name}, last: {last_boss_name}), skipping trash filtering")
+            return []
+        
+        # Filter trash fights to only those between first and last boss
+        trash_fights = []
+        for fight in fights:
+            fight_id = fight.get('id')
+            # Trash fights don't have difficulty field and should be kills
+            # AND must be between first and last boss fight IDs
+            if (not fight.get('difficulty') and 
+                fight.get('kill') is not False and
+                first_boss_fight_id <= fight_id <= last_boss_fight_id):
+                duration = fight.get('endTime', 0) - fight.get('startTime', 0)
+                trash_fights.append({
+                    'id': fight_id,
+                    'name': fight.get('name', 'Trash'),
+                    'duration': duration,
+                    'fight': fight
+                })
+        
+        logger.info(f"Found {len(trash_fights)} trash fights between {first_boss_name} and {last_boss_name} for {trial_name}")
+        return sorted(trash_fights, key=lambda x: x['duration'])
+    
+    def _select_representative_trash_fights(
+        self, 
+        trash_fights: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """
+        Select median and longest trash fights for analysis.
+        Returns up to 2 fights (median and longest).
+        """
+        if not trash_fights:
+            return []
+        
+        if len(trash_fights) == 1:
+            return [trash_fights[0]]
+        
+        # Get median (middle fight by duration)
+        median_idx = len(trash_fights) // 2
+        median_fight = trash_fights[median_idx]
+        
+        # Get longest
+        longest_fight = trash_fights[-1]
+        
+        # Return both if different, otherwise just one
+        if median_fight['id'] != longest_fight['id']:
+            return [median_fight, longest_fight]
+        return [median_fight]
     
     async def close(self):
         """Close the API client connection."""

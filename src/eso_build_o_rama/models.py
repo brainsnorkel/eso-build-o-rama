@@ -256,7 +256,14 @@ class CommonBuild:
         
         role = self.best_player.role.lower()
         
-        # Different thresholds based on role
+        # Special threshold for trash builds - same threshold as boss fights
+        if self.boss_name == "Trash Builds":
+            if role in ['tank', 'healer']:
+                return self.count >= 2  # Keep same threshold for tanks/healers
+            else:  # DPS or unknown
+                return self.count >= 5  # Same threshold as boss DPS builds
+        
+        # Different thresholds based on role for boss fights
         # Balanced threshold for tanks/healers - not too restrictive, not too permissive
         if role in ['tank', 'healer']:
             return self.count >= 2

@@ -89,10 +89,72 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Download existing builds.json
+      - name: Download existing builds.json with backup
         run: |
           mkdir -p output
-          curl -s https://esobuild.com/builds.json -o output/builds.json || echo '{"trials": {}}' > output/builds.json
+          
+          # Try to download builds.json with retries and validation
+          echo "Attempting to download existing builds.json..."
+          
+          # First attempt
+          if curl -s --max-time 30 --retry 3 --retry-delay 5 https://esobuild.com/builds.json -o output/builds.json; then
+            echo "✅ Successfully downloaded builds.json"
+            
+            # Validate the downloaded file
+            if python3 -c "
+            import json
+            try:
+                with open('output/builds.json', 'r') as f:
+                    data = json.load(f)
+                if 'trials' in data and isinstance(data['trials'], dict):
+                    trial_count = len(data['trials'])
+                    print(f'✅ Valid builds.json with {trial_count} trials')
+                    exit(0)
+                else:
+                    print('❌ Invalid builds.json structure')
+                    exit(1)
+            except Exception as e:
+                print(f'❌ Invalid JSON: {e}')
+                exit(1)
+            "; then
+              echo "✅ builds.json validation passed"
+            else
+              echo "❌ builds.json validation failed, will use fallback"
+              echo '{"trials": {}}' > output/builds.json
+            fi
+          else
+            echo "❌ Failed to download builds.json, using fallback"
+            echo '{"trials": {}}' > output/builds.json
+          fi
+          
+          # Log the current state
+          echo "Current builds.json state:"
+          python3 -c "
+          import json
+          try:
+              with open('output/builds.json', 'r') as f:
+                  data = json.load(f)
+              trial_count = len(data.get('trials', {}))
+              print(f'Trials in builds.json: {trial_count}')
+              if trial_count > 0:
+                  print('Available trials:', list(data['trials'].keys())[:5])
+          except Exception as e:
+              print(f'Error reading builds.json: {e}')
+          "
+      
+      - name: Create backup of builds.json
+        run: |
+          # Create a timestamped backup of builds.json
+          if [ -f "output/builds.json" ]; then
+            timestamp=$(date -u +"%Y%m%d_%H%M%S")
+            cp output/builds.json "output/builds_backup_${timestamp}.json"
+            echo "✅ Created backup: builds_backup_${timestamp}.json"
+            
+            # Keep only the last 5 backups to avoid storage bloat
+            ls -t output/builds_backup_*.json 2>/dev/null | tail -n +6 | xargs -r rm
+          else
+            echo "⚠️ No builds.json to backup"
+          fi
       
       - name: Run build analysis for trial
         env:
@@ -100,7 +162,25 @@ jobs:
           ESOLOGS_SECRET: ${{ secrets.ESOLOGS_SECRET }}
           SKIP_SOCIAL_PREVIEW_GENERATION: 'true'
         run: |
-          python -m src.eso_build_o_rama.main --trial-id ${{ steps.trial.outputs.trial_id }}
+          # Run the build analysis
+          if python -m src.eso_build_o_rama.main --trial-id ${{ steps.trial.outputs.trial_id }}; then
+            echo "✅ Build analysis completed successfully"
+          else
+            echo "❌ Build analysis failed, attempting recovery..."
+            
+            # Check if we have a backup to restore from
+            latest_backup=$(ls -t output/builds_backup_*.json 2>/dev/null | head -1)
+            if [ -n "$latest_backup" ]; then
+              echo "🔄 Restoring from backup: $latest_backup"
+              cp "$latest_backup" output/builds.json
+              echo "✅ Restored builds.json from backup"
+            else
+              echo "⚠️ No backup available for recovery"
+            fi
+            
+            # Exit with error to fail the workflow
+            exit 1
+          fi
       
       - name: Copy static assets to output
         run: |
@@ -113,6 +193,53 @@ jobs:
           # - Trial backgrounds, banners, etc. are already in output/static/ from repo
           # - The workflow generates fresh (larger) social previews in static/ but we ignore them
           # - This preserves the optimized 167KB files instead of 240KB unoptimized
+      
+      - name: Validate builds.json before deployment
+        run: |
+          echo "Validating builds.json before deployment..."
+          
+          if [ ! -f "output/builds.json" ]; then
+            echo "❌ builds.json not found!"
+            exit 1
+          fi
+          
+          # Validate JSON structure and content
+          if python3 -c "
+          import json
+          try:
+              with open('output/builds.json', 'r') as f:
+                  data = json.load(f)
+              
+              if 'trials' not in data:
+                  print('❌ Missing trials key')
+                  exit(1)
+              
+              if not isinstance(data['trials'], dict):
+                  print('❌ Trials must be a dictionary')
+                  exit(1)
+              
+              trial_count = len(data['trials'])
+              print(f'✅ builds.json validation passed: {trial_count} trials')
+              
+              # Log trial names for debugging
+              if trial_count > 0:
+                  print('Available trials:', list(data['trials'].keys())[:10])
+              else:
+                  print('⚠️ Warning: No trials in builds.json')
+              
+              exit(0)
+          except json.JSONDecodeError as e:
+              print(f'❌ Invalid JSON: {e}')
+              exit(1)
+          except Exception as e:
+              print(f'❌ Validation error: {e}')
+              exit(1)
+          "; then
+            echo "✅ builds.json validation successful"
+          else
+            echo "❌ builds.json validation failed!"
+            exit 1
+          fi
       
       - name: Setup Pages
         uses: actions/configure-pages@v4

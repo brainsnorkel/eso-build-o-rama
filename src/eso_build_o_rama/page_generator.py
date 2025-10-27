@@ -148,15 +148,22 @@ class PageGenerator:
         trial_id_map = {trial['name']: trial['id'] for trial in trial_data['trials']}
         
         # Prepare trial data with top build for each trial
+        # Include ALL trials from trials.json, not just those with builds
+        all_trial_names = set(trial_id_map.keys())
+        trials_with_builds = set(builds_by_trial.keys())
+        
         trials = []
-        for trial_name, bosses in builds_by_trial.items():
-            # Find the highest DPS build across all bosses in this trial (DPS role only)
+        for trial_name in all_trial_names:
+            # Get data for this trial if it exists in builds_by_trial
             all_builds = []
-            for boss_data in bosses.values():
-                if isinstance(boss_data, dict) and 'builds' in boss_data:
-                    all_builds.extend(boss_data['builds'])
-                elif isinstance(boss_data, list):
-                    all_builds.extend(boss_data)
+            if trial_name in builds_by_trial:
+                bosses = builds_by_trial[trial_name]
+                # Find the highest DPS build across all bosses in this trial (DPS role only)
+                for boss_data in bosses.values():
+                    if isinstance(boss_data, dict) and 'builds' in boss_data:
+                        all_builds.extend(boss_data['builds'])
+                    elif isinstance(boss_data, list):
+                        all_builds.extend(boss_data)
             
             # Filter for DPS role builds only (exclude tanks and healers)
             dps_builds = [b for b in all_builds if b.best_player and b.best_player.role == 'dps']
@@ -180,7 +187,7 @@ class PageGenerator:
                 'top_build': top_build,
                 'id': trial_id,
                 'last_updated': last_updated,
-                'has_data': top_build is not None and len(all_builds) > 0,  # Track if trial has any data
+                'has_data': trial_name in trials_with_builds and top_build is not None and len(all_builds) > 0,  # Track if trial has any data
             })
         
         # Sort trials by trial ID in descending order (newest trials first)

@@ -180,6 +180,7 @@ class PageGenerator:
                 'top_build': top_build,
                 'id': trial_id,
                 'last_updated': last_updated,
+                'has_data': top_build is not None and len(all_builds) > 0,  # Track if trial has any data
             })
         
         # Sort trials by trial ID in descending order (newest trials first)

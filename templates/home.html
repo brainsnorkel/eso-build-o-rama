@@ -2,29 +2,29 @@
 
 {% block title %}ESOBuild.com - Elder Scrolls Online Trial Builds & Gear Sets{% if is_develop %} [DEV]{% endif %}{% endblock %}
 
-{% block meta_description %}Discover the best ESO builds from top-performing players. Complete trial builds, gear sets, abilities, and strategies for all Elder Scrolls Online trials based on real ESO Logs data. DPS, tank, and healer builds updated daily.{% endblock %}
+{% block meta_description %}Discover the best ESO builds from top-performing players derived from real log data. Complete trial builds, gear sets, abilities, and strategies for all Elder Scrolls Online trials based on real ESO Logs data. DPS, tank, and healer builds updated daily.{% endblock %}
 
 {% block keywords %}ESO builds, Elder Scrolls Online builds, ESO trial builds, ESO gear sets, ESO meta builds, ESO Logs, ESO PvE builds, ESO DPS builds, ESO tank builds, ESO healer builds, ESO endgame builds, best ESO builds{% endblock %}
 
 {% block canonical_url %}{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/index.html{% else %}https://esobuild.com/index.html{% endif %}{% endblock %}
 
-{% block og_title %}ESOBuild.com - Elder Scrolls Online Trial Builds{% endblock %}
+{% block og_title %}ESOBuild.com - Elder Scrolls Online Trial Builds From Real Log Data{% endblock %}
 
-{% block og_description %}Discover the best ESO builds from top-performing players. Complete trial builds, gear sets, and strategies for all Elder Scrolls Online trials based on real ESO Logs data.{% endblock %}
+{% block og_description %}Discover the best ESO builds from top-performing players derived from real log data. Complete trial builds, gear sets, and strategies for all Elder Scrolls Online trials based on real ESO Logs data.{% endblock %}
 
-{% block og_image_alt %}ESOBuild.com - Meta Build Explorer for The Elder Scrolls Online{% endblock %}
+{% block og_image_alt %}ESOBuild.com - Meta Build Explorer for The Elder Scrolls Online from real log data{% endblock %}
 
-{% block twitter_title %}ESOBuild.com - ESO Trial Builds{% endblock %}
+{% block twitter_title %}ESOBuild.com - ESO Trial Builds from real log data{% endblock %}
 
-{% block twitter_description %}Best ESO builds from top players. Trial builds, gear sets, and strategies for all Elder Scrolls Online trials.{% endblock %}
+{% block twitter_description %}Best ESO builds from top players derived from real log data. Trial builds, gear sets, and strategies for all Elder Scrolls Online trials.{% endblock %}
 
-{% block twitter_image_alt %}ESOBuild.com - Meta Build Explorer for The Elder Scrolls Online{% endblock %}
+{% block twitter_image_alt %}ESOBuild.com - Meta Build Explorer for The Elder Scrolls Online from real log data{% endblock %}
 
 {% block content %}
 <div class="card">
     <h2>Top Builds for Elder Scrolls Online Trials</h2>
     <p style="margin-bottom: 20px; color: #a8edea;">
-        Select a trial to view boss-specific builds selected from top-scoring reports
+        Select a trial to view boss-specific builds selected from top-scoring log reports
     </p>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
@@ -135,7 +135,7 @@
                     </div>
                 
                     <!-- Content section -->
-                    {% if trial.top_build %}
+                    {% if trial.has_data %}
                     <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
                         <div>
                             <div style="font-size: 0.9em; color: #a8edea; margin-bottom: 5px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">Top Performing Build:</div>
@@ -155,6 +155,16 @@
                                 <span style="color: #38ef7d; font-weight: 600; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">{{ trial.top_build.best_player.get_primary_metric()|format_metric }} {{ trial.top_build.best_player.get_primary_metric_name() }}</span>
                             </div>
                             <div style="color: #a8edea; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); font-size: 0.95em;">{{ trial.top_build.best_player.character_name }}</div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <!-- No data message -->
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
+                        <div style="text-align: center; color: rgba(168, 237, 234, 0.6); font-style: italic; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">
+                            No leaderboard data (yet)
+                        </div>
+                        <div style="text-align: center; color: rgba(168, 237, 234, 0.4); font-size: 0.85em; margin-top: 5px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">
+                            Check back soon
                         </div>
                     </div>
                     {% endif %}

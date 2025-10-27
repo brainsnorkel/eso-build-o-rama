@@ -102,21 +102,21 @@ jobs:
             
             # Validate the downloaded file
             if python3 -c "
-            import json
-            try:
-                with open('output/builds.json', 'r') as f:
-                    data = json.load(f)
-                if 'trials' in data and isinstance(data['trials'], dict):
-                    trial_count = len(data['trials'])
-                    print(f'✅ Valid builds.json with {trial_count} trials')
-                    exit(0)
-                else:
-                    print('❌ Invalid builds.json structure')
-                    exit(1)
-            except Exception as e:
-                print(f'❌ Invalid JSON: {e}')
-                exit(1)
-            "; then
+import json
+try:
+    with open('output/builds.json', 'r') as f:
+        data = json.load(f)
+    if 'trials' in data and isinstance(data['trials'], dict):
+        trial_count = len(data['trials'])
+        print(f'✅ Valid builds.json with {trial_count} trials')
+        exit(0)
+    else:
+        print('❌ Invalid builds.json structure')
+        exit(1)
+except Exception as e:
+    print(f'❌ Invalid JSON: {e}')
+    exit(1)
+"; then
               echo "✅ builds.json validation passed"
             else
               echo "❌ builds.json validation failed, will use fallback"
@@ -130,17 +130,17 @@ jobs:
           # Log the current state
           echo "Current builds.json state:"
           python3 -c "
-          import json
-          try:
-              with open('output/builds.json', 'r') as f:
-                  data = json.load(f)
-              trial_count = len(data.get('trials', {}))
-              print(f'Trials in builds.json: {trial_count}')
-              if trial_count > 0:
-                  print('Available trials:', list(data['trials'].keys())[:5])
-          except Exception as e:
-              print(f'Error reading builds.json: {e}')
-          "
+import json
+try:
+    with open('output/builds.json', 'r') as f:
+        data = json.load(f)
+    trial_count = len(data.get('trials', {}))
+    print(f'Trials in builds.json: {trial_count}')
+    if trial_count > 0:
+        print('Available trials:', list(data['trials'].keys())[:5])
+except Exception as e:
+    print(f'Error reading builds.json: {e}')
+"
       
       - name: Create backup of builds.json
         run: |

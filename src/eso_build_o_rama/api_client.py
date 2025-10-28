@@ -254,11 +254,113 @@ class ESOLogsAPIClient:
                         }
                     })
             
-            logger.info(f"Found {len(top_reports)} top-ranked reports")
+            logger.info(f"Found {len(top_reports)} top-ranked reports from fightRankings")
+
+            # Hybrid approach: If no fight rankings, try character rankings
+            if not top_reports:
+                logger.info("No fight rankings found, trying character rankings (individual player data)...")
+                character_reports = await self._get_character_rankings(encounter_id, limit)
+                if character_reports:
+                    logger.info(f"Found {len(character_reports)} reports from characterRankings")
+                    return character_reports
+
             return top_reports
-            
+
         except Exception as e:
             logger.error(f"Error fetching fight rankings: {e}")
+            return []
+
+    async def _get_character_rankings(self, encounter_id: int, limit: int = 12) -> List[Dict[str, Any]]:
+        """
+        Get reports from character rankings (individual player performance).
+
+        This is a fallback method when fightRankings returns no data.
+        It queries for top DPS players and extracts unique report codes.
+
+        Args:
+            encounter_id: Encounter/boss ID
+            limit: Maximum number of unique reports to return
+
+        Returns:
+            List of unique report dictionaries
+        """
+        try:
+            query_character_rankings = '''
+            query GetCharacterRankings($encounterID: Int!, $metric: CharacterRankingMetricType!) {
+              worldData {
+                encounter(id: $encounterID) {
+                  characterRankings(
+                    metric: $metric
+                  )
+                }
+              }
+            }
+            '''
+
+            result = await self._retry_on_rate_limit(
+                self.client.execute,
+                query=query_character_rankings,
+                variables={
+                    "encounterID": encounter_id,
+                    "metric": "dps"
+                }
+            )
+
+            if result.status_code != 200:
+                logger.error(f"Character rankings request failed with status {result.status_code}")
+                return []
+
+            data = result.json()
+
+            if 'errors' in data:
+                logger.error(f"GraphQL errors in character rankings: {data['errors']}")
+                return []
+
+            char_rankings = data['data']['worldData']['encounter']['characterRankings']
+
+            if isinstance(char_rankings, dict):
+                rankings = char_rankings.get('rankings', [])
+            elif isinstance(char_rankings, list):
+                rankings = char_rankings
+            else:
+                logger.error(f"Unexpected characterRankings format: {type(char_rankings)}")
+                return []
+
+            # Extract unique report codes (avoid duplicates)
+            seen_codes = set()
+            unique_reports = []
+
+            for ranking in rankings:
+                report = ranking.get('report', {})
+                code = report.get('code')
+
+                # Skip if no code or already seen
+                if not code or code in seen_codes:
+                    continue
+
+                seen_codes.add(code)
+
+                unique_reports.append({
+                    "code": code,
+                    "fightID": report.get('fightID', 1),
+                    "startTime": report.get('startTime', 0),
+                    "duration": 0,  # Not available in character rankings
+                    "score": 0,  # Not available in character rankings
+                    "guild": {},  # Not available in character rankings
+                    "server": {},  # Not available in character rankings
+                    "composition": {},  # Not available in character rankings
+                    "source": "characterRankings"  # Mark the source
+                })
+
+                # Stop when we have enough unique reports
+                if len(unique_reports) >= limit:
+                    break
+
+            logger.info(f"Extracted {len(unique_reports)} unique reports from {len(rankings)} player rankings")
+            return unique_reports
+
+        except Exception as e:
+            logger.error(f"Error fetching character rankings: {e}")
             return []
     
     async def get_report(self, report_code: str) -> Dict[str, Any]:

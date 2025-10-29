@@ -124,11 +124,27 @@ class ESOBuildORM:
                 trials_metadata = self.data_store.get_trials_metadata()
                 
                 if all_saved_builds:
+                    # Generate aggregated builds for TL;DR page and home page card
+                    logger.info("Generating aggregated builds for TL;DR summary...")
+                    from .build_analyzer import BuildAnalyzer
+                    build_analyzer = BuildAnalyzer()
+                    aggregated_builds = build_analyzer.aggregate_builds_across_trials(all_saved_builds)
+                    
+                    # Generate TL;DR summary page
+                    tldr_path = self.page_generator.generate_tldr_summary_page(aggregated_builds, self.get_version())
+                    logger.info(f"Generated TL;DR summary: {tldr_path}")
+                    
+                    # Generate aggregated build pages
+                    for role, builds in aggregated_builds.items():
+                        for build in builds:
+                            self.page_generator.generate_aggregated_build_page(build, "unknown", self.get_version())
+                    
                     generated_files = self.page_generator.generate_all_pages(
                         all_saved_builds,
                         "unknown",
                         trials_metadata,
-                        self.get_version()
+                        self.get_version(),
+                        aggregated_builds
                     )
                     logger.info(f"Generated {len(generated_files)} HTML files from existing data")
                 else:

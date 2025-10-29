@@ -645,12 +645,14 @@ class TrialScanner:
                 fight_end_time=first_build.fight_end_time
             )
             
-            # Only include if meets role-based threshold
-            if consolidated.meets_threshold():
-                consolidated_builds.append(consolidated)
+            # Add all consolidated builds (we'll filter by threshold later with DPS fallback)
+            consolidated_builds.append(consolidated)
         
         # Sort by count (most popular first)
         consolidated_builds.sort(key=lambda x: x.count, reverse=True)
+        
+        # Apply threshold filtering with DPS fallback logic
+        consolidated_builds = self._apply_threshold_with_dps_fallback(consolidated_builds)
         
         logger.info(f"Found {len(consolidated_builds)} publishable builds after consolidation")
         
@@ -674,6 +676,64 @@ class TrialScanner:
         await self.fetch_mundus_for_builds(consolidated_builds)
         
         return consolidated_builds
+    
+    def _apply_threshold_with_dps_fallback(self, builds: List[CommonBuild]) -> List[CommonBuild]:
+        """
+        Apply threshold filtering with DPS fallback logic.
+        
+        For DPS builds: If no builds meet the 5+ threshold for a trial/boss,
+        include all builds with the highest occurrence count available.
+        
+        For tank/healer builds: Keep standard threshold (2+ occurrences).
+        """
+        from collections import defaultdict
+        
+        # Group builds by (trial_name, boss_name) to apply logic per fight
+        builds_by_fight = defaultdict(list)
+        for build in builds:
+            key = (build.trial_name, build.boss_name)
+            builds_by_fight[key].append(build)
+        
+        publishable_builds = []
+        
+        for (trial_name, boss_name), fight_builds in builds_by_fight.items():
+            # Separate builds by role
+            dps_builds = []
+            other_builds = []
+            
+            for build in fight_builds:
+                if not build.best_player:
+                    continue
+                    
+                role = build.best_player.role.lower()
+                if role == 'dps':
+                    dps_builds.append(build)
+                else:  # tank, healer, or unknown
+                    other_builds.append(build)
+            
+            # Process DPS builds with fallback logic
+            if dps_builds:
+                # Check if any DPS builds meet the 5+ threshold
+                threshold_meeting_dps = [b for b in dps_builds if b.count >= 5]
+                
+                if threshold_meeting_dps:
+                    # Include all builds that meet threshold
+                    publishable_builds.extend(threshold_meeting_dps)
+                    logger.debug(f"{trial_name} - {boss_name}: Found {len(threshold_meeting_dps)} DPS builds meeting 5+ threshold")
+                else:
+                    # No builds meet threshold - find max occurrence count and include all with that count
+                    max_count = max((b.count for b in dps_builds), default=0)
+                    if max_count > 0:
+                        max_count_builds = [b for b in dps_builds if b.count == max_count]
+                        publishable_builds.extend(max_count_builds)
+                        logger.info(f"{trial_name} - {boss_name}: No DPS builds meet 5+ threshold, using {len(max_count_builds)} build(s) with max occurrence count ({max_count})")
+            
+            # Process other builds (tank/healer) with standard threshold
+            for build in other_builds:
+                if build.meets_threshold():
+                    publishable_builds.append(build)
+        
+        return publishable_builds
     
     async def _apply_role_fallback(
         self,

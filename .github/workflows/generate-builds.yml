@@ -2,10 +2,10 @@ name: Generate ESO Builds (Staggered)
 
 on:
   schedule:
-    # Every hour, cycling through all 14 trials sequentially
-    # AA at 20:00 UTC, HRC at 21:00 UTC, SO at 22:00 UTC, etc.
-    # Each trial gets updated every 14 hours (14 trials × 1 hour)
-    - cron: '0 * * * *'  # Every hour at :00
+    # Every 30 minutes, cycling through all 14 trials sequentially
+    # AA at 20:00 UTC, HRC at 20:30 UTC, SO at 21:00 UTC, etc.
+    # Each trial gets updated every 7 hours (14 trials × 30 minutes)
+    - cron: '0,30 * * * *'  # Every 30 minutes at :00 and :30
   workflow_dispatch:
     inputs:
       trial_id:
@@ -35,10 +35,11 @@ jobs:
             echo "trial_id=${{ inputs.trial_id }}" >> $GITHUB_OUTPUT
           else
             # Sequential trial scheduling: AA, HRC, SO, MoL, HoF, AS, CR, SS, KA, RG, DSR, SE, LC, OC
-            # Each trial runs every 14 hours (one trial per hour)
+            # Each trial runs every 7 hours (one trial every 30 minutes)
             # Starting reference: 20:00 UTC for AA
             
             CURRENT_HOUR=$(date -u +%H | sed 's/^0*//' || echo "0")
+            CURRENT_MIN=$(date -u +%M | sed 's/^0*//' || echo "0")
             
             # Hours since 20:00 UTC reference
             REFERENCE_HOUR=20
@@ -49,8 +50,16 @@ jobs:
               HOURS_SINCE_REFERENCE=$((HOURS_SINCE_REFERENCE + 24))
             fi
             
-            # Trial index = hours since reference % 14
-            TRIAL_INDEX=$(( HOURS_SINCE_REFERENCE % 14 ))
+            # Compute half-hour slot: 0 for :00-:29, 1 for :30-:59
+            HALFHOUR=0
+            if [ $CURRENT_MIN -ge 30 ]; then
+              HALFHOUR=1
+            fi
+            
+            # Trial index advances every 30 minutes
+            # total_slots = hours*2 + halfhour
+            TOTAL_SLOTS=$(( HOURS_SINCE_REFERENCE * 2 + HALFHOUR ))
+            TRIAL_INDEX=$(( TOTAL_SLOTS % 14 ))
             
             # Map trial index to actual trial IDs
             case $TRIAL_INDEX in
@@ -73,6 +82,8 @@ jobs:
             
             echo "Current time: $(date -u '+%Y-%m-%d %H:%M') UTC"
             echo "Hours since 20:00 UTC reference: $HOURS_SINCE_REFERENCE"
+            echo "Half-hour slot: $HALFHOUR"
+            echo "Total slots since reference: $TOTAL_SLOTS"
             echo "Trial index: $TRIAL_INDEX"
           fi
       

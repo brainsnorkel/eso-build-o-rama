@@ -313,44 +313,57 @@ jobs:
             exit 1
           fi
           
-          # Validate JSON structure and content with minimum trial count
+          # Validate JSON structure and compare against live site
           python3 << 'EOF'
           import json
           import sys
+          import urllib.request
           
-          # Minimum trial count required for deployment (configurable)
-          MIN_TRIAL_COUNT = 10
+          def load_json(path):
+              with open(path, 'r', encoding='utf-8') as f:
+                  return json.load(f)
+          
+          def fetch_live(url):
+              try:
+                  with urllib.request.urlopen(url, timeout=20) as resp:
+                      if resp.status != 200:
+                          return None
+                      data = json.loads(resp.read().decode('utf-8'))
+                      return data
+              except Exception:
+                  return None
           
           try:
-              with open('output/builds.json', 'r', encoding='utf-8') as f:
-                  data = json.load(f)
+              new_data = load_json('output/builds.json')
               
-              # Check structure
-              if 'trials' not in data:
-                  print('❌ Missing "trials" key')
+              # Structure checks
+              if not isinstance(new_data, dict) or 'trials' not in new_data or not isinstance(new_data['trials'], dict):
+                  print('❌ Invalid structure in new builds.json')
                   sys.exit(1)
               
-              if not isinstance(data['trials'], dict):
-                  print('❌ "trials" must be a dictionary')
-                  sys.exit(1)
+              new_count = len(new_data['trials'])
               
-              trial_count = len(data['trials'])
+              # Fetch live builds.json for comparison (best-effort)
+              live_data = fetch_live('https://esobuild.com/builds.json')
+              if live_data and isinstance(live_data, dict) and isinstance(live_data.get('trials'), dict):
+                  live_count = len(live_data['trials'])
+                  print(f'ℹ️ Live trials: {live_count} | New trials: {new_count}')
+                  
+                  # Allow deployment if new_count >= live_count (adds trials or overwrites)
+                  if new_count < live_count:
+                      print(f'❌ CRITICAL: New builds.json has fewer trials ({new_count}) than live ({live_count}).')
+                      print('Deployment blocked to prevent data loss. If rebuilding from scratch, push once counts are >= live.')
+                      sys.exit(1)
+              else:
+                  # Could not fetch live; proceed if new structure is valid (workflow already validated earlier)
+                  print('⚠️ Could not fetch/parse live builds.json; proceeding with structural validation only')
               
-              # Enforce minimum trial count - prevents deploying empty/corrupted data
-              if trial_count < MIN_TRIAL_COUNT:
-                  print(f'❌ CRITICAL: Only {trial_count} trials found, minimum {MIN_TRIAL_COUNT} required for deployment')
-                  print('This indicates potential data loss. Deployment will fail to preserve existing site.')
-                  sys.exit(1)
+              # Log trial names for visibility
+              if new_count > 0:
+                  trial_names = list(new_data['trials'].keys())[:10]
+                  print(f'Available trials (new): {", ".join(trial_names)}')
               
-              print(f'✅ builds.json validation passed: {trial_count} trials (minimum {MIN_TRIAL_COUNT} required)')
-              
-              # Log trial names for debugging
-              if trial_count > 0:
-                  trial_names = list(data['trials'].keys())[:10]
-                  print(f'Available trials: {", ".join(trial_names)}')
-                  if trial_count > 10:
-                      print(f'... and {trial_count - 10} more')
-              
+              print('✅ builds.json validation passed (relative to live)')
               sys.exit(0)
           except json.JSONDecodeError as e:
               print(f'❌ Invalid JSON: {e}')

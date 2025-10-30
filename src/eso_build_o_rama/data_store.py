@@ -13,6 +13,11 @@ from .models import CommonBuild, PlayerBuild
 logger = logging.getLogger(__name__)
 
 
+class CorruptedBuildsFileError(Exception):
+    """Raised when builds.json file is corrupted or invalid."""
+    pass
+
+
 class DataStore:
     """Handles persistence of trial build data to JSON file."""
     
@@ -32,6 +37,9 @@ class DataStore:
         
         Returns:
             Dictionary with trial data structure or empty structure if file doesn't exist
+            
+        Raises:
+            CorruptedBuildsFileError: If the file exists but is corrupted or invalid JSON
         """
         if not self.builds_file.exists():
             logger.info(f"Builds file doesn't exist, creating empty structure: {self.builds_file}")
@@ -43,20 +51,79 @@ class DataStore:
         try:
             with open(self.builds_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                logger.info(f"Loaded builds data from {self.builds_file}")
-                return data
-        except (json.JSONDecodeError, IOError) as e:
-            logger.warning(f"Error loading builds file {self.builds_file}: {e}")
-            return {
-                "trials": {},
-                "last_full_update": None
-            }
+            
+            # Validate structure
+            if not isinstance(data, dict):
+                raise CorruptedBuildsFileError(
+                    f"Builds file {self.builds_file} contains invalid root structure (expected dict)"
+                )
+            
+            if 'trials' not in data:
+                raise CorruptedBuildsFileError(
+                    f"Builds file {self.builds_file} is missing 'trials' key"
+                )
+            
+            if not isinstance(data.get('trials'), dict):
+                raise CorruptedBuildsFileError(
+                    f"Builds file {self.builds_file} has invalid 'trials' structure (expected dict)"
+                )
+            
+            logger.info(f"Loaded builds data from {self.builds_file}: {len(data.get('trials', {}))} trials")
+            return data
+            
+        except json.JSONDecodeError as e:
+            logger.error(f"JSON decode error in builds file {self.builds_file}: {e}")
+            raise CorruptedBuildsFileError(
+                f"Builds file {self.builds_file} contains invalid JSON: {e}"
+            ) from e
+        except IOError as e:
+            logger.error(f"IO error reading builds file {self.builds_file}: {e}")
+            raise CorruptedBuildsFileError(
+                f"Error reading builds file {self.builds_file}: {e}"
+            ) from e
+    
+    def load_from_backup(self, backup_path: Optional[Path] = None) -> Dict[str, Any]:
+        """
+        Load builds data from a backup file.
+        
+        Args:
+            backup_path: Optional path to backup file. If None, tries to find latest backup.
+            
+        Returns:
+            Dictionary with trial data structure
+            
+        Raises:
+            CorruptedBuildsFileError: If backup file is corrupted or invalid
+            FileNotFoundError: If no backup file found
+        """
+        if backup_path is None:
+            # Try to find latest backup in same directory
+            backup_dir = self.builds_file.parent
+            backup_files = sorted(backup_dir.glob("builds_backup_*.json"), reverse=True)
+            if not backup_files:
+                raise FileNotFoundError(f"No backup files found in {backup_dir}")
+            backup_path = backup_files[0]
+            logger.info(f"Found latest backup: {backup_path}")
+        
+        if not backup_path.exists():
+            raise FileNotFoundError(f"Backup file not found: {backup_path}")
+        
+        # Temporarily swap builds_file to use backup, then restore
+        original_file = self.builds_file
+        self.builds_file = backup_path
+        try:
+            data = self.load_builds_data()
+            logger.info(f"Successfully loaded from backup: {backup_path}")
+            return data
+        finally:
+            self.builds_file = original_file
     
     def save_trial_builds(
         self, 
         trial_name: str, 
         builds: List[CommonBuild], 
-        update_version: str
+        update_version: str,
+        fallback_to_backup: bool = True
     ) -> None:
         """
         Save builds for a specific trial, updating the JSON file.
@@ -65,9 +132,28 @@ class DataStore:
             trial_name: Name of the trial
             builds: List of CommonBuild objects to save
             update_version: Game update version (e.g., 'U48')
+            fallback_to_backup: If True, attempt to load from backup if primary file is corrupted
+            
+        Raises:
+            CorruptedBuildsFileError: If primary file is corrupted and fallback fails or is disabled
         """
-        # Load existing data
-        data = self.load_builds_data()
+        # Load existing data, with optional fallback to backup
+        try:
+            data = self.load_builds_data()
+        except CorruptedBuildsFileError as e:
+            if fallback_to_backup:
+                logger.warning(f"Primary builds file corrupted: {e}")
+                logger.info("Attempting to load from backup...")
+                try:
+                    data = self.load_from_backup()
+                    logger.info("Successfully loaded from backup, continuing with save")
+                except (FileNotFoundError, CorruptedBuildsFileError) as backup_error:
+                    logger.error(f"Backup restore also failed: {backup_error}")
+                    raise CorruptedBuildsFileError(
+                        f"Both primary file and backup are corrupted. Primary: {e}, Backup: {backup_error}"
+                    ) from backup_error
+            else:
+                raise
         
         # Serialize builds
         serialized_builds = [self._serialize_build(build) for build in builds]

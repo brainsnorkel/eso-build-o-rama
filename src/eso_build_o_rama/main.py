@@ -87,6 +87,15 @@ class ESOBuildORM:
         logger.info("ESO Build-O-Rama - Starting scan")
         logger.info("="*60)
         
+        # Query API usage at start of run
+        initial_rate_limit_data = None
+        try:
+            initial_rate_limit_data = await self.scanner.api_client.get_rate_limit_data()
+            if initial_rate_limit_data:
+                logger.info(f"Initial API usage: {initial_rate_limit_data['pointsSpentThisHour']:.1f} points used this hour (limit: {initial_rate_limit_data['limitPerHour']})")
+        except Exception as e:
+            logger.warning(f"Could not get initial API usage data: {e}")
+        
         try:
             # Generate social media preview images first
             # Skip in CI to use pre-optimized versions from repo
@@ -276,6 +285,9 @@ class ESOBuildORM:
             
             # Print summary
             self._print_summary(publishable_builds, generated_files)
+            
+            # Log API usage summary
+            await self._log_api_usage_summary(initial_rate_limit_data)
             
             # Log cache performance
             
@@ -467,6 +479,69 @@ class ESOBuildORM:
         logger.info(f"\nGenerated Files:")
         logger.info(f"  Index: {generated_files.get('index', 'N/A')}")
         logger.info(f"  Build pages: {len(generated_files) - 1}")
+    
+    async def _log_api_usage_summary(self, initial_rate_limit_data: Optional[Dict[str, Any]]):
+        """
+        Log comprehensive API usage summary at end of run.
+        
+        Args:
+            initial_rate_limit_data: Rate limit data from start of run, or None
+        """
+        logger.info("\n" + "-"*60)
+        logger.info("API USAGE SUMMARY")
+        logger.info("-"*60)
+        
+        try:
+            final_rate_limit_data = await self.scanner.api_client.get_rate_limit_data()
+            
+            if not final_rate_limit_data:
+                logger.warning("Could not get final API usage data")
+                return
+            
+            if not initial_rate_limit_data:
+                # Only show final data if we don't have initial data
+                limit = final_rate_limit_data['limitPerHour']
+                used = final_rate_limit_data['pointsSpentThisHour']
+                remaining = limit - used
+                reset_in = final_rate_limit_data['pointsResetIn']
+                
+                logger.info(f"Current API Usage:")
+                logger.info(f"  Points used this hour: {used:.1f} / {limit}")
+                logger.info(f"  Points remaining: {remaining:.1f}")
+                logger.info(f"  Usage percentage: {(used / limit * 100):.1f}%")
+                logger.info(f"  Resets in: {reset_in // 60} minutes {reset_in % 60} seconds")
+                return
+            
+            # Calculate points used during this run
+            initial_points = initial_rate_limit_data['pointsSpentThisHour']
+            final_points = final_rate_limit_data['pointsSpentThisHour']
+            points_used = final_points - initial_points
+            
+            limit = final_rate_limit_data['limitPerHour']
+            remaining = limit - final_points
+            reset_in = final_rate_limit_data['pointsResetIn']
+            usage_percent = (final_points / limit * 100)
+            
+            logger.info(f"Points used this run: {points_used:.1f}")
+            logger.info(f"Current hourly usage: {final_points:.1f} / {limit} ({(usage_percent):.1f}%)")
+            logger.info(f"Points remaining: {remaining:.1f}")
+            logger.info(f"Resets in: {reset_in // 60} minutes {reset_in % 60} seconds")
+            
+            # Recommendation on 30-minute interval feasibility
+            # For 30-minute intervals to be safe, we need to use less than 9,000 points per run
+            # (half of 18,000 limit to account for rolling window)
+            if points_used < 9000:
+                recommendation = "Feasible"
+                logger.info(f"Recommendation: {recommendation} for 30-minute intervals")
+            elif points_used < 12000:
+                recommendation = "Marginally feasible (monitor closely)"
+                logger.info(f"Recommendation: {recommendation} - Current usage ({points_used:.1f}) is close to 9,000 point threshold")
+            else:
+                recommendation = "Not recommended"
+                logger.warning(f"Recommendation: {recommendation} - Current usage ({points_used:.1f}) exceeds safe threshold of 9,000 points for 30-minute intervals")
+            
+        except Exception as e:
+            logger.warning(f"Error getting API usage summary: {e}")
 
 
 async def main():

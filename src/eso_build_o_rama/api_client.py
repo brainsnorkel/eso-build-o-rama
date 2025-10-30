@@ -22,7 +22,7 @@ class ESOLogsAPIClient:
     """Client for interacting with ESO Logs API."""
     
     # Constants for rate limiting
-    DEFAULT_MIN_REQUEST_DELAY = 2.0  # Default minimum delay between requests in seconds
+    DEFAULT_MIN_REQUEST_DELAY = 0.5  # Default minimum delay between requests in seconds
     DEFAULT_MAX_RETRIES = 3  # Default maximum number of retries
     DEFAULT_RETRY_DELAY = 120.0  # Default retry delay in seconds
     RATE_LIMIT_HTTP_STATUS = 429  # HTTP status code for rate limiting
@@ -567,16 +567,21 @@ class ESOLogsAPIClient:
         
         # Use sourceID to filter Buffs table to this specific player
         try:
+            # Ensure time parameters are integers (ms) as expected by API
+            start_ms = int(start_time) if start_time is not None else None
+            end_ms = int(end_time) if end_time is not None else None
+
             if source_id:
                 # Query Buffs filtered by source ID
                 result = await self._retry_on_rate_limit(
                     self.client.get_report_table,
                     code=report_code,
-                    start_time=start_time,
-                    end_time=end_time,
+                    start_time=start_ms,
+                    end_time=end_ms,
                     data_type="Buffs",
                     hostility_type="Friendlies",
-                    source_id=source_id  # Filter by this player's source ID
+                    source_id=source_id,  # Filter by this player's source ID
+                    fight_ids=fight_ids if fight_ids else None
                 )
             else:
                 # Fallback: get all buffs (less accurate)
@@ -584,10 +589,11 @@ class ESOLogsAPIClient:
                 result = await self._retry_on_rate_limit(
                     self.client.get_report_table,
                     code=report_code,
-                    start_time=start_time,
-                    end_time=end_time,
+                    start_time=start_ms,
+                    end_time=end_ms,
                     data_type="Buffs",
-                    hostility_type="Friendlies"
+                    hostility_type="Friendlies",
+                    fight_ids=fight_ids if fight_ids else None
                 )
             
             # Parse Buffs table to find mundus (100% uptime buffs matching mundus IDs)
@@ -623,6 +629,60 @@ class ESOLogsAPIClient:
             
         except Exception as e:
             logger.warning(f"Failed to get buffs for {player_name}: {e}")
+            return None
+    
+    async def get_rate_limit_data(self) -> Optional[Dict[str, Any]]:
+        """
+        Get current rate limit usage data from ESO Logs API.
+        
+        Returns:
+            Dictionary with rate limit data:
+            - limitPerHour: Total points available per hour (typically 18000)
+            - pointsSpentThisHour: Points spent in current rolling hour window
+            - pointsResetIn: Seconds until the hourly window resets
+            Returns None if query fails
+        """
+        query = """
+        query {
+          rateLimitData {
+            limitPerHour
+            pointsSpentThisHour
+            pointsResetIn
+          }
+        }
+        """
+        
+        try:
+            result = await self._retry_on_rate_limit(
+                self.client.execute,
+                query=query,
+                variables={}
+            )
+            
+            if result.status_code != 200:
+                logger.warning(f"Rate limit data query failed with status {result.status_code}")
+                return None
+            
+            data = result.json()
+            
+            if 'errors' in data:
+                logger.warning(f"GraphQL errors in rate limit query: {data['errors']}")
+                return None
+            
+            rate_limit_data = data.get('data', {}).get('rateLimitData')
+            
+            if not rate_limit_data:
+                logger.warning("No rate limit data in response")
+                return None
+            
+            return {
+                'limitPerHour': rate_limit_data.get('limitPerHour'),
+                'pointsSpentThisHour': rate_limit_data.get('pointsSpentThisHour'),
+                'pointsResetIn': rate_limit_data.get('pointsResetIn')
+            }
+            
+        except Exception as e:
+            logger.warning(f"Failed to get rate limit data: {e}")
             return None
     
     async def close(self):

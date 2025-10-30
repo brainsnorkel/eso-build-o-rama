@@ -89,7 +89,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Download existing builds.json with backup
+      - name: Download existing builds.json
+        id: download_builds
         run: |
           mkdir -p output
           
@@ -98,14 +99,161 @@ jobs:
           
           if curl -s --max-time 30 --retry 3 --retry-delay 5 https://esobuild.com/builds.json -o output/builds.json; then
             echo "✅ Successfully downloaded builds.json"
+            echo "download_success=true" >> $GITHUB_OUTPUT
           else
-            echo "❌ Failed to download builds.json, using fallback"
-            echo '{"trials": {}}' > output/builds.json
+            echo "❌ Failed to download builds.json"
+            echo "download_success=false" >> $GITHUB_OUTPUT
           fi
+      
+      - name: Validate downloaded builds.json
+        id: validate_download
+        run: |
+          if [ "${{ steps.download_builds.outputs.download_success }}" != "true" ]; then
+            echo "⚠️ Download failed, skipping validation"
+            echo "is_valid=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          if [ ! -f "output/builds.json" ]; then
+            echo "❌ builds.json file not found after download"
+            echo "is_valid=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          
+          # Validate JSON structure and content
+          python3 << 'EOF'
+          import json
+          import sys
+          
+          try:
+              with open('output/builds.json', 'r', encoding='utf-8') as f:
+                  data = json.load(f)
+              
+              # Check structure
+              if not isinstance(data, dict):
+                  print('❌ Root must be a dictionary')
+                  sys.exit(1)
+              
+              if 'trials' not in data:
+                  print('❌ Missing "trials" key')
+                  sys.exit(1)
+              
+              if not isinstance(data['trials'], dict):
+                  print('❌ "trials" must be a dictionary')
+                  sys.exit(1)
+              
+              trial_count = len(data['trials'])
+              print(f'✅ JSON structure valid: {trial_count} trials found')
+              
+              # Check minimum trial count (require at least 3 trials for valid data)
+              if trial_count < 3:
+                  print(f'⚠️ Warning: Only {trial_count} trials found (minimum 3 expected)')
+                  print('This may indicate data loss or incomplete download')
+              
+              # Log trial names for debugging
+              if trial_count > 0:
+                  trial_names = list(data['trials'].keys())[:10]
+                  print(f'Available trials: {", ".join(trial_names)}')
+              
+              sys.exit(0)
+          except json.JSONDecodeError as e:
+              print(f'❌ Invalid JSON format: {e}')
+              sys.exit(1)
+          except Exception as e:
+              print(f'❌ Validation error: {e}')
+              sys.exit(1)
+          EOF
+          
+          VALIDATION_EXIT=$?
+          if [ $VALIDATION_EXIT -eq 0 ]; then
+            echo "is_valid=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_valid=false" >> $GITHUB_OUTPUT
+            echo "❌ Validation failed - builds.json is corrupted or invalid"
+          fi
+      
+      - name: Attempt restore from artifacts
+        if: steps.download_builds.outputs.download_success != 'true' || steps.validate_download.outputs.is_valid != 'true'
+        id: restore_artifact
+        continue-on-error: true
+        run: |
+          echo "🔄 Attempting to restore builds.json from previous successful run..."
+          
+          # Try to download from the most recent successful workflow run
+          RUN_ID=$(gh run list --workflow="Generate ESO Builds (Staggered)" --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
+          
+          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+            echo "⚠️ No previous successful run found"
+            echo "restore_success=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "Found previous successful run: $RUN_ID"
+          
+          # Download the artifact
+          gh run download $RUN_ID --name "builds-json-artifact" --dir output/ 2>/dev/null || {
+            echo "⚠️ Failed to download artifact from run $RUN_ID"
+            echo "restore_success=false" >> $GITHUB_OUTPUT
+            exit 0
+          }
+          
+          # Validate restored file
+          if [ -f "output/builds.json" ]; then
+            python3 << 'EOF'
+            import json
+            import sys
+            try:
+                with open('output/builds.json', 'r') as f:
+                    data = json.load(f)
+                if isinstance(data, dict) and 'trials' in data and isinstance(data['trials'], dict):
+                    trial_count = len(data['trials'])
+                    print(f'✅ Restored builds.json with {trial_count} trials')
+                    sys.exit(0)
+                else:
+                    print('❌ Restored file has invalid structure')
+                    sys.exit(1)
+            except Exception as e:
+                print(f'❌ Restored file is invalid: {e}')
+                sys.exit(1)
+            EOF
+            
+            if [ $? -eq 0 ]; then
+              echo "✅ Successfully restored builds.json from artifact"
+              echo "restore_success=true" >> $GITHUB_OUTPUT
+            else
+              echo "❌ Restored file failed validation"
+              echo "restore_success=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "❌ Artifact download did not produce builds.json"
+            echo "restore_success=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Fail if no valid builds.json
+        if: steps.download_builds.outputs.download_success != 'true' && (steps.restore_artifact.outputs.restore_success != 'true' || steps.restore_artifact.outcome == 'failure')
+        run: |
+          echo "❌ CRITICAL: Unable to obtain valid builds.json"
+          echo "  - Download from production site: ${{ steps.download_builds.outputs.download_success }}"
+          echo "  - Validation: ${{ steps.validate_download.outputs.is_valid }}"
+          echo "  - Restore from artifact: ${{ steps.restore_artifact.outputs.restore_success }}"
+          echo ""
+          echo "This workflow will FAIL to prevent deploying an empty/corrupted site."
+          echo "The existing site data must be preserved."
+          exit 1
+      
+      - name: Fail if validation failed and restore failed
+        if: steps.validate_download.outputs.is_valid != 'true' && (steps.restore_artifact.outputs.restore_success != 'true' || steps.restore_artifact.outcome == 'failure')
+        run: |
+          echo "❌ CRITICAL: Downloaded builds.json is corrupted and restore failed"
+          echo "  - Download successful but validation failed"
+          echo "  - Restore from artifact: ${{ steps.restore_artifact.outputs.restore_success }}"
+          echo ""
+          echo "This workflow will FAIL to prevent data loss."
+          exit 1
       
       - name: Create backup of builds.json
         run: |
-          # Create a timestamped backup of builds.json
+          # Create a timestamped backup of builds.json BEFORE any modifications
           if [ -f "output/builds.json" ]; then
             timestamp=$(date -u +"%Y%m%d_%H%M%S")
             cp output/builds.json "output/builds_backup_${timestamp}.json"
@@ -114,7 +262,8 @@ jobs:
             # Keep only the last 5 backups to avoid storage bloat
             ls -t output/builds_backup_*.json 2>/dev/null | tail -n +6 | xargs -r rm
           else
-            echo "⚠️ No builds.json to backup"
+            echo "⚠️ No builds.json to backup (this should not happen)"
+            exit 1
           fi
       
       - name: Run build analysis for trial
@@ -164,43 +313,67 @@ jobs:
             exit 1
           fi
           
-          # Validate JSON structure and content
-          if python3 -c "
+          # Validate JSON structure and content with minimum trial count
+          python3 << 'EOF'
           import json
+          import sys
+          
+          # Minimum trial count required for deployment (configurable)
+          MIN_TRIAL_COUNT = 10
+          
           try:
-              with open('output/builds.json', 'r') as f:
+              with open('output/builds.json', 'r', encoding='utf-8') as f:
                   data = json.load(f)
               
+              # Check structure
               if 'trials' not in data:
-                  print('❌ Missing trials key')
-                  exit(1)
+                  print('❌ Missing "trials" key')
+                  sys.exit(1)
               
               if not isinstance(data['trials'], dict):
-                  print('❌ Trials must be a dictionary')
-                  exit(1)
+                  print('❌ "trials" must be a dictionary')
+                  sys.exit(1)
               
               trial_count = len(data['trials'])
-              print(f'✅ builds.json validation passed: {trial_count} trials')
+              
+              # Enforce minimum trial count - prevents deploying empty/corrupted data
+              if trial_count < MIN_TRIAL_COUNT:
+                  print(f'❌ CRITICAL: Only {trial_count} trials found, minimum {MIN_TRIAL_COUNT} required for deployment')
+                  print('This indicates potential data loss. Deployment will fail to preserve existing site.')
+                  sys.exit(1)
+              
+              print(f'✅ builds.json validation passed: {trial_count} trials (minimum {MIN_TRIAL_COUNT} required)')
               
               # Log trial names for debugging
               if trial_count > 0:
-                  print('Available trials:', list(data['trials'].keys())[:10])
-              else:
-                  print('⚠️ Warning: No trials in builds.json')
+                  trial_names = list(data['trials'].keys())[:10]
+                  print(f'Available trials: {", ".join(trial_names)}')
+                  if trial_count > 10:
+                      print(f'... and {trial_count - 10} more')
               
-              exit(0)
+              sys.exit(0)
           except json.JSONDecodeError as e:
               print(f'❌ Invalid JSON: {e}')
-              exit(1)
+              sys.exit(1)
           except Exception as e:
               print(f'❌ Validation error: {e}')
-              exit(1)
-          "; then
-            echo "✅ builds.json validation successful"
-          else
-            echo "❌ builds.json validation failed!"
+              sys.exit(1)
+          EOF
+          
+          if [ $? -ne 0 ]; then
+            echo "❌ builds.json validation failed - deployment aborted"
             exit 1
           fi
+          
+          echo "✅ builds.json validation successful"
+      
+      - name: Upload builds.json artifact for recovery
+        uses: actions/upload-artifact@v4
+        with:
+          name: builds-json-artifact
+          path: output/builds.json
+          retention-days: 30
+        if: always()  # Upload even if previous steps failed
       
       - name: Setup Pages
         uses: actions/configure-pages@v4

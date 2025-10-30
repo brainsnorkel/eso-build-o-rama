@@ -20,7 +20,7 @@ sys.path.insert(0, str(project_root))
 from .trial_scanner import TrialScanner
 from .page_generator import PageGenerator
 from .models import CommonBuild
-from .data_store import DataStore
+from .data_store import DataStore, CorruptedBuildsFileError
 from .social_preview_generator import SocialPreviewGenerator
 from .csv_exporter import CSVExporter
 
@@ -120,8 +120,34 @@ class ESOBuildORM:
                 logger.warning("No publishable builds found for this trial (need 5+ occurrences for DPS, 3+ for tank/healer)")
                 # Still regenerate pages from existing saved builds
                 logger.info("Regenerating pages from existing saved builds...")
-                all_saved_builds = self.data_store.get_all_builds()
-                trials_metadata = self.data_store.get_trials_metadata()
+                try:
+                    all_saved_builds = self.data_store.get_all_builds()
+                    trials_metadata = self.data_store.get_trials_metadata()
+                except CorruptedBuildsFileError as e:
+                    logger.error(f"Failed to load builds data: {e}")
+                    logger.info("Attempting to restore from backup...")
+                    try:
+                        backup_data = self.data_store.load_from_backup()
+                        # Reconstruct builds from backup data
+                        all_saved_builds = []
+                        for trial_name, trial_data in backup_data["trials"].items():
+                            builds_data = trial_data.get("builds", [])
+                            for build_data in builds_data:
+                                build = self.data_store._deserialize_build(build_data)
+                                if build:
+                                    all_saved_builds.append(build)
+                        
+                        trials_metadata = {}
+                        for trial_name, trial_data in backup_data["trials"].items():
+                            trials_metadata[trial_name] = {
+                                "last_updated": trial_data.get("last_updated"),
+                                "update_version": trial_data.get("update_version"),
+                                "build_count": len(trial_data.get("builds", [])),
+                            }
+                        logger.info(f"Successfully restored {len(all_saved_builds)} builds from backup")
+                    except Exception as backup_error:
+                        logger.error(f"Backup restore also failed: {backup_error}")
+                        raise
                 
                 if all_saved_builds:
                     # Generate aggregated builds for TL;DR page and home page card

@@ -159,14 +159,19 @@ class PageGenerator:
             if trial_name in builds_by_trial:
                 bosses = builds_by_trial[trial_name]
                 # Find the highest DPS build across all bosses in this trial (DPS role only)
-                for boss_data in bosses.values():
+                # Exclude trash builds - only select from actual boss fights
+                for boss_name, boss_data in bosses.items():
+                    # Skip trash builds
+                    if boss_name == "Trash Builds":
+                        continue
                     if isinstance(boss_data, dict) and 'builds' in boss_data:
                         all_builds.extend(boss_data['builds'])
                     elif isinstance(boss_data, list):
                         all_builds.extend(boss_data)
             
             # Filter for DPS role builds only (exclude tanks and healers)
-            dps_builds = [b for b in all_builds if b.best_player and b.best_player.role == 'dps']
+            # Also ensure we're not including any trash builds that might have slipped through
+            dps_builds = [b for b in all_builds if b.best_player and b.best_player.role == 'dps' and b.boss_name != "Trash Builds"]
             
             if dps_builds:
                 top_build = max(dps_builds, key=lambda b: b.best_player.dps)

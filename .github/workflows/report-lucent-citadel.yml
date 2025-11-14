@@ -1,0 +1,97 @@
+name: Report on Lucent Citadel
+
+on:
+  workflow_dispatch:
+    inputs:
+      clear_cache:
+        description: 'Clear cache before scanning'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  report-lucent-citadel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run Lucent Citadel scan and generate report
+        env:
+          ESOLOGS_ID: ${{ secrets.ESOLOGS_ID }}
+          ESOLOGS_SECRET: ${{ secrets.ESOLOGS_SECRET }}
+          SKIP_SOCIAL_PREVIEW_GENERATION: 'true'
+        run: |
+          echo "## 📊 Lucent Citadel Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Scan started at: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Clear cache if requested
+          if [ "${{ inputs.clear_cache }}" == "true" ]; then
+            echo "🗑️ Clearing cache..." >> $GITHUB_STEP_SUMMARY
+            python3 -m src.eso_build_o_rama.main --trial-id 18 --clear-cache 2>&1 | tee lucent_report.log
+          else
+            python3 -m src.eso_build_o_rama.main --trial-id 18 2>&1 | tee lucent_report.log
+          fi
+          
+          # Extract key information from the log
+          echo "### 📈 Scan Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Count bosses processed
+          BOSS_COUNT=$(grep -c "Processing boss:" lucent_report.log || echo "0")
+          echo "- **Bosses processed**: $BOSS_COUNT" >> $GITHUB_STEP_SUMMARY
+          
+          # Count builds found
+          BUILD_COUNT=$(grep -c "Found.*builds" lucent_report.log || echo "0")
+          echo "- **Build groups found**: $BUILD_COUNT" >> $GITHUB_STEP_SUMMARY
+          
+          # Count reports processed
+          REPORT_COUNT=$(grep -c "Processing report" lucent_report.log || echo "0")
+          echo "- **Reports processed**: $REPORT_COUNT" >> $GITHUB_STEP_SUMMARY
+          
+          # Check for errors
+          if grep -i "error\|failed\|exception" lucent_report.log > /dev/null; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### ⚠️ Errors/Warnings" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            grep -i "error\|failed\|exception" lucent_report.log | head -20 >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          # Show sample builds if output-dev/builds.json exists
+          if [ -f "output-dev/builds.json" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 🎯 Build Summary" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            python3 scripts/analyze_lucent_report.py >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "Report completed at: $(date -u '+ entrants-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Upload report log
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: lucent-citadel-report
+          path: |
+            lucent_report.log
+            output-dev/builds.json
+          retention-days: 7

@@ -230,7 +230,7 @@ class BuildAnalyzer:
         mythic_keywords = [
             'oakensoul', 'death dealer\'s fete', 'pale order', 'wild hunt',
             'gaze of sithis', 'malacath\'s band', 'mythic', 'ring of',
-            'band of', 'amulet of', 'necklace of'
+            'band of', 'amulet of', 'necklace of', 'huntsman\'s warmask'
         ]
         
         item_lower = item_name.lower()

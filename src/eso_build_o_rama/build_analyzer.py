@@ -339,6 +339,7 @@ class BuildAnalyzer:
         """
         Aggregate builds across all trials by role and build signature.
         Returns up to 5 most common builds per role, plus trash builds.
+        Only includes builds from Sunspire (trial 12) onward.
         
         Args:
             all_builds: List of all CommonBuild objects from all trials
@@ -348,11 +349,31 @@ class BuildAnalyzer:
         """
         logger.info(f"Aggregating {len(all_builds)} builds across all trials")
         
+        # Load trial data to get trial IDs for filtering
+        import json
+        from pathlib import Path
+        trials_file = Path(__file__).parent.parent.parent / 'data' / 'trials.json'
+        with open(trials_file, 'r') as f:
+            trial_data = json.load(f)
+        
+        # Create a mapping of trial name to ID
+        trial_id_map = {trial['name']: trial['id'] for trial in trial_data['trials']}
+        
+        # Filter to only include trials from Sunspire (trial 12) onward
+        MIN_TRIAL_ID = 12
+        filtered_builds = []
+        for build in all_builds:
+            trial_id = trial_id_map.get(build.trial_name, 0)
+            if trial_id >= MIN_TRIAL_ID:
+                filtered_builds.append(build)
+        
+        logger.info(f"Filtered to {len(filtered_builds)} builds from trials {MIN_TRIAL_ID}+ (from {len(all_builds)} total)")
+        
         # Separate trash builds from boss builds
         boss_builds = []
         trash_builds = []
         
-        for build in all_builds:
+        for build in filtered_builds:
             if build.boss_name == "Trash Builds":
                 trash_builds.append(build)
             else:

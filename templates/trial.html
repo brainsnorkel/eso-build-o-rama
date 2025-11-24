@@ -201,9 +201,6 @@
                 </td>
                 <td data-label="Frequency">
                     {{ build.count }} players in {{ build.report_count }} reports
-                    {% if build.is_aggregated %}
-                        (across all trials)
-                    {% endif %}
                 </td>
                 <td data-label="Metric">{{ build.best_player.get_primary_metric()|format_metric }} {{ build.best_player.get_primary_metric_name() }}</td>
                 <td data-label="Player Character">{{ build.best_player.player_name }} - {{ build.best_player.character_name }}</td>
@@ -277,9 +274,6 @@
                 </td>
                 <td data-label="Frequency">
                     {{ build.count }} players in {{ build.report_count }} reports
-                    {% if build.is_aggregated %}
-                        (across all trials)
-                    {% endif %}
                 </td>
                 <td data-label="Metric">{{ build.best_player.get_primary_metric()|format_metric }} {{ build.best_player.get_primary_metric_name() }}</td>
                 <td data-label="Player Character">{{ build.best_player.player_name }} - {{ build.best_player.character_name }}</td>

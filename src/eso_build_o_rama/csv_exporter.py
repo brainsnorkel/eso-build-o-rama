@@ -193,7 +193,6 @@ class CSVExporter:
             logger.error(f"Failed to write CSV file {csv_path}: {e}")
             raise
     
-<<<<<<< HEAD
     def export_trial_data_from_builds(
         self,
         trial_name: str,
@@ -319,7 +318,6 @@ class CSVExporter:
                 writer.writerow(headers)
                 writer.writerows(rows)
             
-<<<<<<< HEAD
             logger.info(f"✅ Exported {total_players} players to {csv_path}")
             return csv_path
             

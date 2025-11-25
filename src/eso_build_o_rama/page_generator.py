@@ -12,6 +12,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from datetime import datetime
 
 from .models import CommonBuild, PlayerBuild, TrialReport
+from .csv_exporter import CSVExporter
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,9 @@ class PageGenerator:
         
         # Create output directory if it doesn't exist
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Initialize CSV exporter
+        self.csv_exporter = CSVExporter(output_dir=str(self.output_dir))
         
         # Copy static assets to output directory
         self._copy_static_assets()
@@ -452,12 +456,23 @@ class PageGenerator:
         about_path = self.generate_about_page(app_version)
         generated_files['about'] = about_path
         
-        # Generate individual trial pages
+        # Generate individual trial pages and CSV files
         for trial_name, trial_data in builds_by_trial.items():
             # Extract just the bosses data for trial page generation
             bosses_data = {boss: data['builds'] for boss, data in trial_data.items()}
             trial_path = self.generate_trial_page(trial_name, bosses_data, app_version)
             generated_files[f'trial_{trial_name.lower().replace(" ", "_")}'] = trial_path
+            
+            # Generate CSV export for this trial
+            try:
+                csv_path = self.csv_exporter.export_trial_data_from_builds(
+                    trial_name=trial_name,
+                    builds_by_boss=bosses_data
+                )
+                logger.info(f"✅ Generated CSV export: {csv_path}")
+            except Exception as e:
+                logger.error(f"Failed to generate CSV for {trial_name}: {e}")
+                # Continue even if CSV generation fails
         
         # Generate individual build pages
         for build in all_builds:

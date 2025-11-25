@@ -7,7 +7,7 @@ import csv
 import logging
 from pathlib import Path
 from typing import List, Dict, Any
-from .models import PlayerBuild, TrialReport
+from .models import PlayerBuild, TrialReport, CommonBuild
 
 logger = logging.getLogger(__name__)
 
@@ -134,7 +134,12 @@ class CSVExporter:
                 subclasses = (player.subclasses + ['', '', ''])[:3]
                 
                 # Get signature sets (pad to 2)
-                sets = (list(player.sets_equipped) + ['', ''])[:2]
+                # Sort by piece count (descending) to get the most significant sets first
+                sorted_sets = sorted(player.sets_equipped.items(), key=lambda x: x[1], reverse=True)
+                sets = [set_name for set_name, count in sorted_sets[:2]]
+                # Pad to 2 if needed
+                while len(sets) < 2:
+                    sets.append('')
                 
                 # Build the row
                 row = [
@@ -182,6 +187,142 @@ class CSVExporter:
                 writer.writerows(rows)
             
             logger.info(f"✅ Exported {total_players} players to {csv_path}")
+            return csv_path
+            
+        except IOError as e:
+            logger.error(f"Failed to write CSV file {csv_path}: {e}")
+            raise
+    
+    def export_all_trials_data(self, all_builds: List[CommonBuild]) -> Path:
+        """
+        Export all player data from all trials to a single combined CSV.
+        
+        Args:
+            all_builds: List of all CommonBuild objects from all trials
+            
+        Returns:
+            Path to the generated CSV file
+        """
+        csv_path = self.output_dir / "all-trials-data.csv"
+        
+        logger.info(f"Generating combined CSV export for all trials ({len(all_builds)} builds)")
+        
+        # Prepare CSV headers (same as trial export)
+        headers = [
+            'Trial Name',
+            'Boss Name',
+            'ESO Logs Player Link',
+            'Player Handle',
+            'Character Name',
+            'Build Slug',
+            'Role',
+            'Subclass 1',
+            'Subclass 2',
+            'Subclass 3',
+            'Signature Set 1',
+            'Signature Set 2',
+            'DPS',
+            'HPS',
+            'CPM',
+            'Primary Metric',
+            'Mundus Stone'
+        ]
+        
+        # Add gear slots
+        headers.extend([f'Gear: {slot.title()}' for slot in self.GEAR_SLOTS])
+        
+        # Add ability bars (up to 6 abilities each)
+        headers.extend([f'Bar 1 Ability {i+1}' for i in range(6)])
+        headers.extend([f'Bar 2 Ability {i+1}' for i in range(6)])
+        
+        # Collect all rows
+        rows = []
+        total_players = 0
+        
+        # Group builds by trial and boss for processing
+        builds_by_trial_boss: Dict[str, Dict[str, List[CommonBuild]]] = {}
+        for build in all_builds:
+            trial = build.trial_name
+            boss = build.boss_name
+            if trial not in builds_by_trial_boss:
+                builds_by_trial_boss[trial] = {}
+            if boss not in builds_by_trial_boss[trial]:
+                builds_by_trial_boss[trial][boss] = []
+            builds_by_trial_boss[trial][boss].append(build)
+        
+        # Process each trial/boss combination
+        for trial_name, bosses in builds_by_trial_boss.items():
+            for boss_name, builds in bosses.items():
+                for build in builds:
+                    # Get report_code and fight_id from the build
+                    report_code = build.report_code or ""
+                    fight_id = build.fight_id or 0
+                    
+                    # Iterate through all players in this build
+                    for player in build.all_players:
+                        total_players += 1
+                        
+                        # Build ESO Logs player summary link
+                        if report_code and fight_id and player.source_id:
+                            esologs_link = f"https://www.esologs.com/reports/{report_code}#fight={fight_id}&type=summary&source={player.source_id}"
+                        else:
+                            esologs_link = ""
+                        
+                        # Get subclasses (pad to 3)
+                        subclasses = (player.subclasses + ['', '', ''])[:3]
+                        
+                        # Get signature sets (pad to 2) - sorted by piece count
+                        sorted_sets = sorted(player.sets_equipped.items(), key=lambda x: x[1], reverse=True)
+                        sets = [set_name for set_name, count in sorted_sets[:2]]
+                        while len(sets) < 2:
+                            sets.append('')
+                        
+                        # Build the row
+                        row = [
+                            trial_name,
+                            boss_name,
+                            esologs_link,
+                            player.player_name,
+                            player.character_name,
+                            player.get_build_slug(),
+                            player.role,
+                            subclasses[0],
+                            subclasses[1],
+                            subclasses[2],
+                            sets[0],
+                            sets[1],
+                            f"{player.dps:.1f}" if player.dps else "0.0",
+                            f"{player.healing:.1f}" if player.healing else "0.0",
+                            f"{player.crowd_control:.1f}" if player.crowd_control else "0.0",
+                            f"{player.get_primary_metric():.1f} {player.get_primary_metric_name()}",
+                            player.mundus or ""
+                        ]
+                        
+                        # Add gear slots
+                        for slot in self.GEAR_SLOTS:
+                            row.append(self._get_gear_slot_value(player, slot))
+                        
+                        # Add ability bars
+                        bar1_abilities = self._get_ability_names(player.abilities_bar1)
+                        bar2_abilities = self._get_ability_names(player.abilities_bar2)
+                        
+                        # Pad to 6 abilities each
+                        bar1_abilities = (bar1_abilities + [''] * 6)[:6]
+                        bar2_abilities = (bar2_abilities + [''] * 6)[:6]
+                        
+                        row.extend(bar1_abilities)
+                        row.extend(bar2_abilities)
+                        
+                        rows.append(row)
+        
+        # Write CSV with proper quoting for Excel compatibility
+        try:
+            with open(csv_path, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f, quoting=csv.QUOTE_ALL)
+                writer.writerow(headers)
+                writer.writerows(rows)
+            
+            logger.info(f"✅ Exported {total_players} players from all trials to {csv_path}")
             return csv_path
             
         except IOError as e:

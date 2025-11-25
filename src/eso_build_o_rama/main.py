@@ -157,7 +157,7 @@ class ESOBuildORM:
                     aggregated_builds = build_analyzer.aggregate_builds_across_trials(all_saved_builds)
                     
                     # Generate TL;DR summary page
-                    tldr_path = self.page_generator.generate_tldr_summary_page(aggregated_builds, self.get_version())
+                    tldr_path = self.page_generator.generate_tldr_summary_page(aggregated_builds, all_saved_builds, self.get_version())
                     logger.info(f"Generated TL;DR summary: {tldr_path}")
                     
                     # Generate aggregated build pages
@@ -251,7 +251,7 @@ class ESOBuildORM:
             from .build_analyzer import BuildAnalyzer
             build_analyzer = BuildAnalyzer()
             aggregated_builds = build_analyzer.aggregate_builds_across_trials(all_saved_builds)
-            tldr_path = self.page_generator.generate_tldr_summary_page(aggregated_builds, self.get_version())
+            tldr_path = self.page_generator.generate_tldr_summary_page(aggregated_builds, all_saved_builds, self.get_version())
             
             # Generate aggregated build pages
             for role, builds in aggregated_builds.items():

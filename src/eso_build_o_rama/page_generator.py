@@ -12,6 +12,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from datetime import datetime
 
 from .models import CommonBuild, PlayerBuild, TrialReport
+from .csv_exporter import CSVExporter
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,9 @@ class PageGenerator:
         
         # Create output directory if it doesn't exist
         self.output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Initialize CSV exporter
+        self.csv_exporter = CSVExporter(output_dir=str(self.output_dir))
         
         # Copy static assets to output directory
         self._copy_static_assets()
@@ -306,18 +310,35 @@ class PageGenerator:
         logger.info(f"Generated about page: {filepath}")
         return str(filepath)
     
-    def generate_tldr_summary_page(self, aggregated_builds: Dict[str, List[CommonBuild]], app_version: str = "1.0.0") -> str:
+    def generate_tldr_summary_page(
+        self, 
+        aggregated_builds: Dict[str, List[CommonBuild]], 
+        all_builds: Optional[List[CommonBuild]] = None,
+        app_version: str = "1.0.0"
+    ) -> str:
         """
         Generate the TL;DR summary page showing top builds across all trials.
         
         Args:
             aggregated_builds: Dictionary mapping role names to lists of aggregated builds
+            all_builds: Optional list of all CommonBuild objects from all trials (for CSV export)
             app_version: Application version for display
             
         Returns:
             Path to generated HTML file
         """
         logger.info("Generating TL;DR summary page")
+        
+        # Generate combined CSV for all trials if all_builds is provided
+        csv_filename = None
+        if all_builds:
+            try:
+                csv_path = self.csv_exporter.export_all_trials_data(all_builds)
+                csv_filename = "all-trials-data.csv"
+                logger.info(f"✅ Generated combined CSV export: {csv_path}")
+            except Exception as e:
+                logger.error(f"Failed to generate combined CSV for TL;DR page: {e}")
+                # Continue even if CSV generation fails
         
         # Create separate sections for each role
         bosses = {}
@@ -359,7 +380,8 @@ class PageGenerator:
             'is_develop': self.is_develop,
             'social_image_url': self._get_social_image_url('trial', "Top Builds", app_version),
             'app_version': app_version,
-            'hide_download_button': True  # Hide download button for TL;DR page
+            'hide_download_button': csv_filename is None,  # Hide only if CSV wasn't generated
+            'csv_filename': csv_filename  # Special CSV filename for TL;DR page
         }
         html = template.render(**context)
         

@@ -76,9 +76,9 @@
             </div>
             {% if not hide_download_button %}
             <div>
-                <a href="{{ trial_name.lower().replace("'", "").replace(' ', '-') }}-data.csv" 
-                   download 
-                   title="Download a CSV of all players' builds found in the top 10 reports for {{ trial_name }}"
+                <a href="{% if csv_filename %}{{ csv_filename }}{% else %}{{ trial_name.lower().replace("'", "").replace(' ', '-') }}-data.csv{% endif %}" 
+                   download="{% if csv_filename %}{{ csv_filename }}{% else %}{{ trial_name.lower().replace("'", "").replace(' ', '-') }}-data.csv{% endif %}"
+                   title="{% if csv_filename %}Download a CSV of all players' builds from all trials{% else %}Download a CSV of all players' builds found in the top 10 reports for {{ trial_name }}{% endif %}"
                    style="display: inline-flex; 
                           align-items: center; 
                           gap: 8px;

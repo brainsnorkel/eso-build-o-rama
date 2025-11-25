@@ -52,7 +52,7 @@ def main():
     aggregated_builds = build_analyzer.aggregate_builds_across_trials(all_saved_builds)
 
     # Generate TL;DR summary page
-    tldr_path = page_generator.generate_tldr_summary_page(aggregated_builds, app_version)
+    tldr_path = page_generator.generate_tldr_summary_page(aggregated_builds, all_saved_builds, app_version)
     print(f"Generated TL;DR summary: {tldr_path}")
 
     # Generate aggregated build pages

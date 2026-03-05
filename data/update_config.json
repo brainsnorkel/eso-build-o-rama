@@ -1,0 +1,18 @@
+{
+  "current_update": "u48",
+  "active_update": "u48",
+  "updates": {
+    "u48": {
+      "label": "Update 48",
+      "display_name": "Update 48 (Gold Road)",
+      "path_prefix": "u48",
+      "status": "archived"
+    },
+    "u49": {
+      "label": "Update 49",
+      "display_name": "Update 49",
+      "path_prefix": "u49",
+      "status": "pending"
+    }
+  }
+}

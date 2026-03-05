@@ -1,22 +1,16 @@
 name: Generate ESO Builds (Staggered)
 
 on:
-  schedule:
-    # Every 40 minutes, cycling through all 14 trials sequentially
-    # AA at 20:00 UTC, HRC at 20:40 UTC, SO at 21:20 UTC, etc.
-    # Each trial gets updated every 9h 20m (14 trials × 40 minutes)
-    # Pattern: :00 and :40 on even hours, :20 on odd hours
-    - cron: '0,40 0-23/2 * * *'  # :00 and :40 on even hours (00, 02, 04, ..., 22)
-    - cron: '20 1-23/2 * * *'    # :20 on odd hours (01, 03, 05, ..., 23)
   workflow_dispatch:
     inputs:
       trial_id:
         description: 'Trial ID to scan (leave empty for auto-detect based on time)'
         required: false
         type: number
-  push:
-    branches:
-      - main  # Only run on main branch pushes
+      update_version:
+        description: 'Update version to generate (e.g., u48, u49). Reads from update_config.json if empty.'
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -92,6 +86,25 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v4
       
+      - name: Determine update version
+        id: update
+        run: |
+          if [ -n "${{ inputs.update_version }}" ]; then
+            UPDATE_VERSION="${{ inputs.update_version }}"
+          else
+            # Read from update_config.json
+            UPDATE_VERSION=$(python3 -c "import json; print(json.load(open('data/update_config.json'))['current_update'])")
+          fi
+          
+          # Get the path prefix from config
+          UPDATE_PREFIX=$(python3 -c "import json; c=json.load(open('data/update_config.json')); print(c.get('updates',{}).get('${UPDATE_VERSION}',{}).get('path_prefix','${UPDATE_VERSION}'))")
+          UPDATE_DIR="output/${UPDATE_PREFIX}"
+          
+          echo "update_version=${UPDATE_VERSION}" >> $GITHUB_OUTPUT
+          echo "update_prefix=${UPDATE_PREFIX}" >> $GITHUB_OUTPUT
+          echo "update_dir=${UPDATE_DIR}" >> $GITHUB_OUTPUT
+          echo "Using update version: ${UPDATE_VERSION}, prefix: ${UPDATE_PREFIX}, dir: ${UPDATE_DIR}"
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -105,13 +118,18 @@ jobs:
       - name: Download existing builds.json
         id: download_builds
         run: |
-          mkdir -p output
+          UPDATE_PREFIX="${{ steps.update.outputs.update_prefix }}"
+          UPDATE_DIR="${{ steps.update.outputs.update_dir }}"
+          mkdir -p "${UPDATE_DIR}"
           
-          # Try to download builds.json with retries
+          # Try versioned URL first, then fall back to legacy root URL
           echo "Attempting to download existing builds.json..."
           
-          if curl -s --max-time 30 --retry 3 --retry-delay 5 https://esobuild.com/builds.json -o output/builds.json; then
-            echo "✅ Successfully downloaded builds.json"
+          if curl -s --max-time 30 --retry 3 --retry-delay 5 "https://esobuild.com/${UPDATE_PREFIX}/builds.json" -o "${UPDATE_DIR}/builds.json"; then
+            echo "✅ Successfully downloaded builds.json from /${UPDATE_PREFIX}/"
+            echo "download_success=true" >> $GITHUB_OUTPUT
+          elif curl -s --max-time 30 --retry 3 --retry-delay 5 https://esobuild.com/builds.json -o "${UPDATE_DIR}/builds.json"; then
+            echo "✅ Successfully downloaded builds.json from legacy root path"
             echo "download_success=true" >> $GITHUB_OUTPUT
           else
             echo "❌ Failed to download builds.json"
@@ -127,7 +145,7 @@ jobs:
             exit 0
           fi
           
-          if [ ! -f "output/builds.json" ]; then
+          if [ ! -f "${{ steps.update.outputs.update_dir }}/builds.json" ]; then
             echo "❌ builds.json file not found after download"
             echo "is_valid=false" >> $GITHUB_OUTPUT
             exit 1
@@ -139,7 +157,7 @@ jobs:
           import sys
           
           try:
-              with open('output/builds.json', 'r', encoding='utf-8') as f:
+              with open('${{ steps.update.outputs.update_dir }}/builds.json', 'r', encoding='utf-8') as f:
                   data = json.load(f)
               
               # Check structure
@@ -204,19 +222,19 @@ jobs:
           echo "Found previous successful run: $RUN_ID"
           
           # Download the artifact
-          gh run download $RUN_ID --name "builds-json-artifact" --dir output/ 2>/dev/null || {
+          gh run download $RUN_ID --name "builds-json-artifact" --dir "${{ steps.update.outputs.update_dir }}/" 2>/dev/null || {
             echo "⚠️ Failed to download artifact from run $RUN_ID"
             echo "restore_success=false" >> $GITHUB_OUTPUT
             exit 0
           }
           
           # Validate restored file
-          if [ -f "output/builds.json" ]; then
+          if [ -f "${{ steps.update.outputs.update_dir }}/builds.json" ]; then
             python3 << 'EOF'
             import json
             import sys
             try:
-                with open('output/builds.json', 'r') as f:
+                with open('${{ steps.update.outputs.update_dir }}/builds.json', 'r') as f:
                     data = json.load(f)
                 if isinstance(data, dict) and 'trials' in data and isinstance(data['trials'], dict):
                     trial_count = len(data['trials'])
@@ -266,14 +284,15 @@ jobs:
       
       - name: Create backup of builds.json
         run: |
+          UPDATE_DIR="${{ steps.update.outputs.update_dir }}"
           # Create a timestamped backup of builds.json BEFORE any modifications
-          if [ -f "output/builds.json" ]; then
+          if [ -f "${UPDATE_DIR}/builds.json" ]; then
             timestamp=$(date -u +"%Y%m%d_%H%M%S")
-            cp output/builds.json "output/builds_backup_${timestamp}.json"
+            cp "${UPDATE_DIR}/builds.json" "${UPDATE_DIR}/builds_backup_${timestamp}.json"
             echo "✅ Created backup: builds_backup_${timestamp}.json"
             
             # Keep only the last 5 backups to avoid storage bloat
-            ls -t output/builds_backup_*.json 2>/dev/null | tail -n +6 | xargs -r rm
+            ls -t "${UPDATE_DIR}"/builds_backup_*.json 2>/dev/null | tail -n +6 | xargs -r rm
           else
             echo "⚠️ No builds.json to backup (this should not happen)"
             exit 1
@@ -285,17 +304,21 @@ jobs:
           ESOLOGS_SECRET: ${{ secrets.ESOLOGS_SECRET }}
           SKIP_SOCIAL_PREVIEW_GENERATION: 'true'
         run: |
-          # Run the build analysis
-          if python -m src.eso_build_o_rama.main --trial-id ${{ steps.trial.outputs.trial_id }}; then
+          UPDATE_VERSION="${{ steps.update.outputs.update_version }}"
+          UPDATE_DIR="${{ steps.update.outputs.update_dir }}"
+          # Run the build analysis with update version
+          CMD="python -m src.eso_build_o_rama.main --trial-id ${{ steps.trial.outputs.trial_id }} --update-version ${UPDATE_VERSION}"
+          echo "Running: ${CMD}"
+          if ${CMD}; then
             echo "✅ Build analysis completed successfully"
           else
             echo "❌ Build analysis failed, attempting recovery..."
             
             # Check if we have a backup to restore from
-            latest_backup=$(ls -t output/builds_backup_*.json 2>/dev/null | head -1)
+            latest_backup=$(ls -t "${UPDATE_DIR}"/builds_backup_*.json 2>/dev/null | head -1)
             if [ -n "$latest_backup" ]; then
               echo "🔄 Restoring from backup: $latest_backup"
-              cp "$latest_backup" output/builds.json
+              cp "$latest_backup" "${UPDATE_DIR}/builds.json"
               echo "✅ Restored builds.json from backup"
             else
               echo "⚠️ No backup available for recovery"
@@ -307,9 +330,10 @@ jobs:
       
       - name: Copy static assets to output
         run: |
+          UPDATE_DIR="${{ steps.update.outputs.update_dir }}"
           # Copy only icons to output (all other static assets are already in output/ from repo)
-          mkdir -p output/static/icons
-          cp -r static/icons/* output/static/icons/
+          mkdir -p "${UPDATE_DIR}/static/icons"
+          cp -r static/icons/* "${UPDATE_DIR}/static/icons/"
           
           # Note: We do NOT copy static/* to output/static/ because:
           # - Social preview PNGs are pre-optimized and committed to output/static/
@@ -321,7 +345,7 @@ jobs:
         run: |
           echo "Validating builds.json before deployment..."
           
-          if [ ! -f "output/builds.json" ]; then
+          if [ ! -f "${{ steps.update.outputs.update_dir }}/builds.json" ]; then
             echo "❌ builds.json not found!"
             exit 1
           fi
@@ -347,7 +371,7 @@ jobs:
                   return None
           
           try:
-              new_data = load_json('output/builds.json')
+              new_data = load_json('${{ steps.update.outputs.update_dir }}/builds.json')
               
               # Structure checks
               if not isinstance(new_data, dict) or 'trials' not in new_data or not isinstance(new_data['trials'], dict):
@@ -357,7 +381,7 @@ jobs:
               new_count = len(new_data['trials'])
               
               # Fetch live builds.json for comparison (best-effort)
-              live_data = fetch_live('https://esobuild.com/builds.json')
+              live_data = fetch_live('https://esobuild.com/${{ steps.update.outputs.update_prefix }}/builds.json')
               if live_data and isinstance(live_data, dict) and isinstance(live_data.get('trials'), dict):
                   live_count = len(live_data['trials'])
                   print(f'ℹ️ Live trials: {live_count} | New trials: {new_count}')
@@ -397,10 +421,43 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: builds-json-artifact
-          path: output/builds.json
+          path: ${{ steps.update.outputs.update_dir }}/builds.json
           retention-days: 30
         if: always()  # Upload even if previous steps failed
       
+      - name: Verify archived updates are preserved
+        run: |
+          echo "Verifying archived update directories exist in output/..."
+          python3 << 'EOF'
+          import json, os, sys
+          
+          with open('data/update_config.json', 'r') as f:
+              config = json.load(f)
+          
+          current = config.get('current_update', '')
+          missing = []
+          for key, info in config.get('updates', {}).items():
+              status = info.get('status', '')
+              prefix = info.get('path_prefix', key)
+              # Only check archived/active updates (not pending, not the one we just generated)
+              if status in ('archived', 'active') and key != current:
+                  update_dir = os.path.join('output', prefix)
+                  if os.path.isdir(update_dir):
+                      file_count = len(os.listdir(update_dir))
+                      print(f'✅ {prefix}/: {file_count} files')
+                  else:
+                      missing.append(prefix)
+                      print(f'❌ {prefix}/: MISSING')
+          
+          if missing:
+              print(f'\n⚠️ Missing archived updates: {missing}')
+              print('These updates will not be available on the live site after deploy.')
+              print('Check that output/{prefix}/ directories are committed to the repo.')
+              # Warning only — don't fail the deploy for this
+          else:
+              print('\n✅ All archived updates are present in output/')
+          EOF
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:

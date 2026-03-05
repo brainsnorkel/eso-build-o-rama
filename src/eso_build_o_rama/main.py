@@ -45,8 +45,21 @@ class ESOBuildORM:
             logger.warning("VERSION file not found, using default version")
             return "1.0.0"
     
-    def get_output_directory(self) -> str:
-        """Determine output directory based on git branch."""
+    def _load_update_config(self) -> Dict[str, Any]:
+        """Load update versioning configuration from data/update_config.json."""
+        config_file = Path(__file__).parent.parent.parent / 'data' / 'update_config.json'
+        try:
+            with open(config_file, 'r') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            logger.warning(f"Update config not found at {config_file}, using defaults")
+            return {}
+        except json.JSONDecodeError:
+            logger.warning(f"Could not parse update config at {config_file}")
+            return {}
+    
+    def get_output_directory(self, update_prefix: str = "") -> str:
+        """Determine output directory based on git branch and update prefix."""
         try:
             result = subprocess.run(
                 ['git', 'branch', '--show-current'],
@@ -56,24 +69,51 @@ class ESOBuildORM:
             )
             branch = result.stdout.strip()
             if branch == 'main':
-                return 'output'
-            return 'output-dev'
+                base_dir = 'output'
+            else:
+                base_dir = 'output-dev'
         except Exception:
             # Default to 'output-dev' if git command fails (safer for development)
-            return 'output-dev'
+            base_dir = 'output-dev'
+        
+        if update_prefix:
+            return f"{base_dir}/{update_prefix}"
+        return base_dir
     
-    def __init__(self):
-        """Initialize the application."""
-        # Determine output directory based on git branch
-        output_dir = self.get_output_directory()
-        logger.info(f"Using output directory: {output_dir}")
+    def __init__(self, update_version: Optional[str] = None):
+        """
+        Initialize the application.
+        
+        Args:
+            update_version: Override update version (e.g., 'u48'). If None, reads from update_config.json.
+        """
+        # Load update configuration
+        update_config = self._load_update_config()
+        
+        # Determine which update to use
+        if update_version:
+            self.update_version = update_version
+        else:
+            self.update_version = update_config.get('current_update', '')
+        
+        # Get update metadata
+        update_info = update_config.get('updates', {}).get(self.update_version, {})
+        update_prefix = update_info.get('path_prefix', self.update_version)
+        update_label = update_info.get('label', '')
+        
+        # Determine output directory based on git branch + update prefix
+        output_dir = self.get_output_directory(update_prefix=update_prefix)
+        logger.info(f"Using output directory: {output_dir} (update: {self.update_version or 'none'})")
         
         self.scanner = TrialScanner()
-        self.page_generator = PageGenerator(output_dir=output_dir)
+        self.page_generator = PageGenerator(
+            output_dir=output_dir,
+            update_prefix=update_prefix,
+            update_label=update_label,
+        )
         self.data_store = DataStore(builds_file=f"{output_dir}/builds.json")
         self.csv_exporter = CSVExporter(output_dir=output_dir)
         self.trials_file = Path(__file__).parent.parent.parent / "data" / "trials.json"
-    
     async def run(self, test_mode: bool = False, trial_name: Optional[str] = None, trial_id: Optional[int] = None):
         """
         Run the complete build scanning and generation process.
@@ -184,6 +224,16 @@ class ESOBuildORM:
                     logger.info(f"Generated {len(generated_files)} HTML files from existing data")
                 else:
                     logger.warning("No existing builds found to generate pages from")
+                
+                # Generate root-level pages in fallback path too
+                if self.update_version:
+                    try:
+                        self.page_generator.generate_router_page(self.get_version())
+                        self.page_generator.generate_updates_page(self.get_version())
+                        self.page_generator.generate_sitemap_index(self.get_version())
+                        self.page_generator.generate_root_robots_txt(self.get_version())
+                    except Exception as e:
+                        logger.warning(f"Failed to generate root-level pages: {e}")
                 return
             
             logger.info(f"\nFound {len(publishable_builds)} publishable builds")
@@ -281,6 +331,20 @@ class ESOBuildORM:
                 for build in builds:
                     generated_files[f'tldr_{build.build_slug}'] = f"tldr-{build.build_slug}.html"
             
+            # Generate root-level pages when running with update versioning
+            if self.update_version:
+                logger.info("Generating root-level pages (router, updates directory, sitemap index)...")
+                try:
+                    router_path = self.page_generator.generate_router_page(self.get_version())
+                    logger.info(f"Generated root router: {router_path}")
+                    updates_path = self.page_generator.generate_updates_page(self.get_version())
+                    logger.info(f"Generated updates directory: {updates_path}")
+                    sitemap_idx_path = self.page_generator.generate_sitemap_index(self.get_version())
+                    logger.info(f"Generated sitemap index: {sitemap_idx_path}")
+                    root_robots_path = self.page_generator.generate_root_robots_txt(self.get_version())
+                    logger.info(f"Generated root robots.txt: {root_robots_path}")
+                except Exception as e:
+                    logger.warning(f"Failed to generate root-level pages: {e}")
             logger.info(f"Generated {len(generated_files)} HTML files")
             
             # Print summary
@@ -550,6 +614,7 @@ async def main():
     parser.add_argument('--trial', type=str, help='Specific trial name to scan')
     parser.add_argument('--trial-id', type=int, help='Specific trial ID to scan')
     parser.add_argument('--test', action='store_true', help='Test mode - scan only first trial')
+    parser.add_argument('--update-version', type=str, help='Override update version (e.g., u48, u49). Reads from update_config.json if not specified.')
     
     args = parser.parse_args()
     
@@ -568,7 +633,7 @@ async def main():
     except Exception:
         pass  # Ignore git errors
     
-    app = ESOBuildORM()
+    app = ESOBuildORM(update_version=args.update_version)
     
     # Determine scan mode
     if args.trial_id:

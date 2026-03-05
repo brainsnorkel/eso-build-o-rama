@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse all ESO Meta Build Explorer update directories.">
+    <meta name="robots" content="index, follow">
+    <title>ESO Meta Build Explorer | Updates Directory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e8e8e8;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #e8e8e8;
+            opacity: 0.92;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 20px 0 24px;
+            color: #38ef7d;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            background: rgba(56, 239, 125, 0.1);
+            border: 1px solid rgba(56, 239, 125, 0.3);
+            border-radius: 25px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(56, 239, 125, 0.2);
+            border-color: rgba(56, 239, 125, 0.5);
+        }
+
+        .updates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .update-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .update-card h2 {
+            color: #ffffff;
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+
+        .badge-active {
+            background: rgba(56, 239, 125, 0.2);
+            border: 1px solid rgba(56, 239, 125, 0.45);
+            color: #38ef7d;
+        }
+
+        .badge-archived {
+            background: rgba(255, 165, 0, 0.18);
+            border: 1px solid rgba(255, 165, 0, 0.45);
+            color: #ffb347;
+        }
+
+        .badge-pending {
+            background: rgba(128, 128, 128, 0.2);
+            border: 1px solid rgba(200, 200, 200, 0.35);
+            color: #c8c8c8;
+        }
+
+        .update-link {
+            color: #38ef7d;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .update-link:hover {
+            text-decoration: underline;
+        }
+
+        .update-link-disabled {
+            color: #9aa0ab;
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #b9c2d0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>ESO Meta Build Explorer</h1>
+            <p class="subtitle">Updates Directory</p>
+        </header>
+
+        <a class="back-link" href="u48/index.html">← Back to current builds</a>
+
+        <section class="updates-grid" aria-label="Game updates list">
+            
+            <article class="update-card">
+                <h2>Update 48 (Gold Road)</h2>
+
+                <div class="meta-row">
+                    
+                    <span class="badge badge-archived">Archived</span>
+                    
+
+                    <span>Update 48</span>
+                </div>
+
+                
+                <a class="update-link" href="u48/index.html">View builds</a>
+                
+            </article>
+            
+            <article class="update-card">
+                <h2>Update 49</h2>
+
+                <div class="meta-row">
+                    
+                    <span class="badge badge-pending">Coming Soon</span>
+                    
+
+                    <span>Update 49</span>
+                </div>
+
+                
+                <span class="update-link-disabled">Coming Soon</span>
+                
+            </article>
+            
+        </section>
+
+        <footer>
+            Version {&#39;current_update&#39;: &#39;u48&#39;, &#39;active_update&#39;: &#39;u48&#39;, &#39;updates&#39;: {&#39;u48&#39;: {&#39;label&#39;: &#39;Update 48&#39;, &#39;display_name&#39;: &#39;Update 48 (Gold Road)&#39;, &#39;path_prefix&#39;: &#39;u48&#39;, &#39;status&#39;: &#39;archived&#39;}, &#39;u49&#39;: {&#39;label&#39;: &#39;Update 49&#39;, &#39;display_name&#39;: &#39;Update 49&#39;, &#39;path_prefix&#39;: &#39;u49&#39;, &#39;status&#39;: &#39;pending&#39;}}}
+        </footer>
+    </main>
+</body>
+</html>

@@ -2,8 +2,8 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://esobuild.com/sitemap.xml
+# Sitemap index location
+Sitemap: https://esobuild.com/sitemap-index.xml
 
 # Disallow cache directory (if exposed)
 Disallow: /cache/

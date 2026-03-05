@@ -2,661 +2,3037 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://esobuild.com/index.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://esobuild.com/about.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://esobuild.com/tldr-top-builds.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sanity's-edge.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://esobuild.com/sunspire.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/kyne's-aegis.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://esobuild.com/aetherian-archive.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://esobuild.com/hel-ra-citadel.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sanctum-ophidia.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanity's-edge.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-trash-builds-ardent-herald-spear-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-ardent-herald-spear-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-trash-builds-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-trash-builds-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-ass-dawn-herald-deadly-strike-perfected-whorl-of-the-depths.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-daedric-resto-soldier-perfected-lucent-echoes-perfected-xoryns-masterpiece.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-daedric-dawn-resto-master-architect-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-curative-green-x-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-earthen-storm-winter-perfected-pearlescent-ward-the-morag-tong.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-bone-siphon-soldier-perfected-saxhleel-champion-war-machine.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-curative-grave-storm-master-architect-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-soldier-storm-winter-perfected-pearlescent-ward-perfected-xoryns-masterpiece.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-daedric-storm-winter-perfected-claw-of-yolnahkriin-perfected-saxhleel-champion.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-grave-siphon-soldier-perfected-pearlescent-ward-war-machine.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-green-siphon-x-master-architect-perfected-pillagers-profit.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-bone-resto-siphon-powerful-assault-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sunspire-yolnahkriin-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sunspire-lokkestiiz-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sunspire-yolnahkriin-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sunspire-lokkestiiz-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/sunspire-lokkestiiz-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://esobuild.com/sunspire-lokkestiiz-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sunspire-nahviintaas-ardent-herald-spear-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sunspire-lokkestiiz-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-ardent-herald-spear-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-nahviintaas-ardent-herald-spear-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-nahviintaas-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-trash-builds-ardent-herald-spear-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-trash-builds-ardent-herald-x-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-nahviintaas-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://esobuild.com/sunspire-nahviintaas-ardent-herald-spear-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sunspire-nahviintaas-ardent-herald-spear-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/sunspire-nahviintaas-green-resto-siphon-master-architect-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-ardent-ass-grave-roar-of-alkosh-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-ardent-herald-spear-perfected-slivers-of-the-null-arca-unknown.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-ardent-ass-herald-perfected-slivers-of-the-null-arca-unknown.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-trash-builds-ardent-ass-grave-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-trash-builds-ardent-ass-grave-perfected-sul-xans-torment-roar-of-alkosh.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-nahviintaas-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-herald-highland-sentinel-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-nahviintaas-ardent-ass-grave-roar-of-alkosh-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-daedric-winter-x-perfected-saxhleel-champion-war-machine.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-ardent-ass-grave-roar-of-alkosh-zens-redress.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-ardent-ass-grave-roar-of-alkosh-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-earthen-soldier-x-perfected-pearlescent-ward-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-herald-highland-sentinel-perfected-kazpians-cruel-signet.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-nahviintaas-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-green-resto-x-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-ardent-ass-herald-perfected-slivers-of-the-null-arca-the-morag-tong.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-green-siphon-storm-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-daedric-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-daedric-soldier-storm-perfected-pearlescent-ward-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-green-resto-x-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-trash-builds-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-nahviintaas-daedric-soldier-storm-perfected-pearlescent-ward-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-trash-builds-ass-herald-spear-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-nahviintaas-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-trash-builds-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-daedric-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-varlariel-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-earthen-storm-winter-elemental-catalyst-perfected-lucent-echoes.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-earthen-winter-x-perfected-lucent-echoes-perfected-saxhleel-champion.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-varlariel-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-yolnahkriin-green-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-trash-builds-ass-herald-spear-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-nahviintaas-daedric-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-trash-builds-ardent-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-nahviintaas-earthen-storm-winter-elemental-catalyst-perfected-lucent-echoes.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-the-mage-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-nahviintaas-earthen-winter-x-perfected-lucent-echoes-perfected-saxhleel-champion.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-varlariel-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/sunspire-nahviintaas-resto-x-x-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-daedric-soldier-storm-perfected-pearlescent-ward-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-earthen-storm-winter-elemental-catalyst-perfected-lucent-echoes.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-earthen-winter-x-perfected-lucent-echoes-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sunspire-lokkestiiz-green-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-lord-falgravn-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-captain-vrol-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-lord-falgravn-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-captain-vrol-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-captain-vrol-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-captain-vrol-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-lord-falgravn-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-lord-falgravn-ardent-ass-herald-roar-of-alkosh-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-captain-vrol-ardent-ass-herald-roar-of-alkosh-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-lord-falgravn-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-captain-vrol-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-captain-vrol-daedric-soldier-winter-perfected-pearlescent-ward-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-lord-falgravn-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-lord-falgravn-daedric-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/kynes-aegis-captain-vrol-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-oaxiltso-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-oaxiltso-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-ash-titan-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-oaxiltso-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-basks-in-snakes-ardent-ass-herald-mechanical-acuity-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-ash-titan-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-oaxiltso-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-oaxiltso-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-basks-in-snakes-ardent-ass-herald-mechanical-acuity-perfected-yandirs-might.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-ardent-ass-grave-roar-of-alkosh-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-ash-titan-ardent-ass-herald-mechanical-acuity-perfected-yandirs-might.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-ash-titan-ardent-ass-herald-mechanical-acuity-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-trash-builds-ardent-ass-herald-arkasiss-genius-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-trash-builds-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-daedric-earthen-winter-elemental-catalyst-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-oaxiltso-daedric-earthen-winter-elemental-catalyst-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-bone-soldier-winter-perfected-lucent-echoes-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-daedric-earthen-winter-elemental-catalyst-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-ash-titan-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-bone-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-grave-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-xalvakka-grave-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-oaxiltso-soldier-winter-x-perfected-lucent-echoes-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-oaxiltso-grave-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-grave-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-grave-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-flame-herald-bahsei-green-siphon-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-ash-titan-green-resto-siphon-powerful-assault-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-ash-titan-daedric-earthen-winter-elemental-catalyst-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-ash-titan-green-resto-siphon-arkasiss-genius-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-basks-in-snakes-resto-siphon-storm-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-basks-in-snakes-daedric-earthen-winter-elemental-catalyst-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/rockgrove-basks-in-snakes-soldier-x-x-perfected-lucent-echoes-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://esobuild.com/aetherian-archive-trash-builds-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://esobuild.com/aetherian-archive-the-mage-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/aetherian-archive-varlariel-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/aetherian-archive-the-mage-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-varlariel-curative-resto-siphon-powerful-assault-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-trash-builds-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-varlariel-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-trash-builds-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-varlariel-bone-daedric-siphon-perfected-pearlescent-ward-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-varlariel-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-varlariel-herald-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-trash-builds-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-varlariel-daedric-soldier-winter-perfected-lucent-echoes-turning-tide.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-the-mage-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-varlariel-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-the-mage-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-the-mage-bone-daedric-siphon-perfected-pearlescent-ward-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-the-mage-herald-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-the-mage-daedric-soldier-winter-perfected-lucent-echoes-turning-tide.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-varlariel-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-the-mage-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-the-mage-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-bone-daedric-siphon-perfected-pearlescent-ward-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-trash-builds-ardent-herald-spear-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-herald-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-trash-builds-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-daedric-soldier-winter-perfected-lucent-echoes-turning-tide.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-varlariel-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-trash-builds-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-trash-builds-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-bone-daedric-siphon-perfected-pearlescent-ward-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-the-mage-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-herald-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-varlariel-earthen-grave-winter-perfected-saxhleel-champion-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-daedric-soldier-winter-perfected-lucent-echoes-turning-tide.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-the-mage-earthen-grave-winter-perfected-saxhleel-champion-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-earthen-grave-winter-perfected-saxhleel-champion-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-trash-builds-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-earthen-grave-winter-perfected-saxhleel-champion-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-varlariel-daedric-dawn-resto-jorvulds-guidance-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-varlariel-green-living-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-trash-builds-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-the-mage-daedric-dawn-resto-jorvulds-guidance-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-the-mage-green-living-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-daedric-dawn-resto-jorvulds-guidance-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-green-resto-x-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-lightning-storm-atronach-green-living-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-daedric-dawn-resto-jorvulds-guidance-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-green-resto-x-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/aetherian-archive-foundation-stone-atronach-green-living-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-green-resto-siphon-powerful-assault-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-trash-builds-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-green-resto-x-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-trash-builds-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-trash-builds-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-trash-builds-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-trash-builds-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-trash-builds-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-ardent-herald-spear-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-green-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-green-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://esobuild.com/hel-ra-citadel-the-warrior-green-resto-siphon-powerful-assault-spell-power-cure.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-daedric-soldier-winter-perfected-lucent-echoes-turning-tide.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-herald-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-bone-daedric-siphon-perfected-pearlescent-ward-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-green-resto-siphon-powerful-assault-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-daedric-soldier-winter-perfected-lucent-echoes-turning-tide.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-green-resto-siphon-master-architect-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-herald-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-green-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-bone-daedric-siphon-perfected-pearlescent-ward-powerful-assault.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-bone-grave-siphon-pearlescent-ward-perfected-saxhleel-champion.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-siphon-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://esobuild.com/hel-ra-citadel-the-yokedas-daedric-earthen-winter-perfected-lucent-echoes-turning-tide.html</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://esobuild.com/hel-ra-citadel-the-warrior-green-resto-x-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-green-resto-x-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/hel-ra-citadel-ra-kotu-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-the-serpent-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-the-serpent-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-stonebreaker-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-ozara-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-the-serpent-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-ozara-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-ozara-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-the-serpent-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-stonebreaker-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-stonebreaker-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-ozara-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-the-serpent-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-stonebreaker-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-ozara-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-trash-builds-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-trash-builds-ass-dawn-grave-perfected-slivers-of-the-null-arca-tzogvins-warband.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-trash-builds-ardent-herald-spear-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-trash-builds-ardent-ass-herald-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-trash-builds-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-trash-builds-ardent-ass-herald-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-trash-builds-ardent-ass-herald-ansuuls-torment-deadly-strike.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-the-serpent-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-the-serpent-green-resto-x-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-stonebreaker-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-stonebreaker-green-resto-x-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-ozara-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-ozara-green-resto-x-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-ass-dawn-grave-perfected-slivers-of-the-null-arca-tzogvins-warband.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-ardent-herald-spear-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-ardent-ass-herald-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-ardent-ass-herald-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-curative-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-daedric-green-siphon-master-architect-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-daedric-earthen-siphon-perfected-pearlescent-ward-perfected-saxhleel-champion.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanctum-ophidia-possessed-mantikora-grave-siphon-winter-perfected-claw-of-yolnahkriin-perfected-lucent-echoes.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-trash-builds-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-trash-builds-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-zhajhassa-the-forgotten-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-rakkhat-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-zhajhassa-the-forgotten-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-rakkhat-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-the-twins-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-the-twins-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-zhajhassa-the-forgotten-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-trash-builds-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-the-twins-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-rakkhat-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-trash-builds-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-zhajhassa-the-forgotten-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-zhajhassa-the-forgotten-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-zhajhassa-the-forgotten-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-trash-builds-ass-grave-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-trash-builds-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-the-twins-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-rakkhat-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-rakkhat-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-rakkhat-green-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-zhajhassa-the-forgotten-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-zhajhassa-the-forgotten-daedric-earthen-soldier-perfected-pearlescent-ward-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-zhajhassa-the-forgotten-green-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-the-twins-daedric-earthen-soldier-perfected-pearlescent-ward-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-the-twins-green-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/maw-of-lorkhaj-rakkhat-earthen-soldier-x-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-trash-builds-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-trash-builds-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-trash-builds-ardent-ass-herald-arkasiss-genius-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-refabrication-committee-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-trash-builds-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-refabrication-committee-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-trash-builds-ass-dawn-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-trash-builds-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-ardent-ass-herald-mechanical-acuity-perfected-yandirs-might.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-ardent-ass-herald-mechanical-acuity-perfected-whorl-of-the-depths.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-ardent-ass-herald-mechanical-acuity-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-ardent-ass-herald-mechanical-acuity-perfected-whorl-of-the-depths.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-refabrication-committee-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-refabrication-committee-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-refabrication-committee-resto-siphon-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-refabrication-committee-green-resto-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-refabrication-committee-daedric-earthen-soldier-perfected-lucent-echoes-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-refabrication-committee-daedric-soldier-winter-perfected-claw-of-yolnahkriin-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-refabrication-committee-curative-green-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-resto-siphon-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-green-resto-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-daedric-earthen-soldier-perfected-lucent-echoes-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-daedric-soldier-winter-perfected-claw-of-yolnahkriin-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-the-hunter-killers-curative-green-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-resto-siphon-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-daedric-earthen-soldier-perfected-lucent-echoes-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-daedric-soldier-winter-perfected-claw-of-yolnahkriin-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-pinnacle-factotum-curative-green-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-resto-siphon-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-daedric-earthen-soldier-perfected-lucent-echoes-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-daedric-soldier-winter-perfected-claw-of-yolnahkriin-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-assembly-general-curative-green-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-resto-siphon-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-green-resto-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-daedric-earthen-soldier-perfected-lucent-echoes-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-daedric-soldier-winter-perfected-claw-of-yolnahkriin-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/the-halls-of-fabrication-archcustodian-curative-green-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-ardent-ass-herald-perfected-slivers-of-the-null-arca-unknown.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-trash-builds-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-trash-builds-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-herald-highland-sentinel-perfected-kazpians-cruel-signet.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-herald-highland-sentinel-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-trash-builds-ardent-ass-herald-perfected-ansuuls-torment-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-trash-builds-ardent-ass-grave-perfected-sul-xans-torment-roar-of-alkosh.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-bow-breaker-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-trash-builds-ardent-dawn-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-ass-dawn-herald-perfected-slivers-of-the-null-arca-unknown.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-herald-berserking-warrior-perfected-kazpians-cruel-signet.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-ardent-ass-grave-roar-of-alkosh-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-bow-breaker-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-trash-builds-ass-dawn-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-ardent-ass-grave-roar-of-alkosh-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-sail-ripper-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-ardent-ass-grave-roar-of-alkosh-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-ass-herald-spear-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-bone-earthen-soldier-perfected-pearlescent-ward-turning-tide.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-tideborn-taleria-bone-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-sail-ripper-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-bone-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-daedric-siphon-winter-perfected-saxhleel-champion-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-reef-guardian-earthen-siphon-soldier-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-bone-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-curative-green-siphon-master-architect-perfected-pillagers-profit.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-sail-ripper-daedric-soldier-x-perfected-saxhleel-champion-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-sail-ripper-earthen-winter-x-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-daedric-soldier-x-perfected-saxhleel-champion-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-lylanar-and-turlassil-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-bow-breaker-bone-green-x-powerful-assault-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-bow-breaker-curative-resto-siphon-master-architect-perfected-pillagers-profit.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-bow-breaker-daedric-soldier-x-perfected-saxhleel-champion-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/dreadsail-reef-bow-breaker-earthen-winter-x-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-trash-builds-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-trash-builds-ass-dawn-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-trash-builds-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-trash-builds-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-spiral-descender-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-trash-builds-ardent-ass-grave-perfected-sul-xans-torment-roar-of-alkosh.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-spiral-descender-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-spiral-descender-ass-dawn-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-ardent-ass-herald-perfected-slivers-of-the-null-arca-pillar-of-nirn.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-trash-builds-ass-herald-x-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-spiral-descender-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-earthen-storm-winter-perfected-pearlescent-ward-the-morag-tong.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-earthen-winter-x-powerful-assault-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-daedric-resto-soldier-perfected-pearlescent-ward-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-earthen-winter-x-perfected-pearlescent-ward-perfected-saxhleel-champion.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-spiral-descender-resto-siphon-x-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-spiral-descender-daedric-resto-soldier-perfected-lucent-echoes-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-spiral-descender-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-spiral-descender-earthen-storm-winter-perfected-pearlescent-ward-turning-tide.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-daedric-resto-soldier-perfected-lucent-echoes-turning-tide.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-exarchanic-yaseyla-daedric-dawn-resto-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-green-siphon-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-archwizard-twelvane-and-chimera-curative-green-siphon-master-architect-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-daedric-resto-soldier-perfected-saxhleel-champion-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-daedric-siphon-soldier-perfected-saxhleel-champion-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/sanitys-edge-ansuul-the-tormentor-grave-resto-x-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-trash-builds-ass-herald-spear-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-cavot-agnan-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-cavot-agnan-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-trash-builds-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-ardent-ass-herald-perfected-slivers-of-the-null-arca-unknown.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-cavot-agnan-ass-herald-spear-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-ass-herald-spear-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-trash-builds-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-trash-builds-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-ass-herald-spear-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-cavot-agnan-ardent-ass-herald-perfected-slivers-of-the-null-arca-unknown.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-ardent-ass-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-ardent-ass-herald-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-trash-builds-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-trash-builds-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-ardent-ass-herald-perfected-slivers-of-the-null-arca-unknown.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-bone-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-daedric-earthen-winter-perfected-pearlescent-ward-perfected-saxhleel-champion.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-bone-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-daedric-earthen-winter-perfected-pearlescent-ward-perfected-saxhleel-champion.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-daedric-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-orphic-shattered-shard-green-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-cavot-agnan-green-resto-x-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-cavot-agnan-green-resto-siphon-perfected-saxhleel-champion-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-cavot-agnan-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-daedric-green-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-daedric-earthen-soldier-perfected-lucent-echoes-perfected-saxhleel-champion.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-arcane-knot-xoryn-grave-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-cavot-agnan-earthen-soldier-winter-perfected-lucent-echoes-unknown.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/lucent-citadel-cavot-agnan-daedric-storm-x-war-machine-way-of-martial-knowledge.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-hall-of-fleshcraft-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-overfiend-kazpian-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-trash-builds-ass-dawn-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-red-witch-gedna-relvel-ass-dawn-herald-mechanical-acuity-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-blood-drinker-thisa-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-overfiend-kazpian-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-trash-builds-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-red-witch-gedna-relvel-ass-dawn-herald-mechanical-acuity-perfected-yandirs-might.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-overfiend-kazpian-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-blood-drinker-thisa-ass-dawn-herald-mechanical-acuity-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-trash-builds-ass-dawn-herald-perfected-sul-xans-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-red-witch-gedna-relvel-ass-dawn-herald-deadly-strike-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-blood-drinker-thisa-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-trash-builds-ass-dawn-herald-arkasiss-genius-perfected-sul-xans-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-hall-of-fleshcraft-ass-dawn-herald-perfected-ansuuls-torment-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-red-witch-gedna-relvel-ass-dawn-herald-mechanical-acuity-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-red-witch-gedna-relvel-ass-dawn-herald-elf-bane-mechanical-acuity.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-overfiend-kazpian-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-ass-herald-storm-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-ass-grave-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-hall-of-fleshcraft-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-hall-of-fleshcraft-ass-grave-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-blood-drinker-thisa-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-red-witch-gedna-relvel-daedric-x-x-war-machine-way-of-martial-knowledge.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-overfiend-kazpian-daedric-siphon-soldier-perfected-saxhleel-champion-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-red-witch-gedna-relvel-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-red-witch-gedna-relvel-daedric-green-siphon-master-architect-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-overfiend-kazpian-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-overfiend-kazpian-grave-resto-siphon-master-architect-way-of-martial-knowledge.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-overfiend-kazpian-green-resto-siphon-perfected-pillagers-profit-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-green-siphon-x-perfected-pillagers-profit-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-earthen-siphon-winter-perfected-pearlescent-ward-perfected-xoryns-masterpiece.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-daedric-siphon-soldier-perfected-saxhleel-champion-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-jynorah-and-skorkhif-grave-resto-siphon-master-architect-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-hall-of-fleshcraft-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-hall-of-fleshcraft-daedric-siphon-soldier-perfected-pearlescent-ward-perfected-saxhleel-champion.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-hall-of-fleshcraft-earthen-siphon-soldier-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-blood-drinker-thisa-daedric-siphon-soldier-perfected-lucent-echoes-perfected-saxhleel-champion.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/ossein-cage-blood-drinker-thisa-grave-resto-siphon-master-architect-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-ass-dawn-herald-berserking-warrior-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-ass-dawn-herald-deadly-strike-war-machine.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-ass-daedric-herald-war-machine-way-of-martial-knowledge.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-ardent-earthen-winter-perfected-pearlescent-ward-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-green-resto-soldier-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-ardent-herald-spear-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-llothis-the-pious-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-felms-the-bold-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-ass-dawn-herald-perfected-slivers-of-the-null-arca-roar-of-alkosh.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-grave-x-x-perfected-saxhleel-champion-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-olms-the-just-earthen-soldier-winter-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-llothis-the-pious-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-llothis-the-pious-grave-resto-winter-perfected-saxhleel-champion-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-llothis-the-pious-dawn-earthen-soldier-perfected-pearlescent-ward-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-felms-the-bold-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-felms-the-bold-grave-resto-winter-perfected-saxhleel-champion-powerful-assault.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/asylum-sanctorium-saint-felms-the-bold-dawn-earthen-soldier-perfected-pearlescent-ward-zens-redress.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-ardent-herald-spear-deadly-strike-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-ardent-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-ardent-herald-x-highland-sentinel-perfected-slivers-of-the-null-arca.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-ardent-dawn-herald-deadly-strike-perfected-ansuuls-torment.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-ardent-herald-spear-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-green-resto-siphon-jorvulds-guidance-perfected-roaring-opportunist.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-animal-curative-green-powerful-assault-spell-power-cure.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-bone-daedric-winter-perfected-saxhleel-champion-turning-tide.html</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esobuild.com/cloudrest-shade-of-siroria-bone-grave-living-perfected-lucent-echoes-perfected-pearlescent-ward.html</loc>
+    <lastmod>2026-03-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

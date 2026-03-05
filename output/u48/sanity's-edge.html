@@ -10,7 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Sanity&#39;s Edge - ESO Trial Builds">
     <meta property="og:description" content="Best Sanity&#39;s Edge builds for Elder Scrolls Online. Common meta builds, gear sets, and abilities from top ESO Logs players.">
-    <meta property="og:image" content="https://esobuild.com/static/social-preview-sanitysedge-b2.png?v=1.3">
+    <meta property="og:image" content="https://esobuild.com/u48/static/social-preview-sanitysedge-b2.png?v=1.3">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Sanity&#39;s Edge - Top Builds">
@@ -23,7 +23,7 @@
     <meta name="twitter:creator" content="@brainsnorkel">
     <meta name="twitter:title" content="Sanity&#39;s Edge - ESO Meta Builds">
     <meta name="twitter:description" content="Best Sanity&#39;s Edge builds from top players. Discover effective gear sets and strategies for all boss encounters.">
-    <meta name="twitter:image" content="https://esobuild.com/static/social-preview-sanitysedge-b2.png?v=1.3">
+    <meta name="twitter:image" content="https://esobuild.com/u48/static/social-preview-sanitysedge-b2.png?v=1.3">
     <meta name="twitter:image:alt" content="Sanity&#39;s Edge - Top Builds">
     
     <!-- Additional Meta Tags -->
@@ -828,8 +828,15 @@
     
     <header role="banner">
         <div class="container" style="position: relative;">
-            <!-- About link in top right -->
-            <div style="position: absolute; top: 10px; right: 20px; z-index: 10;">
+            <!-- Nav links in top right -->
+            <div style="position: absolute; top: 10px; right: 20px; z-index: 10; display: flex; gap: 8px;">
+                
+                <a href="../updates.html" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9em; font-weight: 500; padding: 8px 16px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all 0.3s ease;" 
+                   onmouseover="this.style.background='rgba(56, 239, 125, 0.2)'; this.style.color='#38ef7d';" 
+                   onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='rgba(255, 255, 255, 0.9)';">
+                    Other Updates
+                </a>
+                
                 <a href="about.html" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9em; font-weight: 500; padding: 8px 16px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all 0.3s ease;" 
                    onmouseover="this.style.background='rgba(56, 239, 125, 0.2)'; this.style.color='#38ef7d';" 
                    onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='rgba(255, 255, 255, 0.9)';">
@@ -838,7 +845,7 @@
             </div>
             
             <h1>ESO Meta Build Explorer</h1>
-            <p class="subtitle">The latest ESO meta trial builds from ESOLogs. Updated every day.</p>
+            <p class="subtitle">The latest ESO meta trial builds from ESOLogs. — Update 48 Updated every day.</p>
         </div>
     </header>
     
@@ -877,7 +884,7 @@
             
             <div>
                 <a href="sanitys-edge-data.csv" 
-                   download 
+                   download="sanitys-edge-data.csv"
                    title="Download a CSV of all players' builds found in the top 10 reports for Sanity&#39;s Edge"
                    style="display: inline-flex; 
                           align-items: center; 
@@ -919,6 +926,14 @@
                 
             
         
+            
+                
+            
+        
+            
+                
+            
+        
         
         
         <div style="margin-top: 20px; padding: 15px; background: rgba(0, 0, 0, 0.3); border-radius: 8px; backdrop-filter: blur(10px);">
@@ -929,6 +944,13 @@
                    onmouseover="this.style.background='rgba(56, 239, 125, 0.2)'" 
                    onmouseout="this.style.background='rgba(56, 239, 125, 0.1)'">
                     Exarchanic Yaseyla
+                </a>
+                
+                <a href="#spiral-descender" 
+                   style="color: #38ef7d; text-decoration: none; font-size: 0.9em; padding: 5px 10px; background: rgba(56, 239, 125, 0.1); border-radius: 4px; transition: all 0.3s ease;"
+                   onmouseover="this.style.background='rgba(56, 239, 125, 0.2)'" 
+                   onmouseout="this.style.background='rgba(56, 239, 125, 0.1)'">
+                    Spiral Descender
                 </a>
                 
                 <a href="#archwizard-twelvane-and-chimera" 
@@ -946,6 +968,13 @@
                 </a>
                 
                 
+                <a href="#trash-builds" 
+                   style="color: #a8edea; text-decoration: none; font-size: 0.9em; padding: 5px 10px; background: rgba(168, 237, 234, 0.1); border-radius: 4px; transition: all 0.3s ease;"
+                   onmouseover="this.style.background='rgba(168, 237, 234, 0.2)'" 
+                   onmouseout="this.style.background='rgba(168, 237, 234, 0.1)'">
+                    Trash Builds
+                </a>
+                
             </div>
         </div>
         
@@ -956,6 +985,14 @@
 
 
 
+
+    
+        
+    
+
+    
+        
+    
 
     
         
@@ -1010,11 +1047,10 @@
                     
                 </td>
                 <td data-label="Frequency">
-                    13 players in 5 reports
-                    
+                    14 players in 8 reports
                 </td>
-                <td data-label="Metric">187.9K DPS</td>
-                <td data-label="Player Character">@NihilistMofo - Tentaculaire</td>
+                <td data-label="Metric">270.4K DPS</td>
+                <td data-label="Player Character">@tanner.k - Kąrs</td>
                 <td data-label="Details">
                     <a href="sanitys-edge-exarchanic-yaseyla-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html" 
                        style="color: #3498db; text-decoration: none;"
@@ -1043,11 +1079,10 @@
                     
                 </td>
                 <td data-label="Frequency">
-                    12 players in 7 reports
-                    
+                    14 players in 5 reports
                 </td>
-                <td data-label="Metric">163.8K DPS</td>
-                <td data-label="Player Character">@revloh - hoslo</td>
+                <td data-label="Metric">125.0K DPS</td>
+                <td data-label="Player Character">@Languste1337 - Roland Sieben Tap</td>
                 <td data-label="Details">
                     <a href="sanitys-edge-exarchanic-yaseyla-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html" 
                        style="color: #3498db; text-decoration: none;"
@@ -1071,20 +1106,51 @@
                         
                             <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
                         
-                            <a href="https://eso-hub.com/en/sets/ansuuls-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Ansuul&#39;s Torment</a>
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
                         
                     
                 </td>
                 <td data-label="Frequency">
-                    10 players in 7 reports
-                    
+                    7 players in 5 reports
                 </td>
-                <td data-label="Metric">162.8K DPS</td>
+                <td data-label="Metric">225.8K DPS</td>
                 <td data-label="Player Character">@tristanwho - Seolyn</td>
                 <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html" 
+                    <a href="sanitys-edge-exarchanic-yaseyla-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html" 
                        style="color: #3498db; text-decoration: none;"
                        aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Curative / Green / Siphoning</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/pillagers-profit" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pillager&#39;s Profit</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/spell-power-cure" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Spell Power Cure</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    3 players in 3 reports
+                </td>
+                <td data-label="Metric">118.0K HPS</td>
+                <td data-label="Player Character">@TactialScrub - Am I Offline</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-exarchanic-yaseyla-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Curative / Green / Siphoning build">
                         View Build →
                     </a>
                 </td>
@@ -1109,180 +1175,14 @@
                     
                 </td>
                 <td data-label="Frequency">
-                    4 players in 4 reports
-                    
+                    2 players in 2 reports
                 </td>
-                <td data-label="Metric">15.8K DPS</td>
-                <td data-label="Player Character">@RealMitchRobbs - Jabarooski</td>
+                <td data-label="Metric">81.0K HPS</td>
+                <td data-label="Player Character">@Onyx643 - Laxus Lightspear</td>
                 <td data-label="Details">
                     <a href="sanitys-edge-exarchanic-yaseyla-daedric-dawn-resto-master-architect-powerful-assault.html" 
                        style="color: #3498db; text-decoration: none;"
                        aria-label="View details for Daedric / Dawn&#39;s / Restoring build">
-                        View Build →
-                    </a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
-                    
-                        <span aria-hidden="true">✚</span>
-                        <span class="sr-only">Healer</span>
-                    
-                </td>
-                <td data-label="Build"><strong>Curative / Green / Unknown</strong></td>
-                <td data-label="Signature Sets">
-                    
-                    
-                        
-                            <a href="https://eso-hub.com/en/sets/pillagers-profit" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pillager&#39;s Profit</a>, 
-                        
-                            <a href="https://eso-hub.com/en/sets/spell-power-cure" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Spell Power Cure</a>
-                        
-                    
-                </td>
-                <td data-label="Frequency">
-                    4 players in 4 reports
-                    
-                </td>
-                <td data-label="Metric">6.9K DPS</td>
-                <td data-label="Player Character">@TactialScrub - Am I Offline</td>
-                <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-curative-green-x-perfected-pillagers-profit-spell-power-cure.html" 
-                       style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Curative / Green / Unknown build">
-                        View Build →
-                    </a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
-                    
-                        <span aria-hidden="true">✚</span>
-                        <span class="sr-only">Healer</span>
-                    
-                </td>
-                <td data-label="Build"><strong>Curative / Grave / Storm</strong></td>
-                <td data-label="Signature Sets">
-                    
-                    
-                        
-                            <a href="https://eso-hub.com/en/sets/master-architect" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Master Architect</a>, 
-                        
-                            <a href="https://eso-hub.com/en/sets/powerful-assault" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Powerful Assault</a>
-                        
-                    
-                </td>
-                <td data-label="Frequency">
-                    3 players in 3 reports
-                    
-                </td>
-                <td data-label="Metric">7.1K DPS</td>
-                <td data-label="Player Character">@Ar_Wen - Lilineth Umbra</td>
-                <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-curative-grave-storm-master-architect-powerful-assault.html" 
-                       style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Curative / Grave / Storm build">
-                        View Build →
-                    </a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
-                    
-                        <span aria-hidden="true">✚</span>
-                        <span class="sr-only">Healer</span>
-                    
-                </td>
-                <td data-label="Build"><strong>Green / Siphoning / Unknown</strong></td>
-                <td data-label="Signature Sets">
-                    
-                    
-                        
-                            <a href="https://eso-hub.com/en/sets/master-architect" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Master Architect</a>, 
-                        
-                            <a href="https://eso-hub.com/en/sets/pillagers-profit" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pillager&#39;s Profit</a>
-                        
-                    
-                </td>
-                <td data-label="Frequency">
-                    3 players in 3 reports
-                    
-                </td>
-                <td data-label="Metric">6.5K DPS</td>
-                <td data-label="Player Character">@Neifary - Alhvít Tyra</td>
-                <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-green-siphon-x-master-architect-perfected-pillagers-profit.html" 
-                       style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Green / Siphoning / Unknown build">
-                        View Build →
-                    </a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
-                    
-                        <span aria-hidden="true">✚</span>
-                        <span class="sr-only">Healer</span>
-                    
-                </td>
-                <td data-label="Build"><strong>Green / Restoring / Siphoning</strong></td>
-                <td data-label="Signature Sets">
-                    
-                    
-                        
-                            <a href="https://eso-hub.com/en/sets/pillagers-profit" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pillager&#39;s Profit</a>, 
-                        
-                            <a href="https://eso-hub.com/en/sets/spell-power-cure" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Spell Power Cure</a>
-                        
-                    
-                </td>
-                <td data-label="Frequency">
-                    3 players in 3 reports
-                    
-                </td>
-                <td data-label="Metric">6.4K DPS</td>
-                <td data-label="Player Character">@cripler - Duchess Anabelle</td>
-                <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-green-resto-siphon-perfected-pillagers-profit-spell-power-cure.html" 
-                       style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Green / Restoring / Siphoning build">
-                        View Build →
-                    </a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
-                    
-                        <span aria-hidden="true">✚</span>
-                        <span class="sr-only">Healer</span>
-                    
-                </td>
-                <td data-label="Build"><strong>Bone / Restoring / Siphoning</strong></td>
-                <td data-label="Signature Sets">
-                    
-                    
-                        
-                            <a href="https://eso-hub.com/en/sets/powerful-assault" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Powerful Assault</a>, 
-                        
-                            <a href="https://eso-hub.com/en/sets/spell-power-cure" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Spell Power Cure</a>
-                        
-                    
-                </td>
-                <td data-label="Frequency">
-                    3 players in 3 reports
-                    
-                </td>
-                <td data-label="Metric">5.7K DPS</td>
-                <td data-label="Player Character">@TheStarlight93 - The Starlight</td>
-                <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-bone-resto-siphon-powerful-assault-spell-power-cure.html" 
-                       style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Bone / Restoring / Siphoning build">
                         View Build →
                     </a>
                 </td>
@@ -1307,11 +1207,10 @@
                     
                 </td>
                 <td data-label="Frequency">
-                    4 players in 4 reports
-                    
+                    3 players in 3 reports
                 </td>
-                <td data-label="Metric">11.6K DPS</td>
-                <td data-label="Player Character">@Morning_Skooma - Ten-Percent-Major-Breach</td>
+                <td data-label="Metric">54 CPM</td>
+                <td data-label="Player Character">@Morning_Skooma - Wonder-Are-You-Washed</td>
                 <td data-label="Details">
                     <a href="sanitys-edge-exarchanic-yaseyla-earthen-storm-winter-perfected-pearlescent-ward-the-morag-tong.html" 
                        style="color: #3498db; text-decoration: none;"
@@ -1335,18 +1234,265 @@
                         
                             <a href="https://eso-hub.com/en/sets/lucent-echoes" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Lucent Echoes</a>, 
                         
-                            <a href="https://eso-hub.com/en/sets/xoryns-masterpiece" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Xoryn&#39;s Masterpiece</a>
+                            <a href="https://eso-hub.com/en/sets/turning-tide" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Turning Tide</a>
                         
                     
                 </td>
                 <td data-label="Frequency">
-                    4 players in 4 reports
-                    
+                    2 players in 2 reports
                 </td>
-                <td data-label="Metric">5.9K DPS</td>
+                <td data-label="Metric">56 CPM</td>
                 <td data-label="Player Character">@WonderNTS - Neural Nutworks</td>
                 <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-daedric-resto-soldier-perfected-lucent-echoes-perfected-xoryns-masterpiece.html" 
+                    <a href="sanitys-edge-exarchanic-yaseyla-daedric-resto-soldier-perfected-lucent-echoes-turning-tide.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Daedric / Restoring / Soldier build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+</div>
+
+<div class="card" id="spiral-descender">
+    <h3 style="color: #38ef7d; margin-bottom: 20px;">Spiral Descender</h3>
+    
+    
+    <table>
+        <caption class="sr-only">Builds for Spiral Descender</caption>
+        <thead>
+            <tr>
+                <th scope="col">Role</th>
+                <th scope="col">Build</th>
+                <th scope="col">Signature Sets</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">Metric</th>
+                <th scope="col">Player Character</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/tide-born-wildstalker" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Tide-Born Wildstalker</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    8 players in 5 reports
+                </td>
+                <td data-label="Metric">173.2K DPS</td>
+                <td data-label="Player Character">@Oshin3 - Spooky Oshin</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-spiral-descender-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/sul-xans-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Sul-Xan&#39;s Torment</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    7 players in 5 reports
+                </td>
+                <td data-label="Metric">162.3K DPS</td>
+                <td data-label="Player Character">@GlitterIII - Sneaky Glitter</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-spiral-descender-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Assassination / Dawn&#39;s / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/sul-xans-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Sul-Xan&#39;s Torment</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    7 players in 4 reports
+                </td>
+                <td data-label="Metric">162.2K DPS</td>
+                <td data-label="Player Character">@Lorelay123 - Saint-Pierre et Miquelon</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-spiral-descender-ass-dawn-herald-deadly-strike-perfected-sul-xans-torment.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Assassination / Dawn&#39;s / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Assassination / Dawn&#39;s / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/ansuuls-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Ansuul&#39;s Torment</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    5 players in 3 reports
+                </td>
+                <td data-label="Metric">159.0K DPS</td>
+                <td data-label="Player Character">@zDarkus - -Darkus</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-spiral-descender-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Assassination / Dawn&#39;s / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Restoring / Siphoning / Unknown</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/jorvulds-guidance" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Jorvuld&#39;s Guidance</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/roaring-opportunist" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Roaring Opportunist</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    2 players in 2 reports
+                </td>
+                <td data-label="Metric">91.8K HPS</td>
+                <td data-label="Player Character">@Iosum - Ra&#39;Zax Nazakar</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-spiral-descender-resto-siphon-x-jorvulds-guidance-perfected-roaring-opportunist.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Restoring / Siphoning / Unknown build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Curative / Green / Siphoning</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/pillagers-profit" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pillager&#39;s Profit</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/spell-power-cure" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Spell Power Cure</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    2 players in 2 reports
+                </td>
+                <td data-label="Metric">126.0K HPS</td>
+                <td data-label="Player Character">@benelian - Vianthi</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-spiral-descender-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Curative / Green / Siphoning build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">🛡️</span>
+                        <span class="sr-only">Tank</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Daedric / Restoring / Soldier</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/lucent-echoes" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Lucent Echoes</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/powerful-assault" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Powerful Assault</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    2 players in 2 reports
+                </td>
+                <td data-label="Metric">100 CPM</td>
+                <td data-label="Player Character">@Candron_Cynical - Beaming-With-Tee-Hee</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-spiral-descender-daedric-resto-soldier-perfected-lucent-echoes-powerful-assault.html" 
                        style="color: #3498db; text-decoration: none;"
                        aria-label="View details for Daedric / Restoring / Soldier build">
                         View Build →
@@ -1361,126 +1507,26 @@
                         <span class="sr-only">Tank</span>
                     
                 </td>
-                <td data-label="Build"><strong>Daedric / Storm / Winter&#39;s</strong></td>
-                <td data-label="Signature Sets">
-                    
-                    
-                        
-                            <a href="https://eso-hub.com/en/sets/claw-of-yolnahkriin" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Claw of Yolnahkriin</a>, 
-                        
-                            <a href="https://eso-hub.com/en/sets/saxhleel-champion" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Saxhleel Champion</a>
-                        
-                    
-                </td>
-                <td data-label="Frequency">
-                    3 players in 3 reports
-                    
-                </td>
-                <td data-label="Metric">13.7K DPS</td>
-                <td data-label="Player Character">@Lionseries100 - Bi Ba Brutzelman</td>
-                <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-daedric-storm-winter-perfected-claw-of-yolnahkriin-perfected-saxhleel-champion.html" 
-                       style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Daedric / Storm / Winter&#39;s build">
-                        View Build →
-                    </a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
-                    
-                        <span aria-hidden="true">🛡️</span>
-                        <span class="sr-only">Tank</span>
-                    
-                </td>
-                <td data-label="Build"><strong>Soldier / Storm / Winter&#39;s</strong></td>
+                <td data-label="Build"><strong>Earthen / Storm / Winter&#39;s</strong></td>
                 <td data-label="Signature Sets">
                     
                     
                         
                             <a href="https://eso-hub.com/en/sets/pearlescent-ward" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pearlescent Ward</a>, 
                         
-                            <a href="https://eso-hub.com/en/sets/xoryns-masterpiece" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Xoryn&#39;s Masterpiece</a>
+                            <a href="https://eso-hub.com/en/sets/turning-tide" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Turning Tide</a>
                         
                     
                 </td>
                 <td data-label="Frequency">
-                    3 players in 3 reports
-                    
+                    2 players in 2 reports
                 </td>
-                <td data-label="Metric">8.4K DPS</td>
-                <td data-label="Player Character">@Hjorth - Dark-Deal-Deer</td>
+                <td data-label="Metric">40 CPM</td>
+                <td data-label="Player Character">@dappr - Que Pasa Cuh</td>
                 <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-soldier-storm-winter-perfected-pearlescent-ward-perfected-xoryns-masterpiece.html" 
+                    <a href="sanitys-edge-spiral-descender-earthen-storm-winter-perfected-pearlescent-ward-turning-tide.html" 
                        style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Soldier / Storm / Winter&#39;s build">
-                        View Build →
-                    </a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
-                    
-                        <span aria-hidden="true">🛡️</span>
-                        <span class="sr-only">Tank</span>
-                    
-                </td>
-                <td data-label="Build"><strong>Grave / Siphoning / Soldier</strong></td>
-                <td data-label="Signature Sets">
-                    
-                    
-                        
-                            <a href="https://eso-hub.com/en/sets/pearlescent-ward" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pearlescent Ward</a>, 
-                        
-                            <a href="https://eso-hub.com/en/sets/war-machine" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">War Machine</a>
-                        
-                    
-                </td>
-                <td data-label="Frequency">
-                    3 players in 3 reports
-                    
-                </td>
-                <td data-label="Metric">7.0K DPS</td>
-                <td data-label="Player Character">@Eragon49 - Vulne-cro</td>
-                <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-grave-siphon-soldier-perfected-pearlescent-ward-war-machine.html" 
-                       style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Grave / Siphoning / Soldier build">
-                        View Build →
-                    </a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
-                    
-                        <span aria-hidden="true">🛡️</span>
-                        <span class="sr-only">Tank</span>
-                    
-                </td>
-                <td data-label="Build"><strong>Bone / Siphoning / Soldier</strong></td>
-                <td data-label="Signature Sets">
-                    
-                    
-                        
-                            <a href="https://eso-hub.com/en/sets/saxhleel-champion" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Saxhleel Champion</a>, 
-                        
-                            <a href="https://eso-hub.com/en/sets/war-machine" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">War Machine</a>
-                        
-                    
-                </td>
-                <td data-label="Frequency">
-                    3 players in 3 reports
-                    
-                </td>
-                <td data-label="Metric">3.7K DPS</td>
-                <td data-label="Player Character">@Falodar - Nodss Craven</td>
-                <td data-label="Details">
-                    <a href="sanitys-edge-exarchanic-yaseyla-bone-siphon-soldier-perfected-saxhleel-champion-war-machine.html" 
-                       style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Bone / Siphoning / Soldier build">
+                       aria-label="View details for Earthen / Storm / Winter&#39;s build">
                         View Build →
                     </a>
                 </td>
@@ -1517,6 +1563,38 @@
                         <span class="sr-only">DPS</span>
                     
                 </td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/tide-born-wildstalker" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Tide-Born Wildstalker</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    14 players in 8 reports
+                </td>
+                <td data-label="Metric">173.7K DPS</td>
+                <td data-label="Player Character">@PartialEthos - Schmethos</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
                 <td data-label="Build"><strong>Assassination / Dawn&#39;s / Herald</strong></td>
                 <td data-label="Signature Sets">
                     
@@ -1529,11 +1607,10 @@
                     
                 </td>
                 <td data-label="Frequency">
-                    16 players in 6 reports
-                    
+                    12 players in 5 reports
                 </td>
-                <td data-label="Metric">165.7K DPS</td>
-                <td data-label="Player Character">@ZoraxESO - Alcohonist</td>
+                <td data-label="Metric">155.3K DPS</td>
+                <td data-label="Player Character">@Chomper876 - The Carry Has Arrived</td>
                 <td data-label="Details">
                     <a href="sanitys-edge-archwizard-twelvane-and-chimera-ass-dawn-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html" 
                        style="color: #3498db; text-decoration: none;"
@@ -1557,20 +1634,243 @@
                         
                             <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>, 
                         
-                            <a href="https://eso-hub.com/en/sets/tide-born-wildstalker" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Tide-Born Wildstalker</a>
+                            <a href="https://eso-hub.com/en/sets/pillar-of-nirn" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Pillar of Nirn</a>
                         
                     
                 </td>
                 <td data-label="Frequency">
-                    8 players in 4 reports
-                    
+                    7 players in 3 reports
                 </td>
-                <td data-label="Metric">185.8K DPS</td>
-                <td data-label="Player Character">@Foolebuilt - hentcanist</td>
+                <td data-label="Metric">190.6K DPS</td>
+                <td data-label="Player Character">@rjYassi - teensie arc</td>
                 <td data-label="Details">
-                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html" 
+                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-ardent-ass-herald-perfected-slivers-of-the-null-arca-pillar-of-nirn.html" 
                        style="color: #3498db; text-decoration: none;"
                        aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    7 players in 3 reports
+                </td>
+                <td data-label="Metric">166.4K DPS</td>
+                <td data-label="Player Character">@tristanwho - Seolyn</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-ardent-ass-herald-deadly-strike-perfected-slivers-of-the-null-arca.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Assassination / Dawn&#39;s / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    6 players in 4 reports
+                </td>
+                <td data-label="Metric">149.6K DPS</td>
+                <td data-label="Player Character">@Droper10 - Droperi</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-ass-dawn-herald-deadly-strike-perfected-slivers-of-the-null-arca.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Assassination / Dawn&#39;s / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Curative / Green / Siphoning</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/pillagers-profit" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pillager&#39;s Profit</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/spell-power-cure" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Spell Power Cure</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    4 players in 4 reports
+                </td>
+                <td data-label="Metric">76.0K HPS</td>
+                <td data-label="Player Character">@TactialScrub - Am I Offline</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Curative / Green / Siphoning build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Green / Siphoning / Unknown</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/pillagers-profit" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pillager&#39;s Profit</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/spell-power-cure" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Spell Power Cure</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    2 players in 2 reports
+                </td>
+                <td data-label="Metric">68.5K HPS</td>
+                <td data-label="Player Character">@Minervyr - Meme Mender</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-green-siphon-x-perfected-pillagers-profit-spell-power-cure.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Green / Siphoning / Unknown build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Curative / Green / Siphoning</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/master-architect" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Master Architect</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/spell-power-cure" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Spell Power Cure</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    2 players in 2 reports
+                </td>
+                <td data-label="Metric">57.9K HPS</td>
+                <td data-label="Player Character">@sallamandra - Vex&#39;alya</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-curative-green-siphon-master-architect-spell-power-cure.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Curative / Green / Siphoning build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">🛡️</span>
+                        <span class="sr-only">Tank</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Earthen / Unknown / Winter&#39;s</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/powerful-assault" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Powerful Assault</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/war-machine" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">War Machine</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    3 players in 3 reports
+                </td>
+                <td data-label="Metric">53 CPM</td>
+                <td data-label="Player Character">@Morning_Skooma - Wonder-Are-You-Washed</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-earthen-winter-x-powerful-assault-war-machine.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Earthen / Unknown / Winter&#39;s build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">🛡️</span>
+                        <span class="sr-only">Tank</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Daedric / Restoring / Soldier</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/pearlescent-ward" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pearlescent Ward</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/war-machine" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">War Machine</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    3 players in 3 reports
+                </td>
+                <td data-label="Metric">48 CPM</td>
+                <td data-label="Player Character">@WonderNTS - Neural Nutworks</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-archwizard-twelvane-and-chimera-daedric-resto-soldier-perfected-pearlescent-ward-war-machine.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Daedric / Restoring / Soldier build">
                         View Build →
                     </a>
                 </td>
@@ -1607,39 +1907,6 @@
                         <span class="sr-only">DPS</span>
                     
                 </td>
-                <td data-label="Build"><strong>Assassination / Dawn&#39;s / Herald</strong></td>
-                <td data-label="Signature Sets">
-                    
-                    
-                        
-                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
-                        
-                            <a href="https://eso-hub.com/en/sets/ansuuls-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Ansuul&#39;s Torment</a>
-                        
-                    
-                </td>
-                <td data-label="Frequency">
-                    7 players in 5 reports
-                    
-                </td>
-                <td data-label="Metric">127.0K DPS</td>
-                <td data-label="Player Character">@Bleezus15 - kinetarc</td>
-                <td data-label="Details">
-                    <a href="sanitys-edge-ansuul-the-tormentor-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html" 
-                       style="color: #3498db; text-decoration: none;"
-                       aria-label="View details for Assassination / Dawn&#39;s / Herald build">
-                        View Build →
-                    </a>
-                </td>
-            </tr>
-            
-            <tr>
-                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
-                    
-                        <span aria-hidden="true">⚔️</span>
-                        <span class="sr-only">DPS</span>
-                    
-                </td>
                 <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
                 <td data-label="Signature Sets">
                     
@@ -1652,11 +1919,10 @@
                     
                 </td>
                 <td data-label="Frequency">
-                    6 players in 2 reports
-                    
+                    15 players in 8 reports
                 </td>
-                <td data-label="Metric">225.7K DPS</td>
-                <td data-label="Player Character">@f.rags - Game Hard Me Bad</td>
+                <td data-label="Metric">232.5K DPS</td>
+                <td data-label="Player Character">@tanner.k - Kąrs</td>
                 <td data-label="Details">
                     <a href="sanitys-edge-ansuul-the-tormentor-ardent-ass-herald-aegis-caller-perfected-slivers-of-the-null-arca.html" 
                        style="color: #3498db; text-decoration: none;"
@@ -1680,20 +1946,337 @@
                         
                             <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
                         
-                            <a href="https://eso-hub.com/en/sets/whorl-of-the-depths" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Whorl of the Depths</a>
+                            <a href="https://eso-hub.com/en/sets/ansuuls-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Ansuul&#39;s Torment</a>
                         
                     
                 </td>
                 <td data-label="Frequency">
-                    6 players in 3 reports
-                    
+                    11 players in 4 reports
                 </td>
-                <td data-label="Metric">150.6K DPS</td>
-                <td data-label="Player Character">@Woolxxl1 - Blockt mit Büchern</td>
+                <td data-label="Metric">187.6K DPS</td>
+                <td data-label="Player Character">@Droper10 - Droperi</td>
                 <td data-label="Details">
-                    <a href="sanitys-edge-ansuul-the-tormentor-ass-dawn-herald-deadly-strike-perfected-whorl-of-the-depths.html" 
+                    <a href="sanitys-edge-ansuul-the-tormentor-ass-dawn-herald-deadly-strike-perfected-ansuuls-torment.html" 
                        style="color: #3498db; text-decoration: none;"
                        aria-label="View details for Assassination / Dawn&#39;s / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/slivers-of-the-null-arca" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Slivers of the Null Arca</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/tide-born-wildstalker" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Tide-Born Wildstalker</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    7 players in 5 reports
+                </td>
+                <td data-label="Metric">148.9K DPS</td>
+                <td data-label="Player Character">@SadYoungMan - The Eighth Inner Gate</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-ansuul-the-tormentor-ardent-ass-herald-perfected-slivers-of-the-null-arca-tide-born-wildstalker.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Curative / Green / Siphoning</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/pillagers-profit" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pillager&#39;s Profit</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/spell-power-cure" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Spell Power Cure</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    4 players in 4 reports
+                </td>
+                <td data-label="Metric">89.4K HPS</td>
+                <td data-label="Player Character">@TactialScrub - Am I Offline</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-ansuul-the-tormentor-curative-green-siphon-perfected-pillagers-profit-spell-power-cure.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Curative / Green / Siphoning build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">✚</span>
+                        <span class="sr-only">Healer</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Grave / Restoring / Unknown</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/master-architect" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Master Architect</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/powerful-assault" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Powerful Assault</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    2 players in 2 reports
+                </td>
+                <td data-label="Metric">76.1K HPS</td>
+                <td data-label="Player Character">@benelian - Alareid</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-ansuul-the-tormentor-grave-resto-x-master-architect-powerful-assault.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Grave / Restoring / Unknown build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">🛡️</span>
+                        <span class="sr-only">Tank</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Earthen / Unknown / Winter&#39;s</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/pearlescent-ward" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Pearlescent Ward</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/saxhleel-champion" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Saxhleel Champion</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    3 players in 3 reports
+                </td>
+                <td data-label="Metric">46 CPM</td>
+                <td data-label="Player Character">@Morning_Skooma - Wonder-Are-You-Washed</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-ansuul-the-tormentor-earthen-winter-x-perfected-pearlescent-ward-perfected-saxhleel-champion.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Earthen / Unknown / Winter&#39;s build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">🛡️</span>
+                        <span class="sr-only">Tank</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Daedric / Restoring / Soldier</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/saxhleel-champion" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Saxhleel Champion</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/war-machine" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">War Machine</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    2 players in 2 reports
+                </td>
+                <td data-label="Metric">46 CPM</td>
+                <td data-label="Player Character">@Candron_Cynical - Beaming-With-Tee-Hee</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-ansuul-the-tormentor-daedric-resto-soldier-perfected-saxhleel-champion-war-machine.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Daedric / Restoring / Soldier build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">🛡️</span>
+                        <span class="sr-only">Tank</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Daedric / Siphoning / Soldier</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/saxhleel-champion" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Saxhleel Champion</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/war-machine" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">War Machine</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    2 players in 2 reports
+                </td>
+                <td data-label="Metric">53 CPM</td>
+                <td data-label="Player Character">@A_Tilted-Mango - Taereal Aelovi</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-ansuul-the-tormentor-daedric-siphon-soldier-perfected-saxhleel-champion-war-machine.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Daedric / Siphoning / Soldier build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+</div>
+
+
+
+
+<div class="card" style="background: linear-gradient(135deg, rgba(168, 237, 234, 0.1) 0%, rgba(56, 239, 125, 0.1) 100%);" id="trash-builds">
+    <h3 style="color: #a8edea; margin-bottom: 10px;">Trash Builds</h3>
+    <p style="color: #999; font-size: 0.9em; margin-bottom: 20px;">
+        DPS builds optimized for clearing trash mobs between boss encounters
+    </p>
+    
+    
+    <table>
+        <caption class="sr-only">Builds for Trash Builds</caption>
+        <thead>
+            <tr>
+                <th scope="col">Role</th>
+                <th scope="col">Build</th>
+                <th scope="col">Signature Sets</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">Metric</th>
+                <th scope="col">Player Character</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/sul-xans-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Sul-Xan&#39;s Torment</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/tide-born-wildstalker" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Tide-Born Wildstalker</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    31 players in 8 reports
+                </td>
+                <td data-label="Metric">209.2K DPS</td>
+                <td data-label="Player Character">@jasontanublet - One Beam No Brain</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-trash-builds-ardent-ass-herald-perfected-sul-xans-torment-tide-born-wildstalker.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Assassination / Dawn&#39;s / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/sul-xans-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Sul-Xan&#39;s Torment</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    29 players in 7 reports
+                </td>
+                <td data-label="Metric">371.2K DPS</td>
+                <td data-label="Player Character">@Valjaria - Val Kyma</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-trash-builds-ass-dawn-herald-deadly-strike-perfected-sul-xans-torment.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Assassination / Dawn&#39;s / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Ardent / Assassination / Herald</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/sul-xans-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Sul-Xan&#39;s Torment</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    16 players in 5 reports
+                </td>
+                <td data-label="Metric">295.1K DPS</td>
+                <td data-label="Player Character">@GlitterIII - Sneaky Glitter</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-trash-builds-ardent-ass-herald-deadly-strike-perfected-sul-xans-torment.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Herald build">
                         View Build →
                     </a>
                 </td>
@@ -1718,15 +2301,78 @@
                     
                 </td>
                 <td data-label="Frequency">
-                    6 players in 4 reports
-                    
+                    8 players in 2 reports
                 </td>
-                <td data-label="Metric">138.0K DPS</td>
-                <td data-label="Player Character">@Raijindono - Raijindono</td>
+                <td data-label="Metric">180.7K DPS</td>
+                <td data-label="Player Character">@sasserclubb - Ginger Tentacles</td>
                 <td data-label="Details">
-                    <a href="sanitys-edge-ansuul-the-tormentor-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html" 
+                    <a href="sanitys-edge-trash-builds-ardent-ass-herald-deadly-strike-perfected-ansuuls-torment.html" 
                        style="color: #3498db; text-decoration: none;"
                        aria-label="View details for Ardent / Assassination / Herald build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Ardent / Assassination / Grave</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/sul-xans-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Sul-Xan&#39;s Torment</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/roar-of-alkosh" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Roar of Alkosh</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    7 players in 4 reports
+                </td>
+                <td data-label="Metric">225.7K DPS</td>
+                <td data-label="Player Character">@porang - sweet soul eater</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-trash-builds-ardent-ass-grave-perfected-sul-xans-torment-roar-of-alkosh.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Ardent / Assassination / Grave build">
+                        View Build →
+                    </a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td data-label="Role" style="text-align: center; font-size: 1.5em;">
+                    
+                        <span aria-hidden="true">⚔️</span>
+                        <span class="sr-only">DPS</span>
+                    
+                </td>
+                <td data-label="Build"><strong>Assassination / Herald / Unknown</strong></td>
+                <td data-label="Signature Sets">
+                    
+                    
+                        
+                            <a href="https://eso-hub.com/en/sets/deadly-strike" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Deadly Strike</a>, 
+                        
+                            <a href="https://eso-hub.com/en/sets/sul-xans-torment" target="_blank" rel="noopener noreferrer" style="color: #38ef7d; text-decoration: none;">Perfected Sul-Xan&#39;s Torment</a>
+                        
+                    
+                </td>
+                <td data-label="Frequency">
+                    6 players in 2 reports
+                </td>
+                <td data-label="Metric">150.5K DPS</td>
+                <td data-label="Player Character">@Ginga453 - Gingers On Top</td>
+                <td data-label="Details">
+                    <a href="sanitys-edge-trash-builds-ass-herald-x-deadly-strike-perfected-sul-xans-torment.html" 
+                       style="color: #3498db; text-decoration: none;"
+                       aria-label="View details for Assassination / Herald / Unknown build">
                         View Build →
                     </a>
                 </td>
@@ -1739,9 +2385,6 @@
 
 
 
-
-
-
     </main>
     
     <footer role="contentinfo">
@@ -1749,9 +2392,10 @@
             <div class="credits">
                 <p style="margin-top: 15px; font-size: 0.85em;">
                     © 2025 <a href="https://github.com/brainsnorkel" target="_blank" rel="noopener noreferrer">@brainsnorkel</a> 
-                    Updated <span id="generated-timestamp" data-utc="2025-10-28T00:37:26Z">2025-10-28T00:37:26Z</span> | 
-                    Version 1.3.3 |
+                    Updated <span id="generated-timestamp" data-utc="2026-03-05T23:23:08Z">2026-03-05T23:23:08Z</span> | 
+                    Version 1.3.9 | Update 48 |
                     Source & Issues: <a href="https://github.com/brainsnorkel/eso-build-o-rama/issues" target="_blank" rel="noopener noreferrer">github</a> | 
+                    <a href="../updates.html">View other game updates</a> | 
                     <a href="https://www.elderscrollsonline.com" target="_blank" rel="noopener noreferrer">The Elder Scrolls Online™</a> © ZeniMax Media Inc
                 </p>
             </div>

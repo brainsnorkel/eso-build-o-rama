@@ -444,7 +444,6 @@ jobs:
           name: builds-json-artifact
           path: ${{ steps.update.outputs.update_dir }}/builds.json
           retention-days: 30
-        if: inputs.deploy_only != true
       
       - name: Verify archived updates are preserved
         if: inputs.deploy_only != true

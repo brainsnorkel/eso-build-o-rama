@@ -25,9 +25,23 @@ def main():
 
     print(f"Regenerating pages in: {output_dir}/")
 
+    # Load update config for prefix/label
+    import json
+    config_path = Path(__file__).parent / 'data' / 'update_config.json'
+    update_config = json.loads(config_path.read_text())
+    active_update = update_config.get('active_update', '')
+    update_info = update_config.get('updates', {}).get(active_update, {})
+    update_prefix = update_info.get('path_prefix', active_update)
+    update_label = update_info.get('label', '')
+
     # Initialize components
     data_store = DataStore(builds_file=f"{output_dir}/builds.json")
-    page_generator = PageGenerator(template_dir="templates", output_dir=output_dir)
+    page_generator = PageGenerator(
+        template_dir="templates",
+        output_dir=output_dir,
+        update_prefix=update_prefix,
+        update_label=update_label,
+    )
 
     # Get all saved builds
     all_saved_builds = data_store.get_all_builds()

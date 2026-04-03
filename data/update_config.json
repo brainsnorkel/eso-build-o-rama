@@ -1,6 +1,6 @@
 {
-  "current_update": "u48",
-  "active_update": "u48",
+  "current_update": "u49",
+  "active_update": "u49",
   "updates": {
     "u48": {
       "label": "Update 48",
@@ -12,7 +12,7 @@
       "label": "Update 49",
       "display_name": "Update 49",
       "path_prefix": "u49",
-      "status": "pending"
+      "status": "active"
     }
   }
 }

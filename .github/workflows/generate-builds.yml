@@ -347,6 +347,7 @@ jobs:
           fi
       
       - name: Copy static assets to output
+        if: inputs.deploy_only != true
         run: |
           UPDATE_DIR="${{ steps.update.outputs.update_dir }}"
           # Copy only icons to output (all other static assets are already in output/ from repo)

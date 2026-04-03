@@ -1,6 +1,8 @@
 name: Generate ESO Builds (Staggered)
 
 on:
+  schedule:
+    - cron: '4 */1 * * *'  # Every hour at :04
   workflow_dispatch:
     inputs:
       trial_id:

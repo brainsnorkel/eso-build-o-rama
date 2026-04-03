@@ -188,7 +188,7 @@
                         <span class="sr-only">Unknown</span>
                     {% endif %}
                 </td>
-                <td data-label="Build"><strong>{{ build.get_display_name(abbreviated=True) }}</strong></td>
+                <td data-label="Build"><strong>{% for name, is_base in build.get_display_parts(abbreviated=True) %}{% if is_base %}<span style="font-weight: 900; color: #fff;">{{ name }}</span>{% else %}{{ name }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</strong></td>
                 <td data-label="Signature Sets">
                     {% set sorted_sets = build.get_sorted_sets() %}
                     {% if sorted_sets %}
@@ -261,7 +261,7 @@
                         <span class="sr-only">Unknown</span>
                     {% endif %}
                 </td>
-                <td data-label="Build"><strong>{{ build.get_display_name(abbreviated=True) }}</strong></td>
+                <td data-label="Build"><strong>{% for name, is_base in build.get_display_parts(abbreviated=True) %}{% if is_base %}<span style="font-weight: 900; color: #fff;">{{ name }}</span>{% else %}{{ name }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</strong></td>
                 <td data-label="Signature Sets">
                     {% set sorted_sets = build.get_sorted_sets() %}
                     {% if sorted_sets %}

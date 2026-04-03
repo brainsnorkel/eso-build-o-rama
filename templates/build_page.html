@@ -132,7 +132,7 @@
 </nav>
 
 <div class="card">
-    <h2>{{ build.get_display_name() }}</h2>
+    <h2>{% for name, is_base in build.get_display_parts() %}{% if is_base %}<span style="font-weight: 900; color: #fff;">{{ name }}</span>{% else %}{{ name }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</h2>
     
     <div class="build-info">
         <div class="info-box">
@@ -155,6 +155,11 @@
             </div>
         </div>
         
+        <div class="info-box">
+            <div class="label">Base Class</div>
+            <div class="value">{{ best_player.class_name or 'Unknown' }}</div>
+        </div>
+
         <div class="info-box">
             <div class="label">Mundus</div>
             <div class="value">{{ best_player.mundus or 'Unknown' }}</div>

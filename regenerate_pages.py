@@ -34,6 +34,12 @@ def main():
     update_prefix = update_info.get('path_prefix', active_update)
     update_label = update_info.get('label', '')
 
+    # Append update prefix to output directory (matches main.py behavior)
+    if update_prefix:
+        output_dir = f"{output_dir}/{update_prefix}"
+
+    print(f"Using update prefix: {update_prefix}, full output path: {output_dir}/")
+
     # Initialize components
     data_store = DataStore(builds_file=f"{output_dir}/builds.json")
     page_generator = PageGenerator(

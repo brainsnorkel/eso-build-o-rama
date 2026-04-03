@@ -7,6 +7,18 @@ from dataclasses import dataclass, field
 from enum import Enum
 
 
+# Mapping from ESO class name (as returned by API 'type' field) to skill line abbreviations
+CLASS_SKILL_LINES = {
+    "Dragonknight": {"ardent", "draconic", "earthen"},
+    "Sorcerer": {"dark", "daedric", "storm"},
+    "Nightblade": {"ass", "shadow", "siphon"},
+    "Templar": {"spear", "dawn", "resto"},
+    "Warden": {"animal", "green", "winter"},
+    "Necromancer": {"grave", "bone", "living"},
+    "Arcanist": {"herald", "curative", "soldier"},
+}
+
+
 class Role(Enum):
     """Player roles in ESO."""
     TANK = "tank"
@@ -235,6 +247,53 @@ class CommonBuild:
         # Role information is now shown via icon, not in parentheses
         return " / ".join(full_subclasses)
     
+    def get_display_parts(self, abbreviated: bool = False) -> list:
+        """
+        Get subclass display names with base-class annotation.
+
+        Returns:
+            Sorted list of (display_name, is_base_class) tuples.
+        """
+        if abbreviated:
+            subclass_names = {
+                "animal": "Animal", "ardent": "Ardent", "ass": "Assassination",
+                "bone": "Bone", "curative": "Curative", "daedric": "Daedric",
+                "dark": "Dark", "dawn": "Dawn's", "draconic": "Draconic",
+                "earthen": "Earthen", "grave": "Grave", "green": "Green",
+                "herald": "Herald", "living": "Living", "resto": "Restoring",
+                "shadow": "Shadow", "siphon": "Siphoning", "soldier": "Soldier",
+                "spear": "Aedric", "storm": "Storm", "winter": "Winter's",
+                "x": "Unknown",
+            }
+        else:
+            subclass_names = {
+                "animal": "Animal Companions", "ardent": "Ardent Flame",
+                "ass": "Assassination", "bone": "Bone Tyrant",
+                "curative": "Curative Runeforms", "daedric": "Daedric Summoning",
+                "dark": "Dark Magic", "dawn": "Dawn's Wrath",
+                "draconic": "Draconic Power", "earthen": "Earthen Heart",
+                "grave": "Grave Lord", "green": "Green Balance",
+                "herald": "Herald of the Tome", "living": "Living Death",
+                "resto": "Restoring Light", "shadow": "Shadow",
+                "siphon": "Siphoning", "soldier": "Soldier of Apocrypha",
+                "spear": "Aedric Spear", "storm": "Storm Calling",
+                "winter": "Winter's Embrace", "x": "Unknown",
+            }
+
+        # Determine base class skill lines from best_player
+        base_class_abbrevs = set()
+        if self.best_player and self.best_player.class_name:
+            base_class_abbrevs = CLASS_SKILL_LINES.get(self.best_player.class_name, set())
+
+        parts = []
+        for subclass in self.subclasses:
+            name = subclass_names.get(subclass.lower(), subclass.title())
+            is_base = subclass.lower() in base_class_abbrevs
+            parts.append((name, is_base))
+
+        parts.sort(key=lambda p: p[0])
+        return parts
+
     def get_all_sets_used(self) -> List[str]:
         """Get a list of all unique sets used by players with this build."""
         all_sets = set()

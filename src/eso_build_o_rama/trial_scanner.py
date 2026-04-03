@@ -54,8 +54,12 @@ class TrialScanner:
             difficulty = fight.get('difficulty')
             kill = fight.get('kill', False)
             
-            # Match by name, has difficulty set, and is a successful kill (not a wipe)
-            if fight_name == encounter_name and difficulty and kill:
+            # Match by name (exact or prefix to handle combined names like "Z'Maja / Shade of Z'Maja"),
+            # has difficulty set, and is a successful kill (not a wipe)
+            name_matches = (fight_name == encounter_name
+                            or fight_name.startswith(encounter_name + " /")
+                            or fight_name.endswith("/ " + encounter_name))
+            if name_matches and difficulty and kill:
                 duration = fight.get('endTime', 0) - fight.get('startTime', 0)
                 matching_fights.append({
                     'id': fight.get('id'),
@@ -108,7 +112,10 @@ class TrialScanner:
         
         # Validate fight is for the expected encounter
         fight_name = fight_info.get('name', '')
-        if expected_encounter_name and fight_name != expected_encounter_name:
+        name_valid = (fight_name == expected_encounter_name
+                      or fight_name.startswith(expected_encounter_name + " /")
+                      or fight_name.endswith("/ " + expected_encounter_name))
+        if expected_encounter_name and not name_valid:
             logger.warning(f"Fight {fight_id} is '{fight_name}', expected '{expected_encounter_name}' - skipping")
             return None
         
@@ -212,7 +219,11 @@ class TrialScanner:
             return None
         
         # Create trial report
-        boss_name = override_boss_name if override_boss_name else fight_info.get('name', 'Unknown Boss')
+        # Use the canonical encounter name when available (fight names can vary,
+        # e.g. "Z'Maja / Shade of Z'Maja" vs just "Z'Maja")
+        boss_name = override_boss_name if override_boss_name else (
+            expected_encounter_name or fight_info.get('name', 'Unknown Boss')
+        )
         trial_report = self.data_parser.create_trial_report(
             valid_players,
             trial_name,

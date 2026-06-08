@@ -431,7 +431,7 @@ jobs:
       
       - name: Upload builds.json artifact for recovery
         if: inputs.deploy_only != true
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: builds-json-artifact
           path: ${{ steps.update.outputs.update_dir }}/builds.json

@@ -88,7 +88,7 @@ jobs:
           fi
       
       - name: Checkout main branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Determine update version
         if: inputs.deploy_only != true
         id: update
@@ -111,7 +111,7 @@ jobs:
       
       - name: Set up Python
         if: inputs.deploy_only != true
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: '3.9'
       
@@ -431,7 +431,7 @@ jobs:
       
       - name: Upload builds.json artifact for recovery
         if: inputs.deploy_only != true
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: builds-json-artifact
           path: ${{ steps.update.outputs.update_dir }}/builds.json
@@ -472,15 +472,15 @@ jobs:
           EOF
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
         with:
           static_site_generator: custom
       
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: output
       
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

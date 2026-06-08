@@ -45,33 +45,24 @@ jobs:
             echo "trial_id=${{ inputs.trial_id }}" >> $GITHUB_OUTPUT
           else
             # Sequential trial scheduling: AA, HRC, SO, MoL, HoF, AS, CR, SS, KA, RG, DSR, SE, LC, OC
-            # Each trial runs every 9h 20m (one trial every 40 minutes)
-            # Starting reference: 20:00 UTC for AA
-            
+            # One trial per UTC hour: TRIAL_INDEX = UTC_hour % 14
+            #
+            # Selection depends ONLY on the hour, never the minute. GitHub's
+            # scheduled cron fires with heavy jitter (often 20-50 min late) and
+            # sometimes drops runs entirely. The previous 40-minute-slot scheme
+            # divided by the run minute, so jitter shifted the chosen trial and
+            # the last index in the cycle (OC) was starved (0 selections in 80
+            # runs). Keying off the hour alone is immune to minute-level jitter:
+            # a run delayed from :04 to :58 stays in the same hour -> same trial.
+            #
+            # 14 does not divide 24, so the index drifts one hour per day and
+            # every trial gets full coverage over time. A dropped run only skips
+            # that trial for one cycle and self-corrects next time.
+
             CURRENT_HOUR=$(date -u +%H | sed 's/^0*//' || echo "0")
-            CURRENT_MIN=$(date -u +%M | sed 's/^0*//' || echo "0")
-            
-            # Reference time: 20:00 UTC
-            REFERENCE_HOUR=20
-            REFERENCE_MIN=0
-            
-            # Calculate total minutes since reference (20:00 UTC)
-            CURRENT_TOTAL_MIN=$(( CURRENT_HOUR * 60 + CURRENT_MIN ))
-            REFERENCE_TOTAL_MIN=$(( REFERENCE_HOUR * 60 + REFERENCE_MIN ))
-            
-            MINUTES_SINCE_REFERENCE=$(( CURRENT_TOTAL_MIN - REFERENCE_TOTAL_MIN ))
-            
-            # Handle negative values (if current time is before reference)
-            if [ $MINUTES_SINCE_REFERENCE -lt 0 ]; then
-              MINUTES_SINCE_REFERENCE=$((MINUTES_SINCE_REFERENCE + 1440))  # Add 24 hours (1440 minutes)
-            fi
-            
-            # Compute 40-minute slot number
-            SLOT_NUMBER=$(( MINUTES_SINCE_REFERENCE / 40 ))
-            
-            # Trial index advances every 40 minutes
-            TRIAL_INDEX=$(( SLOT_NUMBER % 14 ))
-            
+
+            TRIAL_INDEX=$(( CURRENT_HOUR % 14 ))
+
             # Map trial index to actual trial IDs
             case $TRIAL_INDEX in
               0) echo "trial_id=1" >> $GITHUB_OUTPUT ;;   # AA
@@ -92,9 +83,8 @@ jobs:
             esac
             
             echo "Current time: $(date -u '+%Y-%m-%d %H:%M') UTC"
-            echo "Minutes since 20:00 UTC reference: $MINUTES_SINCE_REFERENCE"
-            echo "40-minute slot number: $SLOT_NUMBER"
-            echo "Trial index: $TRIAL_INDEX"
+            echo "UTC hour: $CURRENT_HOUR"
+            echo "Trial index (hour % 14): $TRIAL_INDEX"
           fi
       
       - name: Checkout main branch

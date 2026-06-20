@@ -120,9 +120,43 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      
-      - name: Download existing builds.json
+
+      - name: Bootstrap new update
         if: inputs.deploy_only != true
+        id: bootstrap
+        run: |
+          UPDATE_PREFIX="${{ steps.update.outputs.update_prefix }}"
+          UPDATE_DIR="${{ steps.update.outputs.update_dir }}"
+          mkdir -p "${UPDATE_DIR}"
+          # Bootstrap is ONLY for the very first run of a brand-new update, where
+          # no builds.json exists anywhere. In that case we must NOT download or
+          # restore (the only prior data belongs to a DIFFERENT update and would
+          # contaminate this one) — seed an empty structure and let the scan
+          # populate it from scratch.
+          #
+          # "New" requires BOTH: (a) no builds.json committed in the repo, AND
+          # (b) the live site returns a definitive 404 for this prefix. After the
+          # first deploy the live URL returns 200 (even though the repo still has
+          # no committed copy), so subsequent runs are treated as established and
+          # download the accumulated data — preventing data-loss on later trials.
+          # Any ambiguous live status (timeout/5xx/000) is treated as established
+          # so a transient outage can never wipe an update.
+          LIVE_STATUS=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 5 "https://esobuild.com/${UPDATE_PREFIX}/builds.json" || echo "000")
+          echo "Repo committed builds.json: $(git ls-files --error-unmatch "${UPDATE_DIR}/builds.json" >/dev/null 2>&1 && echo yes || echo no) | live status: ${LIVE_STATUS}"
+          if git ls-files --error-unmatch "${UPDATE_DIR}/builds.json" >/dev/null 2>&1; then
+            echo "Established update ${UPDATE_PREFIX} (committed in repo): will download existing builds.json"
+            echo "is_new_update=false" >> $GITHUB_OUTPUT
+          elif [ "${LIVE_STATUS}" = "404" ]; then
+            echo "🌱 New update ${UPDATE_PREFIX} (no repo copy, live 404): seeding empty builds.json (no download/restore)"
+            echo '{"trials": {}, "last_full_update": null}' > "${UPDATE_DIR}/builds.json"
+            echo "is_new_update=true" >> $GITHUB_OUTPUT
+          else
+            echo "Established update ${UPDATE_PREFIX} (live status ${LIVE_STATUS}): will download/restore existing builds.json"
+            echo "is_new_update=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Download existing builds.json
+        if: inputs.deploy_only != true && steps.bootstrap.outputs.is_new_update != 'true'
         id: download_builds
         run: |
           UPDATE_PREFIX="${{ steps.update.outputs.update_prefix }}"
@@ -132,10 +166,12 @@ jobs:
           # Try versioned URL first, then fall back to legacy root URL
           echo "Attempting to download existing builds.json..."
           
-          if curl -s --max-time 30 --retry 3 --retry-delay 5 "https://esobuild.com/${UPDATE_PREFIX}/builds.json" -o "${UPDATE_DIR}/builds.json"; then
+          # --fail makes curl exit non-zero on HTTP 4xx/5xx so the GitHub Pages
+          # 404 HTML page is NOT mistaken for a valid builds.json download.
+          if curl -fsS --max-time 30 --retry 3 --retry-delay 5 "https://esobuild.com/${UPDATE_PREFIX}/builds.json" -o "${UPDATE_DIR}/builds.json"; then
             echo "✅ Successfully downloaded builds.json from /${UPDATE_PREFIX}/"
             echo "download_success=true" >> $GITHUB_OUTPUT
-          elif curl -s --max-time 30 --retry 3 --retry-delay 5 https://esobuild.com/builds.json -o "${UPDATE_DIR}/builds.json"; then
+          elif curl -fsS --max-time 30 --retry 3 --retry-delay 5 https://esobuild.com/builds.json -o "${UPDATE_DIR}/builds.json"; then
             echo "✅ Successfully downloaded builds.json from legacy root path"
             echo "download_success=true" >> $GITHUB_OUTPUT
           else
@@ -144,7 +180,7 @@ jobs:
           fi
       
       - name: Validate downloaded builds.json
-        if: inputs.deploy_only != true
+        if: inputs.deploy_only != true && steps.bootstrap.outputs.is_new_update != 'true'
         id: validate_download
         run: |
           if [ "${{ steps.download_builds.outputs.download_success }}" != "true" ]; then
@@ -212,7 +248,7 @@ jobs:
           fi
       
       - name: Attempt restore from artifacts
-        if: inputs.deploy_only != true && (steps.download_builds.outputs.download_success != 'true' || steps.validate_download.outputs.is_valid != 'true')
+        if: inputs.deploy_only != true && steps.bootstrap.outputs.is_new_update != 'true' && (steps.download_builds.outputs.download_success != 'true' || steps.validate_download.outputs.is_valid != 'true')
         id: restore_artifact
         continue-on-error: true
         run: |
@@ -269,7 +305,7 @@ jobs:
           fi
       
       - name: Fail if no valid builds.json
-        if: inputs.deploy_only != true && steps.download_builds.outputs.download_success != 'true' && (steps.restore_artifact.outputs.restore_success != 'true' || steps.restore_artifact.outcome == 'failure')
+        if: inputs.deploy_only != true && steps.bootstrap.outputs.is_new_update != 'true' && steps.download_builds.outputs.download_success != 'true' && (steps.restore_artifact.outputs.restore_success != 'true' || steps.restore_artifact.outcome == 'failure')
         run: |
           echo "❌ CRITICAL: Unable to obtain valid builds.json"
           echo "  - Download from production site: ${{ steps.download_builds.outputs.download_success }}"
@@ -281,7 +317,7 @@ jobs:
           exit 1
       
       - name: Fail if validation failed and restore failed
-        if: inputs.deploy_only != true && steps.validate_download.outputs.is_valid != 'true' && (steps.restore_artifact.outputs.restore_success != 'true' || steps.restore_artifact.outcome == 'failure')
+        if: inputs.deploy_only != true && steps.bootstrap.outputs.is_new_update != 'true' && steps.validate_download.outputs.is_valid != 'true' && (steps.restore_artifact.outputs.restore_success != 'true' || steps.restore_artifact.outcome == 'failure')
         run: |
           echo "❌ CRITICAL: Downloaded builds.json is corrupted and restore failed"
           echo "  - Download successful but validation failed"

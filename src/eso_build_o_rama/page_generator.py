@@ -9,7 +9,7 @@ import shutil
 from typing import List, Dict, Optional, Any
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from datetime import datetime
+from datetime import datetime, timezone
 
 from .models import CommonBuild, PlayerBuild, TrialReport
 from .csv_exporter import CSVExporter
@@ -82,7 +82,7 @@ class PageGenerator:
         ctx = {
             "is_develop": self.is_develop,
             "app_version": app_version,
-            "generated_date": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "generated_date": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         }
         if self.update_label:
             ctx["update_label"] = self.update_label
@@ -670,7 +670,7 @@ class PageGenerator:
         ]
 
         # Current timestamp for lastmod
-        lastmod = datetime.utcnow().strftime("%Y-%m-%d")
+        lastmod = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
         # Add home page
         xml_lines.extend(
@@ -783,7 +783,7 @@ class PageGenerator:
             config = {"updates": {}}
 
         # Get today's date for lastmod
-        today = datetime.now().strftime("%Y-%m-%d")
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
         # Build XML content
         xml_lines = [

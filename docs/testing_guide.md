@@ -6,7 +6,7 @@ This guide covers testing the ESO Build-O-Rama system from end to end.
 
 ## Prerequisites
 
-- Python 3.9+ installed
+- Python 3.11+ installed (CI runs 3.13)
 - Virtual environment activated
 - API credentials configured in `.env`
 - All dependencies installed (`pip install -r requirements.txt`)

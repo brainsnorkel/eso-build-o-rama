@@ -92,7 +92,7 @@ A "build" consists of:
 ## Installation
 
 ### Prerequisites
-- Python 3.9 or higher
+- Python 3.11 or higher (CI runs 3.13)
 - ESO Logs API credentials from [esologs.com/api/clients](https://www.esologs.com/api/clients)
 - Git
 
@@ -413,7 +413,7 @@ Index 13 (09:00 UTC) → Ossein Cage
 
 1. Determine which trial to scan based on current time
 2. Checkout latest code from main branch
-3. Install Python 3.9 and dependencies
+3. Install Python 3.13 and dependencies
 4. Download existing builds.json from live site
 5. Run scan for determined trial
 6. Copy static assets

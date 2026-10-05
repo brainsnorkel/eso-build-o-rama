@@ -60,7 +60,7 @@ ESO Logs API → Data Collection → Build Analysis → Page Generation → Stat
 ## Technology Stack
 
 ### Backend
-- **Language**: Python 3.9+
+- **Language**: Python 3.11+
 - **API Client**: requests or httpx
 - **Scheduling**: AWS Lambda (with EventBridge) or Cloudflare Workers (with Cron Triggers)
 - **Data Processing**: pandas (optional, for analysis)

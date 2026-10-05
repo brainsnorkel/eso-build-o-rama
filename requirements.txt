@@ -1,28 +1,32 @@
+# Requires Python 3.11+ (CI runs 3.13). Floors are set at the first release that
+# clears every advisory known as of 2026-10-06; Dependabot raises them from here.
+
 # Core dependencies
-python-dotenv>=1.1.1
-aiohttp>=3.8.0
+python-dotenv>=1.2.2
 httpx>=0.28.1
-requests>=2.32.5
+requests>=2.33.0
 
-# ESO Logs API client
-git+https://github.com/knowlen/esologs-python.git
+# Transitive dependencies floored at their patched releases
+urllib3>=2.8.0
+anyio>=4.14.2
+soupsieve>=2.9.0
 
-# Web scraping for ability bars
-playwright>=1.40.0
-beautifulsoup4>=4.12.0
-lxml>=5.0.0
+# ESO Logs API client (PyPI release; upstream main differs only in docs/CI)
+esologs-python==0.2.0b1
+
+# HTML parsing (scripts/deployment_check.py)
+beautifulsoup4>=4.15.0
 
 # Static site generation
-jinja2>=3.1.0
-markdown>=3.5.0
+jinja2>=3.1.6
 
 # Data processing
-pydantic>=2.0.0
+pydantic>=2.13.5
 
 # Image generation for social media previews
-Pillow>=10.0.0
+Pillow>=12.3.0
 
 # Development dependencies
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-black>=24.0.0
+pytest>=9.0.3
+pytest-asyncio>=1.4.0
+black>=26.3.1

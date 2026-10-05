@@ -23,10 +23,14 @@ permissions:
   contents: write
   pages: write
   id-token: write
+  actions: read  # gh run list/download in the artifact-restore step
 
 jobs:
   generate-trial:
-    runs-on: ubuntu-latest
+    # Pinned explicitly: the ubuntu-latest label rolls to a new LTS periodically
+    # (24.04 -> 26.04 from 2026-10-19). An unattended hourly cron should not pick
+    # up an image change silently; bump this deliberately alongside setup-python.
+    runs-on: ubuntu-26.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -88,7 +92,7 @@ jobs:
           fi
       
       - name: Checkout main branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Determine update version
         if: inputs.deploy_only != true
         id: update
@@ -111,9 +115,10 @@ jobs:
       
       - name: Set up Python
         if: inputs.deploy_only != true
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
-          python-version: '3.9'
+          python-version: '3.13'
+          cache: pip
       
       - name: Install dependencies
         if: inputs.deploy_only != true
@@ -251,56 +256,67 @@ jobs:
         if: inputs.deploy_only != true && steps.bootstrap.outputs.is_new_update != 'true' && (steps.download_builds.outputs.download_success != 'true' || steps.validate_download.outputs.is_valid != 'true')
         id: restore_artifact
         continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          echo "🔄 Attempting to restore builds.json from previous successful run..."
-          
-          # Try to download from the most recent successful workflow run
-          RUN_ID=$(gh run list --workflow="Generate ESO Builds (Staggered)" --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')
-          
-          if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
+          echo "🔄 Attempting to restore builds.json from a previous successful run..."
+          UPDATE_DIR="${{ steps.update.outputs.update_dir }}"
+          ARTIFACT="builds-json-${{ steps.update.outputs.update_prefix }}"
+          RESTORE_DIR="${RUNNER_TEMP}/builds-json-restore"
+
+          # Artifacts are named per update prefix so a run for another update
+          # (e.g. a manual u49 dispatch) can never be restored into this one.
+          RUN_IDS=$(gh run list --workflow="Generate ESO Builds (Staggered)" --branch main --status success --limit 5 --json databaseId --jq '.[].databaseId')
+          if [ -z "$RUN_IDS" ]; then
             echo "⚠️ No previous successful run found"
             echo "restore_success=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          
-          echo "Found previous successful run: $RUN_ID"
-          
-          # Download the artifact
-          gh run download $RUN_ID --name "builds-json-artifact" --dir "${{ steps.update.outputs.update_dir }}/" 2>/dev/null || {
-            echo "⚠️ Failed to download artifact from run $RUN_ID"
+
+          # Download into scratch space: gh refuses to overwrite an existing file,
+          # and the corrupted download being replaced may still sit in UPDATE_DIR.
+          FOUND_RUN=""
+          for RUN_ID in $RUN_IDS; do
+            rm -rf "${RESTORE_DIR}"
+            mkdir -p "${RESTORE_DIR}"
+            if gh run download "$RUN_ID" --name "$ARTIFACT" --dir "${RESTORE_DIR}" && [ -f "${RESTORE_DIR}/builds.json" ]; then
+              FOUND_RUN="$RUN_ID"
+              break
+            fi
+            echo "⚠️ Run $RUN_ID has no usable ${ARTIFACT} artifact, trying an older run"
+          done
+
+          if [ -z "$FOUND_RUN" ]; then
+            echo "⚠️ No ${ARTIFACT} artifact found in the last 5 successful runs"
             echo "restore_success=false" >> $GITHUB_OUTPUT
             exit 0
-          }
-          
-          # Validate restored file
-          if [ -f "${{ steps.update.outputs.update_dir }}/builds.json" ]; then
-            python3 << 'EOF'
-            import json
-            import sys
-            try:
-                with open('${{ steps.update.outputs.update_dir }}/builds.json', 'r') as f:
-                    data = json.load(f)
-                if isinstance(data, dict) and 'trials' in data and isinstance(data['trials'], dict):
-                    trial_count = len(data['trials'])
-                    print(f'✅ Restored builds.json with {trial_count} trials')
-                    sys.exit(0)
-                else:
-                    print('❌ Restored file has invalid structure')
-                    sys.exit(1)
-            except Exception as e:
-                print(f'❌ Restored file is invalid: {e}')
-                sys.exit(1)
-            EOF
-            
-            if [ $? -eq 0 ]; then
-              echo "✅ Successfully restored builds.json from artifact"
-              echo "restore_success=true" >> $GITHUB_OUTPUT
-            else
-              echo "❌ Restored file failed validation"
-              echo "restore_success=false" >> $GITHUB_OUTPUT
-            fi
+          fi
+          echo "Found ${ARTIFACT} in run ${FOUND_RUN}"
+
+          # Validate the restored file. The heredoc body and its EOF sit at the
+          # script's base indent: YAML strips that, so EOF lands in column 0 as
+          # bash requires (an extra-indented EOF is a silent syntax error).
+          if python3 - "${RESTORE_DIR}/builds.json" << 'EOF'
+          import json
+          import sys
+          try:
+              with open(sys.argv[1], 'r', encoding='utf-8') as f:
+                  data = json.load(f)
+              if isinstance(data, dict) and isinstance(data.get('trials'), dict):
+                  print(f"✅ Restored builds.json with {len(data['trials'])} trials")
+                  sys.exit(0)
+              print('❌ Restored file has invalid structure')
+              sys.exit(1)
+          except Exception as e:
+              print(f'❌ Restored file is invalid: {e}')
+              sys.exit(1)
+          EOF
+          then
+            cp "${RESTORE_DIR}/builds.json" "${UPDATE_DIR}/builds.json"
+            echo "✅ Successfully restored builds.json from run ${FOUND_RUN}"
+            echo "restore_success=true" >> $GITHUB_OUTPUT
           else
-            echo "❌ Artifact download did not produce builds.json"
+            echo "❌ Restored file failed validation"
             echo "restore_success=false" >> $GITHUB_OUTPUT
           fi
       
@@ -469,7 +485,7 @@ jobs:
         if: inputs.deploy_only != true
         uses: actions/upload-artifact@v7
         with:
-          name: builds-json-artifact
+          name: builds-json-${{ steps.update.outputs.update_prefix }}
           path: ${{ steps.update.outputs.update_dir }}/builds.json
           retention-days: 30
       

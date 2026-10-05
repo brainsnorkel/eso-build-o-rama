@@ -1,0 +1,24 @@
+# Keep Python dependencies and GitHub Actions current. Security advisories for
+# pinned/floored packages surface here as PRs instead of being discovered by hand.
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    # requirements.txt uses >= floors; raise the floor rather than widen the range
+    versioning-strategy: increase
+    groups:
+      python-dependencies:
+        patterns: ["*"]
+    open-pull-requests-limit: 5
+    labels: [dependencies]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ["*"]
+    labels: [dependencies]

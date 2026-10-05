@@ -11,7 +11,13 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from datetime import datetime, timezone
 
-from .models import CommonBuild, PlayerBuild, TrialReport
+from .models import (
+    CLASS_SKILL_LINES,
+    CommonBuild,
+    PlayerBuild,
+    TrialReport,
+    normalize_class_name,
+)
 from .csv_exporter import CSVExporter
 
 logger = logging.getLogger(__name__)
@@ -19,6 +25,8 @@ logger = logging.getLogger(__name__)
 
 class PageGenerator:
     """Generates static HTML pages for builds."""
+
+    FINDER_ROLE_ORDER = ["dps", "healer", "tank"]
 
     def __init__(
         self,
@@ -133,6 +141,17 @@ class PageGenerator:
         html = template.render(**context)
 
         # Generate filename with trial and boss (no version prefix)
+        filepath = self.output_dir / self.build_page_filename(build)
+
+        # Write file
+        filepath.write_text(html, encoding="utf-8")
+
+        logger.info(f"Generated: {filepath}")
+        return str(filepath)
+
+    @staticmethod
+    def build_page_filename(build: CommonBuild) -> str:
+        """Return the build page filename (trial-boss-build_slug.html) for a build."""
         trial_slug = build.trial_name.lower().replace(" ", "-").replace("'", "")
         boss_slug = (
             build.boss_name.lower()
@@ -141,14 +160,7 @@ class PageGenerator:
             .replace("&", "and")
             .replace("/", "-")
         )
-        filename = f"{trial_slug}-{boss_slug}-{build.build_slug}.html"
-        filepath = self.output_dir / filename
-
-        # Write file
-        filepath.write_text(html, encoding="utf-8")
-
-        logger.info(f"Generated: {filepath}")
-        return str(filepath)
+        return f"{trial_slug}-{boss_slug}-{build.build_slug}.html"
 
     def generate_home_page(
         self,
@@ -385,6 +397,126 @@ class PageGenerator:
         logger.info(f"Generated about page: {filepath}")
         return str(filepath)
 
+    def _build_finder_rows(self, all_builds: List[CommonBuild]) -> List[Dict[str, Any]]:
+        """
+        Flatten builds into Build Finder table rows, sorted for display.
+
+        Sort: trial id (newest first), boss order (Trash Builds last), role, metric desc.
+        """
+        trial_ids: Dict[str, int] = {}
+        try:
+            with open(
+                self.project_root / "data" / "trials.json", "r", encoding="utf-8"
+            ) as f:
+                trial_ids = {t["name"]: t["id"] for t in json.load(f)["trials"]}
+        except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
+            logger.warning(f"Could not load trials.json for Build Finder sort: {e}")
+
+        rows = []
+        skipped = 0
+        for build in all_builds:
+            player = build.best_player
+            if not player or getattr(build, "is_aggregated", False):
+                continue
+            class_name = normalize_class_name(player.class_name)
+            role = (player.role or "").lower()
+            if role not in self.FINDER_ROLE_ORDER or class_name not in CLASS_SKILL_LINES:
+                skipped += 1
+                continue
+            report_code = player.report_code or build.report_code
+            fight_id = player.fight_id or build.fight_id
+            if player.player_url:
+                esologs_url = player.player_url
+            elif report_code:
+                esologs_url = f"https://www.esologs.com/reports/{report_code}?fight={fight_id}"
+            else:
+                esologs_url = ""
+                logger.warning(
+                    f"Build Finder: no report code for {build.trial_name} / "
+                    f"{build.boss_name} / {build.build_slug}; ESO Logs link will be omitted"
+                )
+            rows.append(
+                {
+                    "trial_name": build.trial_name,
+                    "trial_slug": build.trial_name.lower().replace(" ", "-"),
+                    "boss_name": build.boss_name,
+                    "is_trash": build.boss_name == "Trash Builds",
+                    "role": role,
+                    "class_name": class_name,
+                    "class_slug": class_name.lower(),
+                    "display_parts": build.get_display_parts(abbreviated=True),
+                    "sets": build.get_sorted_sets(),
+                    "count": build.count,
+                    "report_count": build.report_count,
+                    "metric": player.get_primary_metric() or 0.0,
+                    "metric_name": player.get_primary_metric_name(),
+                    "player_name": player.player_name,
+                    "character_name": player.character_name,
+                    "build_url": self.build_page_filename(build),
+                    "esologs_url": esologs_url,
+                }
+            )
+
+        if skipped:
+            logger.warning(
+                f"Build Finder: skipped {skipped} build(s) with an unknown role or class"
+            )
+
+        def sort_key(row: Dict[str, Any]):
+            bosses = self.boss_order.get(row["trial_name"], [])
+            if not row["is_trash"] and row["boss_name"] in bosses:
+                boss_index = bosses.index(row["boss_name"])
+            else:
+                boss_index = len(bosses) + (1 if row["is_trash"] else 0)
+            role_index = (
+                self.FINDER_ROLE_ORDER.index(row["role"])
+                if row["role"] in self.FINDER_ROLE_ORDER
+                else len(self.FINDER_ROLE_ORDER)
+            )
+            return (
+                -trial_ids.get(row["trial_name"], 0),
+                row["trial_name"],
+                boss_index,
+                row["boss_name"],
+                role_index,
+                -(row["metric"] or 0),
+            )
+
+        rows.sort(key=sort_key)
+        return rows
+
+    def generate_build_finder_page(
+        self, all_builds: List[CommonBuild], app_version: str = "1.0.0"
+    ) -> str:
+        """
+        Generate the Build Finder page (build-finder.html) listing every build
+        with client-side class/role filters.
+
+        Returns:
+            Path to generated HTML file
+        """
+        logger.info("Generating Build Finder page")
+
+        template = self.env.get_template("build_finder.html")
+        rows = self._build_finder_rows(all_builds)
+        context = {
+            **self._get_common_context(app_version),
+            "rows": rows,
+            "class_options": [
+                (name.lower(), name) for name in sorted(CLASS_SKILL_LINES.keys())
+            ],
+            "role_options": [("dps", "DPS"), ("healer", "Healer"), ("tank", "Tank")],
+            "total_rows": len(rows),
+            "social_image_url": self._get_social_image_url("home", None, app_version),
+        }
+        html = template.render(**context)
+
+        filepath = self.output_dir / "build-finder.html"
+        filepath.write_text(html, encoding="utf-8")
+
+        logger.info(f"Generated Build Finder page with {len(rows)} rows: {filepath}")
+        return str(filepath)
+
     def generate_updates_page(self, app_version: str = "1.0.0") -> str:
         """
         Generate the updates directory page listing all game updates.
@@ -598,6 +730,14 @@ class PageGenerator:
         about_path = self.generate_about_page(app_version)
         generated_files["about"] = about_path
 
+        # Generate Build Finder page (a failure must not abort the other pages)
+        try:
+            generated_files["build_finder"] = self.generate_build_finder_page(
+                all_builds, app_version
+            )
+        except Exception as e:
+            logger.error(f"Failed to generate Build Finder page: {e}")
+
         # Generate individual trial pages and CSV files
         for trial_name, trial_data in builds_by_trial.items():
             # Extract just the bosses data for trial page generation
@@ -708,6 +848,19 @@ class PageGenerator:
             ]
         )
 
+        # Add Build Finder page (only if it was actually generated)
+        if (self.output_dir / "build-finder.html").exists():
+            xml_lines.extend(
+                [
+                    "  <url>",
+                    f"    <loc>{base_url}/build-finder.html</loc>",
+                    f"    <lastmod>{lastmod}</lastmod>",
+                    "    <changefreq>daily</changefreq>",
+                    "    <priority>0.8</priority>",
+                    "  </url>",
+                ]
+            )
+
         # Add trial pages
         for trial_name in builds_by_trial.keys():
             trial_slug = trial_name.lower().replace(" ", "-")
@@ -724,15 +877,7 @@ class PageGenerator:
 
         # Add individual build pages
         for build in all_builds:
-            trial_slug = build.trial_name.lower().replace(" ", "-").replace("'", "")
-            boss_slug = (
-                build.boss_name.lower()
-                .replace(" ", "-")
-                .replace("'", "")
-                .replace("&", "and")
-                .replace("/", "-")
-            )
-            filename = f"{trial_slug}-{boss_slug}-{build.build_slug}.html"
+            filename = self.build_page_filename(build)
 
             xml_lines.extend(
                 [
@@ -754,7 +899,7 @@ class PageGenerator:
         filepath.write_text(sitemap_content, encoding="utf-8")
 
         logger.info(
-            f"Generated sitemap.xml with {len(all_builds) + len(builds_by_trial) + 1} URLs: {filepath}"
+            f"Generated sitemap.xml with {xml_lines.count('  <url>')} URLs: {filepath}"
         )
         return str(filepath)
 

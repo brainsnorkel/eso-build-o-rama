@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+
+{% set site_root %}{% if is_develop %}https://brainsnorkel.github.io/eso-build-o-rama/{% else %}https://esobuild.com/{% endif %}{% if update_prefix %}{{ update_prefix }}/{% endif %}{% endset %}
+
+{% block title %}Build Finder - {{ update_label }} ESO Trial Builds | ESOBuild.com{% endblock %}
+
+{% block meta_description %}Find the best Elder Scrolls Online trial builds for your class and role{% if update_label %} in {{ update_label }}{% endif %}. Filter every top build from ESO Logs by class (Arcanist, Dragonknight, Necromancer, Nightblade, Sorcerer, Templar, Warden) and role (DPS, healer, tank).{% endblock %}
+
+{% block keywords %}ESO build finder, ESO builds by class, ESO DPS builds, ESO healer builds, ESO tank builds, Elder Scrolls Online trial builds, ESO meta builds{% endblock %}
+
+{% block canonical_url %}{{ site_root }}build-finder.html{% endblock %}
+
+{% block og_title %}{{ update_label }} Build Finder - ESO Trial Builds{% endblock %}
+
+{% block og_description %}Filter every top ESO trial build by class and role. Gear sets, skill lines and links to the ESO Logs reports.{% endblock %}
+
+{% block og_image_alt %}{{ update_label }} Build Finder - Top Builds{% endblock %}
+
+{% block twitter_title %}{{ update_label }} Build Finder - ESO Meta Builds{% endblock %}
+
+{% block twitter_description %}Filter every top ESO trial build by class and role. Gear sets, skill lines and links to the ESO Logs reports.{% endblock %}
+
+{% block twitter_image_alt %}{{ update_label }} Build Finder - Top Builds{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site_root }}index.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Build Finder",
+      "item": "{{ site_root }}build-finder.html"
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block extra_styles %}
+<style>
+    .finder-filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-top: 20px;
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+    }
+    .finder-filters label {
+        color: #a8edea;
+        font-weight: 600;
+        font-size: 0.9em;
+    }
+    .finder-filters select,
+    .finder-filters button {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(56, 239, 125, 0.4);
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.95em;
+        transition: all 0.3s ease;
+    }
+    .finder-filters select option {
+        background: #1a1a2e;
+        color: #fff;
+    }
+    .finder-filters select:hover,
+    .finder-filters button:hover,
+    .finder-filters select:focus,
+    .finder-filters button:focus {
+        border-color: #38ef7d;
+        background: rgba(56, 239, 125, 0.15);
+    }
+    .finder-filters button {
+        cursor: pointer;
+        color: #38ef7d;
+        font-weight: 600;
+    }
+    #finder-count {
+        color: #a8edea;
+        font-size: 0.9em;
+        margin-left: auto;
+    }
+    .finder-filters[hidden] {
+        display: none;
+    }
+
+    #finder-table tr[hidden] {
+        display: none !important;
+    }
+    .finder-links {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .finder-links a {
+        text-decoration: none;
+        white-space: nowrap;
+    }
+    /* Role icon cell */
+    #finder-table td[data-label="Role"] {
+        text-align: center;
+        font-size: 1.5em;
+    }
+    /* Trial and set links; per-element classes are omitted to keep the page small */
+    #finder-table td a {
+        color: #38ef7d;
+        text-decoration: none;
+    }
+    /* Boss name and metric */
+    #finder-table td small {
+        color: #a8edea;
+    }
+    #finder-table .finder-base {
+        font-weight: 900;
+        color: #fff;
+    }
+    #finder-table .finder-build-link {
+        color: #3498db;
+    }
+    #finder-table .finder-esologs-link {
+        color: #a8edea;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<nav aria-label="Breadcrumb" style="margin-bottom: 20px; font-size: 0.9em;">
+    <ol style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; align-items: center;">
+        <li style="display: flex; align-items: center;">
+            <a href="index.html" style="color: #38ef7d; text-decoration: none;">Home</a>
+            <span style="color: #666; margin: 0 10px;" aria-hidden="true">/</span>
+        </li>
+        <li>
+            <span style="color: #a8edea;" aria-current="page">Build Finder</span>
+        </li>
+    </ol>
+</nav>
+
+<div class="card" style="background: linear-gradient(135deg, rgba(56, 239, 125, 0.1) 0%, rgba(17, 153, 142, 0.1) 100%);
+            position: relative;
+            overflow: hidden;">
+    <div style="position: relative; z-index: 1;">
+        <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); margin: 0;">Build Finder</h2>
+        <p style="color: #a8edea; margin-top: 10px; margin-bottom: 0; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);">
+            Every top build collected for {{ update_label }}{% if not update_label %}this update{% endif %}. Pick a class and a role to narrow the list.
+        </p>
+        <noscript>
+            <p style="color: #a8edea; margin-top: 10px; margin-bottom: 0;">Filtering needs JavaScript. The full list is below.</p>
+        </noscript>
+
+        <div class="finder-filters" hidden>
+            <label for="finder-class">Class</label>
+            <select id="finder-class">
+                <option value="">All classes</option>
+                {% for slug, label in class_options %}
+                <option value="{{ slug }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+            <label for="finder-role">Role</label>
+            <select id="finder-role">
+                <option value="">All roles</option>
+                {% for slug, label in role_options %}
+                <option value="{{ slug }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" id="finder-reset">Reset</button>
+            <span id="finder-count" aria-live="polite">Showing {{ total_rows }} of {{ total_rows }} builds</span>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <table id="finder-table">
+        <caption class="sr-only">Top builds{% if update_label %} for {{ update_label }}{% endif %}, filterable by class and role</caption>
+        <thead>
+            <tr>
+                <th scope="col">Role</th>
+                <th scope="col">Trial / Boss</th>
+                <th scope="col">Class</th>
+                <th scope="col">Build</th>
+                <th scope="col">Signature Sets</th>
+                <th scope="col">Frequency</th>
+                <th scope="col">Links</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%- for row in rows %}
+<tr data-class="{{ row.class_slug }}" data-role="{{ row.role }}" data-trash="{{ 1 if row.is_trash else 0 }}">
+<td data-label="Role">{% if row.role == 'dps' %}<span aria-hidden="true">⚔️</span><span class="sr-only">DPS</span>{% elif row.role == 'healer' %}<span aria-hidden="true">✚</span><span class="sr-only">Healer</span>{% elif row.role == 'tank' %}<span aria-hidden="true">🛡️</span><span class="sr-only">Tank</span>{% else %}<span aria-hidden="true">❓</span><span class="sr-only">Unknown</span>{% endif %}</td>
+<td data-label="Trial / Boss"><a href="{{ row.trial_slug }}.html">{{ row.trial_name }}</a><br><small>{{ row.boss_name }}</small></td>
+<td data-label="Class">{{ row.class_name }}</td>
+<td data-label="Build"><strong>{% for name, is_base in row.display_parts %}{% if is_base %}<span class="finder-base">{{ name }}</span>{% else %}{{ name }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</strong></td>
+<td data-label="Signature Sets">{% if row.sets %}{% for set_name in row.sets %}<a href="{{ set_name|eso_hub_set_url }}" target="_blank" rel="noopener noreferrer">{{ set_name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% else %}Various{% endif %}</td>
+<td data-label="Frequency">{{ row.count }} player{{ 's' if row.count != 1 }} / {{ row.report_count }} report{{ 's' if row.report_count != 1 }}<br><small>{{ row.metric|format_metric }} {{ row.metric_name }}</small></td>
+<td data-label="Links"><div class="finder-links"><a class="finder-build-link" href="{{ row.build_url }}" aria-label="View Build: {{ row.display_parts|map('first')|join(' / ') }}{% if row.sets %}, {{ row.sets|join(' + ') }}{% endif %} ({{ row.trial_name }}, {{ row.boss_name }})">View Build →</a>{% if row.esologs_url %}<a class="finder-esologs-link" href="{{ row.esologs_url }}" target="_blank" rel="noopener noreferrer" aria-label="Open {{ row.player_name }}'s log on ESO Logs">ESO Logs ↗</a>{% else %}<span class="finder-esologs-missing">No log</span>{% endif %}</div></td>
+</tr>
+            {%- endfor %}
+            <tr id="finder-empty" hidden><td colspan="7" data-label="Result">No builds match. Try All classes or All roles.</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+(function () {
+    var classSelect = document.getElementById('finder-class');
+    var roleSelect = document.getElementById('finder-role');
+    var resetButton = document.getElementById('finder-reset');
+    var countEl = document.getElementById('finder-count');
+    var emptyRow = document.getElementById('finder-empty');
+    var filters = document.querySelector('.finder-filters');
+    if (filters) filters.removeAttribute('hidden');
+
+    function setIfOption(select, value) {
+        if (!select || !value) return;
+        for (var i = 0; i < select.options.length; i++) {
+            if (select.options[i].value === value) { select.value = value; return; }
+        }
+    }
+
+    function applyFilter() {
+        var cls = classSelect ? classSelect.value : '';
+        var role = roleSelect ? roleSelect.value : '';
+        var rows = document.querySelectorAll('#finder-table tbody tr:not(#finder-empty)');
+        var shown = 0;
+        for (var i = 0; i < rows.length; i++) {
+            var match = (!cls || rows[i].getAttribute('data-class') === cls) &&
+                        (!role || rows[i].getAttribute('data-role') === role);
+            if (match) { rows[i].removeAttribute('hidden'); shown++; }
+            else { rows[i].setAttribute('hidden', ''); }
+        }
+        if (countEl) countEl.textContent = 'Showing ' + shown + ' of ' + rows.length + ' builds';
+        if (emptyRow) emptyRow.hidden = shown !== 0;
+        if (window.history && history.replaceState) {
+            var params = new URLSearchParams(window.location.search);
+            if (cls) params.set('class', cls); else params.delete('class');
+            if (role) params.set('role', role); else params.delete('role');
+            var query = params.toString();
+            history.replaceState(null, '', window.location.pathname + (query ? '?' + query : '') + window.location.hash);
+        }
+    }
+
+    var initial = new URLSearchParams(window.location.search);
+    setIfOption(classSelect, initial.get('class'));
+    setIfOption(roleSelect, initial.get('role'));
+
+    if (classSelect) classSelect.addEventListener('change', applyFilter);
+    if (roleSelect) roleSelect.addEventListener('change', applyFilter);
+    if (resetButton) resetButton.addEventListener('click', function () {
+        if (classSelect) classSelect.value = '';
+        if (roleSelect) roleSelect.value = '';
+        applyFilter();
+    });
+
+    applyFilter();
+})();
+</script>
+{% endblock %}

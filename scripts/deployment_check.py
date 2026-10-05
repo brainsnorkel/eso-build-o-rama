@@ -15,10 +15,20 @@ Example:
 
 import sys
 import os
+import json
 from pathlib import Path
 from bs4 import BeautifulSoup
 from typing import List, Tuple, Optional
 import re
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.eso_build_o_rama.models import CLASS_SKILL_LINES  # noqa: E402
+
+NON_BUILD_PAGES = {"index.html", "about.html", "tldr-top-builds.html", "build-finder.html"}
+CANONICAL_CLASS_SLUGS = {name.lower() for name in CLASS_SKILL_LINES}
+VALID_ROLES = {"dps", "healer", "tank"}
 
 
 class DeploymentChecker:
@@ -54,6 +64,17 @@ class DeploymentChecker:
             self.log_error(f"Failed to read {file_path}: {e}")
             return None
             
+    def _trial_page_stems(self) -> set:
+        """Return trial page filename stems as written by generate_trial_page (apostrophes kept)."""
+        trials_path = PROJECT_ROOT / "data" / "trials.json"
+        try:
+            with open(trials_path, "r", encoding="utf-8") as f:
+                trials = json.load(f)["trials"]
+        except FileNotFoundError:
+            self.log_error(f"Trials config not found: {trials_path}")
+            return set()
+        return {t["name"].lower().replace(" ", "-") for t in trials}
+
     def check_0_home_page_loads(self) -> bool:
         """Check 0: The home page loads."""
         print("\n" + "="*60)
@@ -127,21 +148,7 @@ class DeploymentChecker:
         print("CHECK 2: Trial Pages Content")
         print("="*60)
         
-        # Get trial names from home page to know which are real trial pages
-        index_path = self.output_dir / "index.html"
-        trial_names = set()
-        
-        if index_path.exists():
-            soup = self.read_html(index_path)
-            if soup:
-                # Extract trial names from h3 tags
-                trial_headers = soup.find_all('h3')
-                for h3 in trial_headers:
-                    trial_text = h3.text.strip()
-                    if any(word in trial_text for word in ['Archive', 'Reef', 'Sanctum', 'Spire', 'Grotto', 'Rockgrove', 'Maw', 'Cage', 'Citadel', 'Edge', 'Sanctorium', 'Aegis']):
-                        # Convert to filename format
-                        trial_slug = trial_text.lower().replace(' ', '-').replace("'", '')
-                        trial_names.add(trial_slug)
+        trial_names = self._trial_page_stems()
         
         # Find trial pages by matching against known trial names
         trial_pages = []
@@ -196,25 +203,14 @@ class DeploymentChecker:
         print("CHECK 3: Build Pages Content")
         print("="*60)
         
-        # Get trial names from home page to exclude them from build page detection
-        index_path = self.output_dir / "index.html"
-        trial_names = set()
-        
-        if index_path.exists():
-            soup = self.read_html(index_path)
-            if soup:
-                trial_headers = soup.find_all('h3')
-                for h3 in trial_headers:
-                    trial_text = h3.text.strip()
-                    if any(word in trial_text for word in ['Archive', 'Reef', 'Sanctum', 'Spire', 'Grotto', 'Rockgrove', 'Maw', 'Cage', 'Citadel', 'Edge', 'Sanctorium', 'Aegis']):
-                        trial_slug = trial_text.lower().replace(' ', '-').replace("'", '')
-                        trial_names.add(trial_slug)
+        # Trial pages are excluded from build page detection
+        trial_names = self._trial_page_stems()
         
         # Find build pages (not index, not trial pages)
         build_pages = []
         for html_file in self.output_dir.glob("*.html"):
-            # Skip index and trial pages
-            if html_file.name == "index.html":
+            # Skip index, other non-build pages, and trial pages
+            if html_file.name in NON_BUILD_PAGES:
                 continue
             if html_file.stem in trial_names:
                 continue
@@ -301,6 +297,118 @@ class DeploymentChecker:
         
         return self.checks_failed == 0
         
+    def check_4_build_finder(self) -> bool:
+        """Check 4: Build Finder page has valid filters and rows."""
+        print("\n" + "="*60)
+        print("CHECK 4: Build Finder Page")
+        print("="*60)
+
+        finder_path = self.output_dir / "build-finder.html"
+        if not finder_path.exists():
+            self.log_error(f"Build finder page not found: {finder_path}")
+            return False
+
+        soup = self.read_html(finder_path)
+        if not soup:
+            return False
+
+        class_select = soup.find('select', id='finder-class')
+        role_select = soup.find('select', id='finder-role')
+        if not class_select or not role_select:
+            self.log_error("Build finder missing #finder-class and/or #finder-role select")
+            return False
+
+        class_values = [o.get('value', '') for o in class_select.find_all('option')]
+        role_values = [o.get('value', '') for o in role_select.find_all('option')]
+        bad_classes = [v for v in class_values if v != "" and v not in CANONICAL_CLASS_SLUGS]
+        bad_roles = [v for v in role_values if v != "" and v not in VALID_ROLES]
+        if bad_classes:
+            self.log_error(f"Build finder class select has non-canonical values: {bad_classes}")
+        if bad_roles:
+            self.log_error(f"Build finder role select has invalid values: {bad_roles}")
+        if len(class_values) < 2:
+            self.log_error("Build finder class select has fewer than 2 options")
+
+        table = soup.find('table', id='finder-table')
+        if not table:
+            self.log_error("Build finder missing #finder-table")
+            return False
+        tbody = table.find('tbody')
+        rows = [tr for tr in (tbody.find_all('tr') if tbody else []) if tr.get('id') != 'finder-empty']
+        if len(rows) < 1:
+            self.log_error("Build finder table has no data rows")
+            return False
+
+        # Compare finder build links with build pages on disk
+        trial_names = self._trial_page_stems()
+        build_pages = {
+            f.name for f in self.output_dir.glob("*.html")
+            if f.name not in NON_BUILD_PAGES
+            and f.stem not in trial_names
+            and not f.name.startswith("tldr-")
+        }
+        finder_targets = {
+            (a.get('href') or '').split('#')[0].split('?')[0]
+            for row in rows for a in row.find_all('a', class_='finder-build-link')
+        }
+        if finder_targets != build_pages:
+            not_on_disk = sorted(finder_targets - build_pages)
+            not_in_finder = sorted(build_pages - finder_targets)
+            self.log_warning(
+                f"Build finder links and build pages differ: "
+                f"{len(not_on_disk)} linked but not a build page {not_on_disk[:10]}; "
+                f"{len(not_in_finder)} build pages not in finder {not_in_finder[:10]}"
+            )
+
+        problems: List[str] = []
+        problem_count = 0
+
+        def problem(msg: str):
+            nonlocal problem_count
+            problem_count += 1
+            if len(problems) < 10:
+                problems.append(msg)
+
+        classes_seen = set()
+        roles_seen = set()
+        for i, row in enumerate(rows, 1):
+            data_class = row.get('data-class')
+            data_role = row.get('data-role')
+            if data_class not in CANONICAL_CLASS_SLUGS:
+                problem(f"row {i}: invalid data-class {data_class!r}")
+            else:
+                classes_seen.add(data_class)
+            if data_role not in VALID_ROLES:
+                problem(f"row {i}: invalid data-role {data_role!r}")
+            else:
+                roles_seen.add(data_role)
+            if not row.has_attr('data-trash'):
+                problem(f"row {i}: missing data-trash")
+
+            build_links = row.find_all('a', class_='finder-build-link')
+            if len(build_links) != 1:
+                problem(f"row {i}: expected 1 .finder-build-link, found {len(build_links)}")
+            else:
+                href = (build_links[0].get('href') or '').split('#')[0].split('?')[0]
+                if not href or not (self.output_dir / href).is_file():
+                    problem(f"row {i}: build link target missing: {href!r}")
+
+            esologs_links = row.find_all('a', class_='finder-esologs-link')
+            if len(esologs_links) > 1:
+                problem(f"row {i}: expected at most 1 .finder-esologs-link, found {len(esologs_links)}")
+            elif esologs_links and not (esologs_links[0].get('href') or '').startswith("https://www.esologs.com/"):
+                problem(f"row {i}: esologs link href invalid: {esologs_links[0].get('href')!r}")
+
+            if any(not td.has_attr('data-label') for td in row.find_all('td')):
+                problem(f"row {i}: td missing data-label")
+
+        if problem_count:
+            self.log_error(f"Build finder: {problem_count} problem(s); examples: " + "; ".join(problems))
+            return False
+
+        self.log_success(f"Build finder: {len(rows)} rows, {len(classes_seen)} classes, {len(roles_seen)} roles")
+        return self.checks_failed == 0
+
     def run_all_checks(self) -> bool:
         """Run all deployment checks."""
         print("\n" + "="*70)
@@ -313,6 +421,7 @@ class DeploymentChecker:
         check_1 = self.check_1_home_page_content()
         check_2 = self.check_2_trial_pages()
         check_3 = self.check_3_build_pages()
+        check_4 = self.check_4_build_finder()
         
         # Print summary
         print("\n" + "="*70)

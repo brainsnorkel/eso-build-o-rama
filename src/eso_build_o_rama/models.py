@@ -19,6 +19,21 @@ CLASS_SKILL_LINES = {
 }
 
 
+def normalize_class_name(name: str) -> str:
+    """Map an ESO Logs class name to its CLASS_SKILL_LINES key, case-insensitively.
+
+    ESO Logs returns e.g. "DragonKnight" while CLASS_SKILL_LINES uses "Dragonknight".
+    Empty input returns "Unknown"; unrecognised input is stripped and title-cased.
+    """
+    if not name or not name.strip():
+        return "Unknown"
+    key = name.strip().lower()
+    for canonical in CLASS_SKILL_LINES:
+        if canonical.lower() == key:
+            return canonical
+    return name.strip().title()
+
+
 class Role(Enum):
     """Player roles in ESO."""
     TANK = "tank"
@@ -283,7 +298,9 @@ class CommonBuild:
         # Determine base class skill lines from best_player
         base_class_abbrevs = set()
         if self.best_player and self.best_player.class_name:
-            base_class_abbrevs = CLASS_SKILL_LINES.get(self.best_player.class_name, set())
+            base_class_abbrevs = CLASS_SKILL_LINES.get(
+                normalize_class_name(self.best_player.class_name), set()
+            )
 
         parts = []
         for subclass in self.subclasses:

@@ -795,6 +795,20 @@
                 font-size: 1.1em;
             }
         }
+
+        @media (max-width: 900px) {
+            .header-nav {
+                position: static !important;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+                margin-bottom: 10px;
+            }
+
+            .header-nav a {
+                font-size: 0.8em !important;
+                padding: 6px 10px !important;
+            }
+        }
         
         /* Print Styles */
         @media print {
@@ -823,7 +837,7 @@
     <header role="banner">
         <div class="container" style="position: relative;">
             <!-- Nav links in top right -->
-            <div style="position: absolute; top: 10px; right: 20px; z-index: 10; display: flex; gap: 8px;">
+            <div class="header-nav" style="position: absolute; top: 10px; right: 20px; z-index: 10; display: flex; gap: 8px;">
                 {% if updates_page_url %}
                 <a href="{{ updates_page_url }}" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9em; font-weight: 500; padding: 8px 16px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all 0.3s ease;" 
                    onmouseover="this.style.background='rgba(56, 239, 125, 0.2)'; this.style.color='#38ef7d';" 
@@ -831,6 +845,11 @@
                     Other Updates
                 </a>
                 {% endif %}
+                <a href="build-finder.html" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9em; font-weight: 500; padding: 8px 16px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all 0.3s ease;" 
+                   onmouseover="this.style.background='rgba(56, 239, 125, 0.2)'; this.style.color='#38ef7d';" 
+                   onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='rgba(255, 255, 255, 0.9)';">
+                    Build Finder
+                </a>
                 <a href="about.html" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.9em; font-weight: 500; padding: 8px 16px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); transition: all 0.3s ease;" 
                    onmouseover="this.style.background='rgba(56, 239, 125, 0.2)'; this.style.color='#38ef7d';" 
                    onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='rgba(255, 255, 255, 0.9)';">

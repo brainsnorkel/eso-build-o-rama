@@ -258,7 +258,7 @@ Each item is checkable; the why is attached so the implementation can deviate wh
   site diff bundles meaningfully.
 - **R8 Do not commit the bundle to the repo.** Publish as a GitHub release asset (suggested tag
   `esobuild-assets-u51-<YYYYMMDD>`) so both repos stay small and the site can fetch with `gh release download`.
-  This is a recommendation; see open question Q1.
+  Decided; see section 9.
 - **R9 Licensing text in the manifest** as in 4.1; the site's About page will credit UESP, EsoExtractData,
   LibSets and the ZeniMax ownership notice using that text.
 
@@ -344,15 +344,16 @@ name only as a last resort; the deployment check gains a test that every icon re
 Related tracked work there: `eso-build-o-rama-06l` (log missing icons during a scan), `eso-build-o-rama-399`
 (Unknown subclasses), `eso-build-o-rama-xqr` (update tag never derived from game version).
 
-## 9. Open questions for Chris
+## 9. Decisions (all resolved with Chris, 2026-10-06)
 
-- **Q1 Delivery.** GitHub release asset on the ESO Log Tail repo (recommended, keeps both repos lean), a committed
-  `exports/esobuild/` folder, or a PR straight into the site repo?
+- **Q1 Delivery.** GitHub release asset on the ESO Log Tail repo: one zip per bundle, release tag
+  `esobuild-assets-<uXX>-<YYYYMMDD>`, validation numbers from section 7 in the release notes. Do not commit the
+  bundle to either repo.
 - **Q2 U51 timing (resolved 2026-10-06).** Update 51 is live. Build the bundle from the live client with
   `--server live --update u51`; no PTS bundle and no `u50` bundle are needed.
-- **Q3 Sizes.** 64 px only, or also a 40 px set for the mobile breakpoint? Current pages serve 64 px scaled down.
-- **Q4 Enums.** Should the bundle also carry the game's item trait and glyph enumerations (Appendix C)? The site's
-  tables for those come from ESO Logs, not the game, and may not be comparable.
+- **Q3 Sizes.** 64 px only. The site scales in CSS; no 40 px set.
+- **Q4 Enums.** Include `enums.json` (Appendix C) only if it falls out of data you already mine; if it needs new
+  tooling, skip it. It stays P2.
 
 ## Appendix A: the 21 class skill lines and the site's abbreviations
 

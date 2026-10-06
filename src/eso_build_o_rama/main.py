@@ -17,6 +17,7 @@ from typing import List, Dict, Any, Optional
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
+from .api_client import ESOLogsAPIClient
 from .trial_scanner import TrialScanner
 from .page_generator import PageGenerator
 from .models import CommonBuild
@@ -45,6 +46,13 @@ class ESOBuildORM:
             logger.warning("VERSION file not found, using default version")
             return "1.0.0"
     
+    @staticmethod
+    def partition_for(update_config: Dict[str, Any], update_version: Optional[str]) -> Optional[int]:
+        """ESO Logs ranking partition configured for an update, or None (API default)."""
+        if not update_version:
+            return None
+        return update_config.get('updates', {}).get(update_version, {}).get('partition')
+
     def _load_update_config(self) -> Dict[str, Any]:
         """Load update versioning configuration from data/update_config.json."""
         config_file = Path(__file__).parent.parent.parent / 'data' / 'update_config.json'
@@ -100,12 +108,18 @@ class ESOBuildORM:
         update_info = update_config.get('updates', {}).get(self.update_version, {})
         update_prefix = update_info.get('path_prefix', self.update_version)
         update_label = update_info.get('label', '')
+        self.partition = self.partition_for(update_config, self.update_version)
+        if self.update_version and self.partition is None:
+            logger.warning(
+                f"No ESO Logs ranking partition configured for {self.update_version}; "
+                "rankings will use the API default (newest update)"
+            )
         
         # Determine output directory based on git branch + update prefix
         output_dir = self.get_output_directory(update_prefix=update_prefix)
         logger.info(f"Using output directory: {output_dir} (update: {self.update_version or 'none'})")
         
-        self.scanner = TrialScanner()
+        self.scanner = TrialScanner(api_client=ESOLogsAPIClient(partition=self.partition))
         self.page_generator = PageGenerator(
             output_dir=output_dir,
             update_prefix=update_prefix,
@@ -114,7 +128,83 @@ class ESOBuildORM:
         self.data_store = DataStore(builds_file=f"{output_dir}/builds.json")
         self.csv_exporter = CSVExporter(output_dir=output_dir)
         self.trials_file = Path(__file__).parent.parent.parent / "data" / "trials.json"
-    async def run(self, test_mode: bool = False, trial_name: Optional[str] = None, trial_id: Optional[int] = None):
+    async def _regenerate_from_saved_builds(self) -> None:
+        """Rebuild every page (update pages and root pages) from the saved builds.json.
+
+        Used when a scan yields nothing publishable and by --regenerate-only, which
+        rebuilds an update's site without touching ESO Logs (archive freezes,
+        template changes).
+        """
+        # Still regenerate pages from existing saved builds
+        logger.info("Regenerating pages from existing saved builds...")
+        try:
+            all_saved_builds = self.data_store.get_all_builds()
+            trials_metadata = self.data_store.get_trials_metadata()
+        except CorruptedBuildsFileError as e:
+            logger.error(f"Failed to load builds data: {e}")
+            logger.info("Attempting to restore from backup...")
+            try:
+                backup_data = self.data_store.load_from_backup()
+                # Reconstruct builds from backup data
+                all_saved_builds = []
+                for trial_name, trial_data in backup_data["trials"].items():
+                    builds_data = trial_data.get("builds", [])
+                    for build_data in builds_data:
+                        build = self.data_store._deserialize_build(build_data)
+                        if build:
+                            all_saved_builds.append(build)
+
+                trials_metadata = {}
+                for trial_name, trial_data in backup_data["trials"].items():
+                    trials_metadata[trial_name] = {
+                        "last_updated": trial_data.get("last_updated"),
+                        "update_version": trial_data.get("update_version"),
+                        "build_count": len(trial_data.get("builds", [])),
+                    }
+                logger.info(f"Successfully restored {len(all_saved_builds)} builds from backup")
+            except Exception as backup_error:
+                logger.error(f"Backup restore also failed: {backup_error}")
+                raise
+
+        if all_saved_builds:
+            # Generate aggregated builds for TL;DR page and home page card
+            logger.info("Generating aggregated builds for TL;DR summary...")
+            from .build_analyzer import BuildAnalyzer
+            build_analyzer = BuildAnalyzer()
+            aggregated_builds = build_analyzer.aggregate_builds_across_trials(all_saved_builds)
+
+            # Generate TL;DR summary page
+            tldr_path = self.page_generator.generate_tldr_summary_page(aggregated_builds, all_saved_builds, self.get_version())
+            logger.info(f"Generated TL;DR summary: {tldr_path}")
+
+            # Generate aggregated build pages
+            for role, builds in aggregated_builds.items():
+                for build in builds:
+                    self.page_generator.generate_aggregated_build_page(build, "unknown", self.get_version())
+
+            generated_files = self.page_generator.generate_all_pages(
+                all_saved_builds,
+                "unknown",
+                trials_metadata,
+                self.get_version(),
+                aggregated_builds
+            )
+            logger.info(f"Generated {len(generated_files)} HTML files from existing data")
+        else:
+            logger.warning("No existing builds found to generate pages from")
+
+        # Generate root-level pages in fallback path too
+        if self.update_version:
+            try:
+                self.page_generator.generate_router_page(self.get_version())
+                self.page_generator.generate_updates_page(self.get_version())
+                self.page_generator.generate_sitemap_index(self.get_version())
+                self.page_generator.generate_root_robots_txt(self.get_version())
+            except Exception as e:
+                logger.warning(f"Failed to generate root-level pages: {e}")
+
+    async def run(self, test_mode: bool = False, trial_name: Optional[str] = None, trial_id: Optional[int] = None,
+            regenerate_only: bool = False):
         """
         Run the complete build scanning and generation process.
         
@@ -129,12 +219,13 @@ class ESOBuildORM:
         
         # Query API usage at start of run
         initial_rate_limit_data = None
-        try:
-            initial_rate_limit_data = await self.scanner.api_client.get_rate_limit_data()
-            if initial_rate_limit_data:
-                logger.info(f"Initial API usage: {initial_rate_limit_data['pointsSpentThisHour']:.1f} points used this hour (limit: {initial_rate_limit_data['limitPerHour']})")
-        except Exception as e:
-            logger.warning(f"Could not get initial API usage data: {e}")
+        if not regenerate_only:
+            try:
+                initial_rate_limit_data = await self.scanner.api_client.get_rate_limit_data()
+                if initial_rate_limit_data:
+                    logger.info(f"Initial API usage: {initial_rate_limit_data['pointsSpentThisHour']:.1f} points used this hour (limit: {initial_rate_limit_data['limitPerHour']})")
+            except Exception as e:
+                logger.warning(f"Could not get initial API usage data: {e}")
         
         try:
             # Generate social media preview images first
@@ -147,6 +238,11 @@ class ESOBuildORM:
                 logger.info("Skipping social preview generation (using pre-optimized versions from repo)")
             
             # Load trials data
+            if regenerate_only:
+                logger.info("Regenerate-only mode: rebuilding pages from saved builds.json without scanning")
+                await self._regenerate_from_saved_builds()
+                return
+
             all_trials = self._load_trials()
             
             # Determine which trials to scan
@@ -167,73 +263,7 @@ class ESOBuildORM:
             
             if not publishable_builds:
                 logger.warning("No publishable builds found for this trial (need 5+ occurrences for DPS, 3+ for tank/healer)")
-                # Still regenerate pages from existing saved builds
-                logger.info("Regenerating pages from existing saved builds...")
-                try:
-                    all_saved_builds = self.data_store.get_all_builds()
-                    trials_metadata = self.data_store.get_trials_metadata()
-                except CorruptedBuildsFileError as e:
-                    logger.error(f"Failed to load builds data: {e}")
-                    logger.info("Attempting to restore from backup...")
-                    try:
-                        backup_data = self.data_store.load_from_backup()
-                        # Reconstruct builds from backup data
-                        all_saved_builds = []
-                        for trial_name, trial_data in backup_data["trials"].items():
-                            builds_data = trial_data.get("builds", [])
-                            for build_data in builds_data:
-                                build = self.data_store._deserialize_build(build_data)
-                                if build:
-                                    all_saved_builds.append(build)
-                        
-                        trials_metadata = {}
-                        for trial_name, trial_data in backup_data["trials"].items():
-                            trials_metadata[trial_name] = {
-                                "last_updated": trial_data.get("last_updated"),
-                                "update_version": trial_data.get("update_version"),
-                                "build_count": len(trial_data.get("builds", [])),
-                            }
-                        logger.info(f"Successfully restored {len(all_saved_builds)} builds from backup")
-                    except Exception as backup_error:
-                        logger.error(f"Backup restore also failed: {backup_error}")
-                        raise
-                
-                if all_saved_builds:
-                    # Generate aggregated builds for TL;DR page and home page card
-                    logger.info("Generating aggregated builds for TL;DR summary...")
-                    from .build_analyzer import BuildAnalyzer
-                    build_analyzer = BuildAnalyzer()
-                    aggregated_builds = build_analyzer.aggregate_builds_across_trials(all_saved_builds)
-                    
-                    # Generate TL;DR summary page
-                    tldr_path = self.page_generator.generate_tldr_summary_page(aggregated_builds, all_saved_builds, self.get_version())
-                    logger.info(f"Generated TL;DR summary: {tldr_path}")
-                    
-                    # Generate aggregated build pages
-                    for role, builds in aggregated_builds.items():
-                        for build in builds:
-                            self.page_generator.generate_aggregated_build_page(build, "unknown", self.get_version())
-                    
-                    generated_files = self.page_generator.generate_all_pages(
-                        all_saved_builds,
-                        "unknown",
-                        trials_metadata,
-                        self.get_version(),
-                        aggregated_builds
-                    )
-                    logger.info(f"Generated {len(generated_files)} HTML files from existing data")
-                else:
-                    logger.warning("No existing builds found to generate pages from")
-                
-                # Generate root-level pages in fallback path too
-                if self.update_version:
-                    try:
-                        self.page_generator.generate_router_page(self.get_version())
-                        self.page_generator.generate_updates_page(self.get_version())
-                        self.page_generator.generate_sitemap_index(self.get_version())
-                        self.page_generator.generate_root_robots_txt(self.get_version())
-                    except Exception as e:
-                        logger.warning(f"Failed to generate root-level pages: {e}")
+                await self._regenerate_from_saved_builds()
                 return
             
             logger.info(f"\nFound {len(publishable_builds)} publishable builds")
@@ -611,9 +641,11 @@ class ESOBuildORM:
 async def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(description='ESO Build-O-Rama - Scan trials and generate build pages')
-    parser.add_argument('--trial', type=str, help='Specific trial name to scan')
-    parser.add_argument('--trial-id', type=int, help='Specific trial ID to scan')
-    parser.add_argument('--test', action='store_true', help='Test mode - scan only first trial')
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--trial', type=str, help='Specific trial name to scan')
+    mode.add_argument('--trial-id', type=int, help='Specific trial ID to scan')
+    mode.add_argument('--test', action='store_true', help='Test mode - scan only first trial')
+    mode.add_argument('--regenerate-only', action='store_true', help='Rebuild all pages from the existing builds.json without scanning rankings (archive freezes, template changes); ESO Logs credentials are still needed to initialise the client')
     parser.add_argument('--update-version', type=str, help='Override update version (e.g., u48, u49). Reads from update_config.json if not specified.')
     
     args = parser.parse_args()
@@ -636,7 +668,9 @@ async def main():
     app = ESOBuildORM(update_version=args.update_version)
     
     # Determine scan mode
-    if args.trial_id:
+    if args.regenerate_only:
+        await app.run(regenerate_only=True)
+    elif args.trial_id:
         await app.run(trial_id=args.trial_id)
     elif args.trial:
         await app.run(trial_name=args.trial)

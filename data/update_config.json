@@ -6,19 +6,22 @@
       "label": "Update 48",
       "display_name": "Update 48 (Gold Road)",
       "path_prefix": "u48",
-      "status": "archived"
+      "status": "archived",
+      "partition": 27
     },
     "u49": {
       "label": "Update 49",
       "display_name": "Update 49",
       "path_prefix": "u49",
-      "status": "archived"
+      "status": "archived",
+      "partition": 28
     },
     "u50": {
       "label": "Update 50",
       "display_name": "Update 50",
       "path_prefix": "u50",
-      "status": "active"
+      "status": "active",
+      "partition": 29
     }
   }
 }

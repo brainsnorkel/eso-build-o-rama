@@ -33,7 +33,8 @@ class ESOLogsAPIClient:
         client_secret: Optional[str] = None,
         min_request_delay: float = DEFAULT_MIN_REQUEST_DELAY,
         max_retries: int = DEFAULT_MAX_RETRIES,
-        retry_delay: float = DEFAULT_RETRY_DELAY
+        retry_delay: float = DEFAULT_RETRY_DELAY,
+        partition: Optional[int] = None
     ):
         """
         Initialize the ESO Logs API client.
@@ -44,6 +45,9 @@ class ESOLogsAPIClient:
             min_request_delay: Minimum delay between API requests in seconds (default: 2.0)
             max_retries: Maximum number of retries for rate-limited requests (default: 3)
             retry_delay: Delay in seconds after hitting rate limit (default: 120)
+            partition: ESO Logs ranking partition to query (one per game update).
+                Rankings default to the newest partition, so an unpinned query
+                silently switches to the next update the day it launches.
         """
         self.client_id = client_id or os.getenv("ESOLOGS_ID")
         self.client_secret = client_secret or os.getenv("ESOLOGS_SECRET")
@@ -55,6 +59,7 @@ class ESOLogsAPIClient:
         self.max_retries = max_retries
         self.retry_delay = retry_delay
         self.last_request_time = 0
+        self.partition = partition
         
         # Get access token and initialize the client
         self.access_token = get_access_token(self.client_id, self.client_secret)
@@ -62,7 +67,8 @@ class ESOLogsAPIClient:
             url="https://www.esologs.com/api/v2/client",
             headers={"Authorization": f"Bearer {self.access_token}"}
         )
-        logger.info(f"ESO Logs API client initialized (rate limit: {min_request_delay}s between requests)")
+        logger.info(f"ESO Logs API client initialized (rate limit: {min_request_delay}s between requests, "
+                    f"rankings partition: {partition if partition is not None else 'API default'})")
     
     def _validate_credentials(self, client_id: str, client_secret: str) -> None:
         """Validate ESO Logs API credentials."""
@@ -192,11 +198,12 @@ class ESOLogsAPIClient:
         try:
             # Use fightRankings with speed metric to get top-performing reports
             query_fight_rankings = '''
-            query GetTopRankedReports($encounterID: Int!) {
+            query GetTopRankedReports($encounterID: Int!, $partition: Int) {
               worldData {
                 encounter(id: $encounterID) {
                   fightRankings(
                     metric: speed
+                    partition: $partition
                   )
                 }
               }
@@ -206,7 +213,7 @@ class ESOLogsAPIClient:
             result = await self._retry_on_rate_limit(
                 self.client.execute,
                 query=query_fight_rankings,
-                variables={"encounterID": encounter_id}
+                variables={"encounterID": encounter_id, "partition": self.partition}
             )
             
             if result.status_code != 200:
@@ -286,11 +293,12 @@ class ESOLogsAPIClient:
         """
         try:
             query_character_rankings = '''
-            query GetCharacterRankings($encounterID: Int!, $metric: CharacterRankingMetricType!) {
+            query GetCharacterRankings($encounterID: Int!, $metric: CharacterRankingMetricType!, $partition: Int) {
               worldData {
                 encounter(id: $encounterID) {
                   characterRankings(
                     metric: $metric
+                    partition: $partition
                   )
                 }
               }
@@ -302,7 +310,8 @@ class ESOLogsAPIClient:
                 query=query_character_rankings,
                 variables={
                     "encounterID": encounter_id,
-                    "metric": "dps"
+                    "metric": "dps",
+                    "partition": self.partition
                 }
             )
 

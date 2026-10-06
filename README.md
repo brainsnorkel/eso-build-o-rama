@@ -620,9 +620,9 @@ Solutions:
 - Wait 2-3 minutes between manual workflow triggers
 - Automated schedule handles this automatically
 
-### GitHub Actions Race Conditions
+### GitHub Actions Run Ordering
 
-When triggering multiple workflows manually, wait 2-3 minutes between them. Each workflow downloads builds.json from the live site. If workflows overlap, the later one may download stale data before the earlier deployment completes.
+The workflow declares a `concurrency` group with `cancel-in-progress: false`, so runs never overlap. A manual dispatch that arrives while a run is active waits in the pending slot and starts when that run finishes. This matters because every run downloads builds.json from the live site at start; serialising runs is what stops a later starter from publishing stale data. GitHub holds only one pending run per group, so dispatching twice while a run is active cancels the first pending dispatch in favour of the second.
 
 ### Template Changes Not Appearing
 

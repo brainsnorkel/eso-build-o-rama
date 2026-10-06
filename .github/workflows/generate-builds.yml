@@ -25,6 +25,16 @@ permissions:
   id-token: write
   actions: read  # gh run list/download in the artifact-restore step
 
+# One run at a time. Every run downloads the live builds.json at start and
+# deploys at the end, so overlapping runs (a late-firing cron plus a manual
+# dispatch, or two dispatches) let the later starter publish stale data for
+# the other trial. Queued runs wait rather than cancel: a scan takes a few
+# minutes and cancelling mid-deploy is worse than waiting. GitHub holds one
+# pending run per group; a third arrival replaces the pending one.
+concurrency:
+  group: generate-builds-pages
+  cancel-in-progress: false
+
 jobs:
   generate-trial:
     # Pinned explicitly: the ubuntu-latest label rolls to a new LTS periodically

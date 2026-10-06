@@ -1,5 +1,5 @@
 {
-  "current_update": "u50",
+  "current_update": "u51",
   "active_update": "u50",
   "updates": {
     "u48": {
@@ -20,8 +20,15 @@
       "label": "Update 50",
       "display_name": "Update 50",
       "path_prefix": "u50",
-      "status": "active",
+      "status": "archived",
       "partition": 29
+    },
+    "u51": {
+      "label": "Update 51",
+      "display_name": "Update 51",
+      "path_prefix": "u51",
+      "status": "active",
+      "partition": 30
     }
   }
 }

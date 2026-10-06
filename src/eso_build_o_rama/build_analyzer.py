@@ -22,9 +22,18 @@ class BuildAnalyzer:
     MINIMUM_HEALER_TANK_BUILD_OCCURRENCES = 3  # Minimum occurrences for healer and tank builds
     MAX_SUBCLASSES = 3  # Maximum number of subclasses per character
     
-    def __init__(self):
-        """Initialize the build analyzer."""
-        self.subclass_analyzer = ESOSubclassAnalyzer()
+    def __init__(self, update_version: Optional[str] = None):
+        """Initialize the build analyzer.
+
+        Args:
+            update_version: Update whose game data tables (data/game/<update>/)
+                drive skill-line detection, so a rescan of an archived update uses
+                that update's tables. None uses the configured current update.
+        """
+        from .game_data import GameData
+        self.subclass_analyzer = ESOSubclassAnalyzer(
+            game_data=GameData.load(update_version), load_game_data=False
+        )
     
     def analyze_trial_report(self, trial_report: TrialReport) -> TrialReport:
         """
@@ -72,15 +81,18 @@ class BuildAnalyzer:
         # Debug: Check DPS before analysis
         dps_before = player.dps
         
-        # Extract ability names for subclass analysis
-        all_abilities = []
-        for ability in player.abilities_bar1 + player.abilities_bar2:
-            if ability.ability_name:
-                all_abilities.append(ability.ability_name)
-        
-        # Determine subclasses (only if not already set)
+        # Determine subclasses (only if not already set). Resolution is by ability
+        # id against the imported game data, with the grimoire icon for scribed
+        # skills and the legacy name match as last resort; lines the bars do not
+        # show are padded from the player's class (see analyze_player).
+        all_abilities = [
+            ability for ability in player.abilities_bar1 + player.abilities_bar2
+            if ability.ability_name or ability.ability_id
+        ]
         if not player.subclasses and all_abilities:
-            player.subclasses = self.subclass_analyzer.analyze_subclasses(all_abilities)
+            player.subclasses, player.subclasses_padded = self.subclass_analyzer.analyze_player(
+                all_abilities, player.class_name
+            )
         elif not player.subclasses:
             player.subclasses = ['x', 'x', 'x']
         
@@ -273,6 +285,7 @@ class BuildAnalyzer:
         
         # Extract build components from the best player
         subclasses = best_player.subclasses.copy()
+        subclasses_padded = list(best_player.subclasses_padded)
         sets = []
         
         # Get the two most common sets
@@ -288,6 +301,7 @@ class BuildAnalyzer:
         common_build = CommonBuild(
             build_slug=build_slug,
             subclasses=subclasses,
+            subclasses_padded=subclasses_padded,
             sets=sets,
             count=len(players),
             report_count=len(unique_reports),
@@ -426,6 +440,7 @@ class BuildAnalyzer:
                     aggregated_build = CommonBuild(
                         build_slug=build_slug,
                         subclasses=builds[0].subclasses.copy(),
+                        subclasses_padded=list(best_player.subclasses_padded),
                         sets=builds[0].sets.copy(),
                         count=total_players,
                         report_count=total_reports,

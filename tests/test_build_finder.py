@@ -114,7 +114,7 @@ def test_display_parts_marks_base_class_for_api_casing():
         subclasses=["Ardent", "Draconic", "Herald"],
         best_player=PlayerBuild(class_name="DragonKnight"),
     )
-    parts = dict(build.get_display_parts(abbreviated=True))
+    parts = {name: is_base for name, is_base, _padded in build.get_display_parts(abbreviated=True)}
     assert parts == {"Ardent": True, "Draconic": True, "Herald": False}
 
 
@@ -123,7 +123,7 @@ def test_display_parts_not_all_false_for_api_casing():
         subclasses=["Ardent", "Draconic", "Herald"],
         best_player=PlayerBuild(class_name="DragonKnight"),
     )
-    assert any(is_base for _, is_base in build.get_display_parts(abbreviated=True))
+    assert any(is_base for _, is_base, _padded in build.get_display_parts(abbreviated=True))
 
 
 # 3. build_page_filename
@@ -459,7 +459,7 @@ def test_finder_escapes_apostrophes_in_attributes(gen, tmp_path):
     soup = _finder_soup_for(gen, tmp_path, [build])
     tr = _data_rows(soup)[0]
     assert tr.select_one("a.finder-esologs-link")["aria-label"] == "Open @O'Brien's log on ESO Logs"
-    parts = " / ".join(name for name, _ in build.get_display_parts(abbreviated=True))
+    parts = " / ".join(name for name, _base, _padded in build.get_display_parts(abbreviated=True))
     assert (
         tr.select_one("a.finder-build-link")["aria-label"]
         == f"View Build: {parts}, Deadly Strike + Perfected Ansuul's Torment"

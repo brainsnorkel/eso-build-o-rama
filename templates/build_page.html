@@ -132,7 +132,8 @@
 </nav>
 
 <div class="card">
-    <h2>{% for name, is_base in build.get_display_parts() %}{% if is_base %}<span style="font-weight: 900; color: #fff;">{{ name }}</span>{% else %}{{ name }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</h2>
+    <h2>{% for name, is_base, is_padded in build.get_display_parts() %}{% if is_padded %}<span class="subclass-padded" title="Not slotted on the bars; assumed from the player's class">{{ name }}</span>{% elif is_base %}<span style="font-weight: 900; color: #fff;">{{ name }}</span>{% else %}{{ name }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</h2>
+    {% if build.get_padded_subclasses() %}<p class="subclass-padded-note">Dotted lines were not slotted on the bars and are assumed from the player's class.</p>{% endif %}
     
     <div class="build-info">
         <div class="info-box">
@@ -162,7 +163,7 @@
 
         <div class="info-box">
             <div class="label">Mundus</div>
-            <div class="value">{{ best_player.mundus or 'Unknown' }}</div>
+            <div class="value">{% if best_player.mundus and best_player.mundus != 'Unknown' %}<a href="{{ best_player.mundus|eso_hub_mundus_url }}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(255, 255, 255, 0.5);">{{ best_player.mundus }}</a>{% else %}{{ best_player.mundus or 'Unknown' }}{% endif %}</div>
         </div>
     </div>
 </div>
@@ -179,7 +180,7 @@
         {% for ability in best_player.abilities_bar1 %}
         <div class="ability">
             {% if ability.ability_icon %}
-            <img src="../static/icons/{{ ability.ability_icon }}.png" 
+            <img src="static/icons/{{ ability.ability_icon }}.png"
                  alt="{{ ability.ability_name }}{% if ability.skill_line %} from {{ ability.skill_line }}{% endif %}" 
                  class="ability-icon">
             {% endif %}
@@ -197,7 +198,7 @@
         {% for ability in best_player.abilities_bar2 %}
         <div class="ability">
             {% if ability.ability_icon %}
-            <img src="../static/icons/{{ ability.ability_icon }}.png" 
+            <img src="static/icons/{{ ability.ability_icon }}.png"
                  alt="{{ ability.ability_name }}{% if ability.skill_line %} from {{ ability.skill_line }}{% endif %}" 
                  class="ability-icon">
             {% endif %}

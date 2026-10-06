@@ -50,8 +50,8 @@ python utils/migrate_cache.py
 cd output-dev && python3 -m http.server 8080
 
 # Run deployment checks (REQUIRED before merging to main)
-./scripts/pre-merge-check.sh output-dev
-python3 scripts/deployment_check.py output-dev
+./scripts/pre-merge-check.sh output-dev/u51     # the update directory, not the output root
+python3 scripts/deployment_check.py output-dev/u51
 
 # Test API client
 python tests/test_api_client.py
@@ -102,10 +102,11 @@ gh run view <run_id> --log
 - Select highest DPS player as representative
 - Preserve mundus stone from any instance of same character
 
-**Subclass Detection**:
-- Count ability casts per skill line from combat logs
-- Weight ultimates more heavily than normal abilities
-- Select top 3 skill lines by weighted usage
+**Subclass Detection** (`subclass_analyzer.py`, `game_data.py`):
+- Resolve each slotted ability by its game ability id in the imported game data (`data/game/<update>/abilities.json`)
+- Scribed skills arrive with ESO Logs pseudo-ids (1000+); their grimoire icon stem identifies a non-class line
+- Legacy name matching (`SKILL_LINE_ABILITIES`) is only a last resort for abilities the tables do not know
+- Bars often show only 1-2 class lines; the rest are padded from the player's class-native lines and recorded in `subclasses_padded` so pages can mark them
 - Normalize to abbreviated names (e.g., "Ardent Flame" → "Ardent")
 
 **Mundus Stone Detection**:
@@ -161,7 +162,7 @@ gh run view <run_id> --log
 **BEFORE merging ANY branch to main**, you MUST:
 
 1. Generate test build: `python3 -m src.eso_build_o_rama.main --trial-id 1`
-2. Run deployment check: `./scripts/pre-merge-check.sh output-dev`
+2. Run deployment check: `./scripts/pre-merge-check.sh output-dev/u51` (the update directory)
 3. All checks must pass (exit code 0)
 4. Only then merge: `git checkout main && git merge develop`
 
@@ -234,6 +235,12 @@ export ESOLOGS_SECRET="your_client_secret"
 **data/trial_bosses.json**:
 - Maps trial names to boss encounters in order
 - Used for page navigation and build grouping
+
+**data/game/<update>/** (abilities, skill_lines, mundus, sets, manifest):
+- Game tables imported from the ESO Log Tail asset bundle; see `docs/GAME_ASSET_BUNDLE.md`
+- Import with `python scripts/import_game_assets.py <release-tag>`; the repo ignores `*.json`, so new tables need `git add -f`
+- Icons live in `static/icons/` and are imported add-or-update only; never delete the site-authored `gp_class_*`, `abilityframe64_up`, `ridingskill_ready`
+- Build pages load `static/icons/` from their own update directory (refreshed every run). Pages committed before 2026-10-06 load the root copy `output/static/icons/`, which only changes when synced by hand
 
 **.github/workflows/generate-builds.yml**:
 - Staggered schedule: one trial per hour

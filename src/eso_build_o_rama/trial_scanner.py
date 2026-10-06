@@ -19,16 +19,19 @@ logger = logging.getLogger(__name__)
 class TrialScanner:
     """Scans ESO Logs trials to identify top-performing builds."""
     
-    def __init__(self, api_client: Optional[ESOLogsAPIClient] = None):
+    def __init__(self, api_client: Optional[ESOLogsAPIClient] = None, update_version: Optional[str] = None):
         """
         Initialize the trial scanner.
-        
+
         Args:
             api_client: Optional API client instance
+            update_version: Update whose game data tables drive skill-line
+                detection (data/game/<update>/); None uses the configured
+                current update.
         """
         self.api_client = api_client or ESOLogsAPIClient()
         self.data_parser = DataParser()
-        self.build_analyzer = BuildAnalyzer()
+        self.build_analyzer = BuildAnalyzer(update_version=update_version)
     
     @staticmethod
     def _fight_name_matches(fight_name: Optional[str], encounter_name: Optional[str]) -> bool:
@@ -658,6 +661,7 @@ class TrialScanner:
             consolidated = CommonBuild(
                 build_slug=build_slug,
                 subclasses=first_build.subclasses.copy(),
+                subclasses_padded=list(best_player.subclasses_padded),
                 sets=first_build.sets.copy(),
                 count=len(all_players),
                 report_count=len(unique_reports),
@@ -854,6 +858,7 @@ class TrialScanner:
             fallback_build = CommonBuild(
                 build_slug=build_slug,
                 subclasses=player.subclasses.copy(),
+                subclasses_padded=list(player.subclasses_padded),
                 sets=sets_list,
                 count=1,  # Mark as fallback
                 report_count=1,

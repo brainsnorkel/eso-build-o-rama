@@ -229,6 +229,7 @@ class DataStore:
         return {
             "build_slug": build.build_slug,
             "subclasses": build.subclasses,
+            "subclasses_padded": build.subclasses_padded,
             "sets": build.sets,
             "count": build.count,
             "report_count": build.report_count,
@@ -265,6 +266,7 @@ class DataStore:
             return CommonBuild(
                 build_slug=data.get("build_slug", ""),
                 subclasses=data.get("subclasses", []),
+                subclasses_padded=data.get("subclasses_padded", []),
                 sets=data.get("sets", []),
                 count=data.get("count", 0),
                 report_count=data.get("report_count", 0),
@@ -307,6 +309,7 @@ class DataStore:
             "abilities_bar1": [self._serialize_ability(ability) for ability in player.abilities_bar1],
             "abilities_bar2": [self._serialize_ability(ability) for ability in player.abilities_bar2],
             "subclasses": player.subclasses,
+            "subclasses_padded": player.subclasses_padded,
             "sets_equipped": player.sets_equipped,
             "mundus": player.mundus,
             "champion_points": player.champion_points,
@@ -357,6 +360,7 @@ class DataStore:
                 abilities_bar1=abilities_bar1,
                 abilities_bar2=abilities_bar2,
                 subclasses=data.get("subclasses", []),
+                subclasses_padded=data.get("subclasses_padded", []),
                 sets_equipped=data.get("sets_equipped", {}),
                 mundus=data.get("mundus", ""),
                 champion_points=data.get("champion_points", []),

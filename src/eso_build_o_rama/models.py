@@ -104,6 +104,9 @@ class PlayerBuild:
     
     # Analysis results
     subclasses: List[str] = field(default_factory=list)  # e.g., ["Ass", "Herald", "Ardent"]
+    # Subset of `subclasses` that no slotted ability proved: filled in from the
+    # player's class-native lines so every build has three (see GAME_ASSET_BUNDLE.md).
+    subclasses_padded: List[str] = field(default_factory=list)
     sets_equipped: Dict[str, int] = field(default_factory=dict)  # set_name -> count
     sets_bar1: Dict[str, int] = field(default_factory=dict)
     sets_bar2: Dict[str, int] = field(default_factory=dict)
@@ -172,6 +175,7 @@ class CommonBuild:
     """Represents a build that appears frequently."""
     build_slug: str = ""
     subclasses: List[str] = field(default_factory=list)
+    subclasses_padded: List[str] = field(default_factory=list)  # from the best player
     sets: List[str] = field(default_factory=list)
     count: int = 0
     report_count: int = 0
@@ -267,7 +271,9 @@ class CommonBuild:
         Get subclass display names with base-class annotation.
 
         Returns:
-            Sorted list of (display_name, is_base_class) tuples.
+            Sorted list of (display_name, is_base_class, is_padded) tuples. A padded
+            line was not proven by any slotted ability and was filled in from the
+            player's class (see PlayerBuild.subclasses_padded).
         """
         if abbreviated:
             subclass_names = {
@@ -302,11 +308,12 @@ class CommonBuild:
                 normalize_class_name(self.best_player.class_name), set()
             )
 
+        padded = {p.lower() for p in self.get_padded_subclasses()}
         parts = []
         for subclass in self.subclasses:
             name = subclass_names.get(subclass.lower(), subclass.title())
             is_base = subclass.lower() in base_class_abbrevs
-            parts.append((name, is_base))
+            parts.append((name, is_base, subclass.lower() in padded))
 
         parts.sort(key=lambda p: p[0])
         return parts
@@ -321,6 +328,18 @@ class CommonBuild:
         # Sort alphabetically and return as list
         return sorted(list(all_sets))
     
+    def get_padded_subclasses(self) -> List[str]:
+        """Class lines no slotted ability proved, from this build or its best player.
+
+        The build-level list is a copy of the best player's; consolidation paths
+        that construct a CommonBuild from players fall back to the player's list.
+        """
+        if self.subclasses_padded:
+            return list(self.subclasses_padded)
+        if self.best_player and self.best_player.subclasses_padded:
+            return list(self.best_player.subclasses_padded)
+        return []
+
     def get_sorted_sets(self) -> List[str]:
         """Get the main sets for this build, sorted alphabetically."""
         return sorted(self.sets) if self.sets else []

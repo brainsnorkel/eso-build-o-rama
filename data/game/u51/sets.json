@@ -1,0 +1,5717 @@
+{
+ "sets": {
+  "100": {
+   "esohub": "/en/sets/hawks-eye",
+   "max_equip": 5,
+   "name": "Hawk's Eye",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "101": {
+   "esohub": "/en/sets/affliction",
+   "max_equip": 5,
+   "name": "Affliction",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "102": {
+   "esohub": "/en/sets/dunerippers-scales",
+   "max_equip": 5,
+   "name": "Duneripper's Scales",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "103": {
+   "esohub": "/en/sets/magicka-furnace",
+   "max_equip": 5,
+   "name": "Magicka Furnace",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "104": {
+   "esohub": "/en/sets/curse-eater",
+   "max_equip": 5,
+   "name": "Curse Eater",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "105": {
+   "esohub": "/en/sets/twin-sisters",
+   "max_equip": 5,
+   "name": "Twin Sisters",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "106": {
+   "esohub": "/en/sets/wilderqueens-arch",
+   "max_equip": 5,
+   "name": "Wilderqueen's Arch",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "107": {
+   "esohub": "/en/sets/wyrd-trees-blessing",
+   "max_equip": 5,
+   "name": "Wyrd Tree's Blessing",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "108": {
+   "esohub": "/en/sets/ravager",
+   "max_equip": 5,
+   "name": "Ravager",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "109": {
+   "esohub": "/en/sets/light-of-cyrodiil",
+   "max_equip": 5,
+   "name": "Light of Cyrodiil",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "110": {
+   "esohub": "/en/sets/sanctuary",
+   "max_equip": 5,
+   "name": "Sanctuary",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "111": {
+   "esohub": "/en/sets/ward-of-cyrodiil",
+   "max_equip": 5,
+   "name": "Ward of Cyrodiil",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "112": {
+   "esohub": "/en/sets/night-terror",
+   "max_equip": 5,
+   "name": "Night Terror",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "113": {
+   "esohub": "/en/sets/crest-of-cyrodiil",
+   "max_equip": 5,
+   "name": "Crest of Cyrodiil",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "114": {
+   "esohub": "/en/sets/soulshine",
+   "max_equip": 5,
+   "name": "Soulshine",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "116": {
+   "esohub": "/en/sets/the-destruction-suite",
+   "max_equip": 3,
+   "name": "The Destruction Suite",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "117": {
+   "esohub": "/en/sets/relics-of-the-physician-ansur",
+   "max_equip": 3,
+   "name": "Relics of the Physician, Ansur",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "118": {
+   "esohub": "/en/sets/treasures-of-the-earthforge",
+   "max_equip": 3,
+   "name": "Treasures of the Earthforge",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "119": {
+   "esohub": "/en/sets/relics-of-the-rebellion",
+   "max_equip": 3,
+   "name": "Relics of the Rebellion",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "120": {
+   "esohub": "/en/sets/arms-of-infernace",
+   "max_equip": 3,
+   "name": "Arms of Infernace",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "121": {
+   "esohub": "/en/sets/arms-of-the-ancestors",
+   "max_equip": 3,
+   "name": "Arms of the Ancestors",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "122": {
+   "esohub": "/en/sets/ebon-armory",
+   "max_equip": 5,
+   "name": "Ebon Armory",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "123": {
+   "esohub": "/en/sets/hircines-veneer",
+   "max_equip": 5,
+   "name": "Hircine's Veneer",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "124": {
+   "esohub": "/en/sets/the-worms-raiment",
+   "max_equip": 5,
+   "name": "The Worm's Raiment",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "125": {
+   "esohub": "/en/sets/wrath-of-the-imperium",
+   "max_equip": 3,
+   "name": "Wrath of the Imperium",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "126": {
+   "esohub": "/en/sets/grace-of-the-ancients",
+   "max_equip": 3,
+   "name": "Grace of the Ancients",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "127": {
+   "esohub": "/en/sets/deadly-strike",
+   "max_equip": 5,
+   "name": "Deadly Strike",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "128": {
+   "esohub": "/en/sets/blessing-of-the-potentates",
+   "max_equip": 3,
+   "name": "Blessing of the Potentates",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "129": {
+   "esohub": "/en/sets/vengeance-leech",
+   "max_equip": 3,
+   "name": "Vengeance Leech",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "130": {
+   "esohub": "/en/sets/eagle-eye",
+   "max_equip": 3,
+   "name": "Eagle Eye",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "131": {
+   "esohub": "/en/sets/bastion-of-the-heartland",
+   "max_equip": 5,
+   "name": "Bastion of the Heartland",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "132": {
+   "esohub": "/en/sets/shield-of-the-valiant",
+   "max_equip": 5,
+   "name": "Shield of the Valiant",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "133": {
+   "esohub": "/en/sets/buffer-of-the-swift",
+   "max_equip": 5,
+   "name": "Buffer of the Swift",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "134": {
+   "esohub": "/en/sets/shroud-of-the-lich",
+   "max_equip": 5,
+   "name": "Shroud of the Lich",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "135": {
+   "esohub": "/en/sets/draugrs-heritage",
+   "max_equip": 5,
+   "name": "Draugr's Heritage",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "136": {
+   "esohub": "/en/sets/immortal-warrior",
+   "max_equip": 5,
+   "name": "Immortal Warrior",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "137": {
+   "esohub": "/en/sets/berserking-warrior",
+   "max_equip": 5,
+   "name": "Berserking Warrior",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "138": {
+   "esohub": "/en/sets/defending-warrior",
+   "max_equip": 5,
+   "name": "Defending Warrior",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "139": {
+   "esohub": "/en/sets/wise-mage",
+   "max_equip": 5,
+   "name": "Wise Mage",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "140": {
+   "esohub": "/en/sets/destructive-mage",
+   "max_equip": 5,
+   "name": "Destructive Mage",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "141": {
+   "esohub": "/en/sets/healing-mage",
+   "max_equip": 5,
+   "name": "Healing Mage",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "142": {
+   "esohub": "/en/sets/quick-serpent",
+   "max_equip": 5,
+   "name": "Quick Serpent",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "143": {
+   "esohub": "/en/sets/poisonous-serpent",
+   "max_equip": 5,
+   "name": "Poisonous Serpent",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "144": {
+   "esohub": "/en/sets/twice-fanged-serpent",
+   "max_equip": 5,
+   "name": "Twice-Fanged Serpent",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "145": {
+   "esohub": "/en/sets/way-of-fire",
+   "max_equip": 5,
+   "name": "Way of Fire",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "146": {
+   "esohub": "/en/sets/way-of-air",
+   "max_equip": 5,
+   "name": "Way of Air",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "147": {
+   "esohub": "/en/sets/way-of-martial-knowledge",
+   "max_equip": 5,
+   "name": "Way of Martial Knowledge",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "148": {
+   "esohub": "/en/sets/way-of-the-arena",
+   "max_equip": 5,
+   "name": "Way of the Arena",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "155": {
+   "esohub": "/en/sets/undaunted-bastion",
+   "max_equip": 5,
+   "name": "Undaunted Bastion",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "156": {
+   "esohub": "/en/sets/undaunted-infiltrator",
+   "max_equip": 5,
+   "name": "Undaunted Infiltrator",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "157": {
+   "esohub": "/en/sets/undaunted-unweaver",
+   "max_equip": 5,
+   "name": "Undaunted Unweaver",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "158": {
+   "esohub": "/en/sets/embershield",
+   "max_equip": 5,
+   "name": "Embershield",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "159": {
+   "esohub": "/en/sets/sunderflame",
+   "max_equip": 5,
+   "name": "Sunderflame",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "160": {
+   "esohub": "/en/sets/burning-spellweave",
+   "max_equip": 5,
+   "name": "Burning Spellweave",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "161": {
+   "esohub": "/en/sets/twice-born-star",
+   "max_equip": 5,
+   "name": "Twice-Born Star",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "162": {
+   "esohub": "/en/sets/spawn-of-mephala",
+   "max_equip": 2,
+   "name": "Spawn of Mephala",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "163": {
+   "esohub": "/en/sets/bloodspawn",
+   "max_equip": 2,
+   "name": "Bloodspawn",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "164": {
+   "esohub": "/en/sets/lord-warden",
+   "max_equip": 2,
+   "name": "Lord Warden",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "165": {
+   "esohub": "/en/sets/scourge-harvester",
+   "max_equip": 2,
+   "name": "Scourge Harvester",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "166": {
+   "esohub": "/en/sets/engine-guardian",
+   "max_equip": 2,
+   "name": "Engine Guardian",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "167": {
+   "esohub": "/en/sets/nightflame",
+   "max_equip": 2,
+   "name": "Nightflame",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "168": {
+   "esohub": "/en/sets/nerieneth",
+   "max_equip": 2,
+   "name": "Nerien'eth",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "169": {
+   "esohub": "/en/sets/valkyn-skoria",
+   "max_equip": 2,
+   "name": "Valkyn Skoria",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "170": {
+   "esohub": "/en/sets/maw-of-the-infernal",
+   "max_equip": 2,
+   "name": "Maw of the Infernal",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "171": {
+   "esohub": "/en/sets/eternal-warrior",
+   "max_equip": 5,
+   "name": "Eternal Warrior",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "172": {
+   "esohub": "/en/sets/infallible-mage",
+   "max_equip": 5,
+   "name": "Infallible Mage",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "173": {
+   "esohub": "/en/sets/vicious-serpent",
+   "max_equip": 5,
+   "name": "Vicious Serpent",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "176": {
+   "esohub": "/en/sets/nobles-conquest",
+   "max_equip": 5,
+   "name": "Noble's Conquest",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "177": {
+   "esohub": "/en/sets/redistributor",
+   "max_equip": 5,
+   "name": "Redistributor",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "178": {
+   "esohub": "/en/sets/armor-master",
+   "max_equip": 5,
+   "name": "Armor Master",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "179": {
+   "esohub": "/en/sets/black-rose",
+   "max_equip": 5,
+   "name": "Black Rose",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "180": {
+   "esohub": "/en/sets/powerful-assault",
+   "max_equip": 5,
+   "name": "Powerful Assault",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "181": {
+   "esohub": "/en/sets/meritorious-service",
+   "max_equip": 5,
+   "name": "Meritorious Service",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "183": {
+   "esohub": "/en/sets/molag-kena",
+   "max_equip": 2,
+   "name": "Molag Kena",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "184": {
+   "esohub": "/en/sets/brands-of-imperium",
+   "max_equip": 5,
+   "name": "Brands of Imperium",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "185": {
+   "esohub": "/en/sets/spell-power-cure",
+   "max_equip": 5,
+   "name": "Spell Power Cure",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "186": {
+   "esohub": "/en/sets/jolting-arms",
+   "max_equip": 5,
+   "name": "Jolting Arms",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "187": {
+   "esohub": "/en/sets/swamp-raider",
+   "max_equip": 5,
+   "name": "Swamp Raider",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "188": {
+   "esohub": "/en/sets/storm-master",
+   "max_equip": 5,
+   "name": "Storm Master",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "19": {
+   "esohub": "/en/sets/vestments-of-the-warlock",
+   "max_equip": 5,
+   "name": "Vestments of the Warlock",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "190": {
+   "esohub": "/en/sets/scathing-mage",
+   "max_equip": 5,
+   "name": "Scathing Mage",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "193": {
+   "esohub": "/en/sets/overwhelming-surge",
+   "max_equip": 5,
+   "name": "Overwhelming Surge",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "194": {
+   "esohub": "/en/sets/combat-physician",
+   "max_equip": 5,
+   "name": "Combat Physician",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "195": {
+   "esohub": "/en/sets/sheer-venom",
+   "max_equip": 5,
+   "name": "Sheer Venom",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "196": {
+   "esohub": "/en/sets/leeching-plate",
+   "max_equip": 5,
+   "name": "Leeching Plate",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "197": {
+   "esohub": "/en/sets/tormentor",
+   "max_equip": 5,
+   "name": "Tormentor",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "198": {
+   "esohub": "/en/sets/essence-thief",
+   "max_equip": 5,
+   "name": "Essence Thief",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "199": {
+   "esohub": "/en/sets/shield-breaker",
+   "max_equip": 5,
+   "name": "Shield Breaker",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "20": {
+   "esohub": "/en/sets/witchman-armor",
+   "max_equip": 5,
+   "name": "Witchman Armor",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "200": {
+   "esohub": "/en/sets/phoenix",
+   "max_equip": 5,
+   "name": "Phoenix",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "201": {
+   "esohub": "/en/sets/reactive-armor",
+   "max_equip": 5,
+   "name": "Reactive Armor",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "204": {
+   "esohub": "/en/sets/endurance",
+   "max_equip": 3,
+   "name": "Endurance",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "205": {
+   "esohub": "/en/sets/willpower",
+   "max_equip": 3,
+   "name": "Willpower",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "206": {
+   "esohub": "/en/sets/agility",
+   "max_equip": 3,
+   "name": "Agility",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "207": {
+   "esohub": "/en/sets/law-of-julianos",
+   "max_equip": 5,
+   "name": "Law of Julianos",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "208": {
+   "esohub": "/en/sets/trial-by-fire",
+   "max_equip": 5,
+   "name": "Trial by Fire",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "209": {
+   "esohub": "/en/sets/armor-of-the-code",
+   "max_equip": 4,
+   "name": "Armor of the Code",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "21": {
+   "esohub": "/en/sets/akaviri-dragonguard",
+   "max_equip": 5,
+   "name": "Akaviri Dragonguard",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "210": {
+   "esohub": "/en/sets/mark-of-the-pariah",
+   "max_equip": 5,
+   "name": "Mark of the Pariah",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "211": {
+   "esohub": "/en/sets/permafrost",
+   "max_equip": 5,
+   "name": "Permafrost",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "212": {
+   "esohub": "/en/sets/briarheart",
+   "max_equip": 5,
+   "name": "Briarheart",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "213": {
+   "esohub": "/en/sets/glorious-defender",
+   "max_equip": 5,
+   "name": "Glorious Defender",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "214": {
+   "esohub": "/en/sets/para-bellum",
+   "max_equip": 5,
+   "name": "Para Bellum",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "215": {
+   "esohub": "/en/sets/elemental-succession",
+   "max_equip": 5,
+   "name": "Elemental Succession",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "216": {
+   "esohub": "/en/sets/hunt-leader",
+   "max_equip": 5,
+   "name": "Hunt Leader",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "217": {
+   "esohub": "/en/sets/winterborn",
+   "max_equip": 5,
+   "name": "Winterborn",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "218": {
+   "esohub": "/en/sets/trinimacs-valor",
+   "max_equip": 5,
+   "name": "Trinimac's Valor",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "219": {
+   "esohub": "/en/sets/morkuldin",
+   "max_equip": 5,
+   "name": "Morkuldin",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "22": {
+   "esohub": "/en/sets/dreamers-mantle",
+   "max_equip": 5,
+   "name": "Dreamer's Mantle",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "224": {
+   "esohub": "/en/sets/tavas-favor",
+   "max_equip": 5,
+   "name": "Tava's Favor",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "225": {
+   "esohub": "/en/sets/clever-alchemist",
+   "max_equip": 5,
+   "name": "Clever Alchemist",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "226": {
+   "esohub": "/en/sets/eternal-hunt",
+   "max_equip": 5,
+   "name": "Eternal Hunt",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "227": {
+   "esohub": "/en/sets/bahrahas-curse",
+   "max_equip": 5,
+   "name": "Bahraha's Curse",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "228": {
+   "esohub": "/en/sets/syvarras-scales",
+   "max_equip": 5,
+   "name": "Syvarra's Scales",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "229": {
+   "esohub": "/en/sets/twilight-remedy",
+   "max_equip": 5,
+   "name": "Twilight Remedy",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "23": {
+   "esohub": "/en/sets/archers-mind",
+   "max_equip": 5,
+   "name": "Archer's Mind",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "230": {
+   "esohub": "/en/sets/moondancer",
+   "max_equip": 5,
+   "name": "Moondancer",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "231": {
+   "esohub": "/en/sets/lunar-bastion",
+   "max_equip": 5,
+   "name": "Lunar Bastion",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "232": {
+   "esohub": "/en/sets/roar-of-alkosh",
+   "max_equip": 5,
+   "name": "Roar of Alkosh",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "234": {
+   "esohub": "/en/sets/marksmans-crest",
+   "max_equip": 5,
+   "name": "Marksman's Crest",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "235": {
+   "esohub": "/en/sets/robes-of-transmutation",
+   "max_equip": 5,
+   "name": "Robes of Transmutation",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "236": {
+   "esohub": "/en/sets/vicious-death",
+   "max_equip": 5,
+   "name": "Vicious Death",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "237": {
+   "esohub": "/en/sets/lekis-focus",
+   "max_equip": 5,
+   "name": "Leki's Focus",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "238": {
+   "esohub": "/en/sets/fasallas-guile",
+   "max_equip": 5,
+   "name": "Fasalla's Guile",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "239": {
+   "esohub": "/en/sets/warriors-fury",
+   "max_equip": 5,
+   "name": "Warrior's Fury",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "24": {
+   "esohub": "/en/sets/footmans-fortune",
+   "max_equip": 5,
+   "name": "Footman's Fortune",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "240": {
+   "esohub": "/en/sets/kvatch-gladiator",
+   "max_equip": 5,
+   "name": "Kvatch Gladiator",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "241": {
+   "esohub": "/en/sets/varens-legacy",
+   "max_equip": 5,
+   "name": "Varen's Legacy",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "242": {
+   "esohub": "/en/sets/pelinals-wrath",
+   "max_equip": 5,
+   "name": "Pelinal's Wrath",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "243": {
+   "esohub": "/en/sets/hide-of-morihaus",
+   "max_equip": 5,
+   "name": "Hide of Morihaus",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "244": {
+   "esohub": "/en/sets/flanking-strategist",
+   "max_equip": 5,
+   "name": "Flanking Strategist",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "245": {
+   "esohub": "/en/sets/sithis-touch",
+   "max_equip": 5,
+   "name": "Sithis' Touch",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "246": {
+   "esohub": "/en/sets/galerions-revenge",
+   "max_equip": 5,
+   "name": "Galerion's Revenge",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "247": {
+   "esohub": "/en/sets/vicecanon-of-venom",
+   "max_equip": 5,
+   "name": "Vicecanon of Venom",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "248": {
+   "esohub": "/en/sets/thews-of-the-harbinger",
+   "max_equip": 5,
+   "name": "Thews of the Harbinger",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "25": {
+   "esohub": "/en/sets/desert-rose",
+   "max_equip": 5,
+   "name": "Desert Rose",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "253": {
+   "esohub": "/en/sets/imperial-physique",
+   "max_equip": 5,
+   "name": "Imperial Physique",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "256": {
+   "esohub": "/en/sets/mighty-chudan",
+   "max_equip": 2,
+   "name": "Mighty Chudan",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "257": {
+   "esohub": "/en/sets/velidreth",
+   "max_equip": 2,
+   "name": "Velidreth",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "258": {
+   "esohub": "/en/sets/amber-plasm",
+   "max_equip": 5,
+   "name": "Amber Plasm",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "259": {
+   "esohub": "/en/sets/heem-jas-retribution",
+   "max_equip": 5,
+   "name": "Heem-Jas' Retribution",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "26": {
+   "esohub": "/en/sets/prisoners-rags",
+   "max_equip": 5,
+   "name": "Prisoner's Rags",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "260": {
+   "esohub": "/en/sets/aspect-of-mazzatun",
+   "max_equip": 5,
+   "name": "Aspect of Mazzatun",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "261": {
+   "esohub": "/en/sets/gossamer",
+   "max_equip": 5,
+   "name": "Gossamer",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "262": {
+   "esohub": "/en/sets/widowmaker",
+   "max_equip": 5,
+   "name": "Widowmaker",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "263": {
+   "esohub": "/en/sets/hand-of-mephala",
+   "max_equip": 5,
+   "name": "Hand of Mephala",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "264": {
+   "esohub": "/en/sets/giant-spider",
+   "max_equip": 2,
+   "name": "Giant Spider",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "265": {
+   "esohub": "/en/sets/shadowrend",
+   "max_equip": 2,
+   "name": "Shadowrend",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "266": {
+   "esohub": "/en/sets/kragh",
+   "max_equip": 2,
+   "name": "Kra'gh",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "267": {
+   "esohub": "/en/sets/swarm-mother",
+   "max_equip": 2,
+   "name": "Swarm Mother",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "268": {
+   "esohub": "/en/sets/sentinel-of-rkugamz",
+   "max_equip": 2,
+   "name": "Sentinel of Rkugamz",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "269": {
+   "esohub": "/en/sets/chokethorn",
+   "max_equip": 2,
+   "name": "Chokethorn",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "27": {
+   "esohub": "/en/sets/fiords-legacy",
+   "max_equip": 5,
+   "name": "Fiord's Legacy",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "270": {
+   "esohub": "/en/sets/slimecraw",
+   "max_equip": 2,
+   "name": "Slimecraw",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "271": {
+   "esohub": "/en/sets/sellistrix",
+   "max_equip": 2,
+   "name": "Sellistrix",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "272": {
+   "esohub": "/en/sets/infernal-guardian",
+   "max_equip": 2,
+   "name": "Infernal Guardian",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "273": {
+   "esohub": "/en/sets/ilambris",
+   "max_equip": 2,
+   "name": "Ilambris",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "274": {
+   "esohub": "/en/sets/iceheart",
+   "max_equip": 2,
+   "name": "Iceheart",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "275": {
+   "esohub": "/en/sets/stormfist",
+   "max_equip": 2,
+   "name": "Stormfist",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "276": {
+   "esohub": "/en/sets/tremorscale",
+   "max_equip": 2,
+   "name": "Tremorscale",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "277": {
+   "esohub": "/en/sets/pirate-skeleton",
+   "max_equip": 2,
+   "name": "Pirate Skeleton",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "278": {
+   "esohub": "/en/sets/the-troll-king",
+   "max_equip": 2,
+   "name": "The Troll King",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "279": {
+   "esohub": "/en/sets/selene",
+   "max_equip": 2,
+   "name": "Selene",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "28": {
+   "esohub": "/en/sets/barkskin",
+   "max_equip": 5,
+   "name": "Barkskin",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "280": {
+   "esohub": "/en/sets/grothdarr",
+   "max_equip": 2,
+   "name": "Grothdarr",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "281": {
+   "esohub": "/en/sets/armor-of-the-trainee",
+   "max_equip": 3,
+   "name": "Armor of the Trainee",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "282": {
+   "esohub": "/en/sets/vampire-cloak",
+   "max_equip": 5,
+   "name": "Vampire Cloak",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "283": {
+   "esohub": "/en/sets/sword-singer",
+   "max_equip": 5,
+   "name": "Sword-Singer",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "284": {
+   "esohub": "/en/sets/order-of-diagna",
+   "max_equip": 5,
+   "name": "Order of Diagna",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "285": {
+   "esohub": "/en/sets/vampire-lord",
+   "max_equip": 5,
+   "name": "Vampire Lord",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "286": {
+   "esohub": "/en/sets/spriggans-thorns",
+   "max_equip": 5,
+   "name": "Spriggan's Thorns",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "287": {
+   "esohub": "/en/sets/green-pact",
+   "max_equip": 5,
+   "name": "Green Pact",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "288": {
+   "esohub": "/en/sets/beekeepers-gear",
+   "max_equip": 5,
+   "name": "Beekeeper's Gear",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "289": {
+   "esohub": "/en/sets/spinners-garments",
+   "max_equip": 5,
+   "name": "Spinner's Garments",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "29": {
+   "esohub": "/en/sets/sergeants-mail",
+   "max_equip": 5,
+   "name": "Sergeant's Mail",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "290": {
+   "esohub": "/en/sets/skooma-smuggler",
+   "max_equip": 5,
+   "name": "Skooma Smuggler",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "291": {
+   "esohub": "/en/sets/shalk-exoskeleton",
+   "max_equip": 5,
+   "name": "Shalk Exoskeleton",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "292": {
+   "esohub": "/en/sets/mothers-sorrow",
+   "max_equip": 5,
+   "name": "Mother's Sorrow",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "293": {
+   "esohub": "/en/sets/plague-doctor",
+   "max_equip": 5,
+   "name": "Plague Doctor",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "294": {
+   "esohub": "/en/sets/ysgramors-birthright",
+   "max_equip": 5,
+   "name": "Ysgramor's Birthright",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "295": {
+   "esohub": "/en/sets/jailbreaker",
+   "max_equip": 5,
+   "name": "Jailbreaker",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "296": {
+   "esohub": "/en/sets/spelunker",
+   "max_equip": 5,
+   "name": "Spelunker",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "297": {
+   "esohub": "/en/sets/spider-cultist-cowl",
+   "max_equip": 5,
+   "name": "Spider Cultist Cowl",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "298": {
+   "esohub": "/en/sets/light-speaker",
+   "max_equip": 5,
+   "name": "Light Speaker",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "299": {
+   "esohub": "/en/sets/toothrow",
+   "max_equip": 5,
+   "name": "Toothrow",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "30": {
+   "esohub": "/en/sets/thunderbugs-carapace",
+   "max_equip": 5,
+   "name": "Thunderbug's Carapace",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "300": {
+   "esohub": "/en/sets/netchs-touch",
+   "max_equip": 5,
+   "name": "Netch's Touch",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "301": {
+   "esohub": "/en/sets/strength-of-the-automaton",
+   "max_equip": 5,
+   "name": "Strength of the Automaton",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "302": {
+   "esohub": "/en/sets/leviathan",
+   "max_equip": 5,
+   "name": "Leviathan",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "303": {
+   "esohub": "/en/sets/lamias-song",
+   "max_equip": 5,
+   "name": "Lamia's Song",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "304": {
+   "esohub": "/en/sets/medusa",
+   "max_equip": 5,
+   "name": "Medusa",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "305": {
+   "esohub": "/en/sets/treasure-hunter",
+   "max_equip": 5,
+   "name": "Treasure Hunter",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "307": {
+   "esohub": "/en/sets/draugr-hulk",
+   "max_equip": 5,
+   "name": "Draugr Hulk",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "308": {
+   "esohub": "/en/sets/bone-pirates-tatters",
+   "max_equip": 5,
+   "name": "Bone Pirate's Tatters",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "309": {
+   "esohub": "/en/sets/knight-errants-mail",
+   "max_equip": 5,
+   "name": "Knight-errant's Mail",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "31": {
+   "esohub": "/en/sets/silks-of-the-sun",
+   "max_equip": 5,
+   "name": "Silks of the Sun",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "310": {
+   "esohub": "/en/sets/sword-dancer",
+   "max_equip": 5,
+   "name": "Sword Dancer",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "311": {
+   "esohub": "/en/sets/rattlecage",
+   "max_equip": 5,
+   "name": "Rattlecage",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "313": {
+   "esohub": "/en/sets/titanic-cleave",
+   "max_equip": 2,
+   "name": "Titanic Cleave",
+   "perfected_id": 528,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "314": {
+   "esohub": "/en/sets/puncturing-remedy",
+   "max_equip": 2,
+   "name": "Puncturing Remedy",
+   "perfected_id": 529,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "315": {
+   "esohub": "/en/sets/stinging-slashes",
+   "max_equip": 2,
+   "name": "Stinging Slashes",
+   "perfected_id": 530,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "316": {
+   "esohub": "/en/sets/caustic-arrow",
+   "max_equip": 2,
+   "name": "Caustic Arrow",
+   "perfected_id": 531,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "317": {
+   "esohub": "/en/sets/destructive-impact",
+   "max_equip": 2,
+   "name": "Destructive Impact",
+   "perfected_id": 532,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "318": {
+   "esohub": "/en/sets/grand-rejuvenation",
+   "max_equip": 2,
+   "name": "Grand Rejuvenation",
+   "perfected_id": 533,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "32": {
+   "esohub": "/en/sets/healers-habit",
+   "max_equip": 5,
+   "name": "Healer's Habit",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "320": {
+   "esohub": "/en/sets/war-maiden",
+   "max_equip": 5,
+   "name": "War Maiden",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "321": {
+   "esohub": "/en/sets/defiler",
+   "max_equip": 5,
+   "name": "Defiler",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "322": {
+   "esohub": "/en/sets/warrior-poet",
+   "max_equip": 5,
+   "name": "Warrior-Poet",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "323": {
+   "esohub": "/en/sets/assassins-guile",
+   "max_equip": 5,
+   "name": "Assassin's Guile",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "324": {
+   "esohub": "/en/sets/daedric-trickery",
+   "max_equip": 5,
+   "name": "Daedric Trickery",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "325": {
+   "esohub": "/en/sets/shacklebreaker",
+   "max_equip": 5,
+   "name": "Shacklebreaker",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "326": {
+   "esohub": "/en/sets/vanguards-challenge",
+   "max_equip": 5,
+   "name": "Vanguard's Challenge",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "327": {
+   "esohub": "/en/sets/cowards-gear",
+   "max_equip": 5,
+   "name": "Coward's Gear",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "328": {
+   "esohub": "/en/sets/knight-slayer",
+   "max_equip": 5,
+   "name": "Knight Slayer",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "329": {
+   "esohub": "/en/sets/wizards-riposte",
+   "max_equip": 5,
+   "name": "Wizard's Riposte",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "33": {
+   "esohub": "/en/sets/vipers-sting",
+   "max_equip": 5,
+   "name": "Viper's Sting",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "330": {
+   "esohub": "/en/sets/automated-defense",
+   "max_equip": 5,
+   "name": "Automated Defense",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "331": {
+   "esohub": "/en/sets/war-machine",
+   "max_equip": 5,
+   "name": "War Machine",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "332": {
+   "esohub": "/en/sets/master-architect",
+   "max_equip": 5,
+   "name": "Master Architect",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "333": {
+   "esohub": "/en/sets/inventors-guard",
+   "max_equip": 5,
+   "name": "Inventor's Guard",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "334": {
+   "esohub": "/en/sets/impregnable-armor",
+   "max_equip": 5,
+   "name": "Impregnable Armor",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "335": {
+   "esohub": "/en/sets/draugrs-rest",
+   "max_equip": 5,
+   "name": "Draugr's Rest",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "336": {
+   "esohub": "/en/sets/pillar-of-nirn",
+   "max_equip": 5,
+   "name": "Pillar of Nirn",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "337": {
+   "esohub": "/en/sets/ironblood",
+   "max_equip": 5,
+   "name": "Ironblood",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "338": {
+   "esohub": "/en/sets/flame-blossom",
+   "max_equip": 5,
+   "name": "Flame Blossom",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "339": {
+   "esohub": "/en/sets/blooddrinker",
+   "max_equip": 5,
+   "name": "Blooddrinker",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "34": {
+   "esohub": "/en/sets/night-mothers-embrace",
+   "max_equip": 5,
+   "name": "Night Mother's Embrace",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "340": {
+   "esohub": "/en/sets/hagravens-garden",
+   "max_equip": 5,
+   "name": "Hagraven's Garden",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "341": {
+   "esohub": "/en/sets/earthgore",
+   "max_equip": 2,
+   "name": "Earthgore",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "342": {
+   "esohub": "/en/sets/domihaus",
+   "max_equip": 2,
+   "name": "Domihaus",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "343": {
+   "esohub": "/en/sets/caluurions-legacy",
+   "max_equip": 5,
+   "name": "Caluurion's Legacy",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "344": {
+   "esohub": "/en/sets/trappings-of-invigoration",
+   "max_equip": 5,
+   "name": "Trappings of Invigoration",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "345": {
+   "esohub": "/en/sets/ulfnors-favor",
+   "max_equip": 5,
+   "name": "Ulfnor's Favor",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "346": {
+   "esohub": "/en/sets/jorvulds-guidance",
+   "max_equip": 5,
+   "name": "Jorvuld's Guidance",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "347": {
+   "esohub": "/en/sets/plague-slinger",
+   "max_equip": 5,
+   "name": "Plague Slinger",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "348": {
+   "esohub": "/en/sets/curse-of-doylemish",
+   "max_equip": 5,
+   "name": "Curse of Doylemish",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "349": {
+   "esohub": "/en/sets/thurvokun",
+   "max_equip": 2,
+   "name": "Thurvokun",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "35": {
+   "esohub": "/en/sets/knightmare",
+   "max_equip": 5,
+   "name": "Knightmare",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "350": {
+   "esohub": "/en/sets/zaan",
+   "max_equip": 2,
+   "name": "Zaan",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "351": {
+   "esohub": "/en/sets/innate-axiom",
+   "max_equip": 5,
+   "name": "Innate Axiom",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "352": {
+   "esohub": "/en/sets/fortified-brass",
+   "max_equip": 5,
+   "name": "Fortified Brass",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "353": {
+   "esohub": "/en/sets/mechanical-acuity",
+   "max_equip": 5,
+   "name": "Mechanical Acuity",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "354": {
+   "esohub": "/en/sets/mad-tinkerer",
+   "max_equip": 5,
+   "name": "Mad Tinkerer",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "355": {
+   "esohub": "/en/sets/unfathomable-darkness",
+   "max_equip": 5,
+   "name": "Unfathomable Darkness",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "356": {
+   "esohub": "/en/sets/livewire",
+   "max_equip": 5,
+   "name": "Livewire",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "357": {
+   "esohub": "/en/sets/perfected-disciplined-slash",
+   "max_equip": 2,
+   "name": "Perfected Disciplined Slash",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 363
+  },
+  "358": {
+   "esohub": "/en/sets/perfected-defensive-position",
+   "max_equip": 2,
+   "name": "Perfected Defensive Position",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 364
+  },
+  "359": {
+   "esohub": "/en/sets/perfected-chaotic-whirlwind",
+   "max_equip": 2,
+   "name": "Perfected Chaotic Whirlwind",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 365
+  },
+  "36": {
+   "esohub": "/en/sets/armor-of-the-veiled-heritance",
+   "max_equip": 5,
+   "name": "Armor of the Veiled Heritance",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "360": {
+   "esohub": "/en/sets/perfected-piercing-spray",
+   "max_equip": 2,
+   "name": "Perfected Piercing Spray",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 366
+  },
+  "361": {
+   "esohub": "/en/sets/perfected-concentrated-force",
+   "max_equip": 2,
+   "name": "Perfected Concentrated Force",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 367
+  },
+  "362": {
+   "esohub": "/en/sets/perfected-timeless-blessing",
+   "max_equip": 2,
+   "name": "Perfected Timeless Blessing",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 368
+  },
+  "363": {
+   "esohub": "/en/sets/disciplined-slash",
+   "max_equip": 2,
+   "name": "Disciplined Slash",
+   "perfected_id": 357,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "364": {
+   "esohub": "/en/sets/defensive-position",
+   "max_equip": 2,
+   "name": "Defensive Position",
+   "perfected_id": 358,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "365": {
+   "esohub": "/en/sets/chaotic-whirlwind",
+   "max_equip": 2,
+   "name": "Chaotic Whirlwind",
+   "perfected_id": 359,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "366": {
+   "esohub": "/en/sets/piercing-spray",
+   "max_equip": 2,
+   "name": "Piercing Spray",
+   "perfected_id": 360,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "367": {
+   "esohub": "/en/sets/concentrated-force",
+   "max_equip": 2,
+   "name": "Concentrated Force",
+   "perfected_id": 361,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "368": {
+   "esohub": "/en/sets/timeless-blessing",
+   "max_equip": 2,
+   "name": "Timeless Blessing",
+   "perfected_id": 362,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "369": {
+   "esohub": "/en/sets/merciless-charge",
+   "max_equip": 2,
+   "name": "Merciless Charge",
+   "perfected_id": 522,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "37": {
+   "esohub": "/en/sets/deaths-wind",
+   "max_equip": 5,
+   "name": "Death's Wind",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "370": {
+   "esohub": "/en/sets/rampaging-slash",
+   "max_equip": 2,
+   "name": "Rampaging Slash",
+   "perfected_id": 523,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "371": {
+   "esohub": "/en/sets/cruel-flurry",
+   "max_equip": 2,
+   "name": "Cruel Flurry",
+   "perfected_id": 524,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "372": {
+   "esohub": "/en/sets/thunderous-volley",
+   "max_equip": 2,
+   "name": "Thunderous Volley",
+   "perfected_id": 525,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "373": {
+   "esohub": "/en/sets/crushing-wall",
+   "max_equip": 2,
+   "name": "Crushing Wall",
+   "perfected_id": 526,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "374": {
+   "esohub": "/en/sets/precise-regeneration",
+   "max_equip": 2,
+   "name": "Precise Regeneration",
+   "perfected_id": 527,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "38": {
+   "esohub": "/en/sets/twilights-embrace",
+   "max_equip": 5,
+   "name": "Twilight's Embrace",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "380": {
+   "esohub": "/en/sets/prophets",
+   "max_equip": 1,
+   "name": "Prophet's",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "381": {
+   "esohub": "/en/sets/broken-soul",
+   "max_equip": 2,
+   "name": "Broken Soul",
+   "perfected_id": null,
+   "type": "Other",
+   "unperfected_id": null
+  },
+  "382": {
+   "esohub": "/en/sets/grace-of-gloom",
+   "max_equip": 5,
+   "name": "Grace of Gloom",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "383": {
+   "esohub": "/en/sets/gryphons-ferocity",
+   "max_equip": 5,
+   "name": "Gryphon's Ferocity",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "384": {
+   "esohub": "/en/sets/wisdom-of-vanus",
+   "max_equip": 5,
+   "name": "Wisdom of Vanus",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "385": {
+   "esohub": "/en/sets/adept-rider",
+   "max_equip": 5,
+   "name": "Adept Rider",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "386": {
+   "esohub": "/en/sets/sloads-semblance",
+   "max_equip": 5,
+   "name": "Sload's Semblance",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "387": {
+   "esohub": "/en/sets/nocturnals-favor",
+   "max_equip": 5,
+   "name": "Nocturnal's Favor",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "388": {
+   "esohub": "/en/sets/aegis-of-galenwe",
+   "max_equip": 5,
+   "name": "Aegis of Galenwe",
+   "perfected_id": 392,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "389": {
+   "esohub": "/en/sets/arms-of-relequen",
+   "max_equip": 5,
+   "name": "Arms of Relequen",
+   "perfected_id": 393,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "39": {
+   "esohub": "/en/sets/alessian-order",
+   "max_equip": 5,
+   "name": "Alessian Order",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "390": {
+   "esohub": "/en/sets/mantle-of-siroria",
+   "max_equip": 5,
+   "name": "Mantle of Siroria",
+   "perfected_id": 394,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "391": {
+   "esohub": "/en/sets/vestment-of-olorime",
+   "max_equip": 5,
+   "name": "Vestment of Olorime",
+   "perfected_id": 395,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "392": {
+   "esohub": "/en/sets/perfected-aegis-of-galenwe",
+   "max_equip": 5,
+   "name": "Perfected Aegis of Galenwe",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 388
+  },
+  "393": {
+   "esohub": "/en/sets/perfected-arms-of-relequen",
+   "max_equip": 5,
+   "name": "Perfected Arms of Relequen",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 389
+  },
+  "394": {
+   "esohub": "/en/sets/perfected-mantle-of-siroria",
+   "max_equip": 5,
+   "name": "Perfected Mantle of Siroria",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 390
+  },
+  "395": {
+   "esohub": "/en/sets/perfected-vestment-of-olorime",
+   "max_equip": 5,
+   "name": "Perfected Vestment of Olorime",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 391
+  },
+  "397": {
+   "esohub": "/en/sets/balorgh",
+   "max_equip": 2,
+   "name": "Balorgh",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "398": {
+   "esohub": "/en/sets/vykosa",
+   "max_equip": 2,
+   "name": "Vykosa",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "399": {
+   "esohub": "/en/sets/hanus-compassion",
+   "max_equip": 5,
+   "name": "Hanu's Compassion",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "40": {
+   "esohub": "/en/sets/nights-silence",
+   "max_equip": 5,
+   "name": "Night's Silence",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "400": {
+   "esohub": "/en/sets/blood-moon",
+   "max_equip": 5,
+   "name": "Blood Moon",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "401": {
+   "esohub": "/en/sets/haven-of-ursus",
+   "max_equip": 5,
+   "name": "Haven of Ursus",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "402": {
+   "esohub": "/en/sets/moon-hunter",
+   "max_equip": 5,
+   "name": "Moon Hunter",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "403": {
+   "esohub": "/en/sets/savage-werewolf",
+   "max_equip": 5,
+   "name": "Savage Werewolf",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "404": {
+   "esohub": "/en/sets/jailers-tenacity",
+   "max_equip": 5,
+   "name": "Jailer's Tenacity",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "405": {
+   "esohub": "/en/sets/bright-throats-boast",
+   "max_equip": 5,
+   "name": "Bright-Throat's Boast",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "406": {
+   "esohub": "/en/sets/dead-waters-guile",
+   "max_equip": 5,
+   "name": "Dead-Water's Guile",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "407": {
+   "esohub": "/en/sets/champion-of-the-hist",
+   "max_equip": 5,
+   "name": "Champion of the Hist",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "408": {
+   "esohub": "/en/sets/grave-stake-collector",
+   "max_equip": 5,
+   "name": "Grave-Stake Collector",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "409": {
+   "esohub": "/en/sets/naga-shaman",
+   "max_equip": 5,
+   "name": "Naga Shaman",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "41": {
+   "esohub": "/en/sets/whitestrakes-retribution",
+   "max_equip": 5,
+   "name": "Whitestrake's Retribution",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "410": {
+   "esohub": "/en/sets/might-of-the-lost-legion",
+   "max_equip": 5,
+   "name": "Might of the Lost Legion",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "411": {
+   "esohub": "/en/sets/gallant-charge",
+   "max_equip": 2,
+   "name": "Gallant Charge",
+   "perfected_id": 423,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "412": {
+   "esohub": "/en/sets/radial-uppercut",
+   "max_equip": 2,
+   "name": "Radial Uppercut",
+   "perfected_id": 424,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "413": {
+   "esohub": "/en/sets/spectral-cloak",
+   "max_equip": 2,
+   "name": "Spectral Cloak",
+   "perfected_id": 425,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "414": {
+   "esohub": "/en/sets/virulent-shot",
+   "max_equip": 2,
+   "name": "Virulent Shot",
+   "perfected_id": 426,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "415": {
+   "esohub": "/en/sets/wild-impulse",
+   "max_equip": 2,
+   "name": "Wild Impulse",
+   "perfected_id": 427,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "416": {
+   "esohub": "/en/sets/menders-ward",
+   "max_equip": 2,
+   "name": "Mender's Ward",
+   "perfected_id": 428,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "417": {
+   "esohub": "/en/sets/indomitable-fury",
+   "max_equip": 5,
+   "name": "Indomitable Fury",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "418": {
+   "esohub": "/en/sets/spell-strategist",
+   "max_equip": 5,
+   "name": "Spell Strategist",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "419": {
+   "esohub": "/en/sets/battlefield-acrobat",
+   "max_equip": 5,
+   "name": "Battlefield Acrobat",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "420": {
+   "esohub": "/en/sets/soldier-of-anguish",
+   "max_equip": 5,
+   "name": "Soldier of Anguish",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "421": {
+   "esohub": "/en/sets/steadfast-hero",
+   "max_equip": 5,
+   "name": "Steadfast Hero",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "422": {
+   "esohub": "/en/sets/battalion-defender",
+   "max_equip": 5,
+   "name": "Battalion Defender",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "423": {
+   "esohub": "/en/sets/perfected-gallant-charge",
+   "max_equip": 2,
+   "name": "Perfected Gallant Charge",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 411
+  },
+  "424": {
+   "esohub": "/en/sets/perfected-radial-uppercut",
+   "max_equip": 2,
+   "name": "Perfected Radial Uppercut",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 412
+  },
+  "425": {
+   "esohub": "/en/sets/perfected-spectral-cloak",
+   "max_equip": 2,
+   "name": "Perfected Spectral Cloak",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 413
+  },
+  "426": {
+   "esohub": "/en/sets/perfected-virulent-shot",
+   "max_equip": 2,
+   "name": "Perfected Virulent Shot",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 414
+  },
+  "427": {
+   "esohub": "/en/sets/perfected-wild-impulse",
+   "max_equip": 2,
+   "name": "Perfected Wild Impulse",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 415
+  },
+  "428": {
+   "esohub": "/en/sets/perfected-menders-ward",
+   "max_equip": 2,
+   "name": "Perfected Mender's Ward",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 416
+  },
+  "429": {
+   "esohub": "/en/sets/mighty-glacier",
+   "max_equip": 5,
+   "name": "Mighty Glacier",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "43": {
+   "esohub": "/en/sets/armor-of-the-seducer",
+   "max_equip": 5,
+   "name": "Armor of the Seducer",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "430": {
+   "esohub": "/en/sets/tzogvins-warband",
+   "max_equip": 5,
+   "name": "Tzogvin's Warband",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "431": {
+   "esohub": "/en/sets/icy-conjurer",
+   "max_equip": 5,
+   "name": "Icy Conjurer",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "432": {
+   "esohub": "/en/sets/stonekeeper",
+   "max_equip": 2,
+   "name": "Stonekeeper",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "433": {
+   "esohub": "/en/sets/frozen-watcher",
+   "max_equip": 5,
+   "name": "Frozen Watcher",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "434": {
+   "esohub": "/en/sets/scavenging-demise",
+   "max_equip": 5,
+   "name": "Scavenging Demise",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "435": {
+   "esohub": "/en/sets/aurorans-thunder",
+   "max_equip": 5,
+   "name": "Auroran's Thunder",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "436": {
+   "esohub": "/en/sets/symphony-of-blades",
+   "max_equip": 2,
+   "name": "Symphony of Blades",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "437": {
+   "esohub": "/en/sets/coldharbours-favorite",
+   "max_equip": 5,
+   "name": "Coldharbour's Favorite",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "438": {
+   "esohub": "/en/sets/senche-rahts-grit",
+   "max_equip": 5,
+   "name": "Senche-raht's Grit",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "439": {
+   "esohub": "/en/sets/vastaries-tutelage",
+   "max_equip": 5,
+   "name": "Vastarie's Tutelage",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "44": {
+   "esohub": "/en/sets/vampires-kiss",
+   "max_equip": 5,
+   "name": "Vampire's Kiss",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "440": {
+   "esohub": "/en/sets/crafty-alfiq",
+   "max_equip": 5,
+   "name": "Crafty Alfiq",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "441": {
+   "esohub": "/en/sets/vesture-of-darloc-brae",
+   "max_equip": 5,
+   "name": "Vesture of Darloc Brae",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "442": {
+   "esohub": "/en/sets/call-of-the-undertaker",
+   "max_equip": 5,
+   "name": "Call of the Undertaker",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "443": {
+   "esohub": "/en/sets/eye-of-nahviintaas",
+   "max_equip": 5,
+   "name": "Eye of Nahviintaas",
+   "perfected_id": 448,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "444": {
+   "esohub": "/en/sets/false-gods-devotion",
+   "max_equip": 5,
+   "name": "False God's Devotion",
+   "perfected_id": 449,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "445": {
+   "esohub": "/en/sets/tooth-of-lokkestiiz",
+   "max_equip": 5,
+   "name": "Tooth of Lokkestiiz",
+   "perfected_id": 450,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "446": {
+   "esohub": "/en/sets/claw-of-yolnahkriin",
+   "max_equip": 5,
+   "name": "Claw of Yolnahkriin",
+   "perfected_id": 451,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "448": {
+   "esohub": "/en/sets/perfected-eye-of-nahviintaas",
+   "max_equip": 5,
+   "name": "Perfected Eye of Nahviintaas",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 443
+  },
+  "449": {
+   "esohub": "/en/sets/perfected-false-gods-devotion",
+   "max_equip": 5,
+   "name": "Perfected False God's Devotion",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 444
+  },
+  "450": {
+   "esohub": "/en/sets/perfected-tooth-of-lokkestiiz",
+   "max_equip": 5,
+   "name": "Perfected Tooth of Lokkestiiz",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 445
+  },
+  "451": {
+   "esohub": "/en/sets/perfected-claw-of-yolnahkriin",
+   "max_equip": 5,
+   "name": "Perfected Claw of Yolnahkriin",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 446
+  },
+  "452": {
+   "esohub": "/en/sets/hollowfang-thirst",
+   "max_equip": 5,
+   "name": "Hollowfang Thirst",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "453": {
+   "esohub": "/en/sets/drozakars-claws",
+   "max_equip": 5,
+   "name": "Dro'Zakar's Claws",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "454": {
+   "esohub": "/en/sets/renalds-resolve",
+   "max_equip": 5,
+   "name": "Renald's Resolve",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "455": {
+   "esohub": "/en/sets/zens-redress",
+   "max_equip": 5,
+   "name": "Z'en's Redress",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "456": {
+   "esohub": "/en/sets/azureblight-reaper",
+   "max_equip": 5,
+   "name": "Azureblight Reaper",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "457": {
+   "esohub": "/en/sets/dragons-defilement",
+   "max_equip": 5,
+   "name": "Dragon's Defilement",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "458": {
+   "esohub": "/en/sets/grundwulf",
+   "max_equip": 2,
+   "name": "Grundwulf",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "459": {
+   "esohub": "/en/sets/maarselok",
+   "max_equip": 2,
+   "name": "Maarselok",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "46": {
+   "esohub": "/en/sets/noble-duelists-silks",
+   "max_equip": 5,
+   "name": "Noble Duelist's Silks",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "465": {
+   "esohub": "/en/sets/senchal-defender",
+   "max_equip": 5,
+   "name": "Senchal Defender",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "466": {
+   "esohub": "/en/sets/marauders-haste",
+   "max_equip": 5,
+   "name": "Marauder's Haste",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "467": {
+   "esohub": "/en/sets/dragonguard-elite",
+   "max_equip": 5,
+   "name": "Dragonguard Elite",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "468": {
+   "esohub": "/en/sets/daring-corsair",
+   "max_equip": 5,
+   "name": "Daring Corsair",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "469": {
+   "esohub": "/en/sets/ancient-dragonguard",
+   "max_equip": 5,
+   "name": "Ancient Dragonguard",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "47": {
+   "esohub": "/en/sets/robes-of-the-withered-hand",
+   "max_equip": 5,
+   "name": "Robes of the Withered Hand",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "470": {
+   "esohub": "/en/sets/new-moon-acolyte",
+   "max_equip": 5,
+   "name": "New Moon Acolyte",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "471": {
+   "esohub": "/en/sets/hitis-hearth",
+   "max_equip": 5,
+   "name": "Hiti's Hearth",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "472": {
+   "esohub": "/en/sets/titanborn-strength",
+   "max_equip": 5,
+   "name": "Titanborn Strength",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "473": {
+   "esohub": "/en/sets/banis-torment",
+   "max_equip": 5,
+   "name": "Bani's Torment",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "474": {
+   "esohub": "/en/sets/draugrkins-grip",
+   "max_equip": 5,
+   "name": "Draugrkin's Grip",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "475": {
+   "esohub": "/en/sets/aegis-caller",
+   "max_equip": 5,
+   "name": "Aegis Caller",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "476": {
+   "esohub": "/en/sets/grave-guardian",
+   "max_equip": 5,
+   "name": "Grave Guardian",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "478": {
+   "esohub": "/en/sets/mother-ciannait",
+   "max_equip": 2,
+   "name": "Mother Ciannait",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "479": {
+   "esohub": "/en/sets/kjalnars-nightmare",
+   "max_equip": 2,
+   "name": "Kjalnar's Nightmare",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "48": {
+   "esohub": "/en/sets/magnus-gift",
+   "max_equip": 5,
+   "name": "Magnus' Gift",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "480": {
+   "esohub": "/en/sets/critical-riposte",
+   "max_equip": 5,
+   "name": "Critical Riposte",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "481": {
+   "esohub": "/en/sets/unchained-aggressor",
+   "max_equip": 5,
+   "name": "Unchained Aggressor",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "482": {
+   "esohub": "/en/sets/dauntless-combatant",
+   "max_equip": 5,
+   "name": "Dauntless Combatant",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "487": {
+   "esohub": "/en/sets/winters-respite",
+   "max_equip": 5,
+   "name": "Winter's Respite",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "488": {
+   "esohub": "/en/sets/venomous-smite",
+   "max_equip": 5,
+   "name": "Venomous Smite",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "489": {
+   "esohub": "/en/sets/eternal-vigor",
+   "max_equip": 5,
+   "name": "Eternal Vigor",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "49": {
+   "esohub": "/en/sets/shadow-of-the-red-mountain",
+   "max_equip": 5,
+   "name": "Shadow of the Red Mountain",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "490": {
+   "esohub": "/en/sets/stuhns-favor",
+   "max_equip": 5,
+   "name": "Stuhn's Favor",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "491": {
+   "esohub": "/en/sets/dragons-appetite",
+   "max_equip": 5,
+   "name": "Dragon's Appetite",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "492": {
+   "esohub": "/en/sets/kynes-wind",
+   "max_equip": 5,
+   "name": "Kyne's Wind",
+   "perfected_id": 493,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "493": {
+   "esohub": "/en/sets/perfected-kynes-wind",
+   "max_equip": 5,
+   "name": "Perfected Kyne's Wind",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 492
+  },
+  "494": {
+   "esohub": "/en/sets/vrols-command",
+   "max_equip": 5,
+   "name": "Vrol's Command",
+   "perfected_id": 495,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "495": {
+   "esohub": "/en/sets/perfected-vrols-command",
+   "max_equip": 5,
+   "name": "Perfected Vrol's Command",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 494
+  },
+  "496": {
+   "esohub": "/en/sets/roaring-opportunist",
+   "max_equip": 5,
+   "name": "Roaring Opportunist",
+   "perfected_id": 497,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "497": {
+   "esohub": "/en/sets/perfected-roaring-opportunist",
+   "max_equip": 5,
+   "name": "Perfected Roaring Opportunist",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 496
+  },
+  "498": {
+   "esohub": "/en/sets/yandirs-might",
+   "max_equip": 5,
+   "name": "Yandir's Might",
+   "perfected_id": 499,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "499": {
+   "esohub": "/en/sets/perfected-yandirs-might",
+   "max_equip": 5,
+   "name": "Perfected Yandir's Might",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 498
+  },
+  "50": {
+   "esohub": "/en/sets/the-morag-tong",
+   "max_equip": 5,
+   "name": "The Morag Tong",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "501": {
+   "esohub": "/en/sets/thrassian-stranglers",
+   "max_equip": 1,
+   "name": "Thrassian Stranglers",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "503": {
+   "esohub": "/en/sets/ring-of-the-wild-hunt",
+   "max_equip": 1,
+   "name": "Ring of the Wild Hunt",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "505": {
+   "esohub": "/en/sets/torc-of-tonal-constancy",
+   "max_equip": 1,
+   "name": "Torc of Tonal Constancy",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "506": {
+   "esohub": "/en/sets/spell-parasite",
+   "max_equip": 5,
+   "name": "Spell Parasite",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "51": {
+   "esohub": "/en/sets/night-mothers-gaze",
+   "max_equip": 5,
+   "name": "Night Mother's Gaze",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "513": {
+   "esohub": "/en/sets/talfygs-treachery",
+   "max_equip": 5,
+   "name": "Talfyg's Treachery",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "514": {
+   "esohub": "/en/sets/unleashed-terror",
+   "max_equip": 5,
+   "name": "Unleashed Terror",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "515": {
+   "esohub": "/en/sets/crimson-twilight",
+   "max_equip": 5,
+   "name": "Crimson Twilight",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "516": {
+   "esohub": "/en/sets/elemental-catalyst",
+   "max_equip": 5,
+   "name": "Elemental Catalyst",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "517": {
+   "esohub": "/en/sets/kraglens-howl",
+   "max_equip": 5,
+   "name": "Kraglen's Howl",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "518": {
+   "esohub": "/en/sets/arkasiss-genius",
+   "max_equip": 5,
+   "name": "Arkasis's Genius",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "519": {
+   "esohub": "/en/sets/snow-treaders",
+   "max_equip": 1,
+   "name": "Snow Treaders",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "52": {
+   "esohub": "/en/sets/beckoning-steel",
+   "max_equip": 5,
+   "name": "Beckoning Steel",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "520": {
+   "esohub": "/en/sets/malacaths-band-of-brutality",
+   "max_equip": 1,
+   "name": "Malacath's Band of Brutality",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "521": {
+   "esohub": "/en/sets/bloodlords-embrace",
+   "max_equip": 1,
+   "name": "Bloodlord's Embrace",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "522": {
+   "esohub": "/en/sets/perfected-merciless-charge",
+   "max_equip": 2,
+   "name": "Perfected Merciless Charge",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 369
+  },
+  "523": {
+   "esohub": "/en/sets/perfected-rampaging-slash",
+   "max_equip": 2,
+   "name": "Perfected Rampaging Slash",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 370
+  },
+  "524": {
+   "esohub": "/en/sets/perfected-cruel-flurry",
+   "max_equip": 2,
+   "name": "Perfected Cruel Flurry",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 371
+  },
+  "525": {
+   "esohub": "/en/sets/perfected-thunderous-volley",
+   "max_equip": 2,
+   "name": "Perfected Thunderous Volley",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 372
+  },
+  "526": {
+   "esohub": "/en/sets/perfected-crushing-wall",
+   "max_equip": 2,
+   "name": "Perfected Crushing Wall",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 373
+  },
+  "527": {
+   "esohub": "/en/sets/perfected-precise-regeneration",
+   "max_equip": 2,
+   "name": "Perfected Precise Regeneration",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 374
+  },
+  "528": {
+   "esohub": "/en/sets/perfected-titanic-cleave",
+   "max_equip": 2,
+   "name": "Perfected Titanic Cleave",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 313
+  },
+  "529": {
+   "esohub": "/en/sets/perfected-puncturing-remedy",
+   "max_equip": 2,
+   "name": "Perfected Puncturing Remedy",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 314
+  },
+  "53": {
+   "esohub": "/en/sets/the-ice-furnace",
+   "max_equip": 5,
+   "name": "The Ice Furnace",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "530": {
+   "esohub": "/en/sets/perfected-stinging-slashes",
+   "max_equip": 2,
+   "name": "Perfected Stinging Slashes",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 315
+  },
+  "531": {
+   "esohub": "/en/sets/perfected-caustic-arrow",
+   "max_equip": 2,
+   "name": "Perfected Caustic Arrow",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 316
+  },
+  "532": {
+   "esohub": "/en/sets/perfected-destructive-impact",
+   "max_equip": 2,
+   "name": "Perfected Destructive Impact",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 317
+  },
+  "533": {
+   "esohub": "/en/sets/perfected-grand-rejuvenation",
+   "max_equip": 2,
+   "name": "Perfected Grand Rejuvenation",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 318
+  },
+  "534": {
+   "esohub": "/en/sets/stone-husk",
+   "max_equip": 2,
+   "name": "Stone Husk",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "535": {
+   "esohub": "/en/sets/lady-thorn",
+   "max_equip": 2,
+   "name": "Lady Thorn",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "536": {
+   "esohub": "/en/sets/radiant-bastion",
+   "max_equip": 5,
+   "name": "Radiant Bastion",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "537": {
+   "esohub": "/en/sets/voidcaller",
+   "max_equip": 5,
+   "name": "Voidcaller",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "538": {
+   "esohub": "/en/sets/witch-knights-defiance",
+   "max_equip": 5,
+   "name": "Witch-Knight's Defiance",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "539": {
+   "esohub": "/en/sets/red-eagles-fury",
+   "max_equip": 5,
+   "name": "Red Eagle's Fury",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "54": {
+   "esohub": "/en/sets/ashen-grip",
+   "max_equip": 5,
+   "name": "Ashen Grip",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "540": {
+   "esohub": "/en/sets/legacy-of-karth",
+   "max_equip": 5,
+   "name": "Legacy of Karth",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "541": {
+   "esohub": "/en/sets/aetherial-ascension",
+   "max_equip": 5,
+   "name": "Aetherial Ascension",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "542": {
+   "esohub": "/en/sets/hex-siphon",
+   "max_equip": 5,
+   "name": "Hex Siphon",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "543": {
+   "esohub": "/en/sets/pestilent-host",
+   "max_equip": 5,
+   "name": "Pestilent Host",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "544": {
+   "esohub": "/en/sets/explosive-rebuke",
+   "max_equip": 5,
+   "name": "Explosive Rebuke",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "55": {
+   "esohub": "/en/sets/prayer-shawl",
+   "max_equip": 5,
+   "name": "Prayer Shawl",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "557": {
+   "esohub": "/en/sets/executioners-blade",
+   "max_equip": 2,
+   "name": "Executioner's Blade",
+   "perfected_id": 563,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "558": {
+   "esohub": "/en/sets/void-bash",
+   "max_equip": 2,
+   "name": "Void Bash",
+   "perfected_id": 564,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "559": {
+   "esohub": "/en/sets/frenzied-momentum",
+   "max_equip": 2,
+   "name": "Frenzied Momentum",
+   "perfected_id": 565,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "56": {
+   "esohub": "/en/sets/stendarrs-embrace",
+   "max_equip": 5,
+   "name": "Stendarr's Embrace",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "560": {
+   "esohub": "/en/sets/point-blank-snipe",
+   "max_equip": 2,
+   "name": "Point-Blank Snipe",
+   "perfected_id": 566,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "561": {
+   "esohub": "/en/sets/wrath-of-elements",
+   "max_equip": 2,
+   "name": "Wrath of Elements",
+   "perfected_id": 567,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "562": {
+   "esohub": "/en/sets/force-overflow",
+   "max_equip": 2,
+   "name": "Force Overflow",
+   "perfected_id": 568,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "563": {
+   "esohub": "/en/sets/perfected-executioners-blade",
+   "max_equip": 2,
+   "name": "Perfected Executioner's Blade",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 557
+  },
+  "564": {
+   "esohub": "/en/sets/perfected-void-bash",
+   "max_equip": 2,
+   "name": "Perfected Void Bash",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 558
+  },
+  "565": {
+   "esohub": "/en/sets/perfected-frenzied-momentum",
+   "max_equip": 2,
+   "name": "Perfected Frenzied Momentum",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 559
+  },
+  "566": {
+   "esohub": "/en/sets/perfected-point-blank-snipe",
+   "max_equip": 2,
+   "name": "Perfected Point-Blank Snipe",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 560
+  },
+  "567": {
+   "esohub": "/en/sets/perfected-wrath-of-elements",
+   "max_equip": 2,
+   "name": "Perfected Wrath of Elements",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 561
+  },
+  "568": {
+   "esohub": "/en/sets/perfected-force-overflow",
+   "max_equip": 2,
+   "name": "Perfected Force Overflow",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": 562
+  },
+  "569": {
+   "esohub": "/en/sets/true-sworn-fury",
+   "max_equip": 5,
+   "name": "True-Sworn Fury",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "57": {
+   "esohub": "/en/sets/syrabanes-grip",
+   "max_equip": 5,
+   "name": "Syrabane's Grip",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "570": {
+   "esohub": "/en/sets/kinrass-wrath",
+   "max_equip": 5,
+   "name": "Kinras's Wrath",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "571": {
+   "esohub": "/en/sets/drakes-rush",
+   "max_equip": 5,
+   "name": "Drake's Rush",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "572": {
+   "esohub": "/en/sets/unleashed-ritualist",
+   "max_equip": 5,
+   "name": "Unleashed Ritualist",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "573": {
+   "esohub": "/en/sets/dagons-dominion",
+   "max_equip": 5,
+   "name": "Dagon's Dominion",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "574": {
+   "esohub": "/en/sets/foolkillers-ward",
+   "max_equip": 5,
+   "name": "Foolkiller's Ward",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "575": {
+   "esohub": "/en/sets/ring-of-the-pale-order",
+   "max_equip": 1,
+   "name": "Ring of the Pale Order",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "576": {
+   "esohub": "/en/sets/pearls-of-ehlnofey",
+   "max_equip": 1,
+   "name": "Pearls of Ehlnofey",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "577": {
+   "esohub": "/en/sets/encratiss-behemoth",
+   "max_equip": 2,
+   "name": "Encratis's Behemoth",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "578": {
+   "esohub": "/en/sets/baron-zaudrus",
+   "max_equip": 2,
+   "name": "Baron Zaudrus",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "579": {
+   "esohub": "/en/sets/frostbite",
+   "max_equip": 5,
+   "name": "Frostbite",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "58": {
+   "esohub": "/en/sets/hide-of-the-werewolf",
+   "max_equip": 5,
+   "name": "Hide of the Werewolf",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "580": {
+   "esohub": "/en/sets/deadlands-assassin",
+   "max_equip": 5,
+   "name": "Deadlands Assassin",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "581": {
+   "esohub": "/en/sets/bog-raider",
+   "max_equip": 5,
+   "name": "Bog Raider",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "582": {
+   "esohub": "/en/sets/hist-whisperer",
+   "max_equip": 5,
+   "name": "Hist Whisperer",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "583": {
+   "esohub": "/en/sets/heartland-conqueror",
+   "max_equip": 5,
+   "name": "Heartland Conqueror",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "584": {
+   "esohub": "/en/sets/diamonds-victory",
+   "max_equip": 5,
+   "name": "Diamond's Victory",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "585": {
+   "esohub": "/en/sets/saxhleel-champion",
+   "max_equip": 5,
+   "name": "Saxhleel Champion",
+   "perfected_id": 589,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "586": {
+   "esohub": "/en/sets/sul-xans-torment",
+   "max_equip": 5,
+   "name": "Sul-Xan's Torment",
+   "perfected_id": 590,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "587": {
+   "esohub": "/en/sets/bahseis-mania",
+   "max_equip": 5,
+   "name": "Bahsei's Mania",
+   "perfected_id": 591,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "588": {
+   "esohub": "/en/sets/stone-talkers-oath",
+   "max_equip": 5,
+   "name": "Stone-Talker's Oath",
+   "perfected_id": 592,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "589": {
+   "esohub": "/en/sets/perfected-saxhleel-champion",
+   "max_equip": 5,
+   "name": "Perfected Saxhleel Champion",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 585
+  },
+  "59": {
+   "esohub": "/en/sets/kynes-kiss",
+   "max_equip": 5,
+   "name": "Kyne's Kiss",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "590": {
+   "esohub": "/en/sets/perfected-sul-xans-torment",
+   "max_equip": 5,
+   "name": "Perfected Sul-Xan's Torment",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 586
+  },
+  "591": {
+   "esohub": "/en/sets/perfected-bahseis-mania",
+   "max_equip": 5,
+   "name": "Perfected Bahsei's Mania",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 587
+  },
+  "592": {
+   "esohub": "/en/sets/perfected-stone-talkers-oath",
+   "max_equip": 5,
+   "name": "Perfected Stone-Talker's Oath",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 588
+  },
+  "593": {
+   "esohub": "/en/sets/gaze-of-sithis",
+   "max_equip": 1,
+   "name": "Gaze of Sithis",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "594": {
+   "esohub": "/en/sets/harpooners-wading-kilt",
+   "max_equip": 1,
+   "name": "Harpooner's Wading Kilt",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "596": {
+   "esohub": "/en/sets/death-dealers-fete",
+   "max_equip": 1,
+   "name": "Death Dealer's Fete",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "597": {
+   "esohub": "/en/sets/shapeshifters-chain",
+   "max_equip": 1,
+   "name": "Shapeshifter's Chain",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "598": {
+   "esohub": "/en/sets/zoal-the-ever-wakeful",
+   "max_equip": 2,
+   "name": "Zoal the Ever-Wakeful",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "599": {
+   "esohub": "/en/sets/immolator-charr",
+   "max_equip": 2,
+   "name": "Immolator Charr",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "60": {
+   "esohub": "/en/sets/darkstride",
+   "max_equip": 5,
+   "name": "Darkstride",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "600": {
+   "esohub": "/en/sets/glorgoloch-the-destroyer",
+   "max_equip": 2,
+   "name": "Glorgoloch the Destroyer",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "602": {
+   "esohub": "/en/sets/crimson-oaths-rive",
+   "max_equip": 5,
+   "name": "Crimson Oath's Rive",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "603": {
+   "esohub": "/en/sets/scorions-feast",
+   "max_equip": 5,
+   "name": "Scorion's Feast",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "604": {
+   "esohub": "/en/sets/rush-of-agony",
+   "max_equip": 5,
+   "name": "Rush of Agony",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "605": {
+   "esohub": "/en/sets/silver-rose-vigil",
+   "max_equip": 5,
+   "name": "Silver Rose Vigil",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "606": {
+   "esohub": "/en/sets/thunder-caller",
+   "max_equip": 5,
+   "name": "Thunder Caller",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "607": {
+   "esohub": "/en/sets/grisly-gourmet",
+   "max_equip": 5,
+   "name": "Grisly Gourmet",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "608": {
+   "esohub": "/en/sets/prior-thierric",
+   "max_equip": 2,
+   "name": "Prior Thierric",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "609": {
+   "esohub": "/en/sets/magma-incarnate",
+   "max_equip": 2,
+   "name": "Magma Incarnate",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "61": {
+   "esohub": "/en/sets/dreugh-king-slayer",
+   "max_equip": 5,
+   "name": "Dreugh King Slayer",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "610": {
+   "esohub": "/en/sets/wretched-vitality",
+   "max_equip": 5,
+   "name": "Wretched Vitality",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "611": {
+   "esohub": "/en/sets/deadlands-demolisher",
+   "max_equip": 5,
+   "name": "Deadlands Demolisher",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "612": {
+   "esohub": "/en/sets/iron-flask",
+   "max_equip": 5,
+   "name": "Iron Flask",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "613": {
+   "esohub": "/en/sets/eye-of-the-grasp",
+   "max_equip": 5,
+   "name": "Eye of the Grasp",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "614": {
+   "esohub": "/en/sets/hexos-ward",
+   "max_equip": 5,
+   "name": "Hexos' Ward",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "615": {
+   "esohub": "/en/sets/kynmarchers-cruelty",
+   "max_equip": 5,
+   "name": "Kynmarcher's Cruelty",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "616": {
+   "esohub": "/en/sets/dark-convergence",
+   "max_equip": 5,
+   "name": "Dark Convergence",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "617": {
+   "esohub": "/en/sets/plaguebreak",
+   "max_equip": 5,
+   "name": "Plaguebreak",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "618": {
+   "esohub": "/en/sets/hrothgars-chill",
+   "max_equip": 5,
+   "name": "Hrothgar's Chill",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "619": {
+   "esohub": "/en/sets/maligaligs-maelstrom",
+   "max_equip": 5,
+   "name": "Maligalig's Maelstrom",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "62": {
+   "esohub": "/en/sets/hatchlings-shell",
+   "max_equip": 5,
+   "name": "Hatchling's Shell",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "620": {
+   "esohub": "/en/sets/gryphons-reprisal",
+   "max_equip": 5,
+   "name": "Gryphon's Reprisal",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "621": {
+   "esohub": "/en/sets/glacial-guardian",
+   "max_equip": 5,
+   "name": "Glacial Guardian",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "622": {
+   "esohub": "/en/sets/turning-tide",
+   "max_equip": 5,
+   "name": "Turning Tide",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "623": {
+   "esohub": "/en/sets/storm-curseds-revenge",
+   "max_equip": 5,
+   "name": "Storm-Cursed's Revenge",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "624": {
+   "esohub": "/en/sets/spriggans-vigor",
+   "max_equip": 5,
+   "name": "Spriggan's Vigor",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "625": {
+   "esohub": "/en/sets/markyn-ring-of-majesty",
+   "max_equip": 1,
+   "name": "Markyn Ring of Majesty",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "626": {
+   "esohub": "/en/sets/belharzas-band",
+   "max_equip": 1,
+   "name": "Belharza's Band",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "627": {
+   "esohub": "/en/sets/spaulder-of-ruin",
+   "max_equip": 1,
+   "name": "Spaulder of Ruin",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "629": {
+   "esohub": "/en/sets/rallying-cry",
+   "max_equip": 5,
+   "name": "Rallying Cry",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "63": {
+   "esohub": "/en/sets/the-juggernaut",
+   "max_equip": 5,
+   "name": "The Juggernaut",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "630": {
+   "esohub": "/en/sets/hew-and-sunder",
+   "max_equip": 5,
+   "name": "Hew and Sunder",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "631": {
+   "esohub": "/en/sets/enervating-aura",
+   "max_equip": 5,
+   "name": "Enervating Aura",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "632": {
+   "esohub": "/en/sets/kargaeda",
+   "max_equip": 2,
+   "name": "Kargaeda",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "633": {
+   "esohub": "/en/sets/nazaray",
+   "max_equip": 2,
+   "name": "Nazaray",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "634": {
+   "esohub": "/en/sets/nunatak",
+   "max_equip": 2,
+   "name": "Nunatak",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "635": {
+   "esohub": "/en/sets/lady-malygda",
+   "max_equip": 2,
+   "name": "Lady Malygda",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "636": {
+   "esohub": "/en/sets/baron-thirsk",
+   "max_equip": 2,
+   "name": "Baron Thirsk",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "64": {
+   "esohub": "/en/sets/shadow-dancers-raiment",
+   "max_equip": 5,
+   "name": "Shadow Dancer's Raiment",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "640": {
+   "esohub": "/en/sets/orders-wrath",
+   "max_equip": 5,
+   "name": "Order's Wrath",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "641": {
+   "esohub": "/en/sets/serpents-disdain",
+   "max_equip": 5,
+   "name": "Serpent's Disdain",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "642": {
+   "esohub": "/en/sets/druids-braid",
+   "max_equip": 12,
+   "name": "Druid's Braid",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "643": {
+   "esohub": "/en/sets/blessing-of-high-isle",
+   "max_equip": 5,
+   "name": "Blessing of High Isle",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "644": {
+   "esohub": "/en/sets/steadfasts-mettle",
+   "max_equip": 5,
+   "name": "Steadfast's Mettle",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "645": {
+   "esohub": "/en/sets/systres-scowl",
+   "max_equip": 5,
+   "name": "Systres' Scowl",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "646": {
+   "esohub": "/en/sets/whorl-of-the-depths",
+   "max_equip": 5,
+   "name": "Whorl of the Depths",
+   "perfected_id": 653,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "647": {
+   "esohub": "/en/sets/coral-riptide",
+   "max_equip": 5,
+   "name": "Coral Riptide",
+   "perfected_id": 652,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "648": {
+   "esohub": "/en/sets/pearlescent-ward",
+   "max_equip": 5,
+   "name": "Pearlescent Ward",
+   "perfected_id": 651,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "649": {
+   "esohub": "/en/sets/pillagers-profit",
+   "max_equip": 5,
+   "name": "Pillager's Profit",
+   "perfected_id": 650,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "65": {
+   "esohub": "/en/sets/bloodthorns-touch",
+   "max_equip": 5,
+   "name": "Bloodthorn's Touch",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "650": {
+   "esohub": "/en/sets/perfected-pillagers-profit",
+   "max_equip": 5,
+   "name": "Perfected Pillager's Profit",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 649
+  },
+  "651": {
+   "esohub": "/en/sets/perfected-pearlescent-ward",
+   "max_equip": 5,
+   "name": "Perfected Pearlescent Ward",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 648
+  },
+  "652": {
+   "esohub": "/en/sets/perfected-coral-riptide",
+   "max_equip": 5,
+   "name": "Perfected Coral Riptide",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 647
+  },
+  "653": {
+   "esohub": "/en/sets/perfected-whorl-of-the-depths",
+   "max_equip": 5,
+   "name": "Perfected Whorl of the Depths",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 646
+  },
+  "654": {
+   "esohub": "/en/sets/moras-whispers",
+   "max_equip": 1,
+   "name": "Mora's Whispers",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "655": {
+   "esohub": "/en/sets/dov-rha-sabatons",
+   "max_equip": 1,
+   "name": "Dov-rha Sabatons",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "656": {
+   "esohub": "/en/sets/lefthanders-aegis-belt",
+   "max_equip": 1,
+   "name": "Lefthander's Aegis Belt",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "657": {
+   "esohub": "/en/sets/sea-serpents-coil",
+   "max_equip": 1,
+   "name": "Sea-Serpent's Coil",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "658": {
+   "esohub": "/en/sets/oakensoul-ring",
+   "max_equip": 1,
+   "name": "Oakensoul Ring",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "66": {
+   "esohub": "/en/sets/robes-of-the-hist",
+   "max_equip": 5,
+   "name": "Robes of the Hist",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "660": {
+   "esohub": "/en/sets/deeproot-zeal",
+   "max_equip": 5,
+   "name": "Deeproot Zeal",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "661": {
+   "esohub": "/en/sets/stones-accord",
+   "max_equip": 5,
+   "name": "Stone's Accord",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "662": {
+   "esohub": "/en/sets/rage-of-the-ursauk",
+   "max_equip": 5,
+   "name": "Rage of the Ursauk",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "663": {
+   "esohub": "/en/sets/pangrit-denmother",
+   "max_equip": 5,
+   "name": "Pangrit Denmother",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "664": {
+   "esohub": "/en/sets/grave-inevitability",
+   "max_equip": 5,
+   "name": "Grave Inevitability",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "665": {
+   "esohub": "/en/sets/phylacterys-grasp",
+   "max_equip": 5,
+   "name": "Phylactery's Grasp",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "666": {
+   "esohub": "/en/sets/archdruid-devyric",
+   "max_equip": 2,
+   "name": "Archdruid Devyric",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "667": {
+   "esohub": "/en/sets/euphotic-gatekeeper",
+   "max_equip": 2,
+   "name": "Euphotic Gatekeeper",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "668": {
+   "esohub": "/en/sets/languor-of-peryite",
+   "max_equip": 5,
+   "name": "Languor of Peryite",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "669": {
+   "esohub": "/en/sets/nocturnals-ploy",
+   "max_equip": 5,
+   "name": "Nocturnal's Ploy",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "67": {
+   "esohub": "/en/sets/shadow-walker",
+   "max_equip": 5,
+   "name": "Shadow Walker",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "670": {
+   "esohub": "/en/sets/maras-balm",
+   "max_equip": 5,
+   "name": "Mara's Balm",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "671": {
+   "esohub": "/en/sets/back-alley-gourmand",
+   "max_equip": 5,
+   "name": "Back-Alley Gourmand",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "672": {
+   "esohub": "/en/sets/phoenix-moth-theurge",
+   "max_equip": 5,
+   "name": "Phoenix Moth Theurge",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "673": {
+   "esohub": "/en/sets/bastion-of-the-draoife",
+   "max_equip": 5,
+   "name": "Bastion of the Draoife",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "674": {
+   "esohub": "/en/sets/fauns-lark-cladding",
+   "max_equip": 1,
+   "name": "Faun's Lark Cladding",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "675": {
+   "esohub": "/en/sets/stormweavers-cavort",
+   "max_equip": 1,
+   "name": "Stormweaver's Cavort",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "676": {
+   "esohub": "/en/sets/syrabanes-ward",
+   "max_equip": 1,
+   "name": "Syrabane's Ward",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "677": {
+   "esohub": "/en/sets/chimeras-rebuke",
+   "max_equip": 5,
+   "name": "Chimera's Rebuke",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "678": {
+   "esohub": "/en/sets/old-growth-brewer",
+   "max_equip": 5,
+   "name": "Old Growth Brewer",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "679": {
+   "esohub": "/en/sets/claw-of-the-forest-wraith",
+   "max_equip": 5,
+   "name": "Claw of the Forest Wraith",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "68": {
+   "esohub": "/en/sets/stygian",
+   "max_equip": 5,
+   "name": "Stygian",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "680": {
+   "esohub": "/en/sets/ritemasters-bond",
+   "max_equip": 5,
+   "name": "Ritemaster's Bond",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "681": {
+   "esohub": "/en/sets/nix-hounds-howl",
+   "max_equip": 5,
+   "name": "Nix-Hound's Howl",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "682": {
+   "esohub": "/en/sets/telvanni-enforcer",
+   "max_equip": 5,
+   "name": "Telvanni Enforcer",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "683": {
+   "esohub": "/en/sets/roksa-the-warped",
+   "max_equip": 2,
+   "name": "Roksa the Warped",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "684": {
+   "esohub": "/en/sets/runecarvers-blaze",
+   "max_equip": 5,
+   "name": "Runecarver's Blaze",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "685": {
+   "esohub": "/en/sets/apocryphal-inspiration",
+   "max_equip": 5,
+   "name": "Apocryphal Inspiration",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "686": {
+   "esohub": "/en/sets/abyssal-brace",
+   "max_equip": 5,
+   "name": "Abyssal Brace",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "687": {
+   "esohub": "/en/sets/ozezan-the-inferno",
+   "max_equip": 2,
+   "name": "Ozezan the Inferno",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "688": {
+   "esohub": "/en/sets/snake-in-the-stars",
+   "max_equip": 5,
+   "name": "Snake in the Stars",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "689": {
+   "esohub": "/en/sets/shell-splitter",
+   "max_equip": 5,
+   "name": "Shell Splitter",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "69": {
+   "esohub": "/en/sets/rangers-gait",
+   "max_equip": 5,
+   "name": "Ranger's Gait",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "690": {
+   "esohub": "/en/sets/judgment-of-akatosh",
+   "max_equip": 5,
+   "name": "Judgment of Akatosh",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "691": {
+   "esohub": "/en/sets/cryptcanon-vestments",
+   "max_equip": 1,
+   "name": "Cryptcanon Vestments",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "692": {
+   "esohub": "/en/sets/esoteric-environment-greaves",
+   "max_equip": 1,
+   "name": "Esoteric Environment Greaves",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "693": {
+   "esohub": "/en/sets/torc-of-the-last-ayleid-king",
+   "max_equip": 1,
+   "name": "Torc of the Last Ayleid King",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "694": {
+   "esohub": "/en/sets/velothi-ur-mages-amulet",
+   "max_equip": 1,
+   "name": "Velothi Ur-Mage's Amulet",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "695": {
+   "esohub": "/en/sets/shattered-fate",
+   "max_equip": 12,
+   "name": "Shattered Fate",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "696": {
+   "esohub": "/en/sets/telvanni-efficiency",
+   "max_equip": 5,
+   "name": "Telvanni Efficiency",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "697": {
+   "esohub": "/en/sets/seeker-synthesis",
+   "max_equip": 5,
+   "name": "Seeker Synthesis",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "698": {
+   "esohub": "/en/sets/vivecs-duality",
+   "max_equip": 5,
+   "name": "Vivec's Duality",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "699": {
+   "esohub": "/en/sets/camonna-tong",
+   "max_equip": 5,
+   "name": "Camonna Tong",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "70": {
+   "esohub": "/en/sets/seventh-legion-brute",
+   "max_equip": 5,
+   "name": "Seventh Legion Brute",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "700": {
+   "esohub": "/en/sets/adamant-lurker",
+   "max_equip": 5,
+   "name": "Adamant Lurker",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "701": {
+   "esohub": "/en/sets/peace-and-serenity",
+   "max_equip": 5,
+   "name": "Peace and Serenity",
+   "perfected_id": 708,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "702": {
+   "esohub": "/en/sets/ansuuls-torment",
+   "max_equip": 5,
+   "name": "Ansuul's Torment",
+   "perfected_id": 707,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "703": {
+   "esohub": "/en/sets/test-of-resolve",
+   "max_equip": 5,
+   "name": "Test of Resolve",
+   "perfected_id": 706,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "704": {
+   "esohub": "/en/sets/transformative-hope",
+   "max_equip": 5,
+   "name": "Transformative Hope",
+   "perfected_id": 705,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "705": {
+   "esohub": "/en/sets/perfected-transformative-hope",
+   "max_equip": 5,
+   "name": "Perfected Transformative Hope",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 704
+  },
+  "706": {
+   "esohub": "/en/sets/perfected-test-of-resolve",
+   "max_equip": 5,
+   "name": "Perfected Test of Resolve",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 703
+  },
+  "707": {
+   "esohub": "/en/sets/perfected-ansuuls-torment",
+   "max_equip": 5,
+   "name": "Perfected Ansuul's Torment",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 702
+  },
+  "708": {
+   "esohub": "/en/sets/perfected-peace-and-serenity",
+   "max_equip": 5,
+   "name": "Perfected Peace and Serenity",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 701
+  },
+  "71": {
+   "esohub": "/en/sets/duroks-bane",
+   "max_equip": 5,
+   "name": "Durok's Bane",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "711": {
+   "esohub": "/en/sets/colovian-highlands-general",
+   "max_equip": 2,
+   "name": "Colovian Highlands General",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "712": {
+   "esohub": "/en/sets/jerall-mountains-warchief",
+   "max_equip": 2,
+   "name": "Jerall Mountains Warchief",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "713": {
+   "esohub": "/en/sets/nibenay-bay-battlereeve",
+   "max_equip": 2,
+   "name": "Nibenay Bay Battlereeve",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "72": {
+   "esohub": "/en/sets/nikulas-heavy-armor",
+   "max_equip": 5,
+   "name": "Nikulas' Heavy Armor",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "722": {
+   "esohub": "/en/sets/reawakened-hierophant",
+   "max_equip": 5,
+   "name": "Reawakened Hierophant",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "723": {
+   "esohub": "/en/sets/basalt-blooded-warrior",
+   "max_equip": 5,
+   "name": "Basalt-Blooded Warrior",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "724": {
+   "esohub": "/en/sets/nobility-in-decay",
+   "max_equip": 5,
+   "name": "Nobility in Decay",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "726": {
+   "esohub": "/en/sets/soulcleaver",
+   "max_equip": 5,
+   "name": "Soulcleaver",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "727": {
+   "esohub": "/en/sets/monolith-of-storms",
+   "max_equip": 5,
+   "name": "Monolith of Storms",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "728": {
+   "esohub": "/en/sets/wrathsun",
+   "max_equip": 5,
+   "name": "Wrathsun",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "729": {
+   "esohub": "/en/sets/gardener-of-seasons",
+   "max_equip": 5,
+   "name": "Gardener of Seasons",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "73": {
+   "esohub": "/en/sets/oblivions-foe",
+   "max_equip": 5,
+   "name": "Oblivion's Foe",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "730": {
+   "esohub": "/en/sets/cinders-of-anthelmir",
+   "max_equip": 5,
+   "name": "Cinders of Anthelmir",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "731": {
+   "esohub": "/en/sets/sluthrugs-hunger",
+   "max_equip": 5,
+   "name": "Sluthrug's Hunger",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "732": {
+   "esohub": "/en/sets/black-glove-grounding",
+   "max_equip": 5,
+   "name": "Black-Glove Grounding",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "734": {
+   "esohub": "/en/sets/anthelmirs-construct",
+   "max_equip": 2,
+   "name": "Anthelmir's Construct",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "735": {
+   "esohub": "/en/sets/blind-path-induction",
+   "max_equip": 5,
+   "name": "Blind Path Induction",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "736": {
+   "esohub": "/en/sets/tarnished-nightmare",
+   "max_equip": 5,
+   "name": "Tarnished Nightmare",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "737": {
+   "esohub": "/en/sets/reflected-fury",
+   "max_equip": 5,
+   "name": "Reflected Fury",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "738": {
+   "esohub": "/en/sets/the-blind",
+   "max_equip": 2,
+   "name": "The Blind",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "74": {
+   "esohub": "/en/sets/spectres-eye",
+   "max_equip": 5,
+   "name": "Spectre's Eye",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "75": {
+   "esohub": "/en/sets/torugs-pact",
+   "max_equip": 5,
+   "name": "Torug's Pact",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "754": {
+   "esohub": "/en/sets/oakfathers-retribution",
+   "max_equip": 5,
+   "name": "Oakfather's Retribution",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "755": {
+   "esohub": "/en/sets/blunted-blades",
+   "max_equip": 5,
+   "name": "Blunted Blades",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "756": {
+   "esohub": "/en/sets/baan-dars-blessing",
+   "max_equip": 5,
+   "name": "Baan Dar's Blessing",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "757": {
+   "esohub": "/en/sets/symmetry-of-the-weald",
+   "max_equip": 5,
+   "name": "Symmetry of the Weald",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "758": {
+   "esohub": "/en/sets/macabre-vintage",
+   "max_equip": 5,
+   "name": "Macabre Vintage",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "759": {
+   "esohub": "/en/sets/ayleid-refuge",
+   "max_equip": 5,
+   "name": "Ayleid Refuge",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "76": {
+   "esohub": "/en/sets/robes-of-alteration-mastery",
+   "max_equip": 5,
+   "name": "Robes of Alteration Mastery",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "760": {
+   "esohub": "/en/sets/rourken-steamguards",
+   "max_equip": 1,
+   "name": "Rourken Steamguards",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "761": {
+   "esohub": "/en/sets/the-shadow-queens-cowl",
+   "max_equip": 1,
+   "name": "The Shadow Queen's Cowl",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "762": {
+   "esohub": "/en/sets/the-saint-and-the-seducer",
+   "max_equip": 1,
+   "name": "The Saint and the Seducer",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "763": {
+   "esohub": "/en/sets/tharrikers-strike",
+   "max_equip": 5,
+   "name": "Tharriker's Strike",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "764": {
+   "esohub": "/en/sets/highland-sentinel",
+   "max_equip": 5,
+   "name": "Highland Sentinel",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "765": {
+   "esohub": "/en/sets/threads-of-war",
+   "max_equip": 5,
+   "name": "Threads of War",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "766": {
+   "esohub": "/en/sets/mora-scribes-thesis",
+   "max_equip": 5,
+   "name": "Mora Scribe's Thesis",
+   "perfected_id": 773,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "767": {
+   "esohub": "/en/sets/slivers-of-the-null-arca",
+   "max_equip": 5,
+   "name": "Slivers of the Null Arca",
+   "perfected_id": 772,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "768": {
+   "esohub": "/en/sets/lucent-echoes",
+   "max_equip": 5,
+   "name": "Lucent Echoes",
+   "perfected_id": 771,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "769": {
+   "esohub": "/en/sets/xoryns-masterpiece",
+   "max_equip": 5,
+   "name": "Xoryn's Masterpiece",
+   "perfected_id": 770,
+   "type": "Trial",
+   "unperfected_id": null
+  },
+  "77": {
+   "esohub": "/en/sets/crusader",
+   "max_equip": 5,
+   "name": "Crusader",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "770": {
+   "esohub": "/en/sets/perfected-xoryns-masterpiece",
+   "max_equip": 5,
+   "name": "Perfected Xoryn's Masterpiece",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 769
+  },
+  "771": {
+   "esohub": "/en/sets/perfected-lucent-echoes",
+   "max_equip": 5,
+   "name": "Perfected Lucent Echoes",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 768
+  },
+  "772": {
+   "esohub": "/en/sets/perfected-slivers-of-the-null-arca",
+   "max_equip": 5,
+   "name": "Perfected Slivers of the Null Arca",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 767
+  },
+  "773": {
+   "esohub": "/en/sets/perfected-mora-scribes-thesis",
+   "max_equip": 5,
+   "name": "Perfected Mora Scribe's Thesis",
+   "perfected_id": null,
+   "type": "Trial",
+   "unperfected_id": 766
+  },
+  "775": {
+   "esohub": "/en/sets/spattering-disjunction",
+   "max_equip": 5,
+   "name": "Spattering Disjunction",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "776": {
+   "esohub": "/en/sets/pyrebrand",
+   "max_equip": 5,
+   "name": "Pyrebrand",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "777": {
+   "esohub": "/en/sets/corpseburster",
+   "max_equip": 5,
+   "name": "Corpseburster",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "778": {
+   "esohub": "/en/sets/umbral-edge",
+   "max_equip": 5,
+   "name": "Umbral Edge",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "779": {
+   "esohub": "/en/sets/beacon-of-oblivion",
+   "max_equip": 5,
+   "name": "Beacon of Oblivion",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "78": {
+   "esohub": "/en/sets/hist-bark",
+   "max_equip": 5,
+   "name": "Hist Bark",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "780": {
+   "esohub": "/en/sets/aetheric-lancer",
+   "max_equip": 5,
+   "name": "Aetheric Lancer",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "781": {
+   "esohub": "/en/sets/aeries-cry",
+   "max_equip": 5,
+   "name": "Aerie's Cry",
+   "perfected_id": null,
+   "type": "Class",
+   "unperfected_id": null
+  },
+  "782": {
+   "esohub": "/en/sets/trackers-lash",
+   "max_equip": 5,
+   "name": "Tracker's Lash",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "783": {
+   "esohub": "/en/sets/shared-pain",
+   "max_equip": 5,
+   "name": "Shared Pain",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "784": {
+   "esohub": "/en/sets/siegemasters-focus",
+   "max_equip": 5,
+   "name": "Siegemaster's Focus",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "79": {
+   "esohub": "/en/sets/willows-path",
+   "max_equip": 5,
+   "name": "Willow's Path",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "791": {
+   "esohub": "/en/sets/bulwark-ruination",
+   "max_equip": 5,
+   "name": "Bulwark Ruination",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "792": {
+   "esohub": "/en/sets/farstrider",
+   "max_equip": 5,
+   "name": "Farstrider",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "793": {
+   "esohub": "/en/sets/netch-oil",
+   "max_equip": 5,
+   "name": "Netch Oil",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "794": {
+   "esohub": "/en/sets/vandorallens-resonance",
+   "max_equip": 5,
+   "name": "Vandorallen's Resonance",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "795": {
+   "esohub": "/en/sets/jerensis-bladestorm",
+   "max_equip": 5,
+   "name": "Jerensi's Bladestorm",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "796": {
+   "esohub": "/en/sets/lucillas-windshield",
+   "max_equip": 5,
+   "name": "Lucilla's Windshield",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "797": {
+   "esohub": "/en/sets/squall-of-retribution",
+   "max_equip": 2,
+   "name": "Squall of Retribution",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "798": {
+   "esohub": "/en/sets/heroic-unity",
+   "max_equip": 5,
+   "name": "Heroic Unity",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "799": {
+   "esohub": "/en/sets/fledglings-nest",
+   "max_equip": 5,
+   "name": "Fledgling's Nest",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "80": {
+   "esohub": "/en/sets/hundings-rage",
+   "max_equip": 5,
+   "name": "Hunding's Rage",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "800": {
+   "esohub": "/en/sets/noxious-boulder",
+   "max_equip": 5,
+   "name": "Noxious Boulder",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "801": {
+   "esohub": "/en/sets/orpheon-the-tactician",
+   "max_equip": 2,
+   "name": "Orpheon the Tactician",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "802": {
+   "esohub": "/en/sets/arkays-charity",
+   "max_equip": 5,
+   "name": "Arkay's Charity",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "803": {
+   "esohub": "/en/sets/lamp-knights-art",
+   "max_equip": 5,
+   "name": "Lamp Knight's Art",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "804": {
+   "esohub": "/en/sets/blackfeather-flight",
+   "max_equip": 5,
+   "name": "Blackfeather Flight",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "805": {
+   "esohub": "/en/sets/three-queens-wellspring",
+   "max_equip": 5,
+   "name": "Three Queens Wellspring",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "806": {
+   "esohub": "/en/sets/death-dancer",
+   "max_equip": 5,
+   "name": "Death-Dancer",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "807": {
+   "esohub": "/en/sets/full-belly-barricade",
+   "max_equip": 5,
+   "name": "Full Belly Barricade",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "808": {
+   "esohub": "/en/sets/shared-burden",
+   "max_equip": 5,
+   "name": "Shared Burden",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "809": {
+   "esohub": "/en/sets/tide-born-wildstalker",
+   "max_equip": 5,
+   "name": "Tide-Born Wildstalker",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "81": {
+   "esohub": "/en/sets/song-of-lamae",
+   "max_equip": 5,
+   "name": "Song of Lamae",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "810": {
+   "esohub": "/en/sets/fellowships-fortitude",
+   "max_equip": 12,
+   "name": "Fellowship's Fortitude",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "811": {
+   "esohub": "/en/sets/mad-gods-dancing-shoes",
+   "max_equip": 1,
+   "name": "Mad God's Dancing Shoes",
+   "perfected_id": null,
+   "type": "World",
+   "unperfected_id": null
+  },
+  "812": {
+   "esohub": "/en/sets/rakkhats-voidmantle",
+   "max_equip": 1,
+   "name": "Rakkhat's Voidmantle",
+   "perfected_id": null,
+   "type": "World",
+   "unperfected_id": null
+  },
+  "813": {
+   "esohub": "/en/sets/monomyth-reforged",
+   "max_equip": 1,
+   "name": "Monomyth Reforged",
+   "perfected_id": null,
+   "type": "World",
+   "unperfected_id": null
+  },
+  "814": {
+   "esohub": "/en/sets/harmony-in-chaos",
+   "max_equip": 5,
+   "name": "Harmony in Chaos",
+   "perfected_id": 821,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "815": {
+   "esohub": "/en/sets/kazpians-cruel-signet",
+   "max_equip": 5,
+   "name": "Kazpian's Cruel Signet",
+   "perfected_id": 820,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "816": {
+   "esohub": "/en/sets/dolorous-arena",
+   "max_equip": 5,
+   "name": "Dolorous Arena",
+   "perfected_id": 819,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "817": {
+   "esohub": "/en/sets/recovery-convergence",
+   "max_equip": 5,
+   "name": "Recovery Convergence",
+   "perfected_id": 818,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "818": {
+   "esohub": "/en/sets/perfected-recovery-convergence",
+   "max_equip": 5,
+   "name": "Perfected Recovery Convergence",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": 817
+  },
+  "819": {
+   "esohub": "/en/sets/perfected-dolorous-arena",
+   "max_equip": 5,
+   "name": "Perfected Dolorous Arena",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": 816
+  },
+  "82": {
+   "esohub": "/en/sets/alessias-bulwark",
+   "max_equip": 5,
+   "name": "Alessia's Bulwark",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "820": {
+   "esohub": "/en/sets/perfected-kazpians-cruel-signet",
+   "max_equip": 5,
+   "name": "Perfected Kazpian's Cruel Signet",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": 815
+  },
+  "821": {
+   "esohub": "/en/sets/perfected-harmony-in-chaos",
+   "max_equip": 5,
+   "name": "Perfected Harmony in Chaos",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": 814
+  },
+  "822": {
+   "esohub": "/en/sets/lustrous-soulwell",
+   "max_equip": 5,
+   "name": "Lustrous Soulwell",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "823": {
+   "esohub": "/en/sets/vykands-soulfury",
+   "max_equip": 5,
+   "name": "Vykand's Soulfury",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "824": {
+   "esohub": "/en/sets/black-foundry-steel",
+   "max_equip": 5,
+   "name": "Black Foundry Steel",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "825": {
+   "esohub": "/en/sets/xanmeer-spellweaver",
+   "max_equip": 5,
+   "name": "Xanmeer Spellweaver",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "826": {
+   "esohub": "/en/sets/tools-of-the-trapmaster",
+   "max_equip": 5,
+   "name": "Tools of the Trapmaster",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "827": {
+   "esohub": "/en/sets/stonehulk-domination",
+   "max_equip": 5,
+   "name": "Stonehulk Domination",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "828": {
+   "esohub": "/en/sets/black-gem-monstrosity",
+   "max_equip": 2,
+   "name": "Black Gem Monstrosity",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "829": {
+   "esohub": "/en/sets/bar-sakka",
+   "max_equip": 2,
+   "name": "Bar-Sakka",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "83": {
+   "esohub": "/en/sets/elf-bane",
+   "max_equip": 5,
+   "name": "Elf Bane",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "830": {
+   "esohub": "/en/sets/spellshredder",
+   "max_equip": 5,
+   "name": "Spellshredder",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "831": {
+   "esohub": "/en/sets/coup-de-grace",
+   "max_equip": 5,
+   "name": "Coup De Grâce",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "832": {
+   "esohub": "/en/sets/unflinching-ultimate",
+   "max_equip": 5,
+   "name": "Unflinching Ultimate",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "84": {
+   "esohub": "/en/sets/orgnums-scales",
+   "max_equip": 5,
+   "name": "Orgnum's Scales",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "845": {
+   "esohub": "/en/sets/huntsmans-warmask",
+   "max_equip": 1,
+   "name": "Huntsman's Warmask",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "846": {
+   "esohub": "/en/sets/xanmeer-genesis",
+   "max_equip": 5,
+   "name": "Xanmeer Genesis",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "848": {
+   "esohub": "/en/sets/shattered-paths-signet",
+   "max_equip": 1,
+   "name": "Shattered Paths Signet",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "849": {
+   "esohub": "/en/sets/glittering-goad",
+   "max_equip": 2,
+   "name": "Glittering Goad",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "85": {
+   "esohub": "/en/sets/almalexias-mercy",
+   "max_equip": 5,
+   "name": "Almalexia's Mercy",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "850": {
+   "esohub": "/en/sets/thousand-eyes",
+   "max_equip": 2,
+   "name": "Thousand Eyes",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "851": {
+   "esohub": "/en/sets/the-ruckus",
+   "max_equip": 2,
+   "name": "The Ruckus",
+   "perfected_id": null,
+   "type": "Monster",
+   "unperfected_id": null
+  },
+  "854": {
+   "esohub": "/en/sets/prowlers-talisman",
+   "max_equip": 1,
+   "name": "Prowler's Talisman",
+   "perfected_id": null,
+   "type": "Mythic",
+   "unperfected_id": null
+  },
+  "855": {
+   "esohub": "/en/sets/gorethief",
+   "max_equip": 5,
+   "name": "Gorethief",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "86": {
+   "esohub": "/en/sets/queens-elegance",
+   "max_equip": 5,
+   "name": "Queen's Elegance",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "87": {
+   "esohub": "/en/sets/eyes-of-mara",
+   "max_equip": 5,
+   "name": "Eyes of Mara",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "876": {
+   "esohub": "/en/sets/tarcyr",
+   "max_equip": 2,
+   "name": "Tarcyr",
+   "perfected_id": null,
+   "type": null,
+   "unperfected_id": null
+  },
+  "877": {
+   "esohub": "/en/sets/mylenne-moon-caller",
+   "max_equip": 2,
+   "name": "Mylenne Moon-Caller",
+   "perfected_id": null,
+   "type": null,
+   "unperfected_id": null
+  },
+  "88": {
+   "esohub": "/en/sets/robes-of-destruction-mastery",
+   "max_equip": 5,
+   "name": "Robes of Destruction Mastery",
+   "perfected_id": null,
+   "type": "Arena",
+   "unperfected_id": null
+  },
+  "89": {
+   "esohub": "/en/sets/sentry",
+   "max_equip": 5,
+   "name": "Sentry",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "90": {
+   "esohub": "/en/sets/senches-bite",
+   "max_equip": 5,
+   "name": "Senche's Bite",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "91": {
+   "esohub": "/en/sets/oblivions-edge",
+   "max_equip": 5,
+   "name": "Oblivion's Edge",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "92": {
+   "esohub": "/en/sets/kagrenacs-hope",
+   "max_equip": 5,
+   "name": "Kagrenac's Hope",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "93": {
+   "esohub": "/en/sets/storm-knights-plate",
+   "max_equip": 5,
+   "name": "Storm Knight's Plate",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "94": {
+   "esohub": "/en/sets/meridias-blessed-armor",
+   "max_equip": 5,
+   "name": "Meridia's Blessed Armor",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "95": {
+   "esohub": "/en/sets/shalidors-curse",
+   "max_equip": 5,
+   "name": "Shalidor's Curse",
+   "perfected_id": null,
+   "type": "Crafted",
+   "unperfected_id": null
+  },
+  "96": {
+   "esohub": "/en/sets/armor-of-truth",
+   "max_equip": 5,
+   "name": "Armor of Truth",
+   "perfected_id": null,
+   "type": "Dungeon",
+   "unperfected_id": null
+  },
+  "97": {
+   "esohub": "/en/sets/the-arch-mage",
+   "max_equip": 5,
+   "name": "The Arch-Mage",
+   "perfected_id": null,
+   "type": "PVP",
+   "unperfected_id": null
+  },
+  "98": {
+   "esohub": "/en/sets/necropotence",
+   "max_equip": 5,
+   "name": "Necropotence",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  },
+  "99": {
+   "esohub": "/en/sets/salvation",
+   "max_equip": 5,
+   "name": "Salvation",
+   "perfected_id": null,
+   "type": "Overland",
+   "unperfected_id": null
+  }
+ },
+ "update": "u51"
+}

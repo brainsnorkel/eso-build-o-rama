@@ -222,6 +222,11 @@ export ESOLOGS_SECRET="your_client_secret"
 
 ## Configuration Files
 
+**data/update_config.json**:
+- `current_update` is what the cron generates; `active_update` is where the root redirect points
+- Every update carries its ESO Logs ranking `partition`; never flip without one
+- Switching updates: follow `docs/UPDATE_FLIP.md` (freeze the outgoing update first)
+
 **data/trials.json**:
 - List of trials with IDs, names, abbreviations
 - Maps trial IDs to ESO Logs zone IDs

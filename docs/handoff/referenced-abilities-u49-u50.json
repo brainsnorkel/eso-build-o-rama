@@ -1,0 +1,2851 @@
+{
+ "source": "esobuild.com builds.json: u49 (repo output/u49/builds.json, 2026-10-06) + u50 (live https://esobuild.com/u50/builds.json, 2026-10-06)",
+ "note": "Every distinct (ability_id, name, icon) slotted on a top-ranked player's bar. ability_id is the ESO Logs abilityGameID (same id space as the game / UESP minedSkills). ids 1000-1008 are ESO Logs pseudo-ids for scribed-skill script variants, not game ids; icon is the ESO Logs abilityIcon value (game texture basename, lowercase, no extension).",
+ "count": 474,
+ "abilities": [
+  {
+   "ability_id": 38701,
+   "name": "Acid Spray",
+   "icon": "ability_bow_005_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 40223,
+   "name": "Aggressive Horn",
+   "icon": "ability_ava_003_a",
+   "slots_seen": 381
+  },
+  {
+   "ability_id": 118404,
+   "name": "Agony Totem",
+   "icon": "ability_necromancer_010_b",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 25484,
+   "name": "Ambush",
+   "icon": "ability_nightblade_008_b",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 40255,
+   "name": "Anti-Cavalry Caltrops",
+   "icon": "ability_ava_001_a",
+   "slots_seen": 431
+  },
+  {
+   "ability_id": 183542,
+   "name": "Apocryphal Gate",
+   "icon": "ability_arcanist_016",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 86156,
+   "name": "Arctic Blast",
+   "icon": "ability_warden_003_b",
+   "slots_seen": 31
+  },
+  {
+   "ability_id": 38695,
+   "name": "Arrow Barrage",
+   "icon": "ability_bow_003_b",
+   "slots_seen": 21
+  },
+  {
+   "ability_id": 117850,
+   "name": "Avid Boneyard",
+   "icon": "ability_necromancer_004_b",
+   "slots_seen": 136
+  },
+  {
+   "ability_id": 40441,
+   "name": "Balance",
+   "icon": "ability_mageguild_003_b",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 23277,
+   "name": "Ball of Lightning",
+   "icon": "ability_sorcerer_ball_of_lightning",
+   "slots_seen": 47
+  },
+  {
+   "ability_id": 217699,
+   "name": "Banner Bearer",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 1334
+  },
+  {
+   "ability_id": 40382,
+   "name": "Barbed Trap",
+   "icon": "ability_fightersguild_004_a",
+   "slots_seen": 1088
+  },
+  {
+   "ability_id": 38573,
+   "name": "Barrier",
+   "icon": "ability_ava_006",
+   "slots_seen": 23
+  },
+  {
+   "ability_id": 118237,
+   "name": "Beckoning Armor",
+   "icon": "ability_necromancer_008_a",
+   "slots_seen": 20
+  },
+  {
+   "ability_id": 26804,
+   "name": "Binding Javelin",
+   "icon": "ability_templar_light_spear",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 86045,
+   "name": "Bird of Prey",
+   "icon": "ability_warden_016_a",
+   "slots_seen": 14
+  },
+  {
+   "ability_id": 26792,
+   "name": "Biting Jabs",
+   "icon": "ability_templar_recovery",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 22180,
+   "name": "Blazing Shield",
+   "icon": "ability_templar_blazing_shield",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 26869,
+   "name": "Blazing Spear",
+   "icon": "ability_templarsun_thrust",
+   "slots_seen": 78
+  },
+  {
+   "ability_id": 40103,
+   "name": "Blessing of Restoration",
+   "icon": "ability_restorationstaff_003_a",
+   "slots_seen": 42
+  },
+  {
+   "ability_id": 117690,
+   "name": "Blighted Blastbones",
+   "icon": "ability_necromancer_002_a",
+   "slots_seen": 389
+  },
+  {
+   "ability_id": 117693,
+   "name": "Blighted Blastbones",
+   "icon": "ability_necromancer_002_a_blackedout",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 61524,
+   "name": "Blinding Flare",
+   "icon": "ability_ava_scorching_flare",
+   "slots_seen": 44
+  },
+  {
+   "ability_id": 39012,
+   "name": "Blockade of Fire",
+   "icon": "ability_destructionstaff_004_b",
+   "slots_seen": 124
+  },
+  {
+   "ability_id": 39028,
+   "name": "Blockade of Frost",
+   "icon": "ability_destructionstaff_002b",
+   "slots_seen": 149
+  },
+  {
+   "ability_id": 39018,
+   "name": "Blockade of Storms",
+   "icon": "ability_destructionstaff_003_b",
+   "slots_seen": 68
+  },
+  {
+   "ability_id": 132141,
+   "name": "Blood Frenzy",
+   "icon": "ability_u26_vampire_02",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 38965,
+   "name": "Blood Mist",
+   "icon": "ability_u26_vampire_05_b",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 32624,
+   "name": "Blood Scion",
+   "icon": "ability_u26_vampire_06",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 38949,
+   "name": "Blood for Blood",
+   "icon": "ability_u26_vampire_01_a",
+   "slots_seen": 7
+  },
+  {
+   "ability_id": 32722,
+   "name": "Blood of the Elder Dragon",
+   "icon": "ability_dragonknight_011_a",
+   "slots_seen": 19
+  },
+  {
+   "ability_id": 32744,
+   "name": "Blood of the Green Dragon",
+   "icon": "ability_dragonknight_011_b",
+   "slots_seen": 41
+  },
+  {
+   "ability_id": 38846,
+   "name": "Bloodthirst",
+   "icon": "ability_dualwield_002_a",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 1004,
+   "name": "Bloody Contingency (Lingering Torment / Force)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 86054,
+   "name": "Blue Betty",
+   "icon": "ability_warden_017",
+   "slots_seen": 24
+  },
+  {
+   "ability_id": 23234,
+   "name": "Bolt Escape",
+   "icon": "ability_sorcerer_bolt_escape",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 38705,
+   "name": "Bombard",
+   "icon": "ability_bow_005_a",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 42176,
+   "name": "Bone Surge",
+   "icon": "ability_undaunted_005a",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 24163,
+   "name": "Bound Aegis",
+   "icon": "ability_sorcerer_bound_aegis",
+   "slots_seen": 130
+  },
+  {
+   "ability_id": 24165,
+   "name": "Bound Armaments",
+   "icon": "ability_sorcerer_bound_armaments",
+   "slots_seen": 39
+  },
+  {
+   "ability_id": 23213,
+   "name": "Boundless Storm",
+   "icon": "ability_sorcerer_boundless_storm",
+   "slots_seen": 43
+  },
+  {
+   "ability_id": 38754,
+   "name": "Brawler",
+   "icon": "ability_2handed_002_b",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 22256,
+   "name": "Breath of Life",
+   "icon": "ability_templar_breath_of_life",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 85840,
+   "name": "Budding Seeds",
+   "icon": "ability_warden_007_b",
+   "slots_seen": 448
+  },
+  {
+   "ability_id": 85922,
+   "name": "Budding Seeds",
+   "icon": "ability_warden_007_a",
+   "slots_seen": 16
+  },
+  {
+   "ability_id": 86058,
+   "name": "Bull Netch",
+   "icon": "ability_warden_017_b",
+   "slots_seen": 44
+  },
+  {
+   "ability_id": 20660,
+   "name": "Burning Embers",
+   "icon": "ability_dragonknight_003_b",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 20252,
+   "name": "Burning Talons",
+   "icon": "ability_dragonknight_010_b",
+   "slots_seen": 26
+  },
+  {
+   "ability_id": 33376,
+   "name": "Caltrops",
+   "icon": "ability_ava_001",
+   "slots_seen": 7
+  },
+  {
+   "ability_id": 40195,
+   "name": "Camouflaged Hunter",
+   "icon": "ability_fightersguild_002_b",
+   "slots_seen": 1640
+  },
+  {
+   "ability_id": 38745,
+   "name": "Carve",
+   "icon": "ability_2handed_002_a",
+   "slots_seen": 419
+  },
+  {
+   "ability_id": 186193,
+   "name": "Cascading Fortune",
+   "icon": "ability_arcanist_014_a",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 183006,
+   "name": "Cephaliarch's Flail",
+   "icon": "ability_arcanist_003_a",
+   "slots_seen": 1412
+  },
+  {
+   "ability_id": 20496,
+   "name": "Chains of Dominance",
+   "icon": "ability_dragonknight_005_a",
+   "slots_seen": 48
+  },
+  {
+   "ability_id": 186207,
+   "name": "Chakram of Destiny",
+   "icon": "ability_arcanist_015_a",
+   "slots_seen": 92
+  },
+  {
+   "ability_id": 103706,
+   "name": "Channeled Acceleration",
+   "icon": "ability_psijic_005_a",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 22240,
+   "name": "Channeled Focus",
+   "icon": "ability_templar_channeled_focus",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 40215,
+   "name": "Charging Maneuver",
+   "icon": "ability_ava_002_b",
+   "slots_seen": 129
+  },
+  {
+   "ability_id": 1014,
+   "name": "Chilling Burst (Class Mastery / Interrupt)",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1009,
+   "name": "Chilling Knife (Assassin's Misery / Off Balance)",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1012,
+   "name": "Chilling Trample (Assassin's Misery / Heroism)",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1003,
+   "name": "Chilling Trample (Lingering Torment / Heroism)",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1007,
+   "name": "Chilling Trample (Thief's Swiftness / Heroism)",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 20251,
+   "name": "Choking Talons",
+   "icon": "ability_dragonknight_010_a",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 20779,
+   "name": "Cinder Storm",
+   "icon": "ability_dragonknight_016a",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 35737,
+   "name": "Circle of Protection",
+   "icon": "ability_fightersguild_001",
+   "slots_seen": 7
+  },
+  {
+   "ability_id": 40234,
+   "name": "Cleanse",
+   "icon": "ability_ava_005_b",
+   "slots_seen": 7
+  },
+  {
+   "ability_id": 20919,
+   "name": "Cleave",
+   "icon": "ability_2handed_002",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 40094,
+   "name": "Combat Prayer",
+   "icon": "ability_restorationstaff_003_b",
+   "slots_seen": 654
+  },
+  {
+   "ability_id": 25267,
+   "name": "Concealed Weapon",
+   "icon": "ability_nightblade_002_b",
+   "slots_seen": 202
+  },
+  {
+   "ability_id": 85845,
+   "name": "Corrupting Pollen",
+   "icon": "ability_warden_007_c",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 22139,
+   "name": "Crescent Sweep",
+   "icon": "ability_templar_crescent_sweep",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 46348,
+   "name": "Crushing Shock",
+   "icon": "ability_destructionstaff_001a",
+   "slots_seen": 100
+  },
+  {
+   "ability_id": 103623,
+   "name": "Crushing Weapon",
+   "icon": "ability_psijic_003_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 185908,
+   "name": "Cruxweaver Armor",
+   "icon": "ability_arcanist_009_a",
+   "slots_seen": 406
+  },
+  {
+   "ability_id": 195031,
+   "name": "Crypt Transfer",
+   "icon": "u38_ability_armor_ultimatetransfer",
+   "slots_seen": 86
+  },
+  {
+   "ability_id": 46324,
+   "name": "Crystal Fragments",
+   "icon": "ability_sorcerer_thunderstomp",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 46331,
+   "name": "Crystal Weapon",
+   "icon": "ability_sorcerer_crystalweapon",
+   "slots_seen": 28
+  },
+  {
+   "ability_id": 186200,
+   "name": "Curative Surge",
+   "icon": "ability_arcanist_014_b",
+   "slots_seen": 18
+  },
+  {
+   "ability_id": 85999,
+   "name": "Cutting Dive",
+   "icon": "ability_warden_013_b",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 24328,
+   "name": "Daedric Prey",
+   "icon": "ability_sorcerer_explosive_curse",
+   "slots_seen": 25
+  },
+  {
+   "ability_id": 25377,
+   "name": "Dark Cloak",
+   "icon": "ability_nightblade_004_b",
+   "slots_seen": 24
+  },
+  {
+   "ability_id": 24595,
+   "name": "Dark Deal",
+   "icon": "ability_sorcerer_dark_deal",
+   "slots_seen": 41
+  },
+  {
+   "ability_id": 35434,
+   "name": "Dark Shade",
+   "icon": "ability_nightblade_001_a",
+   "slots_seen": 239
+  },
+  {
+   "ability_id": 35713,
+   "name": "Dawnbreaker",
+   "icon": "ability_fightersguild_005",
+   "slots_seen": 24
+  },
+  {
+   "ability_id": 40158,
+   "name": "Dawnbreaker of Smiting",
+   "icon": "ability_fightersguild_005_b",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 118623,
+   "name": "Deaden Pain",
+   "icon": "ability_necromancer_011_a",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 38906,
+   "name": "Deadly Cloak",
+   "icon": "ability_dualwield_004_b",
+   "slots_seen": 14
+  },
+  {
+   "ability_id": 39114,
+   "name": "Deafening Roar",
+   "icon": "ability_werewolf_003_a",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 36943,
+   "name": "Debilitate",
+   "icon": "ability_nightblade_006_a",
+   "slots_seen": 214
+  },
+  {
+   "ability_id": 86041,
+   "name": "Deceptive Predator",
+   "icon": "ability_warden_016_b",
+   "slots_seen": 16
+  },
+  {
+   "ability_id": 32792,
+   "name": "Deep Breath",
+   "icon": "ability_dragonknight_012_a",
+   "slots_seen": 50
+  },
+  {
+   "ability_id": 86015,
+   "name": "Deep Fissure",
+   "icon": "ability_warden_015_a",
+   "slots_seen": 14
+  },
+  {
+   "ability_id": 103652,
+   "name": "Deep Thoughts",
+   "icon": "ability_psijic_004_a",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 38312,
+   "name": "Defensive Stance",
+   "icon": "ability_1handed_004_a",
+   "slots_seen": 55
+  },
+  {
+   "ability_id": 38984,
+   "name": "Destructive Clench",
+   "icon": "ability_destructionstaff_005_a",
+   "slots_seen": 64
+  },
+  {
+   "ability_id": 38937,
+   "name": "Destructive Reach",
+   "icon": "ability_destructionstaff_005_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 118763,
+   "name": "Detonating Siphon",
+   "icon": "ability_necromancer_005_b",
+   "slots_seen": 409
+  },
+  {
+   "ability_id": 20944,
+   "name": "Disintegrating Dragonfire",
+   "icon": "ability_dragonknight_004_a",
+   "slots_seen": 36
+  },
+  {
+   "ability_id": 29004,
+   "name": "Dragon Blood",
+   "icon": "ability_dragonknight_011",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 21017,
+   "name": "Dragon Fire Scale",
+   "icon": "ability_dragonknight_008_a",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 20917,
+   "name": "Dragonfire Breath",
+   "icon": "ability_dragonknight_004",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 32785,
+   "name": "Draw Essence",
+   "icon": "ability_dragonknight_012_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 20328,
+   "name": "Earthshield Mantle",
+   "icon": "ability_dragonknight_007_b",
+   "slots_seen": 55
+  },
+  {
+   "ability_id": 61505,
+   "name": "Echoing Vigor",
+   "icon": "ability_ava_echoing_vigor",
+   "slots_seen": 965
+  },
+  {
+   "ability_id": 40232,
+   "name": "Efficient Purge",
+   "icon": "ability_ava_005_a",
+   "slots_seen": 50
+  },
+  {
+   "ability_id": 39011,
+   "name": "Elemental Blockade",
+   "icon": "ability_destructionstaff_002a",
+   "slots_seen": 1453
+  },
+  {
+   "ability_id": 39095,
+   "name": "Elemental Drain",
+   "icon": "ability_destructionstaff_011a",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 217228,
+   "name": "Elemental Explosion",
+   "icon": "ability_grimoire_staffdestro",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 84434,
+   "name": "Elemental Rage",
+   "icon": "ability_destructionstaff_012_b",
+   "slots_seen": 199
+  },
+  {
+   "ability_id": 83619,
+   "name": "Elemental Storm",
+   "icon": "ability_destructionstaff_012",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 39089,
+   "name": "Elemental Susceptibility",
+   "icon": "ability_destructionstaff_011b",
+   "slots_seen": 558
+  },
+  {
+   "ability_id": 39192,
+   "name": "Elude",
+   "icon": "ability_armor_002_b",
+   "slots_seen": 21
+  },
+  {
+   "ability_id": 38963,
+   "name": "Elusive Mist",
+   "icon": "ability_u26_vampire_05_a",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 85804,
+   "name": "Enchanted Forest",
+   "icon": "ability_warden_012_a",
+   "slots_seen": 19
+  },
+  {
+   "ability_id": 85862,
+   "name": "Enchanted Growth",
+   "icon": "ability_warden_008_b",
+   "slots_seen": 28
+  },
+  {
+   "ability_id": 38689,
+   "name": "Endless Hail",
+   "icon": "ability_bow_003_a",
+   "slots_seen": 28
+  },
+  {
+   "ability_id": 42038,
+   "name": "Energy Orb",
+   "icon": "ability_undaunted_004b",
+   "slots_seen": 520
+  },
+  {
+   "ability_id": 20930,
+   "name": "Engulfing Dragonfire",
+   "icon": "ability_dragonknight_004_b",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 20930,
+   "name": "Engulfing Flames",
+   "icon": "ability_dragonknight_004_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 32710,
+   "name": "Eruption",
+   "icon": "ability_dragonknight_016b",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 182977,
+   "name": "Escalating Runeblades",
+   "icon": "ability_arcanist_001_b",
+   "slots_seen": 312
+  },
+  {
+   "ability_id": 188780,
+   "name": "Escalating Runeblades",
+   "icon": "ability_arcanist_001_b",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 85986,
+   "name": "Eternal Guardian",
+   "icon": "ability_warden_018_b",
+   "slots_seen": 44
+  },
+  {
+   "ability_id": 22144,
+   "name": "Everlasting Sweep",
+   "icon": "ability_templar_empowering_sweep",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 32893,
+   "name": "Eviscerate",
+   "icon": "ability_u26_vampire_01",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 186189,
+   "name": "Evolving Runemend",
+   "icon": "ability_arcanist_013_a",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 38819,
+   "name": "Executioner",
+   "icon": "ability_2handed_004_a",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 183122,
+   "name": "Exhausting Fatecarver",
+   "icon": "ability_arcanist_002_a",
+   "slots_seen": 99
+  },
+  {
+   "ability_id": 193397,
+   "name": "Exhausting Fatecarver",
+   "icon": "ability_arcanist_002_a",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 137259,
+   "name": "Exhilarating Drain",
+   "icon": "ability_u26_vampire_03_b",
+   "slots_seen": 92
+  },
+  {
+   "ability_id": 86126,
+   "name": "Expansive Frost Cloak",
+   "icon": "ability_warden_001_a",
+   "slots_seen": 365
+  },
+  {
+   "ability_id": 22161,
+   "name": "Explosive Charge",
+   "icon": "ability_templar_double_tipped_charge",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 22262,
+   "name": "Extended Ritual",
+   "icon": "ability_templar_extended_ritual",
+   "slots_seen": 284
+  },
+  {
+   "ability_id": 183648,
+   "name": "Fatewoven Armor",
+   "icon": "ability_arcanist_009",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 85982,
+   "name": "Feral Guardian",
+   "icon": "ability_warden_018",
+   "slots_seen": 23
+  },
+  {
+   "ability_id": 86027,
+   "name": "Fetcher Infection",
+   "icon": "ability_warden_014_a",
+   "slots_seen": 14
+  },
+  {
+   "ability_id": 1019,
+   "name": "Fiery Burst (Lingering Torment / Maim)",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1001,
+   "name": "Fiery Contingency (Class Mastery / Intellect and Endurance)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1004,
+   "name": "Fiery Contingency (Lingering Torment / Force)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1006,
+   "name": "Fiery Contingency (Lingering Torment / Intellect and Endurance)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1007,
+   "name": "Fiery Contingency (Lingering Torment / Intellect and Endurance)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 85126,
+   "name": "Fiery Rage",
+   "icon": "ability_destructionstaff_013_b",
+   "slots_seen": 7
+  },
+  {
+   "ability_id": 1005,
+   "name": "Fiery Soul (Anchorite's Cruelty / Breach)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 214978,
+   "name": "Fiery Vault",
+   "icon": "ability_grimoire_bow",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 20779,
+   "name": "Fire Keeper",
+   "icon": "ability_dragonknight_016a",
+   "slots_seen": 40
+  },
+  {
+   "ability_id": 31632,
+   "name": "Fire Rune",
+   "icon": "ability_mageguild_001",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 20816,
+   "name": "Flame Lash",
+   "icon": "ability_dragonknight_001_a",
+   "slots_seen": 415
+  },
+  {
+   "ability_id": 32853,
+   "name": "Flames of Oblivion",
+   "icon": "ability_dragonknight_002_a",
+   "slots_seen": 607
+  },
+  {
+   "ability_id": 40161,
+   "name": "Flawless Dawnbreaker",
+   "icon": "ability_fightersguild_005_a",
+   "slots_seen": 787
+  },
+  {
+   "ability_id": 186211,
+   "name": "Fleet-Footed Gate",
+   "icon": "ability_arcanist_016_a",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 21014,
+   "name": "Fleetstep Wings",
+   "icon": "ability_dragonknight_008_b",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 38910,
+   "name": "Flying Blade",
+   "icon": "ability_dualwield_003_a",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 46356,
+   "name": "Force Pulse",
+   "icon": "ability_destructionstaff_001b",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 38794,
+   "name": "Forward Momentum",
+   "icon": "ability_2handed_005_a",
+   "slots_seen": 7
+  },
+  {
+   "ability_id": 38989,
+   "name": "Frost Clench",
+   "icon": "ability_destructionstaff_005_a",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 86179,
+   "name": "Frozen Device",
+   "icon": "ability_warden_005_a",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 182988,
+   "name": "Fulminating Rune",
+   "icon": "ability_arcanist_004_b",
+   "slots_seen": 775
+  },
+  {
+   "ability_id": 201296,
+   "name": "Fulminating Rune",
+   "icon": "ability_arcanist_004_b",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 34838,
+   "name": "Funnel Health",
+   "icon": "ability_nightblade_012_b",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 118308,
+   "name": "Ghostly Embrace",
+   "icon": "ability_necromancer_009_b",
+   "slots_seen": 22
+  },
+  {
+   "ability_id": 192380,
+   "name": "Gibbering Shelter",
+   "icon": "ability_arcanist_012_b",
+   "slots_seen": 65
+  },
+  {
+   "ability_id": 183676,
+   "name": "Gibbering Shield",
+   "icon": "ability_arcanist_012",
+   "slots_seen": 14
+  },
+  {
+   "ability_id": 122388,
+   "name": "Glacial Colossus",
+   "icon": "ability_necromancer_006_a",
+   "slots_seen": 192
+  },
+  {
+   "ability_id": 193794,
+   "name": "Glyphic of the Tides",
+   "icon": "ability_arcanist_018_a",
+   "slots_seen": 57
+  },
+  {
+   "ability_id": 222966,
+   "name": "Goading Throw",
+   "icon": "ability_grimoire_1handed",
+   "slots_seen": 29
+  },
+  {
+   "ability_id": 117749,
+   "name": "Grave Lord's Sacrifice",
+   "icon": "ability_necromancer_002_b",
+   "slots_seen": 13
+  },
+  {
+   "ability_id": 117773,
+   "name": "Grave Lord's Sacrifice",
+   "icon": "ability_necromancer_002_b_blackedout",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 23492,
+   "name": "Greater Storm Atronach",
+   "icon": "ability_sorcerer_greater_storm_atronach",
+   "slots_seen": 7
+  },
+  {
+   "ability_id": 32744,
+   "name": "Green Dragon Blood",
+   "icon": "ability_dragonknight_011_b",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 85854,
+   "name": "Green Lotus",
+   "icon": "ability_warden_009_a",
+   "slots_seen": 18
+  },
+  {
+   "ability_id": 61902,
+   "name": "Grim Focus",
+   "icon": "ability_nightblade_005",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 29489,
+   "name": "Hardened Ward",
+   "icon": "ability_sorcerer_typhoon",
+   "slots_seen": 101
+  },
+  {
+   "ability_id": 24330,
+   "name": "Haunting Curse",
+   "icon": "ability_sorcerer_velocious_curse",
+   "slots_seen": 30
+  },
+  {
+   "ability_id": 220549,
+   "name": "Healing Bond",
+   "icon": "ability_grimoire_staffresto",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1022,
+   "name": "Healing Bond (Sage's Remedy / Heroism)",
+   "icon": "ability_grimoire_staffresto",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 217462,
+   "name": "Healing Burst",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 52
+  },
+  {
+   "ability_id": 1006,
+   "name": "Healing Burst (Sage's Remedy / Expedition)",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1004,
+   "name": "Healing Burst (Sage's Remedy / Intellect and Endurance)",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 240149,
+   "name": "Healing Contingency",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 18
+  },
+  {
+   "ability_id": 216813,
+   "name": "Healing Soul",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 1009,
+   "name": "Healing Soul (Sage's Remedy / Vitality)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 40060,
+   "name": "Healing Springs",
+   "icon": "ability_restorationstaff_004a",
+   "slots_seen": 64
+  },
+  {
+   "ability_id": 85807,
+   "name": "Healing Thicket",
+   "icon": "ability_warden_012_b",
+   "slots_seen": 19
+  },
+  {
+   "ability_id": 217607,
+   "name": "Healing Torch",
+   "icon": "ability_grimoire_fightersguild",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 1008,
+   "name": "Healing Torch (Warrior's Opportunity / Evasion)",
+   "icon": "ability_grimoire_fightersguild",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 40126,
+   "name": "Healing Ward",
+   "icon": "ability_restorationstaff_001_a",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 34727,
+   "name": "Healthy Offering",
+   "icon": "ability_nightblade_011_a",
+   "slots_seen": 79
+  },
+  {
+   "ability_id": 32785,
+   "name": "Heart of Flame",
+   "icon": "ability_dragonknight_012_b",
+   "slots_seen": 56
+  },
+  {
+   "ability_id": 32710,
+   "name": "Hearth and Home",
+   "icon": "ability_dragonknight_016b",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 38264,
+   "name": "Heroic Slash",
+   "icon": "ability_1handed_001_a",
+   "slots_seen": 14
+  },
+  {
+   "ability_id": 223292,
+   "name": "Heroic Torch",
+   "icon": "ability_grimoire_fightersguild",
+   "slots_seen": 7
+  },
+  {
+   "ability_id": 22253,
+   "name": "Honor the Dead",
+   "icon": "ability_templar_honor_the_dead",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 118223,
+   "name": "Hungry Scythe",
+   "icon": "ability_necromancer_007_a",
+   "slots_seen": 39
+  },
+  {
+   "ability_id": 23231,
+   "name": "Hurricane",
+   "icon": "ability_sorcerer_thundering_presence",
+   "slots_seen": 85
+  },
+  {
+   "ability_id": 40489,
+   "name": "Ice Comet",
+   "icon": "ability_mageguild_005_b",
+   "slots_seen": 96
+  },
+  {
+   "ability_id": 86130,
+   "name": "Ice Fortress",
+   "icon": "ability_warden_001_b",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 29224,
+   "name": "Igneous Shield",
+   "icon": "ability_dragonknight_017b",
+   "slots_seen": 52
+  },
+  {
+   "ability_id": 31874,
+   "name": "Igneous Weapons",
+   "icon": "ability_dragonknight_015_a",
+   "slots_seen": 161
+  },
+  {
+   "ability_id": 40058,
+   "name": "Illustrious Healing",
+   "icon": "ability_restorationstaff_004b",
+   "slots_seen": 625
+  },
+  {
+   "ability_id": 39197,
+   "name": "Immovable",
+   "icon": "ability_armor_001_b",
+   "slots_seen": 11
+  },
+  {
+   "ability_id": 34851,
+   "name": "Impale",
+   "icon": "ability_nightblade_017_b",
+   "slots_seen": 15
+  },
+  {
+   "ability_id": 183241,
+   "name": "Impervious Runeward",
+   "icon": "ability_arcanist_008_b",
+   "slots_seen": 65
+  },
+  {
+   "ability_id": 36508,
+   "name": "Incapacitating Strike",
+   "icon": "ability_nightblade_007_a",
+   "slots_seen": 825
+  },
+  {
+   "ability_id": 113105,
+   "name": "Incapacitating Strike",
+   "icon": "ability_nightblade_007_c",
+   "slots_seen": 28
+  },
+  {
+   "ability_id": 32853,
+   "name": "Incinerate",
+   "icon": "ability_dragonknight_002_a",
+   "slots_seen": 48
+  },
+  {
+   "ability_id": 31837,
+   "name": "Inhale",
+   "icon": "ability_dragonknight_012",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 42060,
+   "name": "Inner Beast",
+   "icon": "ability_undaunted_002_a",
+   "slots_seen": 19
+  },
+  {
+   "ability_id": 39475,
+   "name": "Inner Fire",
+   "icon": "ability_undaunted_002",
+   "slots_seen": 23
+  },
+  {
+   "ability_id": 40478,
+   "name": "Inner Light",
+   "icon": "ability_mageguild_002_b",
+   "slots_seen": 14
+  },
+  {
+   "ability_id": 42056,
+   "name": "Inner Rage",
+   "icon": "ability_undaunted_002_b",
+   "slots_seen": 363
+  },
+  {
+   "ability_id": 185842,
+   "name": "Inspired Scholarship",
+   "icon": "ability_arcanist_005_a",
+   "slots_seen": 1691
+  },
+  {
+   "ability_id": 118840,
+   "name": "Intensive Mender",
+   "icon": "ability_necromancer_015_b",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 34843,
+   "name": "Killer's Blade",
+   "icon": "ability_nightblade_017_a",
+   "slots_seen": 762
+  },
+  {
+   "ability_id": 217979,
+   "name": "Leashing Burst",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 1006,
+   "name": "Leashing Burst (Sage's Remedy / Interrupt)",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1010,
+   "name": "Leashing Burst (Sage's Remedy / Maim)",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 217784,
+   "name": "Leashing Soul",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 255
+  },
+  {
+   "ability_id": 1003,
+   "name": "Leashing Soul (Druid's Resurgence / Breach)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 1000,
+   "name": "Leashing Soul (Druid's Resurgence / Cowardice)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1001,
+   "name": "Leashing Soul (Druid's Resurgence / Cowardice)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 1005,
+   "name": "Leashing Soul (Druid's Resurgence / Cowardice)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1007,
+   "name": "Leashing Soul (Druid's Resurgence / Cowardice)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1002,
+   "name": "Leashing Soul (Druid's Resurgence / Maim)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1005,
+   "name": "Leashing Soul (Druid's Resurgence / Maim)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 1007,
+   "name": "Leashing Soul (Druid's Resurgence / Maim)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1011,
+   "name": "Leashing Soul (Druid's Resurgence / Savagery)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1000,
+   "name": "Leashing Soul (Druid's Resurgence / Vitality)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1004,
+   "name": "Leashing Soul (Druid's Resurgence / Vitality)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1000,
+   "name": "Leashing Soul (Sage's Remedy / Vitality)",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 221999,
+   "name": "Leashing Throw",
+   "icon": "ability_grimoire_1handed",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 36908,
+   "name": "Leeching Strikes",
+   "icon": "ability_nightblade_003_a",
+   "slots_seen": 49
+  },
+  {
+   "ability_id": 85132,
+   "name": "Light's Champion",
+   "icon": "ability_restorationstaff_006_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 23205,
+   "name": "Lightning Flood",
+   "icon": "ability_sorcerer_lightning_flood",
+   "slots_seen": 21
+  },
+  {
+   "ability_id": 40372,
+   "name": "Lightweight Beast Trap",
+   "icon": "ability_fightersguild_004_b",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 61519,
+   "name": "Lingering Flare",
+   "icon": "ability_ava_lingering_flare",
+   "slots_seen": 43
+  },
+  {
+   "ability_id": 23200,
+   "name": "Liquid Lightning",
+   "icon": "ability_sorcerer_liquid_lightning",
+   "slots_seen": 65
+  },
+  {
+   "ability_id": 85855,
+   "name": "Lotus Blossom",
+   "icon": "ability_warden_009_b",
+   "slots_seen": 55
+  },
+  {
+   "ability_id": 25493,
+   "name": "Lotus Fan",
+   "icon": "ability_nightblade_008_a",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 26858,
+   "name": "Luminous Shards",
+   "icon": "ability_templar_light_strike",
+   "slots_seen": 11
+  },
+  {
+   "ability_id": 217473,
+   "name": "Magic Knife",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 13
+  },
+  {
+   "ability_id": 1021,
+   "name": "Magic Knife (Assassin's Misery / Lifesteal)",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1000,
+   "name": "Magical Banner (Cavalier's Charge / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 16
+  },
+  {
+   "ability_id": 1022,
+   "name": "Magical Banner (Class Mastery / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 217459,
+   "name": "Magical Burst",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 88
+  },
+  {
+   "ability_id": 219780,
+   "name": "Magical Soul",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 220542,
+   "name": "Magical Trample",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 207
+  },
+  {
+   "ability_id": 1011,
+   "name": "Magical Trample (Assassin's Misery / Heroism)",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1008,
+   "name": "Magical Trample (Class Mastery / Heroism)",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1010,
+   "name": "Magical Trample (Thief's Swiftness / Heroism)",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1015,
+   "name": "Magical Trample (Thief's Swiftness / Heroism)",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 31816,
+   "name": "Magma Fist",
+   "icon": "ability_dragonknight_013_stonefist_b",
+   "slots_seen": 37
+  },
+  {
+   "ability_id": 17874,
+   "name": "Magma Shell",
+   "icon": "ability_dragonknight_018_a",
+   "slots_seen": 33
+  },
+  {
+   "ability_id": 38672,
+   "name": "Magnum Shot",
+   "icon": "ability_bow_004_b",
+   "slots_seen": 22
+  },
+  {
+   "ability_id": 33357,
+   "name": "Mark Target",
+   "icon": "ability_nightblade_014",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 37470,
+   "name": "Mass Hysteria",
+   "icon": "ability_nightblade_016_a",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 61919,
+   "name": "Merciless Resolve",
+   "icon": "ability_nightblade_005_b",
+   "slots_seen": 232
+  },
+  {
+   "ability_id": 128709,
+   "name": "Mesmerize",
+   "icon": "ability_u26_vampire_04",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 35414,
+   "name": "Mirage",
+   "icon": "ability_nightblade_009_a",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 31888,
+   "name": "Molten Armaments",
+   "icon": "ability_dragonknight_015_b",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 20805,
+   "name": "Molten Whip",
+   "icon": "ability_dragonknight_001_b",
+   "slots_seen": 175
+  },
+  {
+   "ability_id": 118122,
+   "name": "Mortal Coil",
+   "icon": "ability_necromancer_017_b",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 61536,
+   "name": "Mystic Guard",
+   "icon": "ability_ava_mystic_guard",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 42028,
+   "name": "Mystic Orb",
+   "icon": "ability_undaunted_004_a",
+   "slots_seen": 187
+  },
+  {
+   "ability_id": 85858,
+   "name": "Nature's Embrace",
+   "icon": "ability_warden_011_b",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 39298,
+   "name": "Necrotic Orb",
+   "icon": "ability_undaunted_004",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 118639,
+   "name": "Necrotic Potency",
+   "icon": "ability_necromancer_011_b",
+   "slots_seen": 87
+  },
+  {
+   "ability_id": 86113,
+   "name": "Northern Storm",
+   "icon": "ability_warden_006_a",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 20944,
+   "name": "Noxious Breath",
+   "icon": "ability_dragonknight_004_a",
+   "slots_seen": 11
+  },
+  {
+   "ability_id": 83229,
+   "name": "Onslaught",
+   "icon": "ability_2handed_006_a",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 41958,
+   "name": "Overflowing Altar",
+   "icon": "ability_undaunted_001_a",
+   "slots_seen": 403
+  },
+  {
+   "ability_id": 39075,
+   "name": "Pack Leader",
+   "icon": "ability_werewolf_001_a",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 86117,
+   "name": "Permafrost",
+   "icon": "ability_warden_006_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 122395,
+   "name": "Pestilent Colossus",
+   "icon": "ability_necromancer_006_b",
+   "slots_seen": 61
+  },
+  {
+   "ability_id": 1006,
+   "name": "Pestilent Trample (Warrior's Opportunity / Heroism)",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 35419,
+   "name": "Phantasmal Escape",
+   "icon": "ability_nightblade_009_b",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 38250,
+   "name": "Pierce Armor",
+   "icon": "ability_1handed_002_b",
+   "slots_seen": 64
+  },
+  {
+   "ability_id": 36968,
+   "name": "Piercing Mark",
+   "icon": "ability_nightblade_014_b",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 38660,
+   "name": "Poison Injection",
+   "icon": "ability_bow_002_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 86152,
+   "name": "Polar Wind",
+   "icon": "ability_warden_003_a",
+   "slots_seen": 161
+  },
+  {
+   "ability_id": 36901,
+   "name": "Power Extraction",
+   "icon": "ability_nightblade_013_b",
+   "slots_seen": 23
+  },
+  {
+   "ability_id": 24806,
+   "name": "Power Overload",
+   "icon": "ability_sorcerer_power_overload",
+   "slots_seen": 31
+  },
+  {
+   "ability_id": 38452,
+   "name": "Power Slam",
+   "icon": "ability_1handed_005_a",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 23674,
+   "name": "Power Surge",
+   "icon": "ability_sorcerer_power_surge",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 21763,
+   "name": "Power of the Light",
+   "icon": "ability_templar_power_of_the_light",
+   "slots_seen": 33
+  },
+  {
+   "ability_id": 186366,
+   "name": "Pragmatic Fatecarver",
+   "icon": "ability_arcanist_002_b",
+   "slots_seen": 1296
+  },
+  {
+   "ability_id": 193398,
+   "name": "Pragmatic Fatecarver",
+   "icon": "ability_arcanist_002_b",
+   "slots_seen": 83
+  },
+  {
+   "ability_id": 40226,
+   "name": "Propelling Shield",
+   "icon": "ability_ava_004_a",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 21017,
+   "name": "Protect the Brood",
+   "icon": "ability_dragonknight_008_a",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 61500,
+   "name": "Proximity Detonation",
+   "icon": "ability_ava_proximity_detonation",
+   "slots_seen": 136
+  },
+  {
+   "ability_id": 39161,
+   "name": "Pulsar",
+   "icon": "ability_destructionstaff_008_b",
+   "slots_seen": 20
+  },
+  {
+   "ability_id": 118664,
+   "name": "Pummeling Goliath",
+   "icon": "ability_necromancer_012_a",
+   "slots_seen": 95
+  },
+  {
+   "ability_id": 28306,
+   "name": "Puncture",
+   "icon": "ability_1handed_002",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 26797,
+   "name": "Puncturing Sweep",
+   "icon": "ability_templar_reckless_attacks",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 38571,
+   "name": "Purge",
+   "icon": "ability_ava_005",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 21765,
+   "name": "Purifying Light",
+   "icon": "ability_templar_purifying_light",
+   "slots_seen": 23
+  },
+  {
+   "ability_id": 38901,
+   "name": "Quick Cloak",
+   "icon": "ability_dualwield_004_a",
+   "slots_seen": 1476
+  },
+  {
+   "ability_id": 40116,
+   "name": "Quick Siphon",
+   "icon": "ability_restorationstaff_005_b",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 103710,
+   "name": "Race Against Time",
+   "icon": "ability_psijic_005_b",
+   "slots_seen": 50
+  },
+  {
+   "ability_id": 26807,
+   "name": "Radiant Aura",
+   "icon": "ability_templar_life_giving_sigil",
+   "slots_seen": 166
+  },
+  {
+   "ability_id": 63044,
+   "name": "Radiant Glory",
+   "icon": "ability_templar_under_exposure",
+   "slots_seen": 625
+  },
+  {
+   "ability_id": 63046,
+   "name": "Radiant Oppression",
+   "icon": "ability_templar_stendarr_aura",
+   "slots_seen": 64
+  },
+  {
+   "ability_id": 22182,
+   "name": "Radiant Ward",
+   "icon": "ability_templar_radiant_ward",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 40079,
+   "name": "Radiating Regeneration",
+   "icon": "ability_restorationstaff_002a",
+   "slots_seen": 574
+  },
+  {
+   "ability_id": 267416,
+   "name": "Rampage",
+   "icon": "achievement_u26_skyrim_werewolfdevour100",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 38857,
+   "name": "Rapid Strikes",
+   "icon": "ability_dualwield_002_b",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 40242,
+   "name": "Razor Caltrops",
+   "icon": "ability_ava_001_b",
+   "slots_seen": 73
+  },
+  {
+   "ability_id": 36967,
+   "name": "Reaper's Mark",
+   "icon": "ability_nightblade_014_a",
+   "slots_seen": 51
+  },
+  {
+   "ability_id": 186234,
+   "name": "Reconstructive Domain",
+   "icon": "ability_arcanist_017_b",
+   "slots_seen": 47
+  },
+  {
+   "ability_id": 183047,
+   "name": "Recuperative Treatise",
+   "icon": "ability_arcanist_005_b",
+   "slots_seen": 98
+  },
+  {
+   "ability_id": 21732,
+   "name": "Reflective Light",
+   "icon": "ability_templar_reflective_light",
+   "slots_seen": 15
+  },
+  {
+   "ability_id": 36028,
+   "name": "Refreshing Path",
+   "icon": "ability_nightblade_010_a",
+   "slots_seen": 27
+  },
+  {
+   "ability_id": 29482,
+   "name": "Regenerative Ward",
+   "icon": "ability_sorcerer_tempest",
+   "slots_seen": 19
+  },
+  {
+   "ability_id": 61927,
+   "name": "Relentless Focus",
+   "icon": "ability_nightblade_005_a",
+   "slots_seen": 735
+  },
+  {
+   "ability_id": 85187,
+   "name": "Rend",
+   "icon": "ability_dualwield_006_a",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 38839,
+   "name": "Rending Slashes",
+   "icon": "ability_dualwield_001_a",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 118367,
+   "name": "Renewing Animation",
+   "icon": "ability_necromancer_018_a",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 40239,
+   "name": "Replenishing Barrier",
+   "icon": "ability_ava_006_a",
+   "slots_seen": 74
+  },
+  {
+   "ability_id": 61507,
+   "name": "Resolving Vigor",
+   "icon": "ability_ava_resolving_vigor",
+   "slots_seen": 304
+  },
+  {
+   "ability_id": 193558,
+   "name": "Resonating Glyphic",
+   "icon": "ability_arcanist_018_b",
+   "slots_seen": 45
+  },
+  {
+   "ability_id": 22237,
+   "name": "Restoring Focus",
+   "icon": "ability_templar_uninterrupted_focus",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 115926,
+   "name": "Restoring Tether",
+   "icon": "ability_necromancer_017",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 61489,
+   "name": "Revealing Flare",
+   "icon": "ability_ava_revealing_flare",
+   "slots_seen": 141
+  },
+  {
+   "ability_id": 38455,
+   "name": "Reverberating Bash",
+   "icon": "ability_1handed_005_b",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 40237,
+   "name": "Reviving Barrier",
+   "icon": "ability_ava_006_b",
+   "slots_seen": 774
+  },
+  {
+   "ability_id": 40169,
+   "name": "Ring of Preservation",
+   "icon": "ability_fightersguild_001_b",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 22327,
+   "name": "Ritual of Rebirth",
+   "icon": "ability_templar_ritual_of_rebirth",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 22259,
+   "name": "Ritual of Retribution",
+   "icon": "ability_templar_purifying_ritual",
+   "slots_seen": 20
+  },
+  {
+   "ability_id": 118226,
+   "name": "Ruinous Scythe",
+   "icon": "ability_necromancer_007_b",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 185839,
+   "name": "Rune of Displacement",
+   "icon": "ability_arcanist_004_a",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 183267,
+   "name": "Rune of the Colorless Pool",
+   "icon": "ability_arcanist_011_b",
+   "slots_seen": 120
+  },
+  {
+   "ability_id": 186489,
+   "name": "Runeguard of Freedom",
+   "icon": "ability_arcanist_010_b",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 183401,
+   "name": "Runeguard of Still Waters",
+   "icon": "ability_arcanist_010_a",
+   "slots_seen": 72
+  },
+  {
+   "ability_id": 186531,
+   "name": "Runic Embrace",
+   "icon": "ability_arcanist_007_b",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 183430,
+   "name": "Runic Sunder",
+   "icon": "ability_arcanist_007_a",
+   "slots_seen": 85
+  },
+  {
+   "ability_id": 192372,
+   "name": "Sanctum of the Abyssal Sea",
+   "icon": "ability_arcanist_012_a",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 36891,
+   "name": "Sap Essence",
+   "icon": "ability_nightblade_013_a",
+   "slots_seen": 26
+  },
+  {
+   "ability_id": 40465,
+   "name": "Scalding Rune",
+   "icon": "ability_mageguild_001_b",
+   "slots_seen": 105
+  },
+  {
+   "ability_id": 20668,
+   "name": "Searing Claw",
+   "icon": "ability_dragonknight_003_a",
+   "slots_seen": 43
+  },
+  {
+   "ability_id": 85532,
+   "name": "Secluded Grove",
+   "icon": "ability_warden_012",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 41990,
+   "name": "Shadow Silk",
+   "icon": "ability_undaunted_003_a",
+   "slots_seen": 11
+  },
+  {
+   "ability_id": 25380,
+   "name": "Shadowy Disguise",
+   "icon": "ability_nightblade_004_a",
+   "slots_seen": 251
+  },
+  {
+   "ability_id": 1000,
+   "name": "Shattering Banner (Cavalier's Charge / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1005,
+   "name": "Shattering Banner (Class Flourish / Heroism)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 1008,
+   "name": "Shattering Banner (Druid's Resurgence / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 217340,
+   "name": "Shattering Knife",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 179
+  },
+  {
+   "ability_id": 1008,
+   "name": "Shattering Knife (Assassin's Misery / Off Balance)",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 1009,
+   "name": "Shattering Knife (Assassin's Misery / Off Balance)",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 1002,
+   "name": "Shattering Knife (Class Mastery / Off Balance)",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1006,
+   "name": "Shattering Knife (Warrior's Opportunity / Off Balance)",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 1007,
+   "name": "Shattering Knife (Warrior's Opportunity / Vulnerability)",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 20323,
+   "name": "Shatterspike Mantle",
+   "icon": "ability_dragonknight_007_a",
+   "slots_seen": 47
+  },
+  {
+   "ability_id": 217061,
+   "name": "Shield Throw",
+   "icon": "ability_grimoire_1handed",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 38401,
+   "name": "Shielded Assault",
+   "icon": "ability_1handed_003_a",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 32958,
+   "name": "Shifting Standard",
+   "icon": "ability_dragonknight_006_a",
+   "slots_seen": 364
+  },
+  {
+   "ability_id": 86143,
+   "name": "Shimmering Shield",
+   "icon": "ability_warden_002_b",
+   "slots_seen": 13
+  },
+  {
+   "ability_id": 1001,
+   "name": "Shocking Banner (Cavalier's Charge / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 18
+  },
+  {
+   "ability_id": 1002,
+   "name": "Shocking Banner (Cavalier's Charge / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 16
+  },
+  {
+   "ability_id": 1004,
+   "name": "Shocking Banner (Cavalier's Charge / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 1008,
+   "name": "Shocking Banner (Cavalier's Charge / Heroism)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 1001,
+   "name": "Shocking Banner (Class Flourish / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 26
+  },
+  {
+   "ability_id": 1002,
+   "name": "Shocking Banner (Class Flourish / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 30
+  },
+  {
+   "ability_id": 1003,
+   "name": "Shocking Banner (Class Flourish / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 1006,
+   "name": "Shocking Banner (Class Flourish / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1000,
+   "name": "Shocking Banner (Class Flourish / Heroism)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 1006,
+   "name": "Shocking Banner (Class Flourish / Heroism)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1004,
+   "name": "Shocking Banner (Class Mastery / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1013,
+   "name": "Shocking Banner (Class Mastery / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1007,
+   "name": "Shocking Banner (Sage's Remedy / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 40493,
+   "name": "Shooting Star",
+   "icon": "ability_mageguild_005_a",
+   "slots_seen": 238
+  },
+  {
+   "ability_id": 34721,
+   "name": "Shrewd Offering",
+   "icon": "ability_nightblade_011_b",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 38914,
+   "name": "Shrouded Daggers",
+   "icon": "ability_dualwield_003_b",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 39195,
+   "name": "Shuffle",
+   "icon": "ability_armor_002_a",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 40229,
+   "name": "Siege Weapon Shield",
+   "icon": "ability_ava_004_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 40336,
+   "name": "Silver Leash",
+   "icon": "ability_fightersguild_003_b",
+   "slots_seen": 16
+  },
+  {
+   "ability_id": 134160,
+   "name": "Simmering Frenzy",
+   "icon": "ability_u26_vampire_02_a",
+   "slots_seen": 83
+  },
+  {
+   "ability_id": 36935,
+   "name": "Siphoning Attacks",
+   "icon": "ability_nightblade_003_b",
+   "slots_seen": 386
+  },
+  {
+   "ability_id": 118726,
+   "name": "Skeletal Arcanist",
+   "icon": "ability_necromancer_003_b",
+   "slots_seen": 86
+  },
+  {
+   "ability_id": 118680,
+   "name": "Skeletal Archer",
+   "icon": "ability_necromancer_003_a",
+   "slots_seen": 291
+  },
+  {
+   "ability_id": 28882,
+   "name": "Snipe",
+   "icon": "ability_bow_001",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 22095,
+   "name": "Solar Barrage",
+   "icon": "ability_templar_solar_power",
+   "slots_seen": 722
+  },
+  {
+   "ability_id": 40420,
+   "name": "Soul Assault",
+   "icon": "ability_otherclass_002_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 36514,
+   "name": "Soul Harvest",
+   "icon": "ability_nightblade_007_b",
+   "slots_seen": 891
+  },
+  {
+   "ability_id": 25091,
+   "name": "Soul Shred",
+   "icon": "ability_nightblade_018",
+   "slots_seen": 13
+  },
+  {
+   "ability_id": 35508,
+   "name": "Soul Siphon",
+   "icon": "ability_nightblade_018_b",
+   "slots_seen": 252
+  },
+  {
+   "ability_id": 35460,
+   "name": "Soul Tether",
+   "icon": "ability_nightblade_018_a",
+   "slots_seen": 22
+  },
+  {
+   "ability_id": 32792,
+   "name": "Soul of Flame",
+   "icon": "ability_dragonknight_012_a",
+   "slots_seen": 39
+  },
+  {
+   "ability_id": 83292,
+   "name": "Spell Wall",
+   "icon": "ability_1handed_006_a",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 118912,
+   "name": "Spirit Guardian",
+   "icon": "ability_necromancer_015_a",
+   "slots_seen": 16
+  },
+  {
+   "ability_id": 185901,
+   "name": "Spiteward of the Lucid Mind",
+   "icon": "ability_arcanist_008_a",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 38788,
+   "name": "Stampede",
+   "icon": "ability_2handed_003_a",
+   "slots_seen": 1753
+  },
+  {
+   "ability_id": 32947,
+   "name": "Standard of Might",
+   "icon": "ability_dragonknight_006_b",
+   "slots_seen": 207
+  },
+  {
+   "ability_id": 38861,
+   "name": "Steel Tornado",
+   "icon": "ability_dualwield_005_b",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 31816,
+   "name": "Stone Giant",
+   "icon": "ability_dragonknight_013_stonefist_b",
+   "slots_seen": 91
+  },
+  {
+   "ability_id": 23236,
+   "name": "Streak",
+   "icon": "ability_sorcerer_streak",
+   "slots_seen": 22
+  },
+  {
+   "ability_id": 40452,
+   "name": "Structured Entropy",
+   "icon": "ability_mageguild_004_b",
+   "slots_seen": 7
+  },
+  {
+   "ability_id": 86019,
+   "name": "Subterranean Assault",
+   "icon": "ability_warden_015_b",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 23495,
+   "name": "Summon Charged Atronach",
+   "icon": "ability_sorcerer_endless_atronachs",
+   "slots_seen": 204
+  },
+  {
+   "ability_id": 24639,
+   "name": "Summon Twilight Matriarch",
+   "icon": "ability_sorcerer_storm_prey",
+   "slots_seen": 48
+  },
+  {
+   "ability_id": 24636,
+   "name": "Summon Twilight Tormentor",
+   "icon": "ability_sorcerer_lightning_matriarch",
+   "slots_seen": 12
+  },
+  {
+   "ability_id": 23316,
+   "name": "Summon Volatile Familiar",
+   "icon": "ability_sorcerer_speedy_familiar",
+   "slots_seen": 46
+  },
+  {
+   "ability_id": 1001,
+   "name": "Sundering Banner (Class Flourish / Courage)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 14
+  },
+  {
+   "ability_id": 1002,
+   "name": "Sundering Banner (Class Flourish / Heroism)",
+   "icon": "ability_grimoire_support",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 217465,
+   "name": "Sundering Burst",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 31
+  },
+  {
+   "ability_id": 217872,
+   "name": "Sundering Knife",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 9
+  },
+  {
+   "ability_id": 215731,
+   "name": "Sundering Soul",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 220541,
+   "name": "Sundering Trample",
+   "icon": "ability_grimoire_assault",
+   "slots_seen": 37
+  },
+  {
+   "ability_id": 25260,
+   "name": "Surprise Attack",
+   "icon": "ability_nightblade_002_a",
+   "slots_seen": 228
+  },
+  {
+   "ability_id": 34835,
+   "name": "Swallow Soul",
+   "icon": "ability_nightblade_012_a",
+   "slots_seen": 10
+  },
+  {
+   "ability_id": 103755,
+   "name": "Symbiosis",
+   "icon": "ability_psijic_006_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 32719,
+   "name": "Take Flight",
+   "icon": "ability_dragonknight_009_b",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 103564,
+   "name": "Temporal Guard",
+   "icon": "ability_psijic_001_b",
+   "slots_seen": 69
+  },
+  {
+   "ability_id": 185823,
+   "name": "Tentacular Dread",
+   "icon": "ability_arcanist_003_b",
+   "slots_seen": 320
+  },
+  {
+   "ability_id": 189867,
+   "name": "The Languid Eye",
+   "icon": "ability_arcanist_006_b",
+   "slots_seen": 1152
+  },
+  {
+   "ability_id": 189837,
+   "name": "The Tide King's Gaze",
+   "icon": "ability_arcanist_006_a",
+   "slots_seen": 49
+  },
+  {
+   "ability_id": 85179,
+   "name": "Thrive in Chaos",
+   "icon": "ability_dualwield_006_b",
+   "slots_seen": 15
+  },
+  {
+   "ability_id": 85130,
+   "name": "Thunderous Rage",
+   "icon": "ability_destructionstaff_015_b",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 186209,
+   "name": "Tidal Chakram",
+   "icon": "ability_arcanist_015_b",
+   "slots_seen": 68
+  },
+  {
+   "ability_id": 104079,
+   "name": "Time Freeze",
+   "icon": "ability_psijic_002_b",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 186452,
+   "name": "Tome-Bearer's Inspiration",
+   "icon": "ability_arcanist_005",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 35750,
+   "name": "Trap Beast",
+   "icon": "ability_fightersguild_004",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 39425,
+   "name": "Trapping Webs",
+   "icon": "ability_undaunted_003",
+   "slots_seen": 5
+  },
+  {
+   "ability_id": 77140,
+   "name": "Twilight Tormentor Enrage",
+   "icon": "ability_sorcerer_lightning_matriarch_summoned",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 36049,
+   "name": "Twisting Path",
+   "icon": "ability_nightblade_010_b",
+   "slots_seen": 29
+  },
+  {
+   "ability_id": 222678,
+   "name": "Ulfsild's Contingency",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 186
+  },
+  {
+   "ability_id": 240150,
+   "name": "Ulfsild's Contingency",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 264
+  },
+  {
+   "ability_id": 186477,
+   "name": "Unbreakable Fate",
+   "icon": "ability_arcanist_009_b",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 103478,
+   "name": "Undo",
+   "icon": "ability_psijic_001",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 117805,
+   "name": "Unnerving Boneyard",
+   "icon": "ability_necromancer_004_a",
+   "slots_seen": 316
+  },
+  {
+   "ability_id": 20496,
+   "name": "Unrelenting Grip",
+   "icon": "ability_dragonknight_005_a",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 39052,
+   "name": "Unstable Wall of Elements",
+   "icon": "ability_destructionstaff_002b",
+   "slots_seen": 76
+  },
+  {
+   "ability_id": 39067,
+   "name": "Unstable Wall of Frost",
+   "icon": "ability_destructionstaff_002a",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 29552,
+   "name": "Unstoppable",
+   "icon": "ability_armor_001",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 21729,
+   "name": "Vampire's Bane",
+   "icon": "ability_templar_vampire_bane",
+   "slots_seen": 44
+  },
+  {
+   "ability_id": 134583,
+   "name": "Vampiric Drain",
+   "icon": "ability_u26_vampire_03",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 36485,
+   "name": "Veil of Blades",
+   "icon": "ability_nightblade_015_b",
+   "slots_seen": 76
+  },
+  {
+   "ability_id": 25255,
+   "name": "Veiled Strike",
+   "icon": "ability_nightblade_002",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 38645,
+   "name": "Venom Arrow",
+   "icon": "ability_bow_002_a",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 117624,
+   "name": "Venom Skull",
+   "icon": "ability_necromancer_001_a",
+   "slots_seen": 326
+  },
+  {
+   "ability_id": 123704,
+   "name": "Venom Skull",
+   "icon": "ability_necromancer_001_a",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 20668,
+   "name": "Venomous Claw",
+   "icon": "ability_dragonknight_003_a",
+   "slots_seen": 391
+  },
+  {
+   "ability_id": 1003,
+   "name": "Venomous Knife (Warrior's Opportunity / Off Balance)",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 1006,
+   "name": "Venomous Knife (Warrior's Opportunity / Off Balance)",
+   "icon": "ability_grimoire_dualwield",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 28311,
+   "name": "Vibrant Shroud",
+   "icon": "ability_sorcerer_crushing_winds",
+   "slots_seen": 84
+  },
+  {
+   "ability_id": 61503,
+   "name": "Vigor",
+   "icon": "ability_ava_vigor",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 20323,
+   "name": "Volatile Armor",
+   "icon": "ability_dragonknight_007_a",
+   "slots_seen": 84
+  },
+  {
+   "ability_id": 38563,
+   "name": "War Horn",
+   "icon": "ability_ava_003",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 217460,
+   "name": "Warding Burst",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 76
+  },
+  {
+   "ability_id": 1011,
+   "name": "Warding Burst (Sage's Remedy / Courage)",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1006,
+   "name": "Warding Burst (Sage's Remedy / Expedition)",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1009,
+   "name": "Warding Burst (Sage's Remedy / Intellect and Endurance)",
+   "icon": "ability_grimoire_soulmagic2",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1000,
+   "name": "Warding Contingency (Gladiator's Tenacity / Intellect and Endurance)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 8
+  },
+  {
+   "ability_id": 1004,
+   "name": "Warding Contingency (Gladiator's Tenacity / Intellect and Endurance)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1005,
+   "name": "Warding Contingency (Gladiator's Tenacity / Intellect and Endurance)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 1001,
+   "name": "Warding Contingency (Gladiator's Tenacity / Protection)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 1002,
+   "name": "Warding Contingency (Gladiator's Tenacity / Protection)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 15
+  },
+  {
+   "ability_id": 1004,
+   "name": "Warding Contingency (Gladiator's Tenacity / Protection)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 6
+  },
+  {
+   "ability_id": 1010,
+   "name": "Warding Contingency (Gladiator's Tenacity / Protection)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1021,
+   "name": "Warding Contingency (Gladiator's Tenacity / Protection)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 1010,
+   "name": "Warding Contingency (Gladiator's Tenacity / Resolve)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1001,
+   "name": "Warding Contingency (Growing Impact / Protection)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 1
+  },
+  {
+   "ability_id": 1002,
+   "name": "Warding Contingency (Growing Impact / Protection)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 4
+  },
+  {
+   "ability_id": 1017,
+   "name": "Warding Contingency (Sage's Remedy / Intellect and Endurance)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 1015,
+   "name": "Warding Contingency (Sage's Remedy / Protection)",
+   "icon": "ability_grimoire_magesguild",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 216802,
+   "name": "Warding Soul",
+   "icon": "ability_grimoire_soulmagic1",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 29173,
+   "name": "Weakness to Elements",
+   "icon": "ability_destructionstaff_011",
+   "slots_seen": 2
+  },
+  {
+   "ability_id": 39076,
+   "name": "Werewolf Berserker",
+   "icon": "ability_werewolf_001_b",
+   "slots_seen": 75
+  },
+  {
+   "ability_id": 32455,
+   "name": "Werewolf Transformation",
+   "icon": "ability_werewolf_001",
+   "slots_seen": 3
+  },
+  {
+   "ability_id": 38891,
+   "name": "Whirling Blades",
+   "icon": "ability_dualwield_005_a",
+   "slots_seen": 89
+  },
+  {
+   "ability_id": 85990,
+   "name": "Wild Guardian",
+   "icon": "ability_warden_018_c",
+   "slots_seen": 74
+  },
+  {
+   "ability_id": 86169,
+   "name": "Winter's Revenge",
+   "icon": "ability_warden_004_b",
+   "slots_seen": 158
+  },
+  {
+   "ability_id": 185803,
+   "name": "Writhing Runeblades",
+   "icon": "ability_arcanist_001_a",
+   "slots_seen": 19
+  },
+  {
+   "ability_id": 186229,
+   "name": "Zenas' Empowering Disc",
+   "icon": "ability_arcanist_017_a",
+   "slots_seen": 26
+  }
+ ]
+}

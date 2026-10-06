@@ -522,7 +522,8 @@ class ESOLogsAPIClient:
                 end_time=end_time,
                 data_type=data_type,
                 hostility_type="Friendlies",
-                fight_ids=fight_ids,
+                # esologs-python maps fight_i_ds -> fightIDs; any other name is dropped silently
+                fight_i_ds=fight_ids,
                 include_combatant_info=include_combatant_info
             )
             
@@ -553,6 +554,17 @@ class ESOLogsAPIClient:
         13985: "The Tower"
     }
     
+    @staticmethod
+    def _window_ms(value: Optional[float]) -> Optional[int]:
+        """Fight window bound as integer ms, or None when not set.
+
+        Zero is the dataclass default for "unknown", and sending startTime or
+        endTime of 0 makes ESO Logs reject the query ("You must either provide
+        fightIDs, or provide startTime and endTime") instead of falling back to
+        the fightIDs that are also supplied.
+        """
+        return int(value) if value else None
+
     async def get_player_buffs(
         self, 
         report_code: str, 
@@ -567,9 +579,9 @@ class ESOLogsAPIClient:
         
         # Use sourceID to filter Buffs table to this specific player
         try:
-            # Ensure time parameters are integers (ms) as expected by API
-            start_ms = int(start_time) if start_time is not None else None
-            end_ms = int(end_time) if end_time is not None else None
+            # Window bounds as integer ms, or None when absent
+            start_ms = self._window_ms(start_time)
+            end_ms = self._window_ms(end_time)
 
             if source_id:
                 # Query Buffs filtered by source ID
@@ -581,7 +593,7 @@ class ESOLogsAPIClient:
                     data_type="Buffs",
                     hostility_type="Friendlies",
                     source_id=source_id,  # Filter by this player's source ID
-                    fight_ids=fight_ids if fight_ids else None
+                    fight_i_ds=fight_ids if fight_ids else None
                 )
             else:
                 # Fallback: get all buffs (less accurate)
@@ -593,7 +605,7 @@ class ESOLogsAPIClient:
                     end_time=end_ms,
                     data_type="Buffs",
                     hostility_type="Friendlies",
-                    fight_ids=fight_ids if fight_ids else None
+                    fight_i_ds=fight_ids if fight_ids else None
                 )
             
             # Parse Buffs table to find mundus (100% uptime buffs matching mundus IDs)

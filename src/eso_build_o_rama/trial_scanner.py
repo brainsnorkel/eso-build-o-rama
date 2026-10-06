@@ -30,6 +30,23 @@ class TrialScanner:
         self.data_parser = DataParser()
         self.build_analyzer = BuildAnalyzer()
     
+    @staticmethod
+    def _fight_name_matches(fight_name: Optional[str], encounter_name: Optional[str]) -> bool:
+        """Return True when a fight's name denotes the given encounter.
+
+        Fight names can be composite ("Z'Maja / Shade of Z'Maja"), so a prefix
+        or suffix match around " / " also counts. encounter_name=None means no
+        validation is wanted (trash fights); that case must short-circuit before
+        any string concatenation, otherwise None + " /" raises TypeError and the
+        fight is silently dropped (this broke every Trash Builds page in U50).
+        """
+        if encounter_name is None:
+            return True
+        fight_name = fight_name or ""
+        return (fight_name == encounter_name
+                or fight_name.startswith(encounter_name + " /")
+                or fight_name.endswith("/ " + encounter_name))
+
     def _find_best_fight_for_encounter(
         self,
         report_data: Dict[str, Any],
@@ -56,9 +73,7 @@ class TrialScanner:
             
             # Match by name (exact or prefix to handle combined names like "Z'Maja / Shade of Z'Maja"),
             # has difficulty set, and is a successful kill (not a wipe)
-            name_matches = (fight_name == encounter_name
-                            or fight_name.startswith(encounter_name + " /")
-                            or fight_name.endswith("/ " + encounter_name))
+            name_matches = self._fight_name_matches(fight_name, encounter_name)
             if name_matches and difficulty and kill:
                 duration = fight.get('endTime', 0) - fight.get('startTime', 0)
                 matching_fights.append({
@@ -112,10 +127,7 @@ class TrialScanner:
         
         # Validate fight is for the expected encounter
         fight_name = fight_info.get('name', '')
-        name_valid = (fight_name == expected_encounter_name
-                      or fight_name.startswith(expected_encounter_name + " /")
-                      or fight_name.endswith("/ " + expected_encounter_name))
-        if expected_encounter_name and not name_valid:
+        if not self._fight_name_matches(fight_name, expected_encounter_name):
             logger.warning(f"Fight {fight_id} is '{fight_name}', expected '{expected_encounter_name}' - skipping")
             return None
         
@@ -236,7 +248,11 @@ class TrialScanner:
         # Analyze builds
         trial_report = self.build_analyzer.analyze_trial_report(trial_report)
         
-        # Store fight context in builds for later mundus queries (after consolidation)
+        # Store fight context for later mundus queries (after consolidation).
+        # The report keeps the window too, so role-fallback builds built from it
+        # can query buffs with a valid fight window.
+        trial_report.fight_start_time = fight_info.get('startTime')
+        trial_report.fight_end_time = fight_info.get('endTime')
         for build in trial_report.common_builds:
             build.report_code = report_code
             build.fight_start_time = fight_info.get('startTime')
@@ -846,6 +862,8 @@ class TrialScanner:
                 trial_name=report.trial_name,
                 boss_name=report.boss_name,
                 fight_id=report.fight_id,
+                fight_start_time=report.fight_start_time or 0,
+                fight_end_time=report.fight_end_time or 0,
                 update_version=report.update_version,
                 report_code=report.report_code
             )

@@ -353,6 +353,9 @@ class TrialReport:
     trial_name: str = ""
     boss_name: str = ""
     fight_id: int = 0
+    # Fight window in ms; carried into role-fallback builds for mundus queries
+    fight_start_time: Optional[int] = None
+    fight_end_time: Optional[int] = None
     report_code: str = ""
     date: str = ""
     update_version: str = ""

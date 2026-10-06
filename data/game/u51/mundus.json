@@ -1,0 +1,83 @@
+{
+ "mundus": {
+  "13940": {
+   "esohub": "/en/mundus-stones/the-warrior",
+   "game_name": "Boon: The Warrior",
+   "icon": "ability_mundusstones_001",
+   "name": "The Warrior"
+  },
+  "13943": {
+   "esohub": "/en/mundus-stones/the-mage",
+   "game_name": "Boon: The Mage",
+   "icon": "ability_mundusstones_002",
+   "name": "The Mage"
+  },
+  "13974": {
+   "esohub": "/en/mundus-stones/the-serpent",
+   "game_name": "Boon: The Serpent",
+   "icon": "ability_mundusstones_004",
+   "name": "The Serpent"
+  },
+  "13975": {
+   "esohub": "/en/mundus-stones/the-thief",
+   "game_name": "Boon: The Thief",
+   "icon": "ability_mundusstones_003",
+   "name": "The Thief"
+  },
+  "13976": {
+   "esohub": "/en/mundus-stones/the-lady",
+   "game_name": "Boon: The Lady",
+   "icon": "ability_mundusstones_005",
+   "name": "The Lady"
+  },
+  "13977": {
+   "esohub": "/en/mundus-stones/the-steed",
+   "game_name": "Boon: The Steed",
+   "icon": "ability_mundusstones_006",
+   "name": "The Steed"
+  },
+  "13978": {
+   "esohub": "/en/mundus-stones/the-lord",
+   "game_name": "Boon: The Lord",
+   "icon": "ability_mundusstones_007",
+   "name": "The Lord"
+  },
+  "13979": {
+   "esohub": "/en/mundus-stones/the-apprentice",
+   "game_name": "Boon: The Apprentice",
+   "icon": "ability_mundusstones_008",
+   "name": "The Apprentice"
+  },
+  "13980": {
+   "esohub": "/en/mundus-stones/the-ritual",
+   "game_name": "Boon: The Ritual",
+   "icon": "ability_mundusstones_010",
+   "name": "The Ritual"
+  },
+  "13981": {
+   "esohub": "/en/mundus-stones/the-lover",
+   "game_name": "Boon: The Lover",
+   "icon": "ability_mundusstones_011",
+   "name": "The Lover"
+  },
+  "13982": {
+   "esohub": "/en/mundus-stones/the-atronach",
+   "game_name": "Boon: The Atronach",
+   "icon": "ability_mundusstones_009",
+   "name": "The Atronach"
+  },
+  "13984": {
+   "esohub": "/en/mundus-stones/the-shadow",
+   "game_name": "Boon: The Shadow",
+   "icon": "ability_mundusstones_012",
+   "name": "The Shadow"
+  },
+  "13985": {
+   "esohub": "/en/mundus-stones/the-tower",
+   "game_name": "Boon: The Tower",
+   "icon": "ability_mundusstones_013",
+   "name": "The Tower"
+  }
+ },
+ "update": "u51"
+}

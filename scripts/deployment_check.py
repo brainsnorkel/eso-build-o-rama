@@ -264,8 +264,8 @@ class DeploymentChecker:
                 self.log_error(f"{build_name}: Mundus is Unknown or empty")
                 continue
                 
-            # Check for ability icons
-            ability_slots = soup.find_all('div', class_='ability-slot')
+            # Check for ability icons (build_page.html: div.abilities-bar > div.ability > img.ability-icon)
+            ability_slots = soup.select('div.abilities-bar > div.ability')
             if not ability_slots:
                 self.log_warning(f"{build_name}: No ability slots found")
             else:
@@ -281,8 +281,8 @@ class DeploymentChecker:
                         if img['src'].startswith('http') or img['src'].startswith('/'):
                             # External or absolute path
                             continue
-                        # Relative path - check if file exists
-                        icon_path = self.output_dir / img['src']
+                        # Relative path - resolve against the page, as a browser would
+                        icon_path = build_file.parent / img['src']
                         if not icon_path.exists():
                             missing_icons.append(img['src'])
                     elif not img:
@@ -409,6 +409,52 @@ class DeploymentChecker:
         self.log_success(f"Build finder: {len(rows)} rows, {len(classes_seen)} classes, {len(roles_seen)} roles")
         return self.checks_failed == 0
 
+    def check_5_builds_json_icons(self) -> bool:
+        """Check 5: Every ability_icon referenced in builds.json has a PNG in <output_dir>/static/icons."""
+        print("\n" + "="*60)
+        print("CHECK 5: builds.json Ability Icons")
+        print("="*60)
+
+        builds_path = self.output_dir / "builds.json"
+        if not builds_path.exists():
+            self.log_error(f"builds.json not found: {builds_path}")
+            return False
+        try:
+            with open(builds_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception as e:
+            self.log_error(f"Failed to read {builds_path}: {e}")
+            return False
+
+        referenced = {}  # stem -> ability name
+
+        def walk(obj):
+            if isinstance(obj, dict):
+                if "best_player" in obj and "build_slug" in obj:
+                    for player in (obj.get("all_players") or []) + [obj.get("best_player")]:
+                        for bar in ("abilities_bar1", "abilities_bar2"):
+                            for ab in (player or {}).get(bar) or []:
+                                stem = ab.get("ability_icon")
+                                if stem:
+                                    referenced.setdefault(stem, ab.get("ability_name") or "?")
+                    return
+                for v in obj.values():
+                    walk(v)
+            elif isinstance(obj, list):
+                for v in obj:
+                    walk(v)
+
+        walk(data)
+        icons_dir = self.output_dir / "static" / "icons"
+        missing = sorted((s, n) for s, n in referenced.items() if not (icons_dir / f"{s}.png").is_file())
+        if missing:
+            listing = ", ".join(f"{s} ({n})" for s, n in missing[:20])
+            self.log_error(f"{len(missing)} of {len(referenced)} ability icons referenced in builds.json "
+                           f"missing from {icons_dir}: {listing}")
+            return False
+        self.log_success(f"All {len(referenced)} ability icons referenced in builds.json exist in {icons_dir}")
+        return True
+
     def run_all_checks(self) -> bool:
         """Run all deployment checks."""
         print("\n" + "="*70)
@@ -422,6 +468,7 @@ class DeploymentChecker:
         check_2 = self.check_2_trial_pages()
         check_3 = self.check_3_build_pages()
         check_4 = self.check_4_build_finder()
+        check_5 = self.check_5_builds_json_icons()
         
         # Print summary
         print("\n" + "="*70)

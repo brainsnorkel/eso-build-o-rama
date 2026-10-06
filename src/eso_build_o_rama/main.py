@@ -119,7 +119,10 @@ class ESOBuildORM:
         output_dir = self.get_output_directory(update_prefix=update_prefix)
         logger.info(f"Using output directory: {output_dir} (update: {self.update_version or 'none'})")
         
-        self.scanner = TrialScanner(api_client=ESOLogsAPIClient(partition=self.partition))
+        self.scanner = TrialScanner(
+            api_client=ESOLogsAPIClient(partition=self.partition),
+            update_version=self.update_version or None,
+        )
         self.page_generator = PageGenerator(
             output_dir=output_dir,
             update_prefix=update_prefix,

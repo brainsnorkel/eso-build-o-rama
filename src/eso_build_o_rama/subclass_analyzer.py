@@ -6,8 +6,12 @@ Analyzes equipped abilities to infer player subclass/build information.
 
 import re
 import logging
-from typing import Dict, List, Set, Optional, Tuple
+from typing import Dict, List, Set, Optional, Tuple, TYPE_CHECKING
 from collections import defaultdict, Counter
+
+if TYPE_CHECKING:
+    from .game_data import GameData
+    from .models import Ability
 
 logger = logging.getLogger(__name__)
 
@@ -265,18 +269,107 @@ class ESOSubclassAnalyzer:
         ]
     }
 
-    def __init__(self):
-        """Initialize the subclass analyzer."""
+    def __init__(self, game_data: Optional["GameData"] = None, load_game_data: bool = True):
+        """Initialize the subclass analyzer.
+
+        Args:
+            game_data: Imported game tables (data/game/<update>/). When None and
+                load_game_data is True, the tables for the configured update are
+                loaded; when none are imported, detection uses the legacy
+                name tables below.
+            load_game_data: Set False in tests to force the legacy path.
+        """
         # Create reverse mapping from ability name to skill line
         self.ability_to_skill_line = {}
         for skill_line, abilities in self.SKILL_LINE_ABILITIES.items():
             for ability in abilities:
                 self.ability_to_skill_line[ability.lower()] = skill_line
 
+        self.game_data = game_data
+        if game_data is None and load_game_data:
+            from .game_data import GameData
+            self.game_data = GameData.load()
+
+    def analyze_player(self, abilities: List["Ability"], class_name: str = "") -> Tuple[List[str], List[str]]:
+        """
+        Determine a player's three class skill lines from the abilities on their bars.
+
+        Each slotted ability is resolved in this order: its game ability id in the
+        imported game data; its icon stem, which identifies the grimoire of a
+        scribed skill (ESO Logs gives those pseudo-ids); and, only for abilities
+        the tables do not know, the legacy name match. Non-class lines (weapon,
+        guild, world, alliance war, scribing) are recognised and ignored.
+
+        Bars often show abilities from only one or two class lines. A character
+        always has three, so the missing ones are filled in from the player's
+        class-native lines and reported separately so pages can mark them.
+
+        Returns:
+            (subclasses, padded): three abbreviations such as ['Herald', 'Curative',
+            'Soldier'], and the subset of them that were padded. 'x' fills any
+            slot that could not be padded: unknown class, or bars with no
+            readable abilities at all (nothing to pad from evidence).
+        """
+        detected: List[str] = []
+        unknown_names: List[str] = []
+        evidence = 0  # abilities that resolved to anything: proof the bars carry real data
+        for ability in abilities:
+            known, line = False, None
+            if self.game_data is not None:
+                # A known id with no line (a mythic's granted skill) is resolved:
+                # it just belongs to no skill line.
+                known, line = self.game_data.resolve(ability.ability_id, ability.ability_icon)
+            if not known:
+                if ability.ability_name and ability.ability_name != "Empty":
+                    unknown_names.append(ability.ability_name)
+                continue
+            evidence += 1
+            if self.game_data.is_class_line(line) and line not in detected:
+                detected.append(line)
+
+        if unknown_names:
+            legacy = self.analyze_subclass(set(unknown_names)).get('skill_lines', [])
+            if self.game_data is not None and legacy:
+                logger.debug(f"Legacy name match used for {unknown_names}: {legacy}")
+            for line in legacy:
+                evidence += 1
+                if line not in detected:
+                    detected.append(line)
+
+        subclasses = [self._get_skill_line_abbreviation(line) for line in detected[:3]]
+        padded: List[str] = []
+        # Pad only when the bars show real abilities; empty or unreadable bars stay 'x'.
+        if len(subclasses) < 3 and evidence:
+            for abbreviation in self._native_abbreviations(class_name):
+                if len(subclasses) >= 3:
+                    break
+                if abbreviation.lower() in {s.lower() for s in subclasses}:
+                    continue
+                subclasses.append(abbreviation)
+                padded.append(abbreviation)
+        while len(subclasses) < 3:
+            subclasses.append('x')
+
+        logger.debug(f"Analyzed {len(abilities)} abilities ({class_name}) -> {subclasses}, padded {padded}")
+        return subclasses, padded
+
+    def _native_abbreviations(self, class_name: str) -> List[str]:
+        """Abbreviations of the three lines a character of class_name is born with."""
+        if not class_name:
+            return []
+        if self.game_data is not None:
+            return [self._get_skill_line_abbreviation(line) for line in self.game_data.native_lines(class_name)]
+        from .models import CLASS_SKILL_LINES, normalize_class_name
+        return sorted(abbr.title() for abbr in CLASS_SKILL_LINES.get(normalize_class_name(class_name), ()))
+
     def analyze_subclasses(self, abilities: List[str]) -> List[str]:
         """
         Analyze a list of ability names to determine the player's subclasses.
-        
+
+        Legacy entry point for callers that only have names. Production uses
+        analyze_player (id-based, with class padding); this stays for
+        name-only callers and the legacy fallback inside analyze_player.
+
         Args:
             abilities: List of ability names
             

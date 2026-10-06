@@ -19,6 +19,7 @@ from .models import (
     normalize_class_name,
 )
 from .csv_exporter import CSVExporter
+from .game_data import GameData
 
 logger = logging.getLogger(__name__)
 
@@ -63,6 +64,10 @@ class PageGenerator:
 
         # Copy static assets to output directory
         self._copy_static_assets()
+
+        # Imported game tables (ESO-Hub paths for sets and mundus stones); None
+        # when no bundle has been imported, in which case links are slugified.
+        self.game_data = GameData.load(update_prefix or None)
 
         # Initialize Jinja2 environment
         self.env = Environment(
@@ -1229,16 +1234,13 @@ Disallow: /cache/
         except (ValueError, TypeError):
             return timestamp_str
 
-    @staticmethod
-    def _eso_hub_set_url(set_name: str) -> str:
+    def _eso_hub_set_url(self, set_name: str) -> str:
         """
-        Generate ESO-Hub URL for a gear set.
+        ESO-Hub URL for a gear set.
 
-        Args:
-            set_name: Name of the gear set
-
-        Returns:
-            ESO-Hub URL for the set
+        Looked up by name in the imported game data (sets.json carries the path
+        ESO-Hub's sitemap lists for every set); slugified only when the set is
+        unknown to the tables or no bundle is imported.
 
         Examples:
             "Deadly Strike" -> "https://eso-hub.com/en/sets/deadly-strike"
@@ -1246,6 +1248,11 @@ Disallow: /cache/
         """
         if not set_name or set_name == "N/A":
             return "#"
+
+        if self.game_data is not None:
+            url = self.game_data.set_esohub_url(set_name)
+            if url:
+                return url
 
         # Remove "Perfected" prefix
         slug = set_name.replace("Perfected ", "")
@@ -1283,30 +1290,29 @@ Disallow: /cache/
 
         return f"https://eso-hub.com/en/skills/{slug}"
 
-    @staticmethod
-    def _eso_hub_mundus_url(mundus_name: str) -> str:
+    def _eso_hub_mundus_url(self, mundus_name: str) -> str:
         """
-        Generate ESO-Hub URL for a mundus stone.
+        ESO-Hub URL for a mundus stone.
 
-        Args:
-            mundus_name: Name of the mundus stone
-
-        Returns:
-            ESO-Hub URL for the mundus stone
+        Looked up in the imported game data (mundus.json carries the sitemap
+        path); otherwise built from the live pattern /en/mundus-stones/<slug>.
+        (The earlier /en/guides/<slug> pattern returns 404.)
 
         Examples:
-            "The Thief" -> "https://eso-hub.com/en/guides/the-thief"
+            "The Thief" -> "https://eso-hub.com/en/mundus-stones/the-thief"
         """
         if not mundus_name or mundus_name == "Unknown":
             return "#"
 
-        # Convert to lowercase and slugify
+        if self.game_data is not None:
+            url = self.game_data.mundus_esohub_url(mundus_name)
+            if url:
+                return url
+
         slug = mundus_name.lower()
         slug = slug.replace("'", "")  # Remove apostrophes
         slug = slug.replace(" ", "-")  # Spaces to dashes
-
-        # Mundus stones are in the guides section
-        return f"https://eso-hub.com/en/guides/{slug}"
+        return f"https://eso-hub.com/en/mundus-stones/{slug}"
 
     @staticmethod
     def _trial_background_image(trial_name: str) -> str:

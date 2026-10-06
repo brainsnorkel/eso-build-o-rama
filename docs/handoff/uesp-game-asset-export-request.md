@@ -46,8 +46,8 @@ refreshed by hand. Measured on 2026-10-06 against the live U50 data (454 builds)
   looks up `static/icons/<stem>.png` (1,669 files, imported once in October 2025, patched by hand since). When U49
   renamed the Stonefist morph textures to `ability_dragonknight_013_stonefist_{a,b}` the site served a broken image
   on about 19 pages before anyone noticed. Today one referenced stem is absent from the site's set and also from your 1,956-icon set:
-  `achievement_u26_skyrim_werewolfdevour100` (werewolf Rampage, 5 slots in U50). Your set already has 297 stems the
-  site lacks, including 58 `ability_u49_*` and 6 `ability_u51_*`.
+  `achievement_u26_skyrim_werewolfdevour100` (werewolf Rampage, 5 slots in U50; the U51 launch check found the same
+  gap independently). Your set already has 297 stems the site lacks, including 58 `ability_u49_*` and 6 `ability_u51_*`.
 - **No version provenance**: the site tags content `u48`, `u49`, `u50` by configuration, and its attempt to derive the
   update from the ESO Logs game version string fails for current versions (every U50 trial is tagged
   `unknown-20261001`). The bundle must therefore carry an explicit update tag and the raw client version.
@@ -99,8 +99,8 @@ name, ESO-Hub slug, type, and the perfected pairing.
 
 ### 3.6 Update tags
 
-The site's `data/update_config.json` names updates `u48`, `u49`, `u50` and is adding `u51` now (the live client as of
-2026-10-06). The bundle takes the tag
+The site's `data/update_config.json` names updates `u48` to `u51`; `u51` has been the active update since 2026-10-06
+and the earlier three are archived. The bundle takes the tag
 from the command line and records the client's own version string beside it. Never infer the tag from a date or from
 the eso.mnf modification time.
 
@@ -341,8 +341,9 @@ A follow-up in `eso-build-o-rama` adds `scripts/import_game_assets.py <bundle.zi
 `static/icons/` (add or update, never delete), writes the JSON tables under `data/game/<uXX>/`, and prints the diff.
 The subclass analyzer then resolves skill lines by ability id first, by grimoire icon stem for pseudo-ids, and by
 name only as a last resort; the deployment check gains a test that every icon referenced by `builds.json` exists.
-Related tracked work there: `eso-build-o-rama-06l` (log missing icons during a scan), `eso-build-o-rama-399`
-(Unknown subclasses), `eso-build-o-rama-xqr` (update tag never derived from game version).
+Related tracked work there: `eso-build-o-rama-06l` (log missing icons during a scan), `eso-build-o-rama-2m6` (the
+werewolf icon missing on U51 pages), `eso-build-o-rama-399` (Unknown subclasses), `eso-build-o-rama-xqr` (update tag
+never derived from game version).
 
 ## 9. Decisions (all resolved with Chris, 2026-10-06)
 

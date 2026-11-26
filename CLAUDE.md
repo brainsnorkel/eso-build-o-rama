@@ -361,6 +361,10 @@ Solutions:
 
 The workflow declares a `concurrency` group with `cancel-in-progress: false`, so runs never overlap. A manual dispatch that arrives while a run is active waits in the pending slot and starts when that run finishes. This matters because every run downloads builds.json from the live site at start; serialising runs is what stops a later starter from publishing stale data. GitHub holds only one pending run per group, so dispatching twice while a run is active cancels the first pending dispatch in favour of the second.
 
+### Deploy Step Fails With "No artifacts named github-pages"
+
+GitHub's artifact listing can lag seconds to about a minute behind the upload step, and `actions/deploy-pages` looks the artifact up once with no retry (upstream issue actions/deploy-pages#451). The workflow therefore waits before the first deploy attempt and retries once after a longer wait. If both attempts fail, do not re-run the job: re-running uploads a second `github-pages` artifact to the same run and the lookup then fails with "Multiple artifacts named github-pages". The next scheduled run is the recovery path; a failed deploy only costs that one trial's scan.
+
 ### Template Changes Not Appearing
 
 CDN caching on esobuild.com has 10-minute TTL (max-age=600). To see changes immediately:
